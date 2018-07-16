@@ -1,2 +1,4 @@
-<!--components/top-bar/top-bar.wxml-->
-<text>components/top-bar/top-bar.wxml</text>
+<view class='top-bar'>
+  <view>活动编码:12346656</view>
+  <view>用户编码：1516165</view>
+</view>
