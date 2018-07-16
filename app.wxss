@@ -1,10 +1,124 @@
-/**app.wxss**/
-.container {
+page{
   height: 100%;
+  background-color:#F8F8F8;
+}
+button[disabled]:not([type]) {
+  background-color: #dddddd;
+}
+.flexR{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center; 
+}
+.flexR-sb{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between; 
+}
+.flexC{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+  justify-content:center;
+}
+.boxSize{
   box-sizing: border-box;
-} 
+}
+button::after{
+  border: none;
+}
+.fl{
+  float: left
+}
+.fr{
+  float: right;
+}
+.overflow{
+  overflow: hidden
+}
+image{
+  width: 100%;
+}
+/*溢出省略号  */
+.ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ellipsis-2{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  line-height:38rpx;
+}
+
+.red{
+  color: #da2221;
+}
+.gray {
+  color: #bbbbbb;
+}
+.redBg{
+  background-color: #da2221;
+  color: #fff;
+}
+.grayBg{
+  background-color:#F8F8F8;
+}
+.whiteBg{
+  background-color:#fff;
+}
+/*模态背景框，半透明黑色，全屏*/
+.model-view-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100002;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+}
+.font-26{
+  font-size: 26rpx;
+}
+.font-30{
+  font-size: 30rpx;
+}
+.font-32{
+  font-size: 32rpx;
+}
+.font-22{
+  font-size: 22rpx;
+}
+
+.fixed-bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.default-btn{
+  height: 100rpx;
+  background-color: #da2221;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 26px;
+}
+.big-btn{
+  width: 600rpx;
+	height: 90px;
+	background-color: #da2221;
+	border-radius: 10px;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 26rpx;
+}

@@ -1,1 +1,11 @@
-/* components/top-bar/top-bar.wxss */
+.top-bar{
+  height: 48rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #da2221;
+  font-size: 20rpx;
+  color:#fff;
+  padding: 0 40rpx;
+}
