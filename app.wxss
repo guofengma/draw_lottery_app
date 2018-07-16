@@ -38,7 +38,9 @@ button::after{
 .overflow{
   overflow: hidden
 }
-
+image{
+  width: 100%;
+}
 /*溢出省略号  */
 .ellipsis{
   white-space: nowrap;
@@ -100,4 +102,23 @@ button::after{
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+.default-btn{
+  height: 100rpx;
+  background-color: #da2221;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 26px;
+}
+.big-btn{
+  width: 600rpx;
+	height: 90px;
+	background-color: #da2221;
+	border-radius: 10px;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 26rpx;
 }
