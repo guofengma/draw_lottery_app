@@ -1,0 +1,13 @@
+@import "/components/address-info/address-info";
+
+.addressList{
+  padding-bottom: 130rpx;
+}
+.address-info{
+  margin-bottom: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.address-info-leftbar{
+  width: 100%;
+}

@@ -1,0 +1,12 @@
+<import src='/components/address-info/address-info.wxml' />
+
+<top-bar/>
+<view class='addressList'>
+  <block>
+    <view catchtap='addressLineClicked'>
+      <template is="address-info" data=''/>
+    </view>
+  </block>
+
+  <view class='default-btn fixed-bottom' catchtap='goPage'>管理</view>
+</view>

@@ -43,6 +43,7 @@ App({
         }
       }
     })
+    this.getSystemInfo()
   },
   globalData: {
     userInfo: null
@@ -65,7 +66,6 @@ App({
       res.screenWidth = res.screenWidth * res.rate;
       res.windowHeight = res.windowHeight * res.rate;
       res.windowWidth = res.windowWidth * res.rate;
-      console.log('getSystemInfo');
       Storage.setSysInfo(res);
       that.getUserInfos(that.globalData.code)
       that.globalData.systemInfo = res

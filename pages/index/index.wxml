@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 <top-bar></top-bar>
 <sign-in wx:if="{{isTrue}}"></sign-in>
+=======
+<top-bar/>
+<sign-in></sign-in>
+
+
+>>>>>>> 3f5caa0b5a028c3760f4e52d8b191f8c4ed58687

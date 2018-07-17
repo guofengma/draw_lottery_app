@@ -27,6 +27,9 @@ export default class Operation {
 
         this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUploadImage'
 
+       // 获取反馈问题的列表
+      
+        this.queryDictionaryDetailsType = '/admin/dictionary/queryDictionaryDetailsType'
 
     }
 

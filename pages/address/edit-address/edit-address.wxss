@@ -1,0 +1,36 @@
+@import "/components/address-info/address-info";
+
+.address-edit-choose image{
+  width: 32rpx;
+}
+.address-edit-choose{
+  padding:20rpx 30rpx; 
+  border-top: 1rpx solid #eee;
+}
+.address-edit-choose>view{
+  width: 50%;
+  font-size: 26rpx;
+}
+.choose-leftbar{
+  background:transparent  url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/choose-gray.png) no-repeat; 
+  background-size: 32rpx;
+  padding-left: 50rpx;
+}
+.choose-leftbar.active{
+  background-image: url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/choose-red.png) ;
+}
+.choose-rightbar.flexR{
+  justify-content: flex-end;
+}
+.choose-rightbar>view{
+  padding-left: 44rpx;
+}
+.edit{
+  background:url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/edit-icon.png) no-repeat; 
+  background-size: 36rpx;
+  margin-right: 30rpx;
+}
+.del{
+  background:url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/delete-icon.png) no-repeat; 
+  background-size: 36rpx;
+}

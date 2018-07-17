@@ -1,0 +1,35 @@
+ <import src='/components/input-line/input-line.wxml' /> 
+
+<top-bar/>
+<view class='new-feedback whiteBg'>
+  <view class='tips'>请尽量留下您的联系方式，以便进一步联系，我们将严格保密</view>
+  <form bindsubmit="formSubmit" >
+    <view class='gray group'>
+      <template is="input-line" data='{{label:"您的姓名:",placeholder:"请输入您的姓名",name:"user"}}'/> 
+      <template is="input-line" data='{{label:"联系电话:",placeholder:"请输入您的联系方式",name:"phone"}}'/> 
+    </view>
+    <view class='flexR choose'>
+      <view class='text-left' >请选择您的问题类型:</view>
+      <view class='view-right flexR' >
+        <view catchtap='chooseType'>{{ activeList.content || "请选择你的问题"}}</view>
+        <view class='choose-type whiteBg' wx:if='{{hidden}}'>
+          <image src='/img/sanjiao.png' mode='widthFix'></image>
+          <block wx:for='{{lists}}' wx:key='unique'>
+            <view data-index='{{index}}' class='flexR-sb  type-line {{activeList.index==index? "redBg":""}}' catchtap='cellClicked'>{{item.dValue}}</view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class='write-some'>
+      <view class='red'>您有什么问题或建议向对我们说</view>
+      <textarea placeholder='请详细描述问题的相关信息，有助于我们快速定位问题的原因，谢谢' bindinput='inputChange' name='remark'></textarea>
+    </view>
+    
+    <view>
+      <update-img bind:uploadImage='uploadImage'/>
+    </view>
+    <button formType="submit" class='default-btn btn' >保存</button>
+
+  </form>
+</view>
+

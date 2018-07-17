@@ -1,0 +1,30 @@
+.userImg{
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 22rpx;
+}
+.user-img-view{
+  height: 150rpx;
+  display: flex;
+  align-items: center; 
+  margin: 40rpx 0;
+}
+.my>view{
+  padding: 0 30rpx;
+}
+.group-line>view{
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 1rpx solid #eee;
+  padding-left: 70rpx;
+  background: #fff url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/my-jiangping.png)  no-repeat 10rpx center;
+  background-size: 40rpx;
+}
+.group-line:nth-child(odd){
+  margin-bottom:40rpx;
+  border-bottom: 0;
+}
+.big-btn{
+  margin-top: 90rpx;
+  height: 80rpx;
+}

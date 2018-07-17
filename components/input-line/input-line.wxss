@@ -3,12 +3,12 @@
   padding: 0 30rpx;
 }
 .input-left{
-  width: 18%;
+  width: 20%;
   height: 1.4rem;
   line-height: 1.4rem;
 }
 .input-right{
-  width: 82%;
+  width: 80%;
 }
 .line{
   border-bottom: 1rpx solid #eee;

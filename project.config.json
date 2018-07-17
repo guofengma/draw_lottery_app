@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.3",
-	"appid": "wx228ac7ba52b9b1ed",
+	"appid": "wxb149b67e84af7551",
 	"projectname": "draw_lottery",
 	"isGameTourist": false,
 	"condition": {
@@ -33,12 +33,36 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
 					"name": "新建地址",
 					"pathName": "pages/address/new-address/new-address",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "地址管理列表",
+					"pathName": "pages/address/address-list/address-list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "编辑地址",
+					"pathName": "pages/address/edit-address/edit-address",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/my/my",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的反馈--新增",
+					"pathName": "pages/my/feedback/new-feedback/new-feedback",
 					"query": ""
 				}
 			]
