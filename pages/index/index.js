@@ -7,7 +7,8 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    isTrue:false,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -42,6 +43,20 @@ Page({
         }
       })
     }
+  },
+  onShow:function () {
+    wx.onAccelerometerChange(function (e) {
+      console.log(e.x)
+      console.log(e.y)
+      console.log(e.z)
+      if (e.x > 1 && e.y > 1) {
+        wx.showToast({
+          title: '摇一摇成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
