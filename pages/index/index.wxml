@@ -1,6 +1,5 @@
 <top-bar></top-bar>
 <sign-in wx:if="{{isTrue}}"></sign-in>
-<<<<<<< HEAD
 <view class="home-page">
   <view class="home-tree"></view>
   <view class="home-inside">
@@ -41,6 +40,3 @@
     <view class="home-tabar-btn">天天签到</view>
   </view>
 </view>
-
-=======
->>>>>>> b34f2bd70da63f0897e79f99f204eb689b871392

@@ -89,14 +89,14 @@ Page({
           // wx.request({
           //   url: '',
           //   success:function (data) {
-          //     setTimeout(function(){
-          //       wx.playBackgroundAudio({ // 音乐
-          //         dataUrl: '',
-          //         title: '',
-          //         coverImgUrl: ''
-          //       })
-          //       wx.hideLoading()
-          //     },2000)
+              setTimeout(function(){
+                // wx.playBackgroundAudio({ // 音乐
+                //   dataUrl: '',
+                //   title: '',
+                //   coverImgUrl: ''
+                // })
+                wx.hideLoading()
+              },2000)
           //     lastX = x; //赋值，为下一次计算做准备 
           //     lastY = y; 
           //     lastZ = z;
