@@ -21,14 +21,14 @@
       </view>
     </view>
     <view class='write-some'>
-      <view class='red'>您有什么问题或建议向对我们说</view>
-      <textarea placeholder='请详细描述问题的相关信息，有助于我们快速定位问题的原因，谢谢' bindinput='inputChange' name='remark'></textarea>
+      <view class='red'>您有什么问题或建议向对我们说?</view>
+      <textarea placeholder='请详细描述问题的相关信息，有助于我们快速定位问题的原因，谢谢'  name='remark'></textarea>
     </view>
     
-    <view>
+    <view class='update-img-view'>
       <update-img bind:uploadImage='uploadImage'/>
     </view>
-    <button formType="submit" class='default-btn btn' >保存</button>
+    <button formType="submit" class='default-btn btn fr' >提交问题</button>
 
   </form>
 </view>

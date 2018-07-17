@@ -1,0 +1,35 @@
+.feedback-detail{
+  height: calc(100% - 20rpx);
+  background: #fff;
+  padding: 0 30rpx;
+  margin-top: 20rpx;
+}
+.title{
+  height: 70rpx; 
+  border-bottom:1rpx solid #eee;
+}
+.userInfo{
+  border-bottom:1rpx solid #eee;
+  padding: 24rpx;
+}
+.group{
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+}
+.group>view{
+  height: 40rpx;
+  width: 298rpx;
+  background-color: #ebebeb;
+	border:  1rpx solid #e2e2e2;
+  line-height: 40rpx;
+  padding-left: 15rpx;
+}
+.content{
+  min-height: 300rpx;
+}
+.font-28{
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+}

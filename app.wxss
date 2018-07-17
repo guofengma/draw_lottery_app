@@ -58,7 +58,14 @@ button::after{
   -webkit-line-clamp:2;
   line-height:38rpx;
 }
-
+.ellipsis-3{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  line-height:38rpx;
+}
 .red{
   color: #da2221;
 }
@@ -100,7 +107,9 @@ button::after{
 .font-22{
   font-size: 22rpx;
 }
-
+.font-28{
+  font-size: 28rpx;
+}
 .fixed-bottom{
   position: fixed;
   bottom: 0;
@@ -120,7 +129,7 @@ button::after{
   width: 600rpx;
 	height: 90rpx;
 	background-color: #da2221;
-	border-radius: 10px;
+	border-radius: 10rpx;
   margin: 0 auto;
   color: #fff;
   font-size: 26rpx;

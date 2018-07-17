@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -63,6 +63,24 @@
 					"id": -1,
 					"name": "我的反馈--新增",
 					"pathName": "pages/my/feedback/new-feedback/new-feedback",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的反馈列表查询",
+					"pathName": "pages/my/feedback/my-feedback/my-feedback",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的反馈--提交成功",
+					"pathName": "pages/my/feedback/submit-feedback/submit-feedback",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的反馈详情",
+					"pathName": "pages/my/feedback/feedback-detail/feedback-detail",
 					"query": ""
 				}
 			]

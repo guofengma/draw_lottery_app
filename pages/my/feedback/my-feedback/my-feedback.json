@@ -1,1 +1,6 @@
-{}
+{
+  "navigationBarTitleText": "问题反馈",
+  "usingComponents": {
+    "top-bar": "/components/top-bar/top-bar"
+  }
+}
