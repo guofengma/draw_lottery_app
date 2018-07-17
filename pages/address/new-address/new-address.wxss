@@ -1,1 +1,18 @@
  @import "/components/input-line/input-line"; 
+ @import "/components/cell-line/cell-line"; 
+
+ textarea{
+   height:180rpx;
+   background: #fff;
+   padding: 20rpx 30rpx;
+   width: 100%;
+ }
+ .group-line>view{
+   height: 88rpx;
+   padding: 0 30rpx;
+   margin-top: 20rpx;
+   margin-bottom: 120rpx;
+ }
+ .group-line image{
+   width: 34rpx;
+ }

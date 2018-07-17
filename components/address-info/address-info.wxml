@@ -1,10 +1,10 @@
 <template name="address-info">
   <view class="address-info flexR-sb whiteBg">
-    <view class='address-icon'>
+    <view class='address-icon' wx:if='{{showImgs}}'>
       <image src='{{ src? src:"/img/address-icon-gray.png"}}' mode='widthFix'></image>
     </view>
     <!--addressType 1为快递 2为自提  -->
-    <view class='address-info-leftbar'>
+    <view class='address-info-leftbar boxSize'>
       <!-- <view class='no-address' wx:if='{{!hasData}}' >
         请选择一个收货地址
       </view> -->

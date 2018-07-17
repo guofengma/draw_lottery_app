@@ -28,7 +28,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    dianji: function () { //这里写了一个动画，让其高度变为满屏
+    clicked: function () { //这里写了一个动画，让其高度变为满屏
       var animation = wx.createAnimation({
         duration: 500,
         timingFunction: 'ease',
@@ -150,6 +150,6 @@ Component({
     }
   },
   ready: function () {
-    this.getProvinceList()
+    //this.getProvinceList()
   }
 })

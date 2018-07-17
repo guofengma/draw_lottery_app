@@ -16,3 +16,6 @@
   border-bottom: 1rpx solid #f7f7f7;
   width:100%;
 }
+.jiantou{
+  width: 16rpx;
+}

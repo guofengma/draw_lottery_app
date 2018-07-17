@@ -5,6 +5,9 @@ page{
 button[disabled]:not([type]) {
   background-color: #dddddd;
 }
+button.btn{
+  border-radius: 0
+}
 .flexR{
   display: flex;
   flex-direction: row;
@@ -111,7 +114,7 @@ image{
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-size: 26px;
+  font-size: 26rpx;
 }
 .big-btn{
   width: 600rpx;

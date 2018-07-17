@@ -1,6 +1,6 @@
 <template name="cell-line">
   <view class='cell-line-view flexR-sb font-26 whiteBg boxSize'>
-    {{name}}
+    {{label}}
     <view class='cell-line-view-right boxSize flexR-sb'>
       <view class='cell-content' wx:if='{{content}}'>{{content}}</view>
       <view class='gray' wx:else>{{placeholder || '请选择'}}</view>

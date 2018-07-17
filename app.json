@@ -1,12 +1,35 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/address/new-address/new-address"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black"
-    }
+  "pages": [
+    "pages/index/index",
+    "pages/address/new-address/new-address",
+    "pages/address/address-list/address-list",
+    "pages/address/edit-address/edit-address",
+    "pages/my/my"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "抽奖系统",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#e60012",
+    "color": "#999999",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "活动详情"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的奖品"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "天天签到"
+      }
+    ]
+  }
 }

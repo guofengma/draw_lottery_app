@@ -1,66 +1,93 @@
-// pages/address/new-address/new-address.js
+let { Tool, RequestFactory, Event } = global
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    line:true
+    line:true,
+    content:'', // 所在区域拼接结果
+    navbar:['新增地址','修改地址'],
+    addressType:1, // 1新建地址 2修改地址
+    region:[],// 省市区的数组 
+    isChoose:false, // 是否选择为默认地址
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    wx.setNavigationBarTitle({
+      title: this.data.navbar[options.type]
+    })
+    this.setData({
+      addressType: options.type
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  pickerClicked(e) {
+    let region = e.detail.result
+    this.setData({ 
+      content: region[0].name + region[1].name + region[2].name,
+      region: region
+    })
+    if (e.detail.btnType == 2) {
+      // this.updateDealerRegion(e)
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  formSubmit(e){
+    let params = e.detail.value
+    if (this.data.region[0]) {
+      params.provinceCode = this.data.region[0].zipcode;
+    }
+    if (this.data.region[1]) {
+      params.cityCode = this.data.region[1].zipcode;
+    }
+    if (this.data.region[2]) {
+      params.areaCode = this.data.region[2].zipcode;
+    }
+    console.log(params)
+    if (!Tool.checkName(params.receiver)) {
+      Tool.showAlert("收货人姓名长度需在2-16位之间");
+      return
+    }
+    if (!Tool.checkPhone(params.recevicePhone)) {
+      Tool.showAlert("请输入正确的电话号码");
+      return
+    }
+    if (this.data.region.length == 0) {
+      Tool.showAlert("请选择你所在的省市区");
+      return
+    }
+    if (Tool.isEmptyStr(params.address)) {
+      Tool.showAlert("请输入详细地址");
+      return
+    }
+    this.requestAddUserAddress(params)
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  requestAddUserAddress(params) {
+    // let r = RequestFactory.addUserAddress(params);
+    r.finishBlock = (req) => {
+      //跳转到地址列表页面
+      this.successCallBack("添加成功")
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
+  deleteItem(){
+    let params = {
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+    }
+    let callBack = ()=>{
+      // let r = RequestFactory.addUserAddress(params);
+      // r.finishBlock = (req) => {
+      //   //跳转到地址列表页面
+      //   this.successCallBack("删除成功")
+      // };
+      // Tool.showErrMsg(r)
+      // r.addToQueue();
+    }
+    Tool.showComfirm('确认要删除该地址吗', callBack)
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  chooseClicked(){
+    this.setData({
+      isChoose: !this.data.isChoose
+    })
   }
 })

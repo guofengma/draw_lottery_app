@@ -1,8 +1,24 @@
  <import src='/components/input-line/input-line.wxml' /> 
+ <import src='/components/cell-line/cell-line.wxml' /> 
 
+<top-bar/>
+<form bindsubmit="formSubmit" >
+  <template is="input-line" data='{{label:"收货人",line,name:"receiver"}}'/> 
+  <template is="input-line" data='{{label:"联系电话",line,name:"recevicePhone"}}'/> 
+  <city-picker bind:pickerClicked="pickerClicked" id='picker' region='{{region}}'>
+      <template is="cell-line" data="{{label:'所在区域',placeholder:'请选择',content}}"/>
+  </city-picker> 
+  <textarea placeholder="请输入详细地址" placeholder-style="color:#999;" class='font-26' name='address'/>
 
- <template is="input-line" data='{{name:"收货人",line}}'/> 
- <template is="input-line" data='{{name:"联系电话",line}}'/> 
- <template is="input-line" data='{{name:"收货人",line}}'/> 
- <template is="input-line" data='{{name:"收货人",line}}'/> 
- <template is="input-line" data='{{name:"收货人",line}}'/> 
+  <view class='font-26 whiteBg group-line'>
+    <view class='flexR-sb' wx:if='{{addressType==1}}'>
+      设为默认地址
+      <image src='{{isChoose? "/img/choose-red.png":"/img/choose-gray.png"}}' catchtap='chooseClicked' mode='widthFix'></image>
+    </view>
+    <view class='flexR-sb red' wx:else  catchtap='deleteItem'>删除地址</view>
+  </view>
+
+  <button formType="submit" class='default-btn fixed-bottom btn' >保存</button>
+
+</form>
+ 

@@ -308,6 +308,8 @@ export default class Tool {
         showCancel: true,
         cancelText: '取消',
         confirmText: '确认',
+        cancelColor:'#da2221',
+        confirmColor:'#da2221',
         success: function (res) {
           if (res.confirm) {
             okCB();
@@ -601,7 +603,16 @@ export default class Tool {
         return false;
       }
     }
-    
+
+    // 判断人名
+    static checkName(value) {
+      if (!(/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/.test(value))) {
+        return false
+      } else {
+        return true
+      }
+    }
+
     // 格式化服务器端返回的cookie
 
     static formatCookie(cookies) {
