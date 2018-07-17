@@ -41,9 +41,9 @@ button::after{
 .overflow{
   overflow: hidden
 }
-image{
+/* image{
   width: 100%;
-}
+} */
 /*溢出省略号  */
 .ellipsis{
   white-space: nowrap;
@@ -118,10 +118,13 @@ image{
 }
 .big-btn{
   width: 600rpx;
-	height: 90px;
+	height: 90rpx;
 	background-color: #da2221;
 	border-radius: 10px;
   margin: 0 auto;
   color: #fff;
   font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

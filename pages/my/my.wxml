@@ -1,1 +1,15 @@
 <top-bar/>
+
+<view class='my'>
+  <view class='user-img-view whiteBg'>
+    <image src='/img/default-user.png' class='userImg'></image>
+    <text class='font-30'>陈收到货时肯定会</text>
+  </view>
+  <block wx:for='{{datas}}' wx:key='unique'>
+    <view class='group-line whiteBg' catchtap='cellClicked' data-index='{{index}}'>
+      <view class='font-26' style='background-image:url({{url+item.icon}}'>{{item.title}}</view>
+    </view>
+  </block>
+</view>
+
+<view class='default-btn fixed-bottom'>退出登录</view>

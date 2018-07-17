@@ -56,7 +56,8 @@
 				{
 					"id": -1,
 					"name": "我的",
-					"pathName": "pages/my/my"
+					"pathName": "pages/my/my",
+					"query": ""
 				}
 			]
 		}
