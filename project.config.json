@@ -33,12 +33,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
 					"name": "新建地址",
-					"pathName": "pages/address/new-address/new-address"
+					"pathName": "pages/address/new-address/new-address",
+					"query": ""
 				}
 			]
 		}
