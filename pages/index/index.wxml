@@ -1,9 +1,43 @@
-<<<<<<< HEAD
 <top-bar></top-bar>
 <sign-in wx:if="{{isTrue}}"></sign-in>
-=======
-<top-bar/>
-<sign-in></sign-in>
+<view class="home-page">
+  <view class="home-tree"></view>
+  <view class="home-inside">
+    <view class="inputBox">
+      <input class="security-code" placeholder='请输入16位防伪码'></input>
+      <view class="securit-btn">提交</view>
+    </view>
+    <view class="draw-number">
+      <text>您有 {{isNumber}}次 摇奖机会</text>
+    </view>
+    <view class="home-winners">
+        <view class="winners-btn">获奖名单</view>
+        <view class="winners-content">
+          <view class="text">
+            1、获奖名单 <view class="text-width"></view>  138****8888
+          </view>
+          <view class="text">
+            2、获奖名单 <view class="text-width"></view>  138****8888
+          </view>
+          <view class="text">
+            3、获奖名单 <view class="text-width"></view>  138****8888
+          </view>
+          <view class="text">
+            4、获奖名单 <view class="text-width"></view>  138****8888
+          </view>
+          <view class="text">
+            5、获奖名单 <view class="text-width"></view>  138****8888
+          </view>
+          <view class="text">
+            6、获奖名单 <view class="text-width"></view>  138****8888
+          </view>
+        </view>
+    </view>    
+  </view>
+  <view class="home-tabar">
+    <view class="home-tabar-btn">活动详情</view>
+    <view class="home-tabar-btn home-btn-borders">我的奖品</view>
+    <view class="home-tabar-btn">天天签到</view>
+  </view>
+</view>
 
-
->>>>>>> 3f5caa0b5a028c3760f4e52d8b191f8c4ed58687

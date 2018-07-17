@@ -1,1 +1,110 @@
 /* @import "/components/address-info/address-info"; */
+.home-page{
+  width: 750rpx;
+  /* height: 2000rpx; */
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homePage.png') no-repeat center center;
+  background-size:100%; 
+  overflow: hidden;
+}
+.home-tree{
+  width: 690rpx;
+  height: 660rpx;
+  margin: 640rpx auto auto auto;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeTree.png') no-repeat center center;
+  background-size:100%;
+}
+.home-inside{
+  width: 536rpx;
+  height: 644rpx;
+  margin: 0 auto;
+}
+.inputBox{
+  width: 463rpx;
+  height: 73rpx;
+  overflow: hidden;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/inputB.png') no-repeat center center;
+  background-size:100%; 
+  margin: 0 auto;
+}
+.security-code{
+  width: 340rpx;
+  height: 73rpx;
+  float: left;
+  padding-left: 15rpx;
+  font-size: 28rpx;
+}
+.securit-btn{
+  width: 103rpx;
+  height: 73rpx;
+  display: inline-block !important;
+  padding: 0;
+  text-align: center;
+  float: left;
+  line-height: 73rpx;
+  color: #911c1c;
+  font-weight: normal;
+  font-size: 28rpx;
+}
+.draw-number{
+  width: 240rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  margin: 28rpx auto;
+}
+.draw-number text{
+  font-size: 28rpx;
+  color: #e9d96a;
+}
+.home-winners{
+  width: 536rpx;
+  height: 430rpx;
+  margin: 60rpx auto;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/honeBorder.png') no-repeat center center;
+  background-size:100%;
+}
+.winners-btn{
+  width: 164rpx;
+  height: 55rpx;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/btnB.png') no-repeat center center;
+  background-size:100%;
+  margin: 0 auto;
+  position: relative;
+  top:-15rpx;
+  color: #911c1c;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 55rpx;
+}
+.winners-content{
+  width: 462rpx;
+  height: 329rpx;
+  margin: 0 auto;
+}
+.winners-content .text{
+  font-size: 24rpx;
+  color: #fff;
+  width: 460rpx;
+  white-space: nowrap;
+  margin-bottom: 30rpx;
+}
+.text-width{
+  display: inline-block;
+  width: 174rpx;
+}
+.home-tabar{
+  height: 88rpx;
+}
+.home-tabar-btn{
+  width: 245rpx;
+  height: 88rpx;
+  background: #dddddd;
+  display: inline-block;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 0 1rpx 0 1rpx;
+}
+.home-btn-borders{
+  border-left:6rpx solid #fff; 
+  border-right:6rpx solid #fff; 
+}

@@ -1,27 +1,17 @@
 {
-  "pages": [
-<<<<<<< HEAD
-    "pages/card/card",
-    "pages/index/index",
-    "pages/address/new-address/new-address"
-=======
-    "pages/index/index",
-    "pages/address/new-address/new-address",
-    "pages/address/address-list/address-list",
-    "pages/address/edit-address/edit-address",
-    "pages/my/my",
-    "pages/my/feedback/my-feedback/my-feedback",
-    "pages/my/feedback/new-feedback/new-feedback"
->>>>>>> 3f5caa0b5a028c3760f4e52d8b191f8c4ed58687
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-<<<<<<< HEAD
-    "navigationBarTitleText": "WeChat",
-=======
-    "navigationBarTitleText": "抽奖系统",
->>>>>>> 3f5caa0b5a028c3760f4e52d8b191f8c4ed58687
-    "navigationBarTextStyle": "black"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/address/new-address/new-address",
+        "pages/address/address-list/address-list",
+        "pages/address/edit-address/edit-address",
+        "pages/my/my",
+        "pages/my/feedback/my-feedback/my-feedback",
+        "pages/my/feedback/new-feedback/new-feedback"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "抽奖系统",
+        "navigationBarTextStyle": "black"
+    }
 }
