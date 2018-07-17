@@ -79,3 +79,13 @@ textarea{
   margin-bottom: 20rpx;
   line-height: 30rpx;
 }
+.update-img-view{
+  background-color: #f7f7f7;
+  padding: 20rpx;
+  padding-bottom: 10rpx;
+  margin-bottom: 14rpx;
+}
+.default-btn{
+  height: 60rpx;
+  width: 170rpx;
+}

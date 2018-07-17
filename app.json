@@ -6,7 +6,9 @@
     "pages/address/edit-address/edit-address",
     "pages/my/my",
     "pages/my/feedback/my-feedback/my-feedback",
-    "pages/my/feedback/new-feedback/new-feedback"
+    "pages/my/feedback/new-feedback/new-feedback",
+    "pages/my/feedback/submit-feedback/submit-feedback",
+    "pages/my/feedback/feedback-detail/feedback-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -42,7 +42,6 @@ Page({
     if (this.data.region[2]) {
       params.areaCode = this.data.region[2].zipcode;
     }
-    console.log(params)
     if (!Tool.checkName(params.receiver)) {
       Tool.showAlert("收货人姓名长度需在2-16位之间");
       return

@@ -1,0 +1,23 @@
+<view class='feedback-detail'>
+  <view class='font-26 title flexR-sb'>
+    问题编号：shdsdh 物流问题
+  </view>
+
+  <view class='userInfo'>
+    <view class='group'>
+      <text class='gray'>您的姓名：</text>
+      <view >精神抖擞建华大街</view>
+    </view>
+    <view class='group'>
+      <text class='gray'>联系电话：</text>
+      <view >18758328354</view>
+    </view>
+  </view>
+
+  <view class=''>
+    <view class='red font-28'>解决反馈问题</view>
+    <view class='grayBg content'>
+    
+    </view>
+  </view>
+</view>

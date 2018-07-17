@@ -1,1 +1,97 @@
-/* pages/my/feedback/my-feedback/my-feedback.wxss */
+.my-feedback{
+  height: 100%;
+}
+.tab-h{
+  height: 80rpx;
+  width: 100%; 
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  font-size: 30rpx; 
+  white-space: nowrap;
+  position: fixed;
+  top: 48rpx; 
+  left: 0; 
+  z-index: 99;
+  background:#fff; 
+  border-bottom: 1rpx solid #eee;
+}
+.tab-item{
+  margin:0 30rpx;
+  display: inline-block;
+  text-align: center;
+  color: #999999;
+}
+.tab-item.active{
+  color: #e60012;
+  position: relative;
+}
+.tab-item.active:after{ 
+  content: "";
+  display: block;
+  height: 6rpx;
+  width: 100%;
+  background: #e60012;
+  position: absolute; 
+  bottom: 0;
+  left: 0;
+  border-radius: 16rpx;
+}
+.scoll-h{
+  height: 100%;
+  padding-top:80rpx;
+}
+.tab-content{
+  margin-top: 80rpx;
+}
+
+.bottom-content{
+  font-size: 24rpx;
+}
+.btn-view{
+  width: 140rpx;
+	height: 50rpx;
+	border-radius: 25rpx;
+	border: 1rpx  solid #dddddd;
+  margin-left: 30rpx;
+}
+.feedback-content{
+  padding:0 30rpx;
+  align-items: flex-start;
+  background: #fff;
+  margin-top: 20rpx;
+}
+.left{
+  width: 60rpx;
+  min-height:88rpx;
+  background: transparent url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qus-b.png) no-repeat center center;
+  background-size: 30rpx;
+}
+.right{
+  width: 635rpx;
+  padding-bottom: 30rpx;
+}
+.type2 .left{
+  background-image:  url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qus-y.png) 
+}
+.reply{
+  width: 80rpx;
+}
+.content{
+  margin-bottom: 60rpx;
+  margin-top: 24rpx
+}
+.reply-content{
+  width: 550rpx;
+}
+.title-fd{
+  height: 88rpx;
+  border-bottom:1rpx solid #eee;
+}
+.type-bg{
+  background: transparent url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qus-b.png) no-repeat center center;
+  background-size: 30rpx;
+}
+.type2 .type-bg{
+
+}

@@ -1,0 +1,6 @@
+<view class='submit-feedback flexC'>
+   <image src='/img/suc-right.png' mode='widthFix'></image>
+   <view class='font-30'>恭喜您！问题提交成功</view>
+   <view class='gray font-22'>稍安勿躁，问题正在加紧处理中</view>
+   <view class='big-btn' catchtap='goPage'>查看问题处理状态</view>
+</view>
