@@ -15,8 +15,8 @@ let TCGlobal = {
     Event: Event,
     RequestFactory: RequestFactory,
     version:'V1.0',
-    AppId: 'wx228ac7ba52b9b1ed',//小程序AppID
-    Secret: 'ac645290e3299966fabe3cf0d0034f9b',//小程序Secret
+    AppId: 'wxb149b67e84af7551',//小程序AppID
+    Secret: 'ea39f6e44bd620a5381d2454e4e8e4b4',//小程序Secret
     WXPayKey: '',//商户平台32位密钥
     WXPayAccount: '',
     WXPayMchId: '',//商户Id

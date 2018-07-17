@@ -67,7 +67,7 @@ button::after{
 }
 .redBg{
   background-color: #da2221;
-  color: #fff;
+  color: #fff !important;
 }
 .grayBg{
   background-color:#F8F8F8;

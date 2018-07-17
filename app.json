@@ -4,7 +4,9 @@
     "pages/address/new-address/new-address",
     "pages/address/address-list/address-list",
     "pages/address/edit-address/edit-address",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/my/feedback/my-feedback/my-feedback",
+    "pages/my/feedback/new-feedback/new-feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",

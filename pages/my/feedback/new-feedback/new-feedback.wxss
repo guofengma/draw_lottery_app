@@ -1,0 +1,81 @@
+ @import "/components/input-line/input-line"; 
+
+.tips{
+  font-size: 24rpx;
+  margin-bottom: 30rpx;
+}
+.new-feedback{
+  height: 100%;
+  padding: 30rpx;
+}
+.input-line{
+  height: 50rpx;
+  margin-bottom: 26rpx;
+}
+.input-line input{
+  width: 408rpx;
+  height: 40rpx;
+  background-color: #ebebeb;
+	border:  1rpx solid #e2e2e2;
+  padding-left: 10rpx;
+  color:#333;
+}
+.group{
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.text-left{
+  font-size: 24rpx;
+  color: #666;
+}
+.view-right{
+  width: 240rpx;
+  height: 40rpx;
+	border: 1rpx solid  #e2e2e2;
+  font-size: 24rpx;
+  margin-left: 16rpx;
+  position: relative;
+  padding-right: 32rpx;
+  background: #ebebeb  url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/down-icon.png) no-repeat 240rpx center;
+  background-size: 16rpx;
+}
+.choose{
+  justify-content: flex-start;
+  padding: 40rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+.choose-type{
+  position: absolute;
+  z-index: 99;
+  left: 0;
+  top:62rpx;
+  width: 100%;
+  box-shadow: 0 0 7rpx 0 rgba(0, 0, 0, 0.1);
+  padding-top: 10rpx;
+}
+.type-line{
+  height:50rpx; 
+  color: #666666;
+  padding: 0 10rpx;
+}
+.choose-type image{
+  width: 22rpx;
+  position: absolute;
+  top:-18rpx;
+  z-index: 100;
+  right: 14rpx;
+}
+.write-some .red{
+  font-size: 28rpx;
+  margin:40rpx 0 20rpx 0;
+}
+textarea{
+  font-size: 24rpx;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx;
+  height: 324rpx;
+  background-color: #f7f7f7;
+  margin-bottom: 20rpx;
+  line-height: 30rpx;
+}

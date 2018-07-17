@@ -2,7 +2,7 @@
    <view class='input-line flexR-sb font-26 whiteBg {{line? "line":""}}'>
       <view class='input-left'>{{label}}</view>
       <view class='input-right'>
-        <input placeholder='{{placeholder}}' name='{{name}}'></input>
+        <input placeholder='{{placeholder}}' placeholder-class='gray' name='{{name || ""}}'></input>
       </view>
    </view>
 </template>

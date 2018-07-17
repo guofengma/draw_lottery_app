@@ -46,10 +46,10 @@ export default class RequestFactory {
   }
   
   
-  static queryCompletedOrderPageList(params) {
-      params.port = '8103';
-      let url = Operation.sharedInstance().queryCompletedOrderPageList;
-      return this.request(url, params, '已完成订单', true);
+  static queryDictionaryDetailsType(params) {
+    params.port = '8001';
+    let url = Operation.sharedInstance().queryDictionaryDetailsType;
+    return this.request(url, params, '获取反馈问题列表', true);
   }
   
   // 上传图片的地址 
