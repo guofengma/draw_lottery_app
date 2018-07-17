@@ -15,7 +15,7 @@ Component({
         signDay: [{ "signDay": "9" }, { "signDay": "11" }, { "signDay": "12" }, { "signDay": "15" }],
         signs: [1, 2, 3, 5, 6, 7],
         signtype: "1",
-        signDays: [],
+        signDays: [], // 存放 已签到的天数
         todayDate: "1",
         todayMonth: "",
         todayYear: "",
@@ -27,15 +27,20 @@ Component({
         series_gos: "15",
         for_signs: "none",
         powerData: "0",
+        isSigncontinuity: 'none',
+        hoverClass:'',
+        isTrue:true,
+        tip: true,
+        isNumber: '3'
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
-        sign_start: function() {
+        sign_start: function() { // 签到
             var powerData = 100;
-            this.onLoad();
+            this.sign();
             //签到成功后重新调用后台接口加载新的签到数据
             this.setData({
                 for_signs: "block",
@@ -49,7 +54,7 @@ Component({
             });
         },
 
-        close_qdbox: function() {
+        close_qdbox: function() { // 签到奖励弹框
             var seriesCount = this.data.seriesCount;
             // var seriesCount = seriesCount+1;
             if (seriesCount < 10) {
@@ -63,14 +68,14 @@ Component({
                 for_signs: "none",
             });
         },
-        sign_end: function() {
+        sign_end: function() { // 到底了
             wx.showToast({
                 title: '今日已经签到',
                 icon: 'loading',
                 duration: 1500
             });
         },
-        sign_prev: function() {
+        sign_prev: function() { // 上一页
             console.log("上一月");
             var showMonth = this.data.showMonth;
             var todayMonth = this.data.todayMonth;
@@ -113,7 +118,7 @@ Component({
                 showMonth: showMonth,
             });
         },
-        sign_next: function() {
+        sign_next: function() { // 下一页
             console.log("下一月");
             var showMonth = this.data.showMonth;
             var todayMonth = this.data.todayMonth;
@@ -143,7 +148,7 @@ Component({
             }
             var godates = showYear + "-" + showMonths + "-01";
 
-            var $datas = { seriesCount: 1, signDays: [1, 4, 5, 9, 11, 12, 13, 14, 25, 26, 28] };
+            var $datas = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7]};
             var signDate_arr = new Array();
             var anns = $datas.signDays;
             for (var p in anns) { //遍历json对象的每个key/value对,p为key
@@ -153,15 +158,13 @@ Component({
             console.log(signDate_arr[0]);
             signTime.dataTime.bulidCal(showYear, showMonth, that, signDate_arr);
             //初始化加载日历
-
-
             this.setData({
                 showYear: showYear,
                 showMonth: showMonth,
             });
 
         },
-        onLoad: function(options) {
+      sign: function(options) { // 签到
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -176,9 +179,7 @@ Component({
             console.log(todayss);
             var godates = todayYear + "-" + todayMonthss + "-01";
             var that = this;
-
-
-            var data = { seriesCount: 1, signDays: [1, 4, 5, 9, 11, 12, 13, 14, 25, 26, 28] };
+            var data = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7] };
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -189,7 +190,8 @@ Component({
                 var series_gos = 99;
             } else {
                 var series_gos = 10 - parseInt(count_signday);
-            }
+            } 
+            anns.push(todayss) //  存放今日的签到日期
             that.setData({
                 seriesCount: count_signday,
                 series_gos: series_gos,
@@ -197,18 +199,36 @@ Component({
             for (var p in anns) { //遍历json对象的每个key/value对,p为key
                 var newdats = anns[p];
                 signDate_arr.push(newdats);
+                var t = parseInt(p)
+                if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
+                  console.log('连续签到了7')
+                  if (newdats === 7) {
+                    that.setData({
+                      hoverClass: 'border-hover'
+                    })
+                  }
+                  // break
+                } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 15) {
+                  console.log('连续签到了15天')
+                  // break
+                } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 30) {
+                  console.log('连续签到了30天')
+                  // break
+                } else {
+                  console.log('没')
+                }
             }
-            if (signDate_arr.indexOf(todayss) > -1) {
-                console.log("当前已签到");
-                that.setData({
-                    signtype: "2",
-                });
-            } else {
-                console.log("当前未签到");
-                that.setData({
-                    signtype: "1",
-                });
-            }
+            // if (signDate_arr.indexOf(todayss) > -1) {
+            //     console.log("当前已签到");
+            //     that.setData({
+            //         signtype: "2",
+            //     });
+            // } else {
+            //     console.log("当前未签到");
+            //     that.setData({
+            //         signtype: "1",
+            //     });
+            // }
             console.log(signDate_arr[0]);
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历
@@ -224,6 +244,11 @@ Component({
                 showYear: todayYear,
                 showMonth: todayMonth,
             });
+        },
+        closeView: function() {
+          this.setData({
+            isTrue: !true
+          })
         }
     },
     ready: function() {
@@ -241,9 +266,7 @@ Component({
         console.log(todayss);
         var godates = todayYear + "-" + todayMonthss + "-01";
         var that = this;
-
-
-        var data = { seriesCount: 1, signDays: [1, 4, 5, 9, 11, 12, 13, 14, 25, 26, 28] };
+        var data = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7]};
         var $datas = data;
         var signDate_arr = new Array();
         var anns = $datas.signDays;
@@ -261,19 +284,36 @@ Component({
         });
         for (var p in anns) { //遍历json对象的每个key/value对,p为key
             var newdats = anns[p];
+            var t = parseInt(p)
             signDate_arr.push(newdats);
+            // if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
+            //   console.log('连续签到了7')
+            //   // if (parseInt(anns[p]) === 7 || anns[p] === '7'){
+            //   //   console.log(1)
+            //   //   that.setData({
+            //   //     hoverClass: 'border-hover'
+            //   //   })
+            //   // }
+            //   // break
+            // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 15){
+            //   console.log('连续签到了15天')
+            // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 30){
+            //   console.log('连续签到了30天')
+            // } else {
+            //   console.log('没有连续签到')
+            // }
         }
-        if (signDate_arr.indexOf(todayss) > -1) {
-            console.log("当前已签到");
-            that.setData({
-                signtype: "2",
-            });
-        } else {
-            console.log("当前未签到");
-            that.setData({
-                signtype: "1",
-            });
-        }
+        // if (signDate_arr.indexOf(todayss) > -1) {
+        //     console.log("当前已签到");
+        //     that.setData({
+        //         signtype: "2",
+        //     });
+        // } else {
+        //     console.log("当前未签到");
+        //     that.setData({
+        //         signtype: "1",
+        //     });
+        // }
         console.log(signDate_arr[0]);
         signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
         //初始化加载日历

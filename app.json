@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/card/card",
     "pages/index/index",
     "pages/address/new-address/new-address",
     "pages/address/address-list/address-list",
