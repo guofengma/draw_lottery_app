@@ -1,0 +1,8 @@
+<template name="input-line">
+   <view class='input-line flexR-sb font-26 whiteBg {{line? "line":""}}'>
+      <view class='input-left'>{{name}}</view>
+      <view class='input-right'>
+        <input placeholder='{{placeholder}}'></input>
+      </view>
+   </view>
+</template>

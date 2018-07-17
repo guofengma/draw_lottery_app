@@ -1,0 +1,8 @@
+ <import src='/components/input-line/input-line.wxml' /> 
+
+
+ <template is="input-line" data='{{name:"收货人",line}}'/> 
+ <template is="input-line" data='{{name:"联系电话",line}}'/> 
+ <template is="input-line" data='{{name:"收货人",line}}'/> 
+ <template is="input-line" data='{{name:"收货人",line}}'/> 
+ <template is="input-line" data='{{name:"收货人",line}}'/> 
