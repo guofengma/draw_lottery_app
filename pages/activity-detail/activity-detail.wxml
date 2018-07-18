@@ -1,0 +1,3 @@
+<view class='fixed-top'>
+  <image src='/img/default-user.png' mode='widthFix'></image>
+</view>

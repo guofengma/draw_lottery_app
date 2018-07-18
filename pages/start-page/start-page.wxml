@@ -1,0 +1,4 @@
+<view class='fixed-top'>
+  <image src='/img/default-user.png' mode='widthFix'></image>
+  <view class='timer'>{{second}}s</view>
+</view>

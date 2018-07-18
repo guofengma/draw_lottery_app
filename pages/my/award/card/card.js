@@ -1,66 +1,38 @@
-// pages/card/card.wxml.js
+let { Tool, RequestFactory } = global
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    datas:[
+      {
+        'icon1': "/img/duo.png", 
+        "icon2":'/img/duoactive.png',
+        "showImg1":'/img/duoBig.png',
+        "showImg2": '/img/duoBig.png',
+        length:0
+      },
+      {
+        'icon1': "/img/duo.png",
+        "icon2": '/img/duoactive.png',
+        "showImg1": '/img/duoBig.png',
+        "showImg2": '/img/duoBig.png',
+        length: 0
+      },
+      {
+        'icon1': "/img/nv.png",
+        "icon2": '/img/nvactive.png',
+        "showImg1": '/img/nvBig.png',
+        "showImg2": '/img/duoBig.png',
+        length: 1
+      },
+      {
+        'icon1': "/img/lang.png",
+        "icon2": '/img/langactive.png',
+        "showImg1": '/img/langBig.png',
+        "showImg2": '/img/duoBig.png',
+        length: 2
+      },
+    ]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
   
   }
 })

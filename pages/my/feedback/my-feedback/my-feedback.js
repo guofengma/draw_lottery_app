@@ -1,3 +1,4 @@
+let { Tool, RequestFactory } = global
 Page({
   data: {
     currentTab:'' 

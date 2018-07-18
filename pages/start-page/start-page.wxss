@@ -1,0 +1,8 @@
+image{
+  width: 100%
+}
+.timer{
+  position: absolute;
+  right: 40rpx;
+  top: 40rpx;
+}
