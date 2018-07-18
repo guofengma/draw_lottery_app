@@ -1,4 +1,5 @@
 /* pages/card/card.wxml.wxss */
+@import "/components/logo-bar/logo-bar";
 .card-content{
   width: 750rpx;
   height: 880rpx;

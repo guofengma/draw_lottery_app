@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "字卡奖品"
+  "navigationBarTitleText": "字卡奖品",
+  "usingComponents": {
+    "top-bar": "/components/top-bar/top-bar",
+    "bottom-bar": "/pages/my/award/temp/bottom-bar"
+  }
 }

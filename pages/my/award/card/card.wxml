@@ -1,4 +1,7 @@
 <!--pages/card/card.wxml.wxml-->
+<import src='/components/logo-bar/logo-bar.wxml' />
+<top-bar/>
+<template is="logo-bar" data=''/>
 <view class="card-content"> <!--card 灰色背景层-->
   <view class="card-inside"> <!--card 字卡存放层-->
     <view class="card-bgCard"><!--大图-->
@@ -23,3 +26,4 @@
     </view> <!--合成按钮-->
   </view>
 </view>
+<bottom-bar></bottom-bar>
