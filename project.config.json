@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -118,6 +118,17 @@
 					"name": "订单物流",
 					"pathName": "pages/logistics/logistics",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "启动页",
+					"pathName": "pages/start-page/start-page",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "活动详情",
+					"pathName": "pages/activity-detail/activity-detail"
 				}
 			]
 		}

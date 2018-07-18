@@ -1,1 +1,48 @@
-/* pages/logistics/logistics.wxss */
+.img-view{
+  width: 110rpx;
+  height: 110rpx;
+  border:1rpx solid #eee;
+}
+.img-view image{
+  width: 100%;
+  height: 100%;
+}
+.logistics{
+  width: 560rpx;
+  height:110rpx;
+  font-size: 24rpx;
+}
+.red{
+  font-size: 26rpx;
+}
+.sub-btn{
+  width: 120rpx;
+	height: 40rpx;
+	border:  1rpx solid  #ebebeb;
+  font-size: 24rpx;
+}
+.top-content{
+  border-bottom: 1rpx solid #eee;
+  margin-top: 20rpx;
+  padding: 20rpx 30rpx;
+}
+.log-name{
+  height: 88rpx;
+  line-height: 88rpx;
+  padding: 0 30rpx;
+}
+.time-line{
+  margin-top: 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  padding: 0 30rpx;
+}
+.time-line image{
+  width: 60rpx;
+  border-radius: 50rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+.infos{
+  display: inline-block
+}
