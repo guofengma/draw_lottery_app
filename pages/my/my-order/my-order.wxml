@@ -10,9 +10,30 @@
         <view class='container whiteBg'>
           <view class='state flexR-sb font-26'>
             <view>朵女郎</view>
-            <view>已发货</view>
+            <view class='red'>已发货</view>
+          </view>
+          <view class='font-22 red ordernum'>
+            <text>订单编号：1532132132132132</text>
+            <text class='time'>2017-12-31 14:15:16</text>
+          </view>
+          <view class='content font-26 flexR-sb grayBg'>
+            <image src='/img/default-user.png'></image>
+            <view class='infos'>
+              <view class='red ellipsis'>中奖码：2017121212121313</view>
+              <view class='ellipsis'>护手霜</view>
+              <view class='flexR-sb'>
+                <text class='gray'>分类：圣诞节收到货</text>
+                <text>x 1</text>
+              </view>
+            </view>
+          </view>
+          <view class='totalNum'>
+            <text class='fr font-26'>合计：共1件奖品</text>
+          </view>
+          <view class='logistics'>
+             <view class='logistics-btn flexR fr' catchtap='goPage' data-id='{{0}}'>查看物流</view>
           </view>
         </view>
-    </block> 
+    </block>
   </scroll-view>
 </view>

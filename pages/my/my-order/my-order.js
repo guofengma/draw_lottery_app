@@ -15,4 +15,8 @@ Page({
       })
     }
   },
+  goPage(e){
+    let id = e.target.dataset.id;
+    Tool.navigateTo('/pages/logistics/logistics?id='+id)
+  }
 })

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "订单物流",
+  "usingComponents": {
+    "top-bar": "/components/top-bar/top-bar"
+  }
+}

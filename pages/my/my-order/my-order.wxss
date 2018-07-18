@@ -3,7 +3,56 @@
 }
 .state{
   height: 88rpx;
+  padding-left: 83rpx;
+  padding-right: 30rpx;
+  background: #fff url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/login-2.png) no-repeat 34rpx center ;
+  background-size:30rpx;
 }
 .container{
   margin-top: 20rpx;
+}
+
+.ordernum{
+  height: 50rpx;
+  padding: 0 30rpx;
+  line-height: 50rpx;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+}
+.time{
+  margin-left: 14rpx;
+}
+.content{
+  padding:30rpx;
+}
+.content image{
+  height: 140rpx;
+  width: 140rpx;
+}
+.infos{
+  width: 520rpx;
+}
+.infos>view{
+  margin-bottom: 10rpx;
+}
+.infos>view:first-child{
+  padding-top: 20rpx;
+}
+.totalNum{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 30rpx;
+}
+.logistics{
+  height: 90rpx;
+  padding: 0 30rpx;
+}
+.logistics-btn{
+  width: 140rpx;
+	height: 50rpx;
+	background-color: #ffffff;
+	border-radius: 25rpx;
+	border:  1rpx solid #999999;
+  color: #666666;
+  font-size: 22rpx;
 }
