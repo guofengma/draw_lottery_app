@@ -41,9 +41,6 @@
                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
                                     {{item == null ? '' : item.normalday}}
                                     </view>
-                                    <!-- <view class="tip" wx:if="{{item.normalday === 7}}">
-                                    获得{{isNumber}}次抽奖机会 
-                                    </view> -->
                                 </view>
                             </view>
                             <view class="month_day">
@@ -142,7 +139,20 @@
           <text class="fontSet">4.连续签到30天可获得7次免费抽奖机会</text>
         </view>
     </view>
-    <view class="closeBtn" bindtap='closeView'>
+    <view class="model-view-bg" wx:if="{{tip}}">
+      <view class="signShowBox"><!--连续签到弹框-->
+        <view class="signContent">
+          <text class="signRedText">连续签到7天</text>
+          <view class="signBlankText">
+            赠送 <text class="signRedText">3次</text>免费抽奖机会
+          </view>
+        </view>
+        <view class="closeBtn" bindtap='closeSingBox'>
+            <image src="../../img/close-x.png"></image>
+          </view>
+        </view>
+     </view> 
+    <view class="closeBtn" bindtap='closeView'>  <!--关闭日历-->
       <image src="../../img/close-x.png"></image>
     </view>
     </view>

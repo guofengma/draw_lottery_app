@@ -307,7 +307,7 @@ button::after {
     height: 100%;
     position: relative;
     padding-bottom:350rpx;
-    margin-top: 350rpx; 
+    /* margin-top: 350rpx;  */
 }
 .viewRadius{
   border-radius: 35rpx 35rpx 35rpx 35rpx;
@@ -369,4 +369,29 @@ button::after {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,.5);
+}
+.signShowBox{
+  width: 330rpx;
+  height: 310rpx;
+  position: absolute;
+  top: 15%;
+  left:27%;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/signShow.png') no-repeat center center;
+  background-size:100%;
+  z-index: 9999;
+}
+.signContent{
+  width: 260rpx;
+  height: 92rpx;
+  margin: 134rpx auto;
+  text-align: center;
+  font-size: 26rpx;
+}
+.signRedText{
+  color: #e60012;
+}
+.signBlankText{
+  margin-top: 35rpx;
+  color: #000;
+  font-weight: bold
 }

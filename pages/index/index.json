@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "top-bar": "/components/top-bar/top-bar",
-    "sign-in": "/components/sign/sign"
+    "sign-in": "/components/sign/sign",
+    "notice":"/components/notice/notice"
   }
 }

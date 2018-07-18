@@ -1,5 +1,6 @@
 /* @import "/components/address-info/address-info"; */
 .home-page{
+  position: relative;
   width: 750rpx;
   /* height: 2000rpx; */
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homePage.png') no-repeat center center;
@@ -122,4 +123,67 @@
 .home-btn-borders{
   border-left:6rpx solid #fff; 
   border-right:6rpx solid #fff; 
+}
+.shakeBox{
+  width: 566rpx;
+  height: 532rpx;
+  position: absolute;
+  top: 280rpx;
+  left: 92rpx;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeDraw.png') no-repeat center center;
+  background-size: 100%;
+  z-index: 100003;
+}
+.shakeHeaderTitle{
+  height: 104rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 104rpx;
+  font-size: 36rpx;
+}
+.shakeContent{
+  width: 314rpx;
+  height: 331rpx;
+  margin: 0 auto;
+  text-align: center;
+}
+.shakeContent image{
+  width: 194rpx;
+  height: 254rpx;
+}
+.shakeBtnBox{
+  width: 434rpx;
+  height: 80rpx;
+  margin: 0 auto;
+}
+.shakeBtn{
+  float: left;
+  width:200rpx ;
+  background: #ffca00;
+  font-size: 24rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+  border: none;
+  border-radius: 15rpx;
+}
+.shakeBtnRight{
+  float: right;
+}
+.shakeText{
+  line-height: 24rpx;
+  font-size: 24rpx;
+  color: #666666;
+  text-align: center;
+}
+.cardZJL image{
+  width: 140rpx;
+  height: 140rpx;
+  margin-top: 57rpx;
+  margin-bottom: 30rpx;
+}
+.hongbao{
+  width: 191rpx;
+  height: 272rpx;
+  margin: 0 auto;
 }

@@ -31,6 +31,10 @@ export default class Operation {
       
         this.queryDictionaryDetailsType = '/admin/dictionary/queryDictionaryDetailsType'
 
+       //天天签到 签到
+        this.signUrl = '/user/activitySign/addActivitySign'
+       // 天天签到 签到列表
+        this.signListUrl = ' /user/activitySign/queryActivitySignData'
     }
 
     static sharedInstance() {
