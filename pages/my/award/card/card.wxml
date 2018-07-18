@@ -5,28 +5,31 @@
 <view class="card-content"> <!--card 灰色背景层-->
   <view class="card-inside"> <!--card 字卡存放层-->
     <view class="card-bgCard"><!--大图-->
-      <image src="../../../../img/duoBig.png"></image>
+      <image src="/img/duoBig.png"></image>
     </view>
     <view class="card-btnImg"> <!--小图按钮-->
-      <view class="card-btn">
-        <image src="../../../../img/duo.png"></image>
-        <view class="tipNumber">
-            x12
+      <block wx:for='{{datas}}' wx:key='unique'>
+        <view class="card-btn">
+        <image src="{{item.length? item.icon2:item.icon1}}"></image>
+        <view class="tipNumber" wx:if='{{item.length}}'>
+            x{{item.length}}
         </view>
       </view>
-      <view class="card-btn card-marginAuto">
-        <image src="../../../../img/duo.png"></image>
-      </view>
-      <view class="card-btn card-marginRight">
-        <image src="../../../../img/duo.png"></image>
+      </block>
+      <!-- <view class="card-btn">
+        <image src="/img/duo.png"></image>
       </view>
       <view class="card-btn">
-        <image src="../../../../img/duo.png"></image>
+        <image src="/img/duo.png"></image>
       </view>
+      <view class="card-btn">
+        <image src="/img/duo.png"></image>
+      </view> -->
     </view>
-    <view class="card-fuseBtn">
-      立即合成
-    </view> <!--合成按钮-->
+    <view class='flexR'>
+      <view class="card-fuseBtn"> 立即合成</view>
+      <view class='address-btn'>地址选择</view>
+    </view>
   </view>
 </view>
 <bottom-bar index="1"></bottom-bar>

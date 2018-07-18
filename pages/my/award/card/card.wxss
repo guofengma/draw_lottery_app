@@ -24,6 +24,8 @@
   width: 658rpx;
   height: 135rpx;
   margin: 38rpx auto;
+  display: flex;
+  justify-content: space-around;
 }
 .card-btn{
   width: 136rpx;
@@ -35,21 +37,19 @@
   width: 136rpx;
   height: 141rpx;
 }
-.card-marginAuto{
+/* .card-marginAuto{
   margin: 0 38rpx 0 38rpx;
-}
+} */
 .card-marginRight{
   margin-right:38rpx;
 }
-.card-fuseBtn{
+.card-fuseBtn,.address-btn{
   width: 163rpx;
   height: 58rpx;
-  margin: 0 auto;
   color: #6f6f6f;
   font-size: 26rpx;
   line-height: 58rpx;
   text-align: center;
-  border: none;
   border-radius: 35rpx;
   background: #afafaf;
 }
@@ -71,4 +71,9 @@
   text-align: center;
   line-height: 27rpx;
   color: #ffc000;
+}
+.address-btn{
+  margin-left: 50rpx;
+  background-color: #da2221;
+  color: #fff;
 }
