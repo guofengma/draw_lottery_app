@@ -1,11 +1,12 @@
 <view class='my-feedback'>
-    <top-bar/>
+  <top-bar/>
   <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
       <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">全部</view>
       <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">客服已处理</view>
       <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">加急处理中</view>
   </scroll-view>
   <scroll-view scroll-y="true" class="scoll-h" >
+    <!--class type1 客服已处理 type2 加速处理中  -->
     <block>
         <view class='feedback-content flexR-sb type1'>
           <view class='left'></view>
@@ -18,7 +19,24 @@
             <view class='bottom-content flexR-sb gray'>
               <view>问题编号：B12 物流问题</view>
               <view class='flexR-sb types'>
-                <view class='type-bg'>已解决</view>
+                <view class='type-state'>已解决</view>
+                <view class='btn-view flexR'>查看详情</view>
+              </view> 
+            </view>
+          </view>
+        </view>
+        <view class='feedback-content flexR-sb type2'>
+          <view class='left'></view>
+          <view class='right'>
+            <view class='ellipsis title-fd font-28 flexR-sb'>就会涉及到哈开始打开了的好多</view>
+            <view class='content font-26 flexR-sb'>
+              <view class='reply'>答复：</view>
+              <view class='ellipsis-3 reply-content '>sjdhakjshdkadhakskah就是大家圣诞节奥斯卡好的卡号的飒飒大号地块撒谎的垃圾的哈</view>
+            </view>
+            <view class='bottom-content flexR-sb gray'>
+              <view>问题编号：B12 物流问题</view>
+              <view class='flexR-sb types'>
+                <view class='type-state'>处理中</view>
                 <view class='btn-view flexR'>查看详情</view>
               </view> 
             </view>

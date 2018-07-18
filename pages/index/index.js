@@ -15,59 +15,25 @@ Page({
     last_y: 0,
     last_z: 0
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function () {
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse){
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       this.setData({
-    //         userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
+    
   },
   onShow:function () {
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+  closeView(e) {
     this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      isTrue: !this.data.isTrue
     })
   },
   onReady: function () {
     var that = this;
-    var x = 0,y = 0,z = 0, lastX = 0, lastY= 0, lastZ = 0;
+    var x = 0, y = 0, z = 0, lastX = 0, lastY = 0, lastZ = 0;
     var shakeSpeend = 110; // 设置阀值 控制速度
     var lastTime = 0;
     function shake(res) {
       console.log(1)
       var newTime = new Date().getTime();
-      if(newTime - lastTime > 100){
+      if (newTime - lastTime > 100) {
         var diffTime = newTime - lastTime;
         lastTime = newTime;
         x = res.x;
@@ -83,20 +49,20 @@ Page({
           //   title: '',
           //   coverImgUrl: ''
           // })
-          wx.showLoading({ 
-            title: '摇奖中...' 
-          }) 
+          wx.showLoading({
+            title: '摇奖中...'
+          })
           // wx.request({
           //   url: '',
           //   success:function (data) {
-              setTimeout(function(){
-                // wx.playBackgroundAudio({ // 音乐
-                //   dataUrl: '',
-                //   title: '',
-                //   coverImgUrl: ''
-                // })
-                wx.hideLoading()
-              },2000)
+          setTimeout(function () {
+            // wx.playBackgroundAudio({ // 音乐
+            //   dataUrl: '',
+            //   title: '',
+            //   coverImgUrl: ''
+            // })
+            wx.hideLoading()
+          }, 2000)
           //     lastX = x; //赋值，为下一次计算做准备 
           //     lastY = y; 
           //     lastZ = z;
@@ -107,4 +73,5 @@ Page({
     }
     wx.onAccelerometerChange(shake)
   }
+  
 })

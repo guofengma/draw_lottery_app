@@ -5,7 +5,7 @@ Component({
      * 组件的属性列表
      */
     properties: {
-
+      isTrue:Boolean
     },
 
     /**
@@ -246,9 +246,7 @@ Component({
             });
         },
         closeView: function() {
-          this.setData({
-            isTrue: !true
-          })
+          this.triggerEvent('closeView',false)
         }
     },
     ready: function() {

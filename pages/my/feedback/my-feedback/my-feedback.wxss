@@ -67,19 +67,21 @@
   background: transparent url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qus-b.png) no-repeat center center;
   background-size: 30rpx;
 }
+.type2 .left{
+  background-image:  url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qus-y.png) 
+}
 .right{
   width: 635rpx;
   padding-bottom: 30rpx;
 }
-.type2 .left{
-  background-image:  url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qus-y.png) 
-}
+
 .reply{
   width: 80rpx;
 }
 .content{
   margin-bottom: 60rpx;
-  margin-top: 24rpx
+  margin-top: 24rpx;
+  color: #666;
 }
 .reply-content{
   width: 550rpx;
@@ -88,10 +90,15 @@
   height: 88rpx;
   border-bottom:1rpx solid #eee;
 }
-.type-bg{
-  background: transparent url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qus-b.png) no-repeat center center;
-  background-size: 30rpx;
+.type-state{
+  background: transparent url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/zan-icon.png) no-repeat left center;
+  background-size: 26rpx;
+  width: 120rpx;
+  box-sizing: border-box;
+  padding-left:40rpx;
+  color: #469dff;
 }
-.type2 .type-bg{
-
+.type2 .type-state{
+  background-image: url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/wait-icon.png);
+  color: #ffa200;
 }
