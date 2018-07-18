@@ -1,11 +1,37 @@
 <import src='/components/logo-bar/logo-bar.wxml' />
 
 <view class='award-goods-page boxSize'>
-  <top-bar/>
-  <template is="logo-bar" data=''/>
-  <scroll-view scroll-y class='scroll'>
-  
+  <!-- <view class='fixed-top'> -->
+    <top-bar/>
+    <template is="logo-bar" data=''/>
+  <!-- </view> -->
+  <scroll-view scroll-y class='scroll' wx:if='{{lists.length>0}}'>
+    <block wx:for='{{lists}}' wx:key='unique'>
+      <view class='cell-content'>
+        <view class='cell-title red flexR-sb grayBg'>中奖号码:{{item.orderNum}} {{item.createTime}}</view>
+        <view class='content whiteBg flexR-sb boxSize'>
+          <view class='left'>
+             <image wx:if='{{item.state==1}}' src='{{item.isSelect?  "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix' class='img' catchtap='chooseClicked' data-index='{{index}}'></image> 
+            <text wx:else class='tips'>已提交</text>
+          </view>
+          <view class='right flexR-sb'>
+            <image src='{{item.img}}' class='prd-img'></image>
+            <view class='right-top boxSize font-26'>
+              <view class='ellipsis prd-name'>{{item.prdName}}</view>
+              <view class='ellipsis gray'>分类：{{item.types}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
   </scroll-view>
+  <view class='no-result' wx:else>
+    <image src='/img/no-result-bg.png' mode='widthFix'></image>
+    <view class='font-26 gray'>暂无礼品~</view>
+  </view>
+  <view class='sub-bar whiteBg'>
+    <view class='redBg sub-btn fr flexR font-26' catchtap='submitClicked'>提交</view>
+  </view>
 </view>
 <bottom-bar index="0"/>
 

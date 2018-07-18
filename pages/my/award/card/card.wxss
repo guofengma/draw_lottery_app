@@ -4,6 +4,7 @@
   width: 750rpx;
   height: 880rpx;
   background: #f7f7f7;
+  padding-top: 170rpx;
 }
 .card-inside{
   width: 660rpx;

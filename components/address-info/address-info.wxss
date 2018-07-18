@@ -1,4 +1,4 @@
-.address-icon{
+.address-icon image{
   width:34rpx; 
   margin-right: 20rpx;
 }

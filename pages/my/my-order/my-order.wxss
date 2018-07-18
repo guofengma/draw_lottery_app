@@ -1,0 +1,9 @@
+.my-order{
+  height: 100%;
+}
+.state{
+  height: 88rpx;
+}
+.container{
+  margin-top: 20rpx;
+}

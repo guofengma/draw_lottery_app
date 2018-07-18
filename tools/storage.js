@@ -142,5 +142,15 @@ export default class Storage {
     static getUserCookie() {
       return this.getterFor('userCookie');
     }
+
+    // 订单确认页面地址
+
+    static setOrderAddress(info) {
+      this.setterFor('OrderAddress', info)
+    }
+
+    static getOrderAddress() {
+      return this.getterFor('OrderAddress');
+    }
     
 }

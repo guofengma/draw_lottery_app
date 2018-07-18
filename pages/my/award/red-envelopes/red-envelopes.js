@@ -1,11 +1,10 @@
-// pages/my/award/red-envelopes/red-envelopes.js
+let { Tool, RequestFactory } = global
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    lists: [
+      {name:"抽奖红包1",num:"201712121222312",createTime:'2017-12-12 21:32',amout:'0.03'},
+      { name: "抽奖红包1", num: "201712121222312", createTime: '2017-12-12 21:32', amout: '0.1' },
+    ],
   },
 
   /**

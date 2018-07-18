@@ -1,4 +1,6 @@
 <template name="logo-bar">
-  <view class='logoBar'></view>
-  <view class='logo-item flexR-sb font-26'>朵女郎</view>
+  <view class='logo-bar-view'>
+    <view class='logoBar'></view>
+    <view class='logo-item flexR-sb font-26'>朵女郎</view>
+  </view>
 </template>

@@ -1,0 +1,43 @@
+<import src='/components/address-info/address-info.wxml' />
+
+<view class='order-confirm'>
+  <top-bar/>
+  <view class='address-line flexR-sb' catchtap='chooseAddress'>
+    <template is="address-info" data='{{showImgs:true}}'/>
+    <image src='/img/common-accessory-icon.png' mode='widthFix' class='jiantou'></image>
+  </view>
+
+  <view class='logo-item flexR-sb font-26'>朵女郎</view>
+
+  <block>
+    <view class='info  grayBg boxSize flexR-sb'>
+      <image src='/img/default-user.png'></image>
+      <view class='right'>
+        <view>清清裤</view>
+        <view>分类：时间段还是机顶盒</view>
+        <view class='yellow'>发货时间：承诺24小时</view>
+        <view>中奖码：20221211212121</view>
+        <view>中奖时间：2017-12-12 14:14:14</view>
+      </view>
+    </view>
+  </block>
+
+  <view class='group whiteBg'>
+    <view class='flexR-sb font-26'>
+      <view>数量</view>
+      <view>x 1</view>
+    </view>
+    <view class='flexR-sb font-26'>
+      <view>配送方式</view>
+      <view>快递*包邮</view>
+    </view>
+    <view class='flexR-sb font-26'>
+      <view>合计</view>
+      <view>共奖品1件</view>
+    </view>
+  </view>
+  <view class='bottomBar fixed-bottom whiteBg'>
+    <view class='sub-btn redBg fr font-26 flexR'>提交订单</view>
+  </view>
+
+</view>

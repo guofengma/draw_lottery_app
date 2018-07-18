@@ -1,9 +1,10 @@
+let { Tool, RequestFactory } = global
 Page({
   data: {
-    currentTab:'' 
+  
   },
-  onLoad: function () {
-   
+  onLoad: function (options) {
+  
   },
   swichNav: function (e) {
     let cur = e.target.dataset.current;

@@ -1,0 +1,7 @@
+<top-bar/>
+<view class='submit-feedback flexC'>
+   <image src='/img/suc-right.png' mode='widthFix'></image>
+   <view class='font-30'>恭喜您！订单提交完成</view>
+   <view class='gray submit-tips'>稍安勿躁，订单正在加紧发货中</view>
+   <view class='big-btn' catchtap='goPage'>查看我的订单</view>
+</view>

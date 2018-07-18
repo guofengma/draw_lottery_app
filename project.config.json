@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -86,7 +86,32 @@
 				{
 					"id": -1,
 					"name": "我的实物奖品",
-					"pathName": "pages/my/award/award-goods/award-goods"
+					"pathName": "pages/my/award/award-goods/award-goods",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的红包",
+					"pathName": "pages/my/award/red-envelopes/red-envelopes",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/order-confirm/order-confirm",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的订单提交成功",
+					"pathName": "pages/order-confirm/submit-order/submit-order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单列表",
+					"pathName": "pages/my/my-order/my-order",
+					"query": ""
 				}
 			]
 		}

@@ -8,6 +8,11 @@
   padding-left: 83rpx;
   background: #fff url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/login-2.png) no-repeat 34rpx center ;
   background-size:30rpx;
-
-
+}
+.logo-bar-view{
+  position: fixed;
+  top: 48rpx;
+  left: 0;
+  width: 100%;
+  z-index: 999;
 }

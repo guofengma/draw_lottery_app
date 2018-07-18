@@ -1,6 +1,8 @@
 page{
   height: 100%;
   background-color:#F8F8F8;
+  box-sizing: border-box;
+  padding-top: 48rpx;
 }
 button[disabled]:not([type]) {
   background-color: #dddddd;
@@ -72,6 +74,9 @@ button::after{
 .gray {
   color: #bbbbbb;
 }
+.yellow{
+  color: #ffa200 !important;
+}
 .redBg{
   background-color: #da2221;
   color: #fff !important;
@@ -114,6 +119,13 @@ button::after{
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 999;
+}
+.fixed-top{
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 999;
 }
 
 .default-btn{
@@ -136,4 +148,62 @@ button::after{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/*提交成功的样式  */
+.submit-feedback image{
+  width: 114rpx;
+  margin-bottom: 46rpx;
+}
+.submit-feedback {
+  padding-top: 100rpx;
+}
+.submit-tips{
+  font-size: 22rpx;
+  margin-bottom: 150rpx;
+}
+/*我的订单 和我的反馈的头部样式  */
+
+.tab-h{
+  height: 80rpx;
+  width: 100%; 
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  font-size: 30rpx; 
+  white-space: nowrap;
+  position: fixed;
+  top: 48rpx; 
+  left: 0; 
+  z-index: 99;
+  background:#fff; 
+  border-bottom: 1rpx solid #eee;
+}
+.tab-item{
+  margin:0 40rpx;
+  display: inline-block;
+  text-align: center;
+  color: #999999;
+}
+.tab-item.active{
+  color: #e60012;
+  position: relative;
+}
+.tab-item.active:after{ 
+  content: "";
+  display: block;
+  height: 6rpx;
+  width: 100%;
+  background: #e60012;
+  position: absolute; 
+  bottom: 0;
+  left: 0;
+  border-radius: 16rpx;
+}
+.scoll-h{
+  height: 100%;
+  padding-top:80rpx;
+}
+.tab-content{
+  margin-top: 80rpx;
 }
