@@ -1,0 +1,13 @@
+.logoBar{
+  height: 100rpx;
+  background: #da2221 url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/logo-1.png) no-repeat center center ;
+  background-size: 200rpx 90rpx;
+}
+.logo-item{
+  height: 70rpx;
+  padding-left: 83rpx;
+  background: #fff url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/login-2.png) no-repeat 34rpx center ;
+  background-size:30rpx;
+
+
+}

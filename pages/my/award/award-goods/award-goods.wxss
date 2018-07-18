@@ -1,1 +1,8 @@
-/* pages/my/award/award-goods/award-goods.wxss */
+@import "/components/logo-bar/logo-bar";
+
+@import "/pages/my/award/temp/bottom-bar";
+
+.bottomBar>view:first-child{
+  background-color: #da2221;
+  color: #fff;
+}
