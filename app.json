@@ -15,8 +15,7 @@
     "pages/order-confirm/order-confirm",
     "pages/order-confirm/submit-order/submit-order",
     "pages/my/my-order/my-order",
-    "pages/logistics/logistics",
-    "pages/my/my-order/my-order"
+    "pages/logistics/logistics"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -258,7 +258,7 @@ Component({
             activityId:1,
             yearsMonth: timeData
           };
-          let r = RequestFactory.signListRequestHttp(data);
+          let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
             console.log(req)
           };
