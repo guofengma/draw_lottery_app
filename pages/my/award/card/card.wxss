@@ -28,6 +28,7 @@
   width: 136rpx;
   height: 141rpx;
   display: inline-block;
+  position: relative;
 }
 .card-btn image{
   width: 136rpx;
@@ -50,4 +51,23 @@
   border: none;
   border-radius: 35rpx;
   background: #afafaf;
+}
+.cardActive{
+  background: #ff7346 !important;
+  color: #fff !important;
+}
+.tipNumber{
+  width: 34rpx;
+  height: 27rpx;
+  padding: 5rpx;
+  position: absolute;
+  right: -15rpx;
+  top: -15rpx;
+  background: #ff000c;
+  border: 1px solid #ffc000;
+  border-radius: 50%;
+  font-size: 15rpx;
+  text-align: center;
+  line-height: 27rpx;
+  color: #ffc000;
 }

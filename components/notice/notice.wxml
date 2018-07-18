@@ -1,0 +1,45 @@
+<!--components/notice/noitve.wxml-->
+<view class="model-view-bg" style='overflow:auto' wx:if="{{isTrue}}">
+    <view class="noticeModel">
+        <view class="notice-Header">
+          <view class="notice-people">
+            <image src="../../img/noticePeople.png"></image>
+          </view>
+          <text class="notice-Title">全民摇大奖朵宝大联盟</text>
+        </view>
+        <view class="noticeContent">
+          <view class="contentHeader">
+            关于*****公告
+          </view>
+          <view class="contentScroll">
+              <scroll-view scroll-y style='height:657rpx;'>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+                <text>111111111111</text>
+              </scroll-view>
+          </view>
+          <view class="noticeBtnbox">
+              <view class="noticeBtn">上一条</view>
+              <view class="noticeBtn noticeBtnRight" wx:if="{{btnText}}">{{btnText}}</view>
+          </view>
+        </view>
+        <view class="closeBtn" bindtap='showNotice'>
+          <image src="../../img/close-x.png"></image>
+        </view>
+    </view>
+</view>

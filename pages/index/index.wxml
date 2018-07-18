@@ -1,8 +1,9 @@
 <top-bar></top-bar>
 <sign-in isTrue='{{isTrue}}' bind:closeView='closeView'></sign-in>
+<notice wx:if="{{isNotice}}" bind:showNotice='showNotice'></notice>
 <view class="home-page">
   <view class="home-tree"></view>
-  <view class="home-Notice">
+  <view class="home-Notice" catchtap='showNotice'>
   <image src="../../img/Notice.png"></image>
   </view>
   <view class="home-inside">
@@ -41,5 +42,35 @@
     <view class="home-tabar-btn">活动详情</view>
     <view class="home-tabar-btn home-btn-borders">我的奖品</view>
     <view class="home-tabar-btn" catchtap='closeView'>天天签到</view>
+  </view>
+  <!--红包弹框-->
+  <view class="model-view-bg" wx:if="{{isShakeBox}}">
+      <view class="shakeBox">
+        <view class="shakeHeaderTitle">
+          恭喜你，中奖啦
+        </view>
+        <view class="shakeContent">
+           <view class="shakeWzj" style='display:none;'>
+            <image src="../../img/wzj.png"></image>
+            <view class="shakeText">别灰心、么么哒、再接再厉！</view>
+           </view>
+           <view class="cardZJL">
+              <image src="../../img/duoactive.png"></image>
+              <view class="shakeText" style="font-weight:blod;">“朵”字卡1张</view>
+           </view>
+           <view class="hongbao" style='display:none;'>
+              <image src="../../img/duoactive.png"></image>
+              <view class="shakeText" style="font-weight:blod;">“朵”字卡1张</view>
+           </view>
+           <view class="" style='display:none;'>
+              <image src="../../img/duoactive.png"></image>
+              <view class="shakeText" style="font-weight:blod;">“朵”字卡1张</view>
+           </view>
+        </view>
+        <view class="shakeBtnBox">
+          <view class="shakeBtn" bindtap="closeBindshakeBox">继续摇奖</view>
+          <view class="shakeBtn shakeBtnRight">查看奖品</view>
+        </view>
+      </view>
   </view>
 </view>

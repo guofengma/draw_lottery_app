@@ -61,6 +61,17 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().aliyunOSSUploadImage;
     return baseUrl + url
   }
-
+  // 天天签到  签到
+  static signRequest(params) {
+    params.port = '8002';
+    let url = Operation.sharedInstance().signRequest;
+    return this.request(url, params, '签到' , true)
+  }
+  // 天天签到 签到列表
+  static signListRequest(params) {
+    params.port = '8002';
+    let url = Operation.sharedInstance().signListRequest;
+    return this.request(url, params, '签到列表', true)
+  }
 }
 

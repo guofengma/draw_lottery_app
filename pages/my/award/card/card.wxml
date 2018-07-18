@@ -10,6 +10,9 @@
     <view class="card-btnImg"> <!--小图按钮-->
       <view class="card-btn">
         <image src="../../../../img/duo.png"></image>
+        <view class="tipNumber">
+            x12
+        </view>
       </view>
       <view class="card-btn card-marginAuto">
         <image src="../../../../img/duo.png"></image>
@@ -26,4 +29,4 @@
     </view> <!--合成按钮-->
   </view>
 </view>
-<bottom-bar></bottom-bar>
+<bottom-bar index="1"></bottom-bar>

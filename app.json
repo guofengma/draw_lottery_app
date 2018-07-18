@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/my/award/card/card",
     "pages/index/index",
     "pages/address/new-address/new-address",
     "pages/address/address-list/address-list",
@@ -11,7 +10,8 @@
     "pages/my/feedback/submit-feedback/submit-feedback",
     "pages/my/feedback/feedback-detail/feedback-detail",
     "pages/my/award/award-goods/award-goods",
-    "pages/my/award/red-envelopes/red-envelopes"
+    "pages/my/award/red-envelopes/red-envelopes",
+    "pages/my/award/card/card"
   ],
   "window": {
     "backgroundTextStyle": "light",

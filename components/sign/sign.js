@@ -1,5 +1,6 @@
 // components/top-bar/top-bar.js
 var signTime = require("signin.js");
+let { Tool, RequestFactory } = global
 Component({
     /**
      * 组件的属性列表
@@ -7,7 +8,6 @@ Component({
     properties: {
       isTrue:Boolean
     },
-
     /**
      * 组件的初始数据
      */
@@ -30,7 +30,7 @@ Component({
         isSigncontinuity: 'none',
         hoverClass:'',
         isTrue:true,
-        tip: true,
+        tip: false,
         isNumber: '3'
     },
 
@@ -40,7 +40,8 @@ Component({
     methods: {
         sign_start: function() { // 签到
             var powerData = 100;
-            this.sign();
+            // this.sign();
+            this.signListRequestHttp()
             //签到成功后重新调用后台接口加载新的签到数据
             this.setData({
                 for_signs: "block",
@@ -53,7 +54,6 @@ Component({
                 duration: 1500
             });
         },
-
         close_qdbox: function() { // 签到奖励弹框
             var seriesCount = this.data.seriesCount;
             // var seriesCount = seriesCount+1;
@@ -200,39 +200,38 @@ Component({
                 var newdats = anns[p];
                 signDate_arr.push(newdats);
                 var t = parseInt(p)
-                if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
-                  console.log('连续签到了7')
-                  if (newdats === 7) {
-                    that.setData({
-                      hoverClass: 'border-hover'
-                    })
-                  }
-                  // break
-                } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 15) {
-                  console.log('连续签到了15天')
-                  // break
-                } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 30) {
-                  console.log('连续签到了30天')
-                  // break
-                } else {
-                  console.log('没')
-                }
+                // if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
+                //   console.log('连续签到了7')
+                //   if (newdats === 7) {
+                //     that.setData({
+                //       hoverClass: 'border-hover'
+                //     })
+                //   }
+                //   // break
+                // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 15) {
+                //   console.log('连续签到了15天')
+                //   // break
+                // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 30) {
+                //   console.log('连续签到了30天')
+                //   // break
+                // } else {
+                //   console.log('没')
+                // }
             }
-            // if (signDate_arr.indexOf(todayss) > -1) {
-            //     console.log("当前已签到");
-            //     that.setData({
-            //         signtype: "2",
-            //     });
-            // } else {
-            //     console.log("当前未签到");
-            //     that.setData({
-            //         signtype: "1",
-            //     });
-            // }
+            if (signDate_arr.indexOf(todayss) > -1) {
+                console.log("当前已签到");
+                that.setData({
+                    signtype: "2",
+                });
+            } else {
+                console.log("当前未签到");
+                that.setData({
+                    signtype: "1",
+                });
+            }
             console.log(signDate_arr[0]);
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历
-
             this.setData({
                 todayDate: todayDate,
                 todayMonth: todayMonth,
@@ -245,8 +244,26 @@ Component({
                 showMonth: todayMonth,
             });
         },
-        closeView: function() {
+        closeView: function() { // 关闭日历
+          console.log(1)
           this.triggerEvent('closeView',false)
+        },
+        closeSingBox: function () { // 关闭连续签到
+          this.setData({
+            tip:!true
+          })
+        },
+        signListRequestHttp(timeData) {
+          let data = {
+            activityId:1,
+            yearsMonth: timeData
+          };
+          let r = RequestFactory.signListRequestHttp(data);
+          r.finishBlock = (req) => {
+            console.log(req)
+          };
+          Tool.showErrMsg(r);
+          r.addToQueue();
         }
     },
     ready: function() {
@@ -262,6 +279,8 @@ Component({
             var todayMonthss = todayMonth;
         }
         console.log(todayss);
+        var timeData = todayYear + "-" + todayMonth
+        // this.signListRequestHttp()
         var godates = todayYear + "-" + todayMonthss + "-01";
         var that = this;
         var data = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7]};
@@ -282,36 +301,19 @@ Component({
         });
         for (var p in anns) { //遍历json对象的每个key/value对,p为key
             var newdats = anns[p];
-            var t = parseInt(p)
             signDate_arr.push(newdats);
-            // if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
-            //   console.log('连续签到了7')
-            //   // if (parseInt(anns[p]) === 7 || anns[p] === '7'){
-            //   //   console.log(1)
-            //   //   that.setData({
-            //   //     hoverClass: 'border-hover'
-            //   //   })
-            //   // }
-            //   // break
-            // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 15){
-            //   console.log('连续签到了15天')
-            // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 30){
-            //   console.log('连续签到了30天')
-            // } else {
-            //   console.log('没有连续签到')
-            // }
         }
-        // if (signDate_arr.indexOf(todayss) > -1) {
-        //     console.log("当前已签到");
-        //     that.setData({
-        //         signtype: "2",
-        //     });
-        // } else {
-        //     console.log("当前未签到");
-        //     that.setData({
-        //         signtype: "1",
-        //     });
-        // }
+        if (signDate_arr.indexOf(todayss) > -1) {
+            console.log("当前已签到");
+            that.setData({
+                signtype: "2",
+            });
+        } else {
+            console.log("当前未签到");
+            that.setData({
+                signtype: "1",
+            });
+        }
         console.log(signDate_arr[0]);
         signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
         //初始化加载日历
