@@ -5,6 +5,7 @@
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homePage.png') no-repeat center center;
   background-size:100%; 
   overflow: hidden;
+  padding-bottom: 89rpx;
 }
 .home-tree{
   width: 690rpx;
@@ -12,6 +13,17 @@
   margin: 640rpx auto auto auto;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeTree.png') no-repeat center center;
   background-size:100%;
+}
+.home-Notice{
+  width:65rpx;
+  height: 65rpx;
+  position: absolute;
+  right: 90rpx;
+  top: 548rpx;
+}
+.home-Notice image{
+  width: 130rpx;
+  height: 130rpx;
 }
 .home-inside{
   width: 536rpx;
@@ -93,6 +105,9 @@
 }
 .home-tabar{
   height: 88rpx;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
 }
 .home-tabar-btn{
   width: 245rpx;

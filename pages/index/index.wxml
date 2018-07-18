@@ -2,6 +2,9 @@
 <sign-in wx:if="{{isTrue}}"></sign-in>
 <view class="home-page">
   <view class="home-tree"></view>
+  <view class="home-Notice">
+  <image src="../../img/Notice.png"></image>
+  </view>
   <view class="home-inside">
     <view class="inputBox">
       <input class="security-code" placeholder='请输入16位防伪码'></input>
@@ -37,6 +40,6 @@
   <view class="home-tabar">
     <view class="home-tabar-btn">活动详情</view>
     <view class="home-tabar-btn home-btn-borders">我的奖品</view>
-    <view class="home-tabar-btn">天天签到</view>
+    <view class="home-tabar-btn" bindtap='bindisShowSign'>天天签到</view>
   </view>
 </view>
