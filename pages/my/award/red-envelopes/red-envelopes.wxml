@@ -1,7 +1,25 @@
 <import src='/components/logo-bar/logo-bar.wxml' />
 
-
-<top-bar/>
-<template is="logo-bar" data=''/>
-
+<!-- <view class='fixed-top'> -->
+  <top-bar/>
+  <template is="logo-bar" data=''/>
+<!-- </view> -->
+<view class='red-envelopes-page'>
+  <scroll-view scroll-x class='scroll' wx:if='{{lists.length>0}}'>
+    <block wx:for='{{lists}}' wx:key='unique'>
+      <view  class='container'>
+        <view class='flexR-sb'>
+          <view class='font-28'>{{item.name}}</view>
+          <view class='red'>+{{item.amout}}</view>
+        </view>
+        <view class='gray font-22'>{{item.num}}</view>
+        <view class='gray font-22'>{{item.createTime}}</view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class='no-result' wx:else>
+    <image src='/img/no-red-bao.png' mode='widthFix'></image>
+    <view class='font-26 gray'>暂无红包~</view>
+  </view>
+</view>
 <bottom-bar index="2"/>

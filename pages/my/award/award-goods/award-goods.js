@@ -1,66 +1,31 @@
-// pages/my/award/award-goods/award-goods.js
+let { Tool, RequestFactory } = global
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    lists:[
+      { img:"/img/default-user.png",prdName:"哈哈哈哈",types:"红色-xl",isSelect:false,createTime:"2017-18-12 12:12:12",orderNum:"1112121212212",state:1},
+      { img: "/img/default-user.png", prdName: "哈哈哈哈", types: "红色-xl", isSelect: false, createTime: "2017-18-12 12:12:12", orderNum: "1112121212212", state: 2},
+    ],
+    selectArr:[], //保存选中的产品规格
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
   
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  chooseClicked(e){
+    let index = e.currentTarget.dataset.index
+    let {lists} = this.data
+    lists[index].isSelect = !lists[index].isSelect
+    let selectArr = []
+    lists.forEach((item)=>{
+      if (item.isSelect){
+        selectArr.push(item)
+      }
+    })
+    this.setData({
+      lists:lists,
+      selectArr: selectArr
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  submitClicked(){
+    Tool.redirectTo('/pages/order-confirm/order-confirm')
   }
 })

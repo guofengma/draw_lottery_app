@@ -1,0 +1,58 @@
+@import "/components/address-info/address-info";
+.order-confirm{
+  padding-bottom: 120rpx;
+}
+.address-line{
+  padding-bottom: 20rpx;
+  background: #fff url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/address-bg.png) no-repeat left bottom;
+  background-size: 100%;
+  margin: 20rpx 0;
+}
+
+.logo-item{
+  height: 88rpx;
+  padding-left: 83rpx;
+  background: #fff url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/login-2.png) no-repeat 34rpx center ;
+  background-size:30rpx;
+}
+.info{
+  height: 278rpx;
+  padding: 20rpx 30rpx;
+}
+.info image{
+  width: 165rpx;
+	height: 165rpx;
+}
+.sub-btn{
+  width: 190rpx;
+  height: 100%;
+}
+.bottomBar{
+  height: 100rpx;
+}
+.group>view{
+  height: 88rpx;
+  border-top: 1rpx solid #eee;
+  padding: 0 30rpx;
+}
+.group>view:first-child{
+  border-top: 0;
+}
+.right>view:first-child{
+  font-size: 26rpx;
+}
+.right>view{
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+  color: #999;
+}
+.right{
+  width: 490rpx;
+}
+.jiantou{
+  width: 16rpx;
+  margin-right: 24rpx;
+}
+.address-info{
+  width: 99.4%;
+}

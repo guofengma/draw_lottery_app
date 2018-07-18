@@ -1,1 +1,28 @@
 @import "/components/logo-bar/logo-bar";
+
+.red-envelopes-page{
+  padding-bottom: 120rpx;
+  height: 100%;
+}
+.scroll{
+  height:calc(100% - 290rpx);
+  padding-bottom: 10rpx;
+  box-sizing: border-box;
+  margin-top: 170rpx;
+}
+.no-result image{
+  width: 268rpx;
+  margin-bottom: 10rpx;
+}
+.no-result{
+   width: 268rpx;
+   margin: 10rpx auto;
+   margin-top: 80rpx;
+   text-align: center;
+}
+.container{
+  padding: 28rpx 30rpx 22rpx 164rpx;
+  background: #fff url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/qianbao-bg.png) no-repeat 40rpx center;
+  background-size: 78rpx;
+  margin-top: 20rpx;
+}

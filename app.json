@@ -11,7 +11,14 @@
     "pages/my/feedback/feedback-detail/feedback-detail",
     "pages/my/award/award-goods/award-goods",
     "pages/my/award/red-envelopes/red-envelopes",
+<<<<<<< HEAD
     "pages/my/award/card/card"
+=======
+    "pages/my/award/card/card",
+    "pages/order-confirm/order-confirm",
+    "pages/order-confirm/submit-order/submit-order",
+    "pages/my/my-order/my-order"
+>>>>>>> 76a94b10945a8c73ffb3e350d96bed8fa6f5af47
   ],
   "window": {
     "backgroundTextStyle": "light",

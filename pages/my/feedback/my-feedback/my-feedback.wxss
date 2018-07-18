@@ -1,49 +1,6 @@
 .my-feedback{
   height: 100%;
 }
-.tab-h{
-  height: 80rpx;
-  width: 100%; 
-  box-sizing: border-box;
-  overflow: hidden;
-  line-height: 80rpx;
-  font-size: 30rpx; 
-  white-space: nowrap;
-  position: fixed;
-  top: 48rpx; 
-  left: 0; 
-  z-index: 99;
-  background:#fff; 
-  border-bottom: 1rpx solid #eee;
-}
-.tab-item{
-  margin:0 30rpx;
-  display: inline-block;
-  text-align: center;
-  color: #999999;
-}
-.tab-item.active{
-  color: #e60012;
-  position: relative;
-}
-.tab-item.active:after{ 
-  content: "";
-  display: block;
-  height: 6rpx;
-  width: 100%;
-  background: #e60012;
-  position: absolute; 
-  bottom: 0;
-  left: 0;
-  border-radius: 16rpx;
-}
-.scoll-h{
-  height: 100%;
-  padding-top:80rpx;
-}
-.tab-content{
-  margin-top: 80rpx;
-}
 
 .bottom-content{
   font-size: 24rpx;

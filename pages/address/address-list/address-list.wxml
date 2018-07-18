@@ -3,7 +3,7 @@
 <top-bar/>
 <view class='addressList'>
   <block>
-    <view catchtap='addressLineClicked'>
+    <view catchtap='addressLineClicked' data-index='{{0}}'>
       <template is="address-info" data=''/>
     </view>
   </block>
