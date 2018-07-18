@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -82,6 +82,11 @@
 					"name": "我的反馈详情",
 					"pathName": "pages/my/feedback/feedback-detail/feedback-detail",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的实物奖品",
+					"pathName": "pages/my/award/award-goods/award-goods"
 				}
 			]
 		}

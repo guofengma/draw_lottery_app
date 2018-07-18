@@ -1,2 +1,7 @@
-<!--pages/my/award/red-envelopes/red-envelopes.wxml-->
-<text>pages/my/award/red-envelopes/red-envelopes.wxml</text>
+<import src='/components/logo-bar/logo-bar.wxml' />
+
+
+<top-bar/>
+<template is="logo-bar" data=''/>
+
+<bottom-bar index="2"/>

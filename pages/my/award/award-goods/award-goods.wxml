@@ -1,2 +1,9 @@
-<!--pages/my/award/award-goods/award-goods.wxml-->
-<text>pages/my/award/award-goods/award-goods.wxml</text>
+<import src='/components/logo-bar/logo-bar.wxml' />
+
+
+<top-bar/>
+<template is="logo-bar" data=''/>
+
+<bottom-bar index="0"/>
+
+

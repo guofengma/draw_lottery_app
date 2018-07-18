@@ -1,1 +1,1 @@
-/* pages/my/award/red-envelopes/red-envelopes.wxss */
+@import "/components/logo-bar/logo-bar";
