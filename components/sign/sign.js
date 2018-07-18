@@ -191,6 +191,9 @@ Component({
             } else {
                 var series_gos = 10 - parseInt(count_signday);
             } 
+            var timeData = todayYear + "-" + todayMonth
+            console.log(timeData)
+            // this.signListRequestHttp(timeData)
             anns.push(todayss) //  存放今日的签到日期
             that.setData({
                 seriesCount: count_signday,
@@ -200,23 +203,6 @@ Component({
                 var newdats = anns[p];
                 signDate_arr.push(newdats);
                 var t = parseInt(p)
-                // if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
-                //   console.log('连续签到了7')
-                //   if (newdats === 7) {
-                //     that.setData({
-                //       hoverClass: 'border-hover'
-                //     })
-                //   }
-                //   // break
-                // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 15) {
-                //   console.log('连续签到了15天')
-                //   // break
-                // } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 30) {
-                //   console.log('连续签到了30天')
-                //   // break
-                // } else {
-                //   console.log('没')
-                // }
             }
             if (signDate_arr.indexOf(todayss) > -1) {
                 console.log("当前已签到");
@@ -253,7 +239,7 @@ Component({
             tip:!true
           })
         },
-        signListRequestHttp(timeData) {
+        signListRequestHttp(timeData){
           let data = {
             activityId:1,
             yearsMonth: timeData
@@ -280,7 +266,8 @@ Component({
         }
         console.log(todayss);
         var timeData = todayYear + "-" + todayMonth
-        // this.signListRequestHttp()
+        console.log(timeData)
+        // this.signListRequestHttp(timeData)
         var godates = todayYear + "-" + todayMonthss + "-01";
         var that = this;
         var data = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7]};
