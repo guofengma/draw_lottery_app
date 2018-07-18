@@ -1,5 +1,5 @@
 <top-bar></top-bar>
-<sign-in wx:if="{{isTrue}}"></sign-in>
+<sign-in isTrue='{{isTrue}}' bind:closeView='closeView'></sign-in>
 <view class="home-page">
   <view class="home-tree"></view>
   <view class="home-Notice">
@@ -40,6 +40,6 @@
   <view class="home-tabar">
     <view class="home-tabar-btn">活动详情</view>
     <view class="home-tabar-btn home-btn-borders">我的奖品</view>
-    <view class="home-tabar-btn" bindtap='bindisShowSign'>天天签到</view>
+    <view class="home-tabar-btn" catchtap='closeView'>天天签到</view>
   </view>
 </view>

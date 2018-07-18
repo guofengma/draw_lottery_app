@@ -1,7 +1,0 @@
-<!--pages/card/card.wxml.wxml-->
-<view class="card-content"> <!--card 灰色背景层-->
-  <view class="card-inside"> <!--card 字卡存放层-->
-    <view class="card-bgCard">
-    </view>
-  </view>
-</view>

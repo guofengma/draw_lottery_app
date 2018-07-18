@@ -1,20 +1,22 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/card/card",
-        "pages/address/new-address/new-address",
-        "pages/address/address-list/address-list",
-        "pages/address/edit-address/edit-address",
-        "pages/my/my",
-        "pages/my/feedback/my-feedback/my-feedback",
-        "pages/my/feedback/new-feedback/new-feedback",
-        "pages/my/feedback/submit-feedback/submit-feedback",
-        "pages/my/feedback/feedback-detail/feedback-detail"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "抽奖系统",
-        "navigationBarTextStyle": "black"
-    }
+  "pages": [
+    "pages/my/award/card/card",
+    "pages/index/index",
+    "pages/address/new-address/new-address",
+    "pages/address/address-list/address-list",
+    "pages/address/edit-address/edit-address",
+    "pages/my/my",
+    "pages/my/feedback/my-feedback/my-feedback",
+    "pages/my/feedback/new-feedback/new-feedback",
+    "pages/my/feedback/submit-feedback/submit-feedback",
+    "pages/my/feedback/feedback-detail/feedback-detail",
+    "pages/my/award/award-goods/award-goods",
+    "pages/my/award/red-envelopes/red-envelopes"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "抽奖系统",
+    "navigationBarTextStyle": "black"
+  }
 }
