@@ -34,7 +34,7 @@ export default class Operation {
        //天天签到 签到
         this.signUrl = '/user/activitySign/addActivitySign'
        // 天天签到 签到列表
-        this.signListUrl = ' /user/activitySign/queryActivitySignData'
+        this.signListUrl = '/user/activitySign/queryActivitySignData'
     }
 
     static sharedInstance() {

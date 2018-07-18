@@ -64,13 +64,13 @@ export default class RequestFactory {
   // 天天签到  签到
   static signRequest(params) {
     params.port = '8002';
-    let url = Operation.sharedInstance().signRequest;
+    let url = Operation.sharedInstance().signUrl;
     return this.request(url, params, '签到' , true)
   }
   // 天天签到 签到列表
   static signListRequest(params) {
     params.port = '8002';
-    let url = Operation.sharedInstance().signListRequest;
+    let url = Operation.sharedInstance().signListUrl;
     return this.request(url, params, '签到列表', true)
   }
 }
