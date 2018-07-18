@@ -1,0 +1,52 @@
+/* pages/card/card.wxml.wxss */
+.card-content{
+  width: 750rpx;
+  height: 880rpx;
+  background: #f7f7f7;
+}
+.card-inside{
+  width: 660rpx;
+  height: 760rpx;
+  margin: 0 auto;
+}
+.card-bgCard{
+  width: 350rpx;
+  height: 464rpx;
+  margin: 75rpx auto auto auto;
+}
+.card-bgCard image{
+  width: 350rpx;
+  height: 464rpx;
+}
+.card-btnImg{
+  width: 658rpx;
+  height: 135rpx;
+  margin: 38rpx auto;
+}
+.card-btn{
+  width: 136rpx;
+  height: 141rpx;
+  display: inline-block;
+}
+.card-btn image{
+  width: 136rpx;
+  height: 141rpx;
+}
+.card-marginAuto{
+  margin: 0 38rpx 0 38rpx;
+}
+.card-marginRight{
+  margin-right:38rpx;
+}
+.card-fuseBtn{
+  width: 163rpx;
+  height: 58rpx;
+  margin: 0 auto;
+  color: #6f6f6f;
+  font-size: 26rpx;
+  line-height: 58rpx;
+  text-align: center;
+  border: none;
+  border-radius: 35rpx;
+  background: #afafaf;
+}

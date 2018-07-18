@@ -1,0 +1,25 @@
+<!--pages/card/card.wxml.wxml-->
+<view class="card-content"> <!--card 灰色背景层-->
+  <view class="card-inside"> <!--card 字卡存放层-->
+    <view class="card-bgCard"><!--大图-->
+      <image src="../../../../img/duoBig.png"></image>
+    </view>
+    <view class="card-btnImg"> <!--小图按钮-->
+      <view class="card-btn">
+        <image src="../../../../img/duo.png"></image>
+      </view>
+      <view class="card-btn card-marginAuto">
+        <image src="../../../../img/duo.png"></image>
+      </view>
+      <view class="card-btn card-marginRight">
+        <image src="../../../../img/duo.png"></image>
+      </view>
+      <view class="card-btn">
+        <image src="../../../../img/duo.png"></image>
+      </view>
+    </view>
+    <view class="card-fuseBtn">
+      立即合成
+    </view> <!--合成按钮-->
+  </view>
+</view>

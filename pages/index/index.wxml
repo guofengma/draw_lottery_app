@@ -2,6 +2,9 @@
 <sign-in isTrue='{{isTrue}}' bind:closeView='closeView'></sign-in>
 <view class="home-page">
   <view class="home-tree"></view>
+  <view class="home-Notice">
+  <image src="../../img/Notice.png"></image>
+  </view>
   <view class="home-inside">
     <view class="inputBox">
       <input class="security-code" placeholder='请输入16位防伪码'></input>
