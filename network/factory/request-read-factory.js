@@ -62,7 +62,7 @@ export default class RequestFactory {
     return baseUrl + url
   }
 
-  /********************登陆*************************/
+  /********************首页摇一摇签到*************************/
 
   // 天天签到  签到
   static signRequest(params) {
@@ -75,7 +75,17 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().signListUrl;
     return this.request(url, params, '签到列表', true)
   }
-  
+
+  // 防伪码
+  static SecurityCodeRequest(params) {
+    let url = Operation.sharedInstance().homeSecurityCodeUrl;
+    return this.request(url, params, '防伪码', true)
+  }
+  // 公告
+  static noticeRequest(params) {
+    let url = Operation.sharedInstance().noticeListUrl;
+    return this.request(url, params, '公告', true)
+  }
   /********************我的奖品*************************/
 
   static queryActivityWordCard(params) {

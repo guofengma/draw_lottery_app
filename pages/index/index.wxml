@@ -8,8 +8,8 @@
   </view>
   <view class="home-inside">
     <view class="inputBox">
-      <input class="security-code" placeholder='请输入16位防伪码'></input>
-      <view class="securit-btn">提交</view>
+      <input class="security-code" placeholder='请输入16位防伪码' bindinput="bindinputCode"></input>
+      <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">
       <text>您有 {{isNumber}}次 摇奖机会</text>

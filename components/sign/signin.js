@@ -57,7 +57,7 @@ var dataTime = {
                         };
                     }
                     if (iVarDate == curMonthDays) {
-                        console.log(aMonth);
+                        // console.log(aMonth);
                         that.setData({
                             signDays: aMonth,
                         });

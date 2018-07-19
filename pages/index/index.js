@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+let { Tool, RequestFactory } = global
 Page({
     data: {
         motto: 'Hello World',
@@ -16,12 +16,34 @@ Page({
         last_z: 0,
         isShakeBox:false,
         isNotice:false,
+        code: '',
     },
     onLoad: function() {
-
+      
     },
     onReady: function() {
 
+    },
+    bindinputCode(e){
+      this.setData({
+        code: e.detail.value
+      })
+    },
+    SecurityCodeRequestHttp () {
+      let data = {
+        activityId:17,
+        code: this.data.code
+      };
+      let r = RequestFactory.SecurityCodeRequest(data);
+      r.finishBlock = (req) => {
+        console.log(req.responseObject)
+        wx.showModal({
+          title: '兑换成功',
+          content: '',
+        })
+      };
+      Tool.showErrMsg(r);
+      r.addToQueue();
     },
     isShowSake: false,
     onShow: function () {
@@ -81,7 +103,11 @@ Page({
           lastZ = z;
         }
       }
-      wx.onAccelerometerChange(shake)
+      if(this.data.isNumber === 0){
+        return
+      } else {
+        wx.onAccelerometerChange(shake)
+      }
     },
     onHide: function () {
       this.isShowSake = false
