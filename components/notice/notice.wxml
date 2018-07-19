@@ -9,7 +9,7 @@
         </view>
         <view class="noticeContent">
           <view class="contentHeader">
-            {{}}
+            {{noticeTitle}}
           </view>
           <view class="contentScroll">
               <scroll-view scroll-y style='height:657rpx;'>
@@ -20,8 +20,8 @@
               </scroll-view>
           </view>
           <view class="noticeBtnbox">
-              <view class="noticeBtn">上一条</view>
-              <view class="noticeBtn noticeBtnRight" wx:if="{{btnText}}">{{btnText}}</view>
+              <view class="noticeBtn" bindtap='prevPage'>上一条</view>
+              <view class="noticeBtn noticeBtnRight" wx:if="{{btnText}}" bindtap='nextPage'>{{btnText}}</view>
           </view>
         </view>
         <view class="closeBtn" bindtap='showNotice'>

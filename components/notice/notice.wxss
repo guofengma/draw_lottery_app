@@ -69,6 +69,7 @@
 }
 .contentScroll text{
   display: block;
+  font-size: 28rpx;
 }
 .noticeBtnbox{
   width: 600rpx;
