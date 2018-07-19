@@ -45,13 +45,6 @@ export default class RequestFactory {
     return this.request(url, params, '获取openid和是否注册');
   }
   
-  
-  static queryDictionaryDetailsType(params) {
-    params.port = '8001';
-    let url = Operation.sharedInstance().queryDictionaryDetailsType;
-    return this.request(url, params, '获取反馈问题列表', true);
-  }
-  
   // 上传图片的地址 
   static aliyunOSSUploadImage() {
     let params = {
@@ -62,7 +55,7 @@ export default class RequestFactory {
     return baseUrl + url
   }
 
-  /********************登陆*************************/
+  /********************首页*************************/
 
   // 天天签到  签到
   static signRequest(params) {
@@ -92,7 +85,11 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().updateUserCheckedAddress;
     return this.request(url, params, '合成字卡活动地址选择', true)
   }
-
+  
+  static queryActivityRedPackageList(params) {
+    let url = Operation.sharedInstance().queryActivityRedPackageList;
+    return this.request(url, params, '我的红包列表', true)
+  }
   /******************** 地址 *************************/
 
   static addUserAddress(params) {
@@ -143,6 +140,31 @@ export default class RequestFactory {
     params.port = '8101'
     let url = Operation.sharedInstance().getAreaList;
     return this.request(url, params, '获取区');
+  }
+  
+  /****************** 我的反馈 *******************************/ 
+
+  static queryDictionaryDetailsType(params) {
+    params.port = '8001';
+    let url = Operation.sharedInstance().queryDictionaryDetailsType;
+    return this.request(url, params, '获取反馈问题列表', true);
+  }
+
+  static queryByCreateUserList(params) {
+    let url = Operation.sharedInstance().queryByCreateUserList;
+    return this.request(url, params, '反馈列表', true);
+  }
+
+  static findFeedbackById(params) {
+    params.port = '8001';
+    let url = Operation.sharedInstance().findFeedbackById;
+    return this.request(url, params, '查询反馈详情', true);
+  }
+
+  static addFeedback(params) {
+    params.port = '8001';
+    let url = Operation.sharedInstance().addFeedback;
+    return this.request(url, params, '添加反馈', true);
   }
 
 }

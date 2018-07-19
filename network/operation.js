@@ -27,9 +27,23 @@ export default class Operation {
 
         this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUploadImage'
 
+      /************* 我的反馈 *********************/
+
         // 获取反馈问题的列表
       
         this.queryDictionaryDetailsType = '/admin/dictionary/queryDictionaryDetailsType'
+
+        // 反馈列表
+
+        this.queryByCreateUserList ='/user/feedback/queryByCreateUserList'
+
+        // 查询反馈详情
+
+        this.findFeedbackById = '/user/feedback/findFeedbackById'
+
+        // 添加反馈
+
+        this.addFeedback = '/user/feedback/addFeedback'
 
       /*************  首页接口 *********************/
 
@@ -54,6 +68,10 @@ export default class Operation {
         // 合成字卡活动地址选择
 
         this.updateUserCheckedAddress = '/user/userAddress/updateUserCheckedAddress'
+
+        // 我的红包列表
+
+        this.queryActivityRedPackageList ='/user/activityRedPackage/queryActivityRedPackageList'
       
       /*************  地址 *********************/
 
