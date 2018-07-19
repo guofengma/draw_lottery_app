@@ -20,8 +20,16 @@ export default class Operation {
     /*************  注册登录相关接口 *********************/
        
         // 验证openid是否注册
-        this.verifyWechat = '/user/memberLogin/verifyWechat'
 
+        this.getWeChatOpenId = '/user/userLogin/getWeChatOpenId'
+
+        // 微信登陆
+
+        this.appWechatLogin ='/user/userLogin/decryptPhone'
+
+        // 退出登录
+
+        this.exitLogin  ='/user/userLogin/exitLogin'
 
         // 上传图片的地址
 
@@ -78,6 +86,10 @@ export default class Operation {
         // 我的红包列表
 
         this.queryActivityRedPackageList ='/user/activityRedPackage/queryActivityRedPackageList'
+
+        // 我的实物列表
+
+        this.querySecuritycodeUsedList = '/user/securitycodeUsed/querySecuritycodeUsedList'
       
       /*************  地址 *********************/
 

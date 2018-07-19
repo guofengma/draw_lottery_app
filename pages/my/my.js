@@ -19,7 +19,13 @@ Page({
   },
   logout(){
     let callBack = () => {
-      
+      // exitLogin
+      let r = global.RequestFactory.exitLogin(params);
+      r.finishBlock = (req) => {
+        
+      }
+      Tool.showErrMsg(r)
+      r.addToQueue();
     }
     Tool.showComfirm('确认退出登录吗', callBack)
   }

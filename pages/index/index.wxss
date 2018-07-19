@@ -109,9 +109,10 @@
   position: fixed;
   bottom: 0;
   z-index: 99;
+  width: 100%;
 }
 .home-tabar-btn{
-  width: 245rpx;
+  width: 33.3%;
   height: 88rpx;
   background: #dddddd;
   display: inline-block;
@@ -119,6 +120,7 @@
   text-align: center;
   font-size: 28rpx;
   padding: 0 1rpx 0 1rpx;
+  border-radius: 0;
 }
 .home-btn-borders{
   border-left:6rpx solid #fff; 
@@ -186,4 +188,46 @@
   width: 191rpx;
   height: 272rpx;
   margin: 0 auto;
+}
+
+/*模态背景框，半透明黑色，全屏*/
+.model-view-bg-c {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10002;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    font-size: 32rpx;
+}
+
+.title-c{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80rpx;
+    width:100%;
+    color: #252525;
+    font-size: 28rpx;
+    border-bottom:1rpx solid #eee;
+}
+.content-c{
+  height: 150rpx;
+  line-height: 150rpx
+}
+.my-award-filter{
+  width: 75%;
+  background: #fff;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 10rpx;
+}
+.login-2{
+  margin-top: 40rpx;
+  text-align: center;
 }

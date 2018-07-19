@@ -43,6 +43,9 @@ Page({
     showBtn:false,
   },
   onLoad: function (options) {
+    this.setData({
+      activityId:Storage.getActivityId() || ''
+    })
     this.queryActivityWordCard()
   },
   cardClicked(e){

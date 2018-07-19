@@ -23,11 +23,14 @@ export default class RequestFactory {
     // 手机型号
     params.device = sysInfo.model
 
+    // 手机系统类型
+    params.deviceType = 3
+
     // 微信版本
     params.wechatVersion = sysInfo.version
 
     // 系统版本
-    params.systemVersion = sysInfo.system
+    params.deviceVersion = sysInfo.system
 
     let req = new Request(params);
 
@@ -40,11 +43,21 @@ export default class RequestFactory {
 
   // 获取openid verifyWechat
 
-  static verifyWechat(params) {
-    let url = Operation.sharedInstance().verifyWechat;
+  static getWeChatOpenId(params) {
+    let url = Operation.sharedInstance().getWeChatOpenId;
     return this.request(url, params, '获取openid和是否注册');
   }
+
+  static appWechatLogin(params) {
+    let url = Operation.sharedInstance().appWechatLogin;
+    return this.request(url, params, '微信登陆');
+  }
   
+  static exitLogin(params) {
+    let url = Operation.sharedInstance().exitLogin;
+    return this.request(url, params, '退出登录');
+  }
+
   // 上传图片的地址 
   static aliyunOSSUploadImage() {
     let params = {
@@ -100,6 +113,12 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().queryActivityRedPackageList;
     return this.request(url, params, '我的红包列表', true)
   }
+  
+  static querySecuritycodeUsedList(params) {
+    let url = Operation.sharedInstance().querySecuritycodeUsedList;
+    return this.request(url, params, '我的实物列表', true)
+  }
+
   /******************** 地址 *************************/
 
   static addUserAddress(params) {
@@ -166,13 +185,11 @@ export default class RequestFactory {
   }
 
   static findFeedbackById(params) {
-    params.port = '8001';
     let url = Operation.sharedInstance().findFeedbackById;
     return this.request(url, params, '查询反馈详情', true);
   }
 
   static addFeedback(params) {
-    params.port = '8001';
     let url = Operation.sharedInstance().addFeedback;
     return this.request(url, params, '添加反馈', true);
   }

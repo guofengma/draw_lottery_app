@@ -1,4 +1,4 @@
-let { Tool, RequestFactory} = global
+let { Tool, RequestFactory, Storage, Event} = global
 
 Page({
   data: {
@@ -46,12 +46,38 @@ Page({
   },
   formSubmit(e) {
     let params = e.detail.value
-    // Tool.isEmptyStr
-    console.log(params)
-    let obj = {
-      activityCode
+    if (Tool.isEmptyStr(params.name)){
+      Tool.showAlert("请填写用户姓名");
+      return
     }
-    // 跳转页面 
-    //Tool.navigateTo('/pages/my/feedback/submit-feedback/submit-feedback')
+    if (Tool.isEmptyStr(this.data.activeList.id)) {
+      Tool.showAlert("请选择反馈的问题类型");
+      return
+    }
+    if (!Tool.checkPhone(params.telphone)) {
+      Tool.showAlert("请输入正确的电话号码");
+      return
+    }
+    if (Tool.isEmptyStr(params.feedback)) {
+      Tool.showAlert("请描述相关问题信息");
+      return
+    }
+    let obj = {
+      activityCode: Storage.getActivityId() || '',
+      originalImg: JSON.stringify(this.data.originalImg),
+      smallImg: JSON.stringify(this.data.smallImg),
+      'type': this.data.activeList.id
+    }
+    Object.assign(params, params, obj)
+    this.addFeedback(params)
+  },
+  addFeedback(params){
+    let r = RequestFactory.addFeedback(params);
+    r.finishBlock = (req) => {
+      Event.emit('updateFeedback')
+      Tool.navigateTo('/pages/my/feedback/submit-feedback/submit-feedback')
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   }
 })

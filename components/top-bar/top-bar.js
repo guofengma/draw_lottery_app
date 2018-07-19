@@ -1,23 +1,20 @@
-// components/top-bar/top-bar.js
+let { Tool,Storage } = global
+
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
 
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
-
+    activityId:''
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
-
+    getActivtyId(){
+      this.setData({
+        activityId: Storage.getActivityId() || ''
+      })
+    }
+  },
+  ready: function () {
+    this.getActivtyId()
   }
 })

@@ -1,65 +1,52 @@
 let { Tool, RequestFactory } = global
 Page({
   data: {
-    lists: [
-      {name:"抽奖红包1",num:"201712121222312",createTime:'2017-12-12 21:32',amout:'0.03'},
-      { name: "抽奖红包1", num: "201712121222312", createTime: '2017-12-12 21:32', amout: '0.1' },
-    ],
+    lists:[],
+    totalPage: '', // 页面总页数
+    currentPage: 1, // 当前的页数
+    pageSize: 10, // 每次加载请求的条数 默认10 
+    params: {},
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
-  },
+    let params = {
+      pageSize: this.data.pageSize,
+      page: this.data.currentPage
+    }
+    this.setData({
+      params: params
+    })
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+    this.queryActivityRedPackageList(params)
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  queryActivityRedPackageList(params){
+    let r = RequestFactory.queryActivityRedPackageList(params);
+    let { lists} = this.data
+    r.finishBlock = (req) => {
+      let datas = req.responseObject.data
+      if (datas.resultCount > 0) {
+        datas.data.forEach((item)=>{
+          item.createTime = Tool.formatTime(item.create_time)
+        })
+        this.setData({
+          lists: lists.concat(datas.data),
+          totalPage: datas.total
+        })
+      } 
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  onScroll() {
+    // 向下滑动的时候请求数据
+    if (this.data.currentPage >= this.data.totalPage) return
+    let page = this.data.currentPage
+    page += 1
+    let { params } = this.data
+    params.page = page
+    this.setData({
+      currentPage: page,
+      params: params
+    })
+    this.queryActivityRedPackageList(this.data.params)
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

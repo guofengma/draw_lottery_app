@@ -5,6 +5,9 @@ Page({
     address:{}
   },
   onLoad: function (options) {
+    this.setData({
+      id: options.id
+    })
     Event.on('updateOrderAddress', this.updateOrderAddress, this)
   },
   chooseAddress(){

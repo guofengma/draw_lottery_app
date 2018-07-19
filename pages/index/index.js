@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Storage } = global
 Page({
     data: {
         motto: 'Hello World',
@@ -17,9 +17,13 @@ Page({
         isShakeBox:false,
         isNotice:false,
         code: '',
+        userId:'',
+        visiable:false,
     },
     onLoad: function() {
-      
+      this.setData({
+        userId: Storage.memberId() || '',
+      })
     },
     onReady: function() {
 
@@ -126,6 +130,66 @@ Page({
       this.setData({
         isNotice: !this.data.isNotice
       })
+    },
+    goPage(){
+      Tool.navigateTo('/pages/activity-detail/activity-detail')
+    },
+    awardClicked(){
+      Tool.navigateTo('/pages/my/my')
+    },
+    getPhoneNumber(e) {
+      if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+        console.log('用户拒绝了你的请求')
+      } else {
+        this.setData({
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv,
+          visiable: !this.data.visiable,
+        })
+      }
+    },
+    agreeGetUser(e) {
+      if (!this.data.canIUse) {
+        this.getUserInfo()
+      }
+      this.setData({
+        visiable: !this.data.visiable
+      })
+      if (e.detail.userInfo !== undefined) {
+        this.getLogin(e.detail.userInfo)
+      }
+    },
+    requetLogin() {
+      let params = {
+        encryptedData: this.data.encryptedData,
+        iv: this.data.iv,
+        openId: Storage.getWxOpenid() || '',
+        name: this.data.userInfo.nickName,
+        headImgUrl: this.data.userInfo.avatarUrl
+      }
+      let r = global.RequestFactory.appWechatLogin(params);
+      r.finishBlock = (req) => {
+        Tool.loginOpt(req)
+        console.log(req)
+      }
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    getUserInfo() {
+      wx.getUserInfo({
+        success: res => {
+          this.getLogin(res.userInfo)
+        },
+        fail: function () {
+          
+        }
+      })
+    },
+    getLogin(userInfo) {
+      this.setData({
+        userInfo: userInfo
+      })
+      Storage.setWxUserInfo(userInfo)
+      this.requetLogin()
     }
-
 })
