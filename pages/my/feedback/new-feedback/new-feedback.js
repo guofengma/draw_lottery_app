@@ -46,7 +46,6 @@ Page({
   },
   formSubmit(e) {
     let params = e.detail.value
-    console.log(params)
     // 跳转页面 
     Tool.navigateTo('/pages/my/feedback/submit-feedback/submit-feedback')
   }
