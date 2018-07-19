@@ -55,7 +55,7 @@ export default class RequestFactory {
   
   static exitLogin(params) {
     let url = Operation.sharedInstance().exitLogin;
-    return this.request(url, params, '退出登录');
+    return this.request(url, params, '退出登录', true);
   }
 
   // 上传图片的地址 

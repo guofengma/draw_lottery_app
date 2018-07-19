@@ -1,4 +1,4 @@
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Event } = global
 Page({
   data: {
     url:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/',
@@ -20,9 +20,12 @@ Page({
   logout(){
     let callBack = () => {
       // exitLogin
-      let r = global.RequestFactory.exitLogin(params);
+      let r = global.RequestFactory.exitLogin();
       r.finishBlock = (req) => {
-        
+        Tool.redirectTo('/pages/index/index')
+        Storage.setUserCookie(null)
+        Storage.setMemberId(null)
+        Event.emit('didLogin');
       }
       Tool.showErrMsg(r)
       r.addToQueue();

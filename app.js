@@ -65,7 +65,6 @@ App({
     let r = global.RequestFactory.getWeChatOpenId(params);
     r.finishBlock = (req) => {
       Tool.loginOpt(req)
-      console.log(req)
     }
     Tool.showErrMsg(r)
     r.addToQueue();
