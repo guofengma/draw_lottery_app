@@ -27,14 +27,27 @@ export default class Operation {
 
         this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUploadImage'
 
-       // 获取反馈问题的列表
+        // 获取反馈问题的列表
       
         this.queryDictionaryDetailsType = '/admin/dictionary/queryDictionaryDetailsType'
 
-       //天天签到 签到
+      /*************  首页接口 *********************/
+
+        //天天签到 签到
+
         this.signUrl = '/user/activitySign/addActivitySign'
-       // 天天签到 签到列表
+
+        // 天天签到 签到列表
+
         this.signListUrl = '/user/activitySign/queryActivitySignData'
+      
+      /*************  我的奖品 *********************/
+
+        // 字卡数量获取
+
+        this.queryActivityWordCard ='user/activityWordCard/queryActivityWordCard'
+
+       
     }
 
     static sharedInstance() {

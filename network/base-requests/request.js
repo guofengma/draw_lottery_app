@@ -20,7 +20,7 @@ export default class Request {
       if (bParam.port) {
         this.baseUrl = this.baseUrl + bParam.port
       } else {
-        this.baseUrl = this.baseUrl + '8102';
+        this.baseUrl = this.baseUrl + '8002';
       }
 
       // 正式

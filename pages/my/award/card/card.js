@@ -36,7 +36,7 @@ Page({
     imgUrl:"https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/"
   },
   onLoad: function (options) {
-  
+    this.queryActivityWordCard()
   },
   cardClicked(e){
     let index = e.currentTarget.dataset.index
@@ -45,5 +45,13 @@ Page({
     this.setData({
       activeImg: this.data.imgUrl+activeImg
     })
+  },
+  queryActivityWordCard() {
+    let r = RequestFactory.queryActivityWordCard();
+    r.finishBlock = (req) => {
+      
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
 })
