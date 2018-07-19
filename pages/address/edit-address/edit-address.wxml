@@ -3,7 +3,7 @@
 <top-bar/>
 <view class='addressList'>
   <block wx:for='{{addressList}}' wx:key='unique'>
-    <view catchtap='addressLineClicked' class='content'>
+    <view  class='content'>
       <template is="address-info" data='{{...item}}'/>
       <view class='address-edit-choose flexR-sb whiteBg'>
         <view class='choose-leftbar boxSize {{item.default_status==1? "active":""}}' bindtap='setDefault' data-index='{{index}}'>

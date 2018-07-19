@@ -67,7 +67,7 @@ export default class Operation {
 
         // 修改地址
 
-        this.updateUserAddress = ' /user/userAddress/updateUserAddress'
+        this.updateUserAddress = '/user/userAddress/updateUserAddress'
 
         // 查询列表
 

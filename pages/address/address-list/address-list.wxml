@@ -2,13 +2,13 @@
 
 <top-bar/>
 <view class='addressList'>
-  <block>
+  <block wx:for='{{addressList}}' wx:key='unique'>
     <view class='flexR-sb whiteBg' catchtap='addressLineClicked'>
-      <view class='card-address-choose' data-index='{{0}}' wx:if='{{door==2}}'>
+      <view class='card-address-choose' data-index='{{index}}' wx:if='{{door==2}}'>
         <image src='/img/choose-gray.png' mode='widthFix'></image>
       </view>
-      <view  data-index='{{0}}' class='address-view'>
-        <template is="address-info" data=''/>
+      <view  data-index='{{index}}' class='address-view'>
+        <template is="address-info" data='{{...item}}'/>
       </view>
     </view>
   </block>

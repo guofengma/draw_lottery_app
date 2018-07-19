@@ -25,9 +25,14 @@ Page({
     })
   },
   getEditAddressList(address){
+    let region = []
+    region[0] = { name: address.province_code}
+    region[1] = { name: address.area_code }
+    region[2] = { name: address.city_code, }
     this.setData({
       content: address.province_code + address.area_code + address.city_code,
-      address: address
+      address: address,
+      region: region
     })
   },
   pickerClicked(e) {
@@ -51,7 +56,6 @@ Page({
     if (this.data.region[2]) {
       params.areaCode = this.data.region[2].name;
     }
-    params.defaultStatus = this.data.isChoose? 1:2
     if (!Tool.checkName(params.receiver)) {
       Tool.showAlert("收货人姓名长度需在2-16位之间");
       return
@@ -68,10 +72,21 @@ Page({
       Tool.showAlert("请输入详细地址");
       return
     }
+    if (this.data.addressType==1){
+      params.defaultStatus = this.data.isChoose ? 1 : 2
+    } else if (this.data.addressType == 2){
+      params.id = this.data.address.id
+    }
     this.requestAddUserAddress(params)
   },
   requestAddUserAddress(params) {
-    let r = RequestFactory.addUserAddress(params);
+    let r =''
+    if (this.data.addressType == 1) {
+      r = RequestFactory.addUserAddress(params);
+    } else if (this.data.addressType == 2) {
+      r = RequestFactory.updateUserAddress(params);
+    }
+    
     r.finishBlock = (req) => {
       //跳转到地址列表页面
       this.successCallBack("添加成功")
@@ -79,6 +94,16 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  deleteAddress(e) {
+    let callBack = () => {
+      let r = RequestFactory.deleteUserAddress({ id: this.data.address.id });
+      r.finishBlock = (req) => {
+        this.successCallBack("删除成功")
+      };
+      r.addToQueue();
+    }
+    Tool.showComfirm('确认删除该地址吗?', callBack)
   },
   chooseClicked(){
     this.setData({

@@ -28,8 +28,10 @@
     </view>
     <view class='flexR'>
       <view class="card-fuseBtn {{disabled? 'cardActive':''}}"  catchtap='configListCard'> 立即合成</view>
-      <view class='address-btn'>地址选择</view>
+      <view class='address-btn' wx:if='{{showBtn}}'>地址选择</view>
     </view>
   </view>
 </view>
 <bottom-bar index="1"></bottom-bar>
+
+<view class='model-view-bg' catchtap='modelClicked' wx:if='{{show}}'></view>

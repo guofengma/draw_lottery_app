@@ -37,7 +37,6 @@ Page({
     Tool.navigationPop()
   },
   queryUserAddressList() {
-    console.log(111111)
     let r = RequestFactory.queryUserAddressList();
     r.finishBlock = (req) => {
       if (req.responseObject.data.length > 0) {

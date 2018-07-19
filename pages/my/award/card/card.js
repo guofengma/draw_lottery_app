@@ -38,7 +38,9 @@ Page({
     disabled: false,
     activeImg:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/duo-dark.png',
     imgUrl:"https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/",
-    activityId:1
+    activityId:1,
+    show:false,
+    showBtn:false,
   },
   onLoad: function (options) {
     this.queryActivityWordCard()
@@ -66,32 +68,49 @@ Page({
           }
         })
       })
-      let disabled = datas[0].number>0? true:false
+      let { activeImg } = this.data
+      let { showBtn } = this.data
+      if (datas[0].number>1) {
+        activeImg = this.data.imgUrl + datas[0].showImg2
+        showBtn = true
+      }
+      let disabled = this.getCardNum()<3? false:true
       this.setData({
         datas: datas,
-        disabled: disabled
+        disabled: disabled,
+        activeImg: activeImg,
+        showBtn: showBtn
       })
     };
     Tool.showErrMsg(r)
     r.addToQueue();
   },
-  configListCard(){
+  getCardNum(){
     let num = 0
-    let {datas} = this.data
-    for(let i=1;i<datas.length;i++){
-      if(datas[i].number>0){
+    let { datas } = this.data
+    for (let i = 1; i < datas.length; i++) {
+      if (datas[i].number > 0) {
         num++
       }
     }
-    if(num<3) return
+    return num
+  },
+  configListCard(){
+    let num = this.getCardNum()
+    if (num < 3) return
     let params = {
       activityId: this.data.activityId
     }
     let r = RequestFactory.configListCard(params);
     r.finishBlock = (req) => {
-      
+      this.modelClicked()
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  modelClicked(){
+    this.setData({
+      show: !this.data.show
+    })
   }
 })
