@@ -46,7 +46,12 @@ Page({
   },
   formSubmit(e) {
     let params = e.detail.value
+    // Tool.isEmptyStr
+    console.log(params)
+    let obj = {
+      activityCode
+    }
     // 跳转页面 
-    Tool.navigateTo('/pages/my/feedback/submit-feedback/submit-feedback')
+    //Tool.navigateTo('/pages/my/feedback/submit-feedback/submit-feedback')
   }
 })
