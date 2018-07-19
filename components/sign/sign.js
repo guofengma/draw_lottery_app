@@ -31,23 +31,28 @@ Component({
         hoverClass:'',
         isTrue:true,
         tip: false,
-        isNumber: '3'
+        isNumber: '3',
+        weekdays: [],
+        week: '',
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
+        onLoad:function() {
+          this.sign()
+        },
         sign_start: function() { // 签到
-            var powerData = 100;
             // this.sign();
-            this.signListRequestHttp()
+            // this.signListRequestHttp()
+            this.signRequestHttp()
             //签到成功后重新调用后台接口加载新的签到数据
-            this.setData({
-                for_signs: "block",
-                signtype: "2",
-                powerData: powerData,
-            });
+            // this.setData({
+            //     for_signs: "block",
+            //     signtype: "2",
+            //     powerData: powerData,
+            // });
             wx.showToast({
                 title: '签到成功',
                 icon: 'success',
@@ -147,7 +152,6 @@ Component({
                 var showMonths = todayMonth;
             }
             var godates = showYear + "-" + showMonths + "-01";
-
             var $datas = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7]};
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -164,7 +168,7 @@ Component({
             });
 
         },
-      sign: function(options) { // 签到
+        sign: function(options) { // 签到
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -179,7 +183,7 @@ Component({
             console.log(todayss);
             var godates = todayYear + "-" + todayMonthss + "-01";
             var that = this;
-            var data = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7] };
+            var data = { seriesCount: 1, signDays: [] };
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -191,18 +195,14 @@ Component({
             } else {
                 var series_gos = 10 - parseInt(count_signday);
             } 
-            var timeData = todayYear + "-" + todayMonth
-            console.log(timeData)
-            // this.signListRequestHttp(timeData)
             anns.push(todayss) //  存放今日的签到日期
-            that.setData({
-                seriesCount: count_signday,
-                series_gos: series_gos,
-            });
+            // that.setData({
+            //     seriesCount: count_signday,
+            //     series_gos: series_gos,
+            // });
             for (var p in anns) { //遍历json对象的每个key/value对,p为key
                 var newdats = anns[p];
                 signDate_arr.push(newdats);
-                var t = parseInt(p)
             }
             if (signDate_arr.indexOf(todayss) > -1) {
                 console.log("当前已签到");
@@ -239,12 +239,28 @@ Component({
             tip:!true
           })
         },
-        signListRequestHttp(timeData){
+        signListRequestHttp(timeData){ // 请求签到列表
           let data = {
             activityId:1,
             yearsMonth: timeData
           };
           let r = RequestFactory.signListRequest(data);
+          r.finishBlock = (req) => {
+            console.log(req.responseObject.data)
+            let stringJson = req.responseObject.data;
+              this.setData({
+                weekdays: req.responseObject.data || []
+              })
+            console.log(this.data.weekdays)
+          };
+          Tool.showErrMsg(r);
+          r.addToQueue();
+        },
+        signRequestHttp(){ // 签到
+          let data = {
+            activityId: 1
+          };
+          let r = RequestFactory.signRequest(data);
           r.finishBlock = (req) => {
             console.log(req)
           };
@@ -252,59 +268,52 @@ Component({
           r.addToQueue();
         }
     },
-    ready: function() {
+    ready: function(e) {
+      console.log(e)
         var getToday = new Date();
         var todayDate = getToday.getDate();
         var todayMonths = getToday.getMonth();
         var todayMonth = (todayMonths + 1);
         var todayYear = getToday.getFullYear();
         var todayss = getToday.getDate();
+        var timeData = ''
         if (todayMonth < 10) {
             var todayMonthss = "0" + todayMonth;
+            timeData = todayYear + "-0" + todayMonth
         } else {
             var todayMonthss = todayMonth;
+          timeData = todayYear + "-" + todayMonth
         }
-        console.log(todayss);
-        var timeData = todayYear + "-" + todayMonth
         console.log(timeData)
-        // this.signListRequestHttp(timeData)
+        this.signListRequestHttp(timeData)
         var godates = todayYear + "-" + todayMonthss + "-01";
         var that = this;
-        var data = { seriesCount: 1, signDays: [1, 2, 3, 4, 5, 6, 7]};
+        var signDays = this.data.weekdays
+        console.log(signDays)
+        var data = { seriesCount: 1, signDays:[]};
         var $datas = data;
         var signDate_arr = new Array();
-        var anns = $datas.signDays;
+        var anns = $datas.signDays
+        // console.log(anns)
         var count_signday = $datas.seriesCount;
         if (count_signday > 9) {
-            var series_gos = "0";
+          var series_gos = "0";
         } else if (count_signday < 0) {
-            var series_gos = 99;
+          var series_gos = 99;
         } else {
-            var series_gos = 10 - parseInt(count_signday);
+          var series_gos = 10 - parseInt(count_signday);
         }
+        // anns.push(todayss) //  存放今日的签到日期
         that.setData({
             seriesCount: count_signday,
             series_gos: series_gos,
         });
         for (var p in anns) { //遍历json对象的每个key/value对,p为key
-            var newdats = anns[p];
-            signDate_arr.push(newdats);
+          var newdats = anns[p];
+          signDate_arr.push(newdats);
         }
-        if (signDate_arr.indexOf(todayss) > -1) {
-            console.log("当前已签到");
-            that.setData({
-                signtype: "2",
-            });
-        } else {
-            console.log("当前未签到");
-            that.setData({
-                signtype: "1",
-            });
-        }
-        console.log(signDate_arr[0]);
         signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
         //初始化加载日历
-
         this.setData({
             todayDate: todayDate,
             todayMonth: todayMonth,
@@ -317,4 +326,4 @@ Component({
             showMonth: todayMonth,
         });
     }
-})
+}) 

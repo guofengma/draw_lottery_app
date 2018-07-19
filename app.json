@@ -1,4 +1,30 @@
 {
+<<<<<<< HEAD
+    "pages": [
+        "pages/index/index",
+        "pages/address/new-address/new-address",
+        "pages/address/address-list/address-list",
+        "pages/address/edit-address/edit-address",
+        "pages/my/my",
+        "pages/my/feedback/my-feedback/my-feedback",
+        "pages/my/feedback/new-feedback/new-feedback",
+        "pages/my/feedback/submit-feedback/submit-feedback",
+        "pages/my/feedback/feedback-detail/feedback-detail",
+        "pages/my/award/award-goods/award-goods",
+        "pages/my/award/red-envelopes/red-envelopes",
+        "pages/my/award/card/card",
+        "pages/order-confirm/order-confirm",
+        "pages/order-confirm/submit-order/submit-order",
+        "pages/my/my-order/my-order",
+        "pages/logistics/logistics"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "抽奖系统",
+        "navigationBarTextStyle": "black"
+    }
+=======
   "pages": [
     "pages/index/index",
     "pages/address/new-address/new-address",
@@ -25,4 +51,5 @@
     "navigationBarTitleText": "抽奖系统",
     "navigationBarTextStyle": "black"
   }
+>>>>>>> e52aa3734f115c41c23b351c7a31d87268e64fe1
 }
