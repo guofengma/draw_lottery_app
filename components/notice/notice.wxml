@@ -9,28 +9,13 @@
         </view>
         <view class="noticeContent">
           <view class="contentHeader">
-            关于*****公告
+            {{}}
           </view>
           <view class="contentScroll">
               <scroll-view scroll-y style='height:657rpx;'>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
-                <text>111111111111</text>
+                <text>
+                {{noticeCountent}}
+                </text>
               </scroll-view>
           </view>
           <view class="noticeBtnbox">

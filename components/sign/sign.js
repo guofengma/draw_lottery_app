@@ -161,7 +161,7 @@ Component({
             console.log(signDate_arr[0]);
             signTime.dataTime.bulidCal(showYear, showMonth, that, signDate_arr);
             //初始化加载日历
-            this.signReady()
+            // this.signReady()
             this.setData({
                 showYear: showYear,
                 showMonth: showMonth,
@@ -293,7 +293,7 @@ Component({
             var godates = todayYear + "-" + todayMonthss + "-01";
             var that = this;
             var signDay = this.data.weekdays
-            console.log(signDay)
+            // console.log(signDay)
             var data = { seriesCount: 1, signDays: [] };
             for (let p in signDay) { // 获取签到列表的每一天
               let signJson = signDay[p].signTime
@@ -313,7 +313,7 @@ Component({
               if (signDay[p].hadWinCount !== 2) { // 获取连续签到7天
                 let arr = [];
                 arr.push(weekDays)
-                console.log(arr)
+                // console.log(arr)
                 if(arr.indexOf(weekDays) > -1) {
                   this.setData({
                     isweekDays: arr
@@ -379,7 +379,7 @@ Component({
                 signtype: "1",
               });
             }
-            console.log(signDate_arr)
+            // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历
             this.setData({
