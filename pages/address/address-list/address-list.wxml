@@ -3,7 +3,7 @@
 <top-bar/>
 <view class='addressList'>
   <block wx:for='{{addressList}}' wx:key='unique'>
-    <view class='flexR-sb whiteBg' catchtap='addressLineClicked'>
+    <view class='flexR-sb whiteBg addressList-line' catchtap='addressLineClicked'>
       <view class='card-address-choose' data-index='{{index}}' wx:if='{{door==2}}'>
         <image src='/img/choose-gray.png' mode='widthFix'></image>
       </view>
