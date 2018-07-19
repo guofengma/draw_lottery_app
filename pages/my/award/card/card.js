@@ -112,5 +112,8 @@ Page({
     this.setData({
       show: !this.data.show
     })
+  },
+  chooseAddress(){
+    Tool.navigateTo('/pages/address/address-list/address-list?door=2')
   }
 })

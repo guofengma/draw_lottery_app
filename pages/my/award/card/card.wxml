@@ -28,7 +28,7 @@
     </view>
     <view class='flexR'>
       <view class="card-fuseBtn {{disabled? 'cardActive':''}}"  catchtap='configListCard'> 立即合成</view>
-      <view class='address-btn' wx:if='{{showBtn}}'>地址选择</view>
+      <view class='address-btn' wx:if='{{showBtn}}' catchtap='chooseAddress'>地址选择</view>
     </view>
   </view>
 </view>
