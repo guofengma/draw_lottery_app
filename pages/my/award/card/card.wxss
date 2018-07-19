@@ -67,7 +67,7 @@
   background: #ff000c;
   border: 1px solid #ffc000;
   border-radius: 50%;
-  font-size: 15rpx;
+  font-size: 18rpx;
   text-align: center;
   line-height: 27rpx;
   color: #ffc000;

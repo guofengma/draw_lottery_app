@@ -3,12 +3,12 @@
 <top-bar/>
 <view class='addressList'>
   <block wx:for='{{addressList}}' wx:key='unique'>
-    <view class='flexR-sb whiteBg addressList-line' catchtap='addressLineClicked'>
+    <view class='flexR-sb whiteBg addressList-line' catchtap='addressLineClicked' data-index='{{index}}'>
       <view class='card-address-choose' data-index='{{index}}' wx:if='{{door==2}}'>
-        <image src='/img/choose-gray.png' mode='widthFix'></image>
+        <image src='{{item.duo_is==1? "/img/choose-red.png":"/img/choose-gray.png"}}' mode='widthFix'></image>
       </view>
       <view  data-index='{{index}}' class='address-view'>
-        <template is="address-info" data='{{...item}}'/>
+        <template is="address-info" data='{{...item,showDefault}}'/>
       </view>
     </view>
   </block>
