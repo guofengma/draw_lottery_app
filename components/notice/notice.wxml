@@ -1,4 +1,5 @@
 <!--components/notice/noitve.wxml-->
+<import src="../../libs/wxParse/wxParse.wxml" />
 <view class="model-view-bg" style='overflow:auto' wx:if="{{isTrue}}">
     <view class="noticeModel">
         <view class="notice-Header">

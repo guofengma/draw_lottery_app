@@ -1,4 +1,5 @@
 // components/top-bar/top-bar.js
+
 let { Tool, RequestFactory } = global
 Component({
   /**

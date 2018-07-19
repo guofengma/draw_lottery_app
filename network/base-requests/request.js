@@ -9,30 +9,26 @@ import RequestStatus from './request-status';
 //请求基类
 export default class Request {
     getBaseUrl(bParam) {
-      // 开发 
-<<<<<<< HEAD
-      // this.baseUrl = 'http://172.16.10.7:'
-=======
-      this.baseUrl = 'http://172.16.10.7:'
->>>>>>> f4e6ccbb81d14024ff46bd23644a4848806d03ca
-      // this.baseUrl = 'http://172.16.10.21:'
-      // this.baseUrl = 'http://172.16.10.4:'
-      this.baseUrl = 'http://172.16.10.12:'
-      // this.baseUrl = 'http://172.16.10.29:'
-      // this.baseUrl = 'http://172.16.10.19:'
-      // this.baseUrl = 'http://172.16.10.253:'
+        // 开发 
+        //   this.baseUrl = 'http://172.16.10.7:'
+        // this.baseUrl = 'http://172.16.10.21:'
+        // this.baseUrl = 'http://172.16.10.4:'
+        this.baseUrl = 'http://172.16.10.12:'
+        // this.baseUrl = 'http://172.16.10.29:'
+        // this.baseUrl = 'http://172.16.10.19:'
+        // this.baseUrl = 'http://172.16.10.253:'
 
-      if (bParam.port) {
-        this.baseUrl = this.baseUrl + bParam.port
-      } else {
-        this.baseUrl = this.baseUrl + '8002';
-      }
+        if (bParam.port) {
+            this.baseUrl = this.baseUrl + bParam.port
+        } else {
+            this.baseUrl = this.baseUrl + '8002';
+        }
 
-      // 正式
+        // 正式
 
-      // this.baseUrl = 'https://nc.hzjure.xyz';
-      
-      return this.baseUrl
+        // this.baseUrl = 'https://nc.hzjure.xyz';
+
+        return this.baseUrl
     }
     constructor(bParam) {
         //request自己控制loading提示
@@ -74,17 +70,17 @@ export default class Request {
         // header
 
         this.header = ''
-        
+
         // cookie
 
         this.cookie = ''
-        /**
-         * 调用finishBlock前的预处理，可作为factory中的统一处理
-         */
-        this.preprocessCallback = (req,firstData) => {};
+            /**
+             * 调用finishBlock前的预处理，可作为factory中的统一处理
+             */
+        this.preprocessCallback = (req, firstData) => {};
 
         //成功回调
-        this.finishBlock = (req,firstData) => {};
+        this.finishBlock = (req, firstData) => {};
 
         //失败回调
         this.failBlock = (req) => {};
@@ -94,7 +90,7 @@ export default class Request {
     }
 
     //添加到请求队列中
-    addToQueue(){
+    addToQueue() {
         this.isManagedByQueue = true;
         RequestQueue.addRequest(this);
     }
@@ -107,15 +103,15 @@ export default class Request {
         this.hasCookie()
         this.requestStatus = RequestStatus.requesting;
         wx.request({
-            data:this._body,
+            data: this._body,
             url: this._url,
-            dataType:'json',
-            method:this.requestMethod,
+            dataType: 'json',
+            method: this.requestMethod,
             header: {
-              'content-type': 'application/x-www-form-urlencoded',
-              'Cookie': this.cookie
+                'content-type': 'application/x-www-form-urlencoded',
+                'Cookie': this.cookie
             },
-            success: function (res) {
+            success: function(res) {
                 if (that.managerLoadingPrompt) {
                     global.Tool.hideLoading();
                 }
@@ -128,24 +124,23 @@ export default class Request {
                 that.responseObject = res.data;
                 //成功
                 if (res.data.code == '200') {
-                  let Datas = that.responseObject.data;
-                  let firstData = {};
-                  firstData = Datas
-                  //预处理，可以重新组织请求结果
-                  that.preprocessCallback(that, firstData)
-                  that.finishBlock(that, firstData)
+                    let Datas = that.responseObject.data;
+                    let firstData = {};
+                    firstData = Datas
+                        //预处理，可以重新组织请求结果
+                    that.preprocessCallback(that, firstData)
+                    that.finishBlock(that, firstData)
                 }
 
                 //失败，有异常
-                else
-                {
-                  //弹窗，提示服务器错误
-                  that.failBlock(that);
-                  // global.Tool.showAlert(res.data.msg);
+                else {
+                    //弹窗，提示服务器错误
+                    that.failBlock(that);
+                    // global.Tool.showAlert(res.data.msg);
                 }
             },
-            fail:function () {
-                that.tryCount ++;
+            fail: function() {
+                that.tryCount++;
 
                 console.debug('<============================== 请求结束：' + that.name + '第' + that.tryCount + '次请求');
                 console.debug('==============================\n\n\n');
@@ -153,21 +148,19 @@ export default class Request {
                 if (that.tryCount < that.maxTryCount) {
                     if (that.isManagedByQueue) {
                         that.addToQueue();
-                    }
-                    else{
+                    } else {
                         that.start();
                     }
                 }
 
                 //达到重试上限，提示错误
-                else
-                {
+                else {
                     //弹窗，提示服务器错误
                     that.failBlock(that);
                     global.Tool.showAlert('请求失败，请稍后重试')
                 }
             },
-            complete:function () {
+            complete: function() {
                 that.requestStatus = RequestStatus.finish;
                 that.completeBlock(that);
 
@@ -198,26 +191,25 @@ export default class Request {
 
     //拼接url
     url() {
-      this._url = this.baseUrl + this.bodyParam.url
-      return this._url;
+        this._url = this.baseUrl + this.bodyParam.url
+        return this._url;
     }
 
     //拼接body
     body() {
-      delete this.bodyParam.url
-      delete this.bodyParam.port
-      this._body = this.bodyParam
-      return this._body;
+        delete this.bodyParam.url
+        delete this.bodyParam.port
+        this._body = this.bodyParam
+        return this._body;
     }
 
     // 是否带上cookie 请求 
-    hasCookie(){
+    hasCookie() {
 
-      if (this.bodyParam.hasCookie){
-        delete this.bodyParam.hasCookie
-        this.cookie = global.Storage.getUserCookie() || ' '
-        return this.cookie
-      }      
+        if (this.bodyParam.hasCookie) {
+            delete this.bodyParam.hasCookie
+            this.cookie = global.Storage.getUserCookie() || ' '
+            return this.cookie
+        }
     }
 }
-
