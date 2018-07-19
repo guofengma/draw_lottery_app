@@ -13,7 +13,11 @@ export default class Request {
         // this.baseUrl = 'http://172.16.10.7:'
         this.baseUrl = 'http://172.16.10.21:'
         // this.baseUrl = 'http://172.16.10.4:'
+<<<<<<< HEAD
         // this.baseUrl = 'http://172.16.10.12:'
+=======
+        this.baseUrl = 'http://172.16.10.12:'
+>>>>>>> 3e11a4d72c257e0efe2210c25dd472c0c2f68a4c
         // this.baseUrl = 'http://172.16.10.29:'
         // this.baseUrl = 'http://172.16.10.19:'
         // this.baseUrl = 'http://172.16.10.253:'

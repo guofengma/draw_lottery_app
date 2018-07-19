@@ -38,11 +38,20 @@
         </view>
     </view>    
   </view>
-  <view class="home-tabar">
-    <view class="home-tabar-btn">活动详情</view>
-    <view class="home-tabar-btn home-btn-borders">我的奖品</view>
-    <view class="home-tabar-btn" catchtap='closeView'>天天签到</view>
+
+  <view class="home-tabar flexR">
+    <view class="home-tabar-btn" catchtap='goPage'>活动详情</view>
+    <block wx:if='{{!userId}}'>
+      <button class='home-tabar-btn home-btn-borders' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信登陆</button>
+      <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">天天签到</button>
+    </block>
+    <block wx:else>
+      <view class="home-tabar-btn home-btn-borders" catchtap='awardClicked'>我的奖品</view>
+      <view class="home-tabar-btn" catchtap='closeView'>天天签到</view>
+    </block>
+    
   </view>
+
   <!--红包弹框-->
   <view class="model-view-bg" wx:if="{{isShakeBox}}">
       <view class="shakeBox">
@@ -74,3 +83,14 @@
       </view>
   </view>
 </view>
+
+
+<block wx:if="{{visiable}}">
+  <view class="model-view-bg-c">
+    <view class="my-award-filter">
+        <view class="title-c"><view>提示</view></view>
+        <view class='content-c'>您同意了授权</view>
+        <button open-type="getUserInfo" class="agree" bindgetuserinfo="agreeGetUser" lang="zh_CN">确定</button>
+    </view>
+  </view>
+</block>
