@@ -235,7 +235,7 @@ button::after {
     position: absolute;
     top: 0;
     left: 0;
-    width: 90rpx;
+    width: 80rpx;
     height: 90rpx;
     color: #bf201f;
     text-align: center;
@@ -331,9 +331,14 @@ button::after {
   /* height: 936rpx; */
   z-index: 1;
 }
-.border-hover{
+.borderHover{
   border: 1px solid hsl(0, 72%, 56%);
   border-radius: 50%;
+  background: #fff !important;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
 }
 .backgroundHeader{
   background-color: #bf201f;
