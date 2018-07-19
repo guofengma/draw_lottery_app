@@ -54,6 +54,12 @@ export default class Operation {
         // 天天签到 签到列表
 
         this.signListUrl = '/user/activitySign/queryActivitySignData'
+
+        // 防伪码接口
+        this.homeSecurityCodeUrl = '/user/securityCode/use'
+
+        // 公告
+        this.noticeListUrl = '/user/notice/queryActivityNoticePageList'
       
       /*************  我的奖品 *********************/
 

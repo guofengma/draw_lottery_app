@@ -152,5 +152,15 @@ export default class Storage {
     static getOrderAddress() {
       return this.getterFor('OrderAddress');
     }
+
+    // 存活动ID
+
+    static setActivityId(info) {
+      this.setterFor('activityId', info)
+    }
+
+    static getActivityId() {
+      return this.getterFor('activityId');
+    }
     
 }

@@ -1,5 +1,6 @@
-// components/top-bar/top-bar.js
+import WxParse from '../../libs/wxParse/wxParse.js';
 let { Tool, RequestFactory } = global
+
 Component({
   /**
    * 组件的属性列表
@@ -34,6 +35,9 @@ Component({
       let r = RequestFactory.noticeRequest(data);
       r.finishBlock = (req) => {
         console.log(req.responseObject)
+        let datas = req.responseObject.data
+        let html = datas.data[0].content
+        WxParse.wxParse('article', 'html', html, this, 5);
       };
       Tool.showErrMsg(r);
       r.addToQueue();
