@@ -34,3 +34,12 @@
   background:url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/delete-icon.png) no-repeat; 
   background-size: 36rpx;
 }
+.content{
+  margin-top: 20rpx;
+}
+.addressList{
+  padding-bottom: 120rpx;
+}
+.address-info-leftbar{
+  width: 100%;
+}

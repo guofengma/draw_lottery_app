@@ -9,16 +9,25 @@ Page({
     line:true,
     content:'', // 所在区域拼接结果
     navbar:['新增地址','修改地址'],
-    addressType:1, // 1新建地址 2修改地址
-    region:[],// 省市区的数组 
+    addressType:0, // 1新建地址 2修改地址
+    region:[],// 省市区的数组
     isChoose:false, // 是否选择为默认地址
   },
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: this.data.navbar[options.type]
+      title: this.data.navbar[options.type-1]
     })
+    if (options.address){
+      this.getEditAddressList(JSON.parse(options.address))
+    }
     this.setData({
-      addressType: options.type
+      addressType: options.type || ''
+    })
+  },
+  getEditAddressList(address){
+    this.setData({
+      content: address.province_code + address.area_code + address.city_code,
+      address: address
     })
   },
   pickerClicked(e) {
@@ -34,14 +43,15 @@ Page({
   formSubmit(e){
     let params = e.detail.value
     if (this.data.region[0]) {
-      params.provinceCode = this.data.region[0].zipcode;
+      params.provinceCode = this.data.region[0].name;
     }
     if (this.data.region[1]) {
-      params.cityCode = this.data.region[1].zipcode;
+      params.cityCode = this.data.region[1].name;
     }
     if (this.data.region[2]) {
-      params.areaCode = this.data.region[2].zipcode;
+      params.areaCode = this.data.region[2].name;
     }
+    params.defaultStatus = this.data.isChoose? 1:2
     if (!Tool.checkName(params.receiver)) {
       Tool.showAlert("收货人姓名长度需在2-16位之间");
       return
@@ -61,32 +71,25 @@ Page({
     this.requestAddUserAddress(params)
   },
   requestAddUserAddress(params) {
-    // let r = RequestFactory.addUserAddress(params);
+    let r = RequestFactory.addUserAddress(params);
     r.finishBlock = (req) => {
       //跳转到地址列表页面
       this.successCallBack("添加成功")
+
     };
     Tool.showErrMsg(r)
     r.addToQueue();
-  },
-  deleteItem(){
-    let params = {
-
-    }
-    let callBack = ()=>{
-      // let r = RequestFactory.addUserAddress(params);
-      // r.finishBlock = (req) => {
-      //   //跳转到地址列表页面
-      //   this.successCallBack("删除成功")
-      // };
-      // Tool.showErrMsg(r)
-      // r.addToQueue();
-    }
-    Tool.showComfirm('确认要删除该地址吗', callBack)
   },
   chooseClicked(){
     this.setData({
       isChoose: !this.data.isChoose
     })
-  }
+  },
+  successCallBack(title) {
+    Event.emit('updateAdressList');//发出通知
+    let callBack = () => {
+      Tool.navigationPop()
+    }
+    Tool.showSuccessToast(title, callBack)
+  }  
 })

@@ -3,8 +3,13 @@
 <top-bar/>
 <view class='addressList'>
   <block>
-    <view catchtap='addressLineClicked' data-index='{{0}}'>
-      <template is="address-info" data=''/>
+    <view class='flexR-sb whiteBg' catchtap='addressLineClicked'>
+      <view class='card-address-choose' data-index='{{0}}' wx:if='{{door==2}}'>
+        <image src='/img/choose-gray.png' mode='widthFix'></image>
+      </view>
+      <view  data-index='{{0}}' class='address-view'>
+        <template is="address-info" data=''/>
+      </view>
     </view>
   </block>
 

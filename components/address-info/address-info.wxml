@@ -5,18 +5,18 @@
     </view>
     <!--addressType 1为快递 2为自提  -->
     <view class='address-info-leftbar boxSize'>
-      <!-- <view class='no-address' wx:if='{{!hasData}}' >
+      <view class='no-address' wx:if='{{!hasData}}' >
         请选择一个收货地址
-      </view> -->
-      <!--姓名 电话 wx:else  -->
-      <view>
+      </view> 
+      <!--姓名 电话   -->
+      <view wx:else>
         <view class='flexR-sb consignee'>
-           <text>陈微微</text>
-           <text>18758328354</text>
+           <text>{{receiver}}</text>
+           <text>{{recevice_phone}}</text>
         </view>
       </view>
       <view class='address-content'>
-        <text class='red'>[默认地址]</text>11111{{addressInfo}}
+        <text class='red' wx:if='{{showDefault}}'>[默认地址]</text>{{addressInfo}}
       </view>
     </view>
   </view>

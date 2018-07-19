@@ -150,6 +150,6 @@ Component({
     }
   },
   ready: function () {
-    //this.getProvinceList()
+    this.getProvinceList()
   }
 })

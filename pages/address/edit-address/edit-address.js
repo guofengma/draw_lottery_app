@@ -2,11 +2,12 @@ let { Tool, RequestFactory, Event } = global
 
 Page({
   data: {
-  
+    addressList:[]
   },
 
   onLoad: function (options) {
-  
+    this.queryUserAddressList() 
+    Event.on('updateAdressList', this.queryUserAddressList, this)
   },
   onUnload: function () {
   
@@ -37,11 +38,12 @@ Page({
     // r.addToQueue();
   },
   editAddress(e) {
-    // let index = this.getAddressId(e).index
-    // let list = this.data.addressList[index]
-    // this.newAddress(list,2)
+    let index = this.getAddressId(e).index
+    let list = this.data.addressList[index]
+    this.newAddress(list,2)
   },
   newAddress(list, types=1) {
+    
     let page = '/pages/address/new-address/new-address?type=' + types
 
     if (types){
@@ -49,4 +51,18 @@ Page({
     }
     Tool.navigateTo(page)
   },
+  queryUserAddressList() {
+    let r = RequestFactory.queryUserAddressList();
+    r.finishBlock = (req) => {
+      if (req.responseObject.data.length > 0) {
+        this.setData({
+          addressList: req.responseObject.data
+        })
+      }
+    };
+    r.addToQueue();
+  },
+  setDefault(){
+
+  }
 })

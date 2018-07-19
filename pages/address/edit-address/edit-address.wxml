@@ -2,12 +2,12 @@
 
 <top-bar/>
 <view class='addressList'>
-  <block>
-    <view catchtap='addressLineClicked'>
-      <template is="address-info" data=''/>
+  <block wx:for='{{addressList}}' wx:key='unique'>
+    <view catchtap='addressLineClicked' class='content'>
+      <template is="address-info" data='{{...item}}'/>
       <view class='address-edit-choose flexR-sb whiteBg'>
-        <view class='choose-leftbar boxSize {{item.defaultStatus? "active":""}}' bindtap='setDefault' data-index='{{index}}'>
-          {{item.defaultStatus? '':"设为"}}默认地址
+        <view class='choose-leftbar boxSize {{item.default_status==1? "active":""}}' bindtap='setDefault' data-index='{{index}}'>
+          {{item.default_status==1? '':"设为"}}默认地址
         </view>
         <view class='choose-rightbar flexR'>
           <view class='edit' bindtap='editAddress' data-index='{{index}}'>编辑</view>
