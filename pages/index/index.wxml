@@ -8,7 +8,7 @@
   </view>
   <view class="home-inside">
     <view class="inputBox">
-      <input class="security-code" placeholder='请输入16位防伪码' bindinput="bindinputCode"></input>
+      <input class="security-code" placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
       <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">
@@ -47,24 +47,24 @@
   <view class="model-view-bg" wx:if="{{isShakeBox}}">
       <view class="shakeBox">
         <view class="shakeHeaderTitle">
-          恭喜你，中奖啦
+          {{isShowModelTitle}}
         </view>
         <view class="shakeContent">
-           <view class="shakeWzj" style='display:none;'>
+           <view class="shakeWzj" wx:if="{{isWzj}}">
             <image src="../../img/wzj.png"></image>
             <view class="shakeText">别灰心、么么哒、再接再厉！</view>
            </view>
-           <view class="cardZJL">
-              <image src="../../img/duoactive.png"></image>
-              <view class="shakeText" style="font-weight:blod;">“朵”字卡1张</view>
+           <view class="cardZJL" wx:if="{{iscardZJL}}">
+              <image src="{{iscardUrl}}"></image>
+              <view class="shakeText" style="font-weight:blod;">{{iscardName}}</view>
            </view>
-           <view class="hongbao" style='display:none;'>
+           <view class="hongbao" wx:if="{{ishongbao}}">
               <image src="../../img/duoactive.png"></image>
-              <view class="shakeText" style="font-weight:blod;">“朵”字卡1张</view>
+              <view class="shakeText" style="font-weight:blod;">{{ishongbaoName}}</view>
            </view>
-           <view class="" style='display:none;'>
-              <image src="../../img/duoactive.png"></image>
-              <view class="shakeText" style="font-weight:blod;">“朵”字卡1张</view>
+           <view class="Material" wx:if="{{isMaterial}}">
+              <image src="{{isMaterialUrl}}"></image>
+              <view class="shakeText" style="font-weight:blod;">{{isMaterialName}}</view>
            </view>
         </view>
         <view class="shakeBtnBox">

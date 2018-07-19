@@ -60,6 +60,12 @@ export default class Operation {
 
         // 公告
         this.noticeListUrl = '/user/notice/queryActivityNoticePageList'
+
+        //获取摇奖次数
+        this.shakeNumberUrl = '/user/activityCount/query'
+        
+        // 摇一摇开启
+        this.shakeStartUrl = '/user/securityCode/lottery'
       
       /*************  我的奖品 *********************/
 

@@ -79,6 +79,16 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().noticeListUrl;
     return this.request(url, params, '公告', true)
   }
+  // 查询摇奖次数
+  static shakeNumberRequest(params) {
+    let url = Operation.sharedInstance().shakeNumberUrl;
+    return this.request(url, params, '摇奖次数查询', true)
+  }
+  //摇一摇
+  static shakeStartRequest(params) {
+    let url = Operation.sharedInstance().shakeStartUrl;
+    return this.request(url, params, '摇一摇', true)
+  }
   /********************我的奖品*************************/
 
   static queryActivityWordCard(params) {

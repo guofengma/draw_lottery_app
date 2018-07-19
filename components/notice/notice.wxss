@@ -91,6 +91,10 @@
 .noticeBtnRight{
   float: right;
 }
+.noticeFalse{
+  background: #dddddd !important;
+  color: #999 !important;
+}
 .closeBtn{
   position: absolute;
   bottom:-188rpx;

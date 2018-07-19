@@ -15,10 +15,14 @@ Component({
     data: {
         isTrue: true,
         isNotice: false,
-        btnText: '下一条',
+        btnNext: '下一条',
+        btnPrev: '上一条',
+        isBtnFalse: true,
+        isClass: '',
         page: 1,
         noticeCountent: '',
-        noticeTitle: ''
+        noticeTitle: '',
+        totals: 0
     },
 
     /**
@@ -34,10 +38,26 @@ Component({
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
-              console.log(req.responseObject)
-              let datas = req.responseObject.data
-              if(datas.data[0] === '') {
+              console.log(req.responseObject.data)
+              let datas = req.responseObject.data;
+              let starts = datas.start;
+              let totals = datas.total;
+              this.setData({
+                totals: totals
+              })
+              // console.log(starts)
+              let isUndefined = datas.data[0]
+              if(datas.total < 1) {
                 console.log('没了')
+                this.setData({
+                  isBtnFalse:false,
+                  btnNext: '关闭'
+                }) 
+              } else {
+                console.log('有')
+                this.setData({
+                  isBtnFalse: true
+                }) 
               }
               Storage.setActivityId(datas.data[0].activity_id)
               let html = datas.data[0].content
@@ -45,17 +65,37 @@ Component({
                 noticeTitle: datas.data[0].title
               })
               WxParse.wxParse('article', 'html', html, this, 5);
+              if ((totals - starts) === 1) {
+                this.setData({
+                  btnNext: '关闭',
+                  isBtnFalse:false
+                })
+                return false
+              } else {
+                this.setData({
+                  btnNext: '下一条',
+                  isBtnFalse: true
+                })
+              } 
             };
             Tool.showErrMsg(r);
             r.addToQueue();
         },
         prevPage () {
-          this.data.page --
-          this.noticeRequestHttp()
+          if(this.data.page === 1){
+            
+          }else {
+            this.data.page--
+            this.noticeRequestHttp()
+          }
         },
         nextPage () {
-          this.data.page ++
-          this.noticeRequestHttp()
+          if(this.data.page === this.data.totals) {
+
+          } else {
+            this.data.page++
+            this.noticeRequestHttp()
+          }
         }
     },
     ready() {

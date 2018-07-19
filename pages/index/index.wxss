@@ -59,7 +59,7 @@
   font-size: 28rpx;
 }
 .draw-number{
-  width: 240rpx;
+  width: 280rpx;
   height: 30rpx;
   line-height: 30rpx;
   margin: 28rpx auto;
