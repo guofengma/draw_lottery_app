@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 16,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -134,7 +134,8 @@
 				{
 					"id": -1,
 					"name": "集卡",
-					"pathName": "pages/my/award/card/card"
+					"pathName": "pages/my/award/card/card",
+					"query": ""
 				}
 			]
 		}

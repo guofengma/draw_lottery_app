@@ -77,3 +77,8 @@
   background-color: #da2221;
   color: #fff;
 }
+.model-view-bg{
+  background: url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/succ-card.png) no-repeat;
+  background-size: 100% 100%;
+  background-color: rgba(0,0,0,.5); 
+}

@@ -61,17 +61,89 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().aliyunOSSUploadImage;
     return baseUrl + url
   }
+
+  /********************登陆*************************/
+
   // 天天签到  签到
   static signRequest(params) {
-    params.port = '8002';
     let url = Operation.sharedInstance().signUrl;
     return this.request(url, params, '签到' , true)
   }
+
   // 天天签到 签到列表
   static signListRequest(params) {
-    params.port = '8002';
     let url = Operation.sharedInstance().signListUrl;
     return this.request(url, params, '签到列表', true)
   }
+  
+  /********************我的奖品*************************/
+
+  static queryActivityWordCard(params) {
+    let url = Operation.sharedInstance().queryActivityWordCard;
+    return this.request(url, params, '字卡数量获取', true)
+  }
+
+  static configListCard(params) {
+    let url = Operation.sharedInstance().configListCard;
+    return this.request(url, params, '合成金朵', true)
+  }
+
+  static updateUserCheckedAddress(params) {
+    let url = Operation.sharedInstance().updateUserCheckedAddress;
+    return this.request(url, params, '合成字卡活动地址选择', true)
+  }
+
+  /******************** 地址 *************************/
+
+  static addUserAddress(params) {
+    let url = Operation.sharedInstance().addUserAddress;
+    return this.request(url, params, '新增地址', true)
+  }
+
+  static deleteUserAddress(params) {
+    let url = Operation.sharedInstance().deleteUserAddress;
+    return this.request(url, params, '删除地址', true)
+  }
+
+  static updateUserAddress(params) {
+    let url = Operation.sharedInstance().updateUserAddress;
+    return this.request(url, params, '修改地址', true)
+  }
+
+  static queryUserAddressList(params) {
+    let url = Operation.sharedInstance().queryUserAddressList;
+    let req = this.request(url, params, '获取地址列表', true);
+    req.preprocessCallback = (req, firstData) => {
+      let data = req.responseObject.data
+      data.forEach((item) => {
+        item.addressInfo = item.province_code + item.city_code + item.area_code + item.address
+        item.hasData = true
+      })
+    }
+    return req 
+  }
+
+  /********************获取省市区********************/
+
+  // 获取省
+  static getProvinceList() {
+    let url = Operation.sharedInstance().getProvinceList;
+    return this.request(url, { port: '8101' }, '获取省份');
+  }
+
+  // 获取市
+  static getCityList(params) {
+    params.port = '8101'
+    let url = Operation.sharedInstance().getCityList;
+    return this.request(url, params, '获取市');
+  }
+
+  // 获取区
+  static getAreaList(params) {
+    params.port = '8101'
+    let url = Operation.sharedInstance().getAreaList;
+    return this.request(url, params, '获取区');
+  }
+
 }
 

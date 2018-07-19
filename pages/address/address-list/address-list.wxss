@@ -11,3 +11,10 @@
 .address-info-leftbar{
   width: 100%;
 }
+.card-address-choose image{
+  width: 34rpx;
+  margin-left: 30rpx;
+}
+.address-view{
+  width: 100%;
+}

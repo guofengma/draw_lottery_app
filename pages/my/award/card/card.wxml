@@ -5,16 +5,16 @@
 <view class="card-content"> <!--card 灰色背景层-->
   <view class="card-inside"> <!--card 字卡存放层-->
     <view class="card-bgCard"><!--大图-->
-      <image src="/img/duoBig.png"></image>
+      <image src="{{activeImg}}"></image>
     </view>
     <view class="card-btnImg"> <!--小图按钮-->
       <block wx:for='{{datas}}' wx:key='unique'>
-        <view class="card-btn">
-        <image src="{{item.length? item.icon2:item.icon1}}"></image>
-        <view class="tipNumber" wx:if='{{item.length}}'>
-            x{{item.length}}
+        <view class="card-btn" catchtap='cardClicked' data-index='{{index}}'>
+          <image src="{{item.number? item.icon2:item.icon1}}"></image>
+          <view class="tipNumber" wx:if='{{item.number}}'>
+              x{{item.number}}
+          </view>
         </view>
-      </view>
       </block>
       <!-- <view class="card-btn">
         <image src="/img/duo.png"></image>
@@ -27,9 +27,11 @@
       </view> -->
     </view>
     <view class='flexR'>
-      <view class="card-fuseBtn"> 立即合成</view>
-      <view class='address-btn'>地址选择</view>
+      <view class="card-fuseBtn {{disabled? 'cardActive':''}}"  catchtap='configListCard'> 立即合成</view>
+      <view class='address-btn' wx:if='{{showBtn}}'>地址选择</view>
     </view>
   </view>
 </view>
 <bottom-bar index="1"></bottom-bar>
+
+<view class='model-view-bg' catchtap='modelClicked' wx:if='{{show}}'></view>
