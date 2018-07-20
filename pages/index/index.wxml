@@ -1,4 +1,4 @@
-<top-bar></top-bar>
+<top-bar id='topBar'></top-bar>
 <sign-in isTrue='{{isTrue}}' bind:closeView='closeView'></sign-in>
 <notice wx:if="{{isNotice}}" bind:showNotice='showNotice'></notice>
 <view class="home-page">
