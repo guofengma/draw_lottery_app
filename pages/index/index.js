@@ -149,23 +149,35 @@ Page({
             let arrLength = arrNumber.length;
             let arr = [];
             let num;
-            arrNumber.forEach((res, index, array) => {
-                    let t = Math.floor(index / 5);
-                    if (num !== t) {
-                        num = t;
-                        arr[t] = new Array();
-                    }
-                    arr[t].push({
-                        index: index + 1,
-                        tphone: res.telephone
-                    });
-                    this.setData({
-                        winnerBlock: arr
-                    })
-                })
-                // console.log(arr)
+            arrNumber.forEach((item,index)=>{
+              item.index = index+1
+            })
+            let result = [];
+            for (let i = 0; i < arrNumber.length;i+=5){
+              result.push(arrNumber.slice(i, i + 5));
+            }
+            this.setData({
+              myresult: result
+            })
+            console.log(result)
+            // arrNumber.forEach((res, index, array) => {
+            //         let t = Math.floor(index / 5);
+            //         if (num !== t) {
+            //             num = t;
+            //             arr[t] = new Array();
+            //         }
+            //         arr[t].push({
+            //             index: index + 1,
+            //             tphone: res.telephone
+            //         });
+            //         this.setData({
+            //             winnerBlock: arr
+            //         })
+            //     })
+            //     // console.log(arr)
 
-            console.log(this.data.winnerBlock)
+            // console.log(this.data.winnerBlock)
+
         };
         Tool.showErrMsg(r);
         r.addToQueue();
