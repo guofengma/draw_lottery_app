@@ -40,7 +40,8 @@ Page({
     imgUrl:"https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/",
     activityId:1,
     show:false,
-    showBtn:false,
+    showBtn: false,
+    showBtn2:false
   },
   onLoad: function (options) {
     this.setData({
@@ -106,6 +107,14 @@ Page({
     }
     let r = RequestFactory.configListCard(params);
     r.finishBlock = (req) => {
+      this.tipsImg()
+      let { datas } = this.data
+      if (datas[0].number == 0) {
+        this.setData({
+          showBtn2: true
+        })
+      }
+      this.queryActivityWordCard()
       this.modelClicked()
     };
     Tool.showErrMsg(r)
@@ -117,6 +126,9 @@ Page({
     })
   },
   chooseAddress(){
+    this.setData({
+      showBtn2: false
+    })
     Tool.navigateTo('/pages/address/address-list/address-list?door=2')
   },
   tipsImg(){

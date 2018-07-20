@@ -107,7 +107,7 @@ Page({
     didLogin() { // 获取 token
         this.selectComponent("#topBar").getActivtyId()
         this.setData({
-            isAuthorize: Storage.didAuthorize() || '',
+            isAuthorize: Storage.didAuthorize() || false,
         })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
