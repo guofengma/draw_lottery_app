@@ -74,6 +74,9 @@ export default class Operation {
         
         // 摇一摇开启
         this.shakeStartUrl = '/user/securityCode/lottery'
+
+        // 获奖名单
+        this.homeWinnersUrl = '/user/securitycodeUsed/queryWinList'
       
       /*************  我的奖品 *********************/
 
