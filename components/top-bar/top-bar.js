@@ -5,7 +5,8 @@ Component({
 
   },
   data: {
-    activityId:''
+    activityId:'',
+    userId:''
   },
   methods: {
     getActivtyId(){

@@ -4,13 +4,18 @@
 
 .bottom-content{
   font-size: 24rpx;
+  padding-top:30rpx;
 }
 .btn-view{
-  width: 140rpx;
-	height: 50rpx;
+  height: 100%;
+  width: 100%;
 	border-radius: 25rpx;
 	border: 1rpx  solid #dddddd;
   margin-left: 30rpx;
+}
+.btn-s-view{
+  width: 140rpx;
+	height: 50rpx;
 }
 .feedback-content{
   padding:0 30rpx;
@@ -36,7 +41,7 @@
   width: 80rpx;
 }
 .content{
-  margin-bottom: 60rpx;
+  margin-bottom: 30rpx;
   margin-top: 24rpx;
   color: #666;
 }

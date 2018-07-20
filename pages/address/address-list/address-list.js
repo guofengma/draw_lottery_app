@@ -4,10 +4,9 @@ Page({
   data: {
     addressList:[],
     door:0, // 2 朵地址
-    showDefault:true,
   },
   onLoad: function (options) {
-    let showDefault = this.data.showDefault
+    let showDefault = this.data.showDefault ||''
     if (options.door==2){
       showDefault = false
     }
@@ -33,7 +32,8 @@ Page({
   goPage(){
     Tool.navigateTo('/pages/address/edit-address/edit-address')
   },
-  updateOrderAddress(e){
+  updateOrderAddress(address){
+    address.showDefault = false
     Storage.setOrderAddress(address)
     Event.emit('updateOrderAddress')
     Tool.navigationPop()
@@ -55,8 +55,12 @@ Page({
       sort:str
     }
     let r = RequestFactory.queryUserAddressList(params);
-    r.finishBlock = (req) => {
-      if (req.responseObject.data.length > 0) {
+    r.finishBlock = (req) => { 
+      let datas = req.responseObject.data
+      if (datas.length > 0) {
+        datas.forEach((item)=>{
+          item.showDefault= item.default_status==1? true:false
+        })
         this.setData({
           addressList: req.responseObject.data
         })

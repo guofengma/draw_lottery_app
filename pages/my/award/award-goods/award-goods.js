@@ -1,4 +1,4 @@
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Storage } = global
 Page({
   data: {
     lists: [],
@@ -7,14 +7,18 @@ Page({
     pageSize: 5, // 每次加载请求的条数 默认10 
     params: {},
     selectArr:{}, //保存选中的产品规格
+    activityId:'', //活动id
   },
   onLoad: function (options) {
+    let activityId = Storage.getActivityId() || 1
     let params = {
       pageSize: this.data.pageSize,
-      page: this.data.currentPage
+      page: this.data.currentPage,
+      activityId: activityId
     }
     this.setData({
-      params: params
+      params: params,
+      activityId: activityId
     })
     this.querySecuritycodeUsedList(params)
   },
@@ -62,6 +66,7 @@ Page({
     })
   },
   submitClicked(){
+    Storage.setOrderList(this.data.selectArr)
     Tool.redirectTo('/pages/order-confirm/order-confirm?id=' + this.data.selectArr.id)
   }
 })

@@ -616,14 +616,19 @@ export default class Tool {
     // 格式化服务器端返回的cookie
 
     static formatCookie(cookies) {
+      //console.log(cookies)
       let __cookies = [];
       (cookies.match(/([\w\-.]*)=([^\s]+);/g) ||[]).forEach((str) => {
+        console.log(str)
         if (str.indexOf('Path=/') !== 0) {
           __cookies.push(str);
         } else if (str.indexOf('token2') != -1){
           let token2 = str.slice(7)
           __cookies.push(token2);
-        }
+        } else if (str.indexOf('SESSION') != -1) {
+          let SESSION = str.slice(7)
+          __cookies.push(SESSION);
+        } 
       });
       //  最后发送的
       let myCookie = __cookies.join('')
@@ -716,6 +721,12 @@ export default class Tool {
       }
       global.Event.emit('refreshMemberInfoNotice');
     }
-
+    
+    static getCurrentPageUrl() {
+      let pages = getCurrentPages()    //获取加载的页面
+      let currentPage = pages[pages.length - 1]    //获取当前页面的对象
+      let url = currentPage.route    //当前页面url
+      return url
+    }
 }
 

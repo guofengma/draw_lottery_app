@@ -3,7 +3,7 @@
 <view class='order-confirm'>
   <top-bar/>
   <view class='address-line flexR-sb' catchtap='chooseAddress'>
-    <template is="address-info" data='{{showImgs:true}}'/>
+    <template is="address-info" data='{{showImgs:true,...address}}'/>
     <image src='/img/common-accessory-icon.png' mode='widthFix' class='jiantou'></image>
   </view>
 
@@ -11,13 +11,13 @@
 
   <block>
     <view class='info  grayBg boxSize flexR-sb'>
-      <image src='/img/default-user.png'></image>
+      <image src='{{list.img_url}}'></image>
       <view class='right'>
-        <view>清清裤</view>
-        <view>分类：时间段还是机顶盒</view>
+        <view>{{list.award_name}}</view>
+        <view>描述：{{list.description}}</view>
         <view class='yellow'>发货时间：承诺24小时</view>
-        <view>中奖码：20221211212121</view>
-        <view>中奖时间：2017-12-12 14:14:14</view>
+        <view>中奖码：{{list.securitycode}}</view>
+        <view>中奖时间：{{list.createTime}}</view>
       </view>
     </view>
   </block>
@@ -37,7 +37,7 @@
     </view>
   </view>
   <view class='bottomBar fixed-bottom whiteBg'>
-    <view class='sub-btn redBg fr font-26 flexR'>提交订单</view>
+    <view class='sub-btn redBg fr font-26 flexR' catchtap='makeOrder'>提交订单</view>
   </view>
 
 </view>

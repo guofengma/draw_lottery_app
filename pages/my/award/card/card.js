@@ -1,4 +1,4 @@
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Storage } = global
 Page({
   data: {
     datas:[

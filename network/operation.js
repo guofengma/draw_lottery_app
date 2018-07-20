@@ -96,6 +96,10 @@ export default class Operation {
         // 我的实物列表
 
         this.querySecuritycodeUsedList = '/user/securitycodeUsed/querySecuritycodeUsedList'
+
+        // 提交实物订单
+
+        this.makeOrder ='/user/securityCode/save'
       
       /*************  地址 *********************/
 

@@ -159,6 +159,12 @@ export default class RequestFactory {
     return req 
   }
 
+  // makeOrder
+  static makeOrder(params) {
+    let url = Operation.sharedInstance().makeOrder;
+    return this.request(url, params, '提交订单', true)
+  }
+
   /********************获取省市区********************/
 
   // 获取省
