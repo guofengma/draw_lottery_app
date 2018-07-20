@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-let { Tool, RequestFactory, Storage } = global
+let { Tool, RequestFactory, Storage, Event } = global
 Page({
     data: {
         motto: 'Hello World',
@@ -17,7 +17,7 @@ Page({
         isShakeBox: false,
         isNotice: false,
         code: '',
-        userId: '',
+        isAuthorize: false,
         visiable: false,
         isWzj: false,
         iscardZJL: false,
@@ -32,9 +32,7 @@ Page({
     },
     onLoad: function() {
         this.getIsNumberHttp()
-        this.setData({
-            userId: Storage.memberId() || '',
-        })
+        Event.on('didLogin',this.didLogin,this);
     },
     onReady: function() {
 
@@ -43,6 +41,12 @@ Page({
         this.setData({
             code: e.detail.value
         })
+    },
+    didLogin(){
+      this.selectComponent("#topBar").getActivtyId()
+      this.setData({
+        isAuthorize: Storage.didAuthorize() || '',
+      })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let data = {
@@ -202,21 +206,33 @@ Page({
         wx.startAccelerometer()
     },
     closeView(e) { // 显示天天签到
-        this.setData({
+        if (this.getIsLogin()) {
+          this.setData({
             isTrue: !this.data.isTrue
-        })
+          })
+        } 
     },
     showNotice: function(e) { // 显示公告
-        this.selectComponent("#topBar").getActivtyId()
+        //this.selectComponent("#topBar").getActivtyId()
         this.setData({
             isNotice: !this.data.isNotice
         })
     },
     goPage() {
-        Tool.navigateTo('/pages/activity-detail/activity-detail')
+      Tool.navigateTo('/pages/activity-detail/activity-detail')
     },
     awardClicked() {
+      if (this.getIsLogin()) {
         Tool.navigateTo('/pages/my/my')
+      }  
+    },
+    getIsLogin(){
+      let cookies = Storage.getUserCookie() || false
+      if (!cookies){
+        Tool.navigateTo('/pages/login/login')
+        return false
+      }
+      return true
     },
     getPhoneNumber(e) {
         if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
@@ -246,12 +262,13 @@ Page({
             iv: this.data.iv,
             openId: Storage.getWxOpenid() || '',
             name: this.data.userInfo.nickName,
-            headImgUrl: this.data.userInfo.avatarUrl
+            headImgUrl: this.data.userInfo.avatarUrl,
+            loginAddress:'',
+            sex: this.data.userInfo.gender
         }
         let r = global.RequestFactory.appWechatLogin(params);
         r.finishBlock = (req) => {
             Tool.loginOpt(req)
-            console.log(req)
         }
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -272,5 +289,8 @@ Page({
         })
         Storage.setWxUserInfo(userInfo)
         this.requetLogin()
-    }
+    },
+    onUnload: function () {
+      Event.off('didLogin', this.didLogin);
+    },
 })

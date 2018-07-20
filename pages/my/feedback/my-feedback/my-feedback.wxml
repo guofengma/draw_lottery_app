@@ -17,7 +17,7 @@
               <view class='ellipsis-3 reply-content '>{{item.answer}}</view>
             </view>
             <view class='bottom-content flexR-sb gray'>
-              <view>问题编号：{{item.CODE}} 物流问题</view>
+              <view>问题编号：{{item.code}} {{item.d_value}}</view>
               <view class='flexR-sb types'>
                 <view class='type-state'>{{item.typeName}}</view>
                 <view class='btn-s-view'>

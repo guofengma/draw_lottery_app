@@ -1,5 +1,5 @@
 import WxParse from '../../libs/wxParse/wxParse.js';
-let { Tool, RequestFactory, Storage } = global
+let { Tool, RequestFactory } = global
 
 Component({
     /**
@@ -59,7 +59,7 @@ Component({
                   isBtnFalse: true
                 }) 
               }
-              Storage.setActivityId(datas.data[0].activity_id)
+              // Storage.setActivityId(datas.data[0].activity_id)
               let html = datas.data[0].content
               this.setData({
                 noticeTitle: datas.data[0].title

@@ -30,7 +30,11 @@ App({
         let code = res.code
         if (code) {
           this.globalData.code = code;
-          this.getSystemInfo();
+          // 启动页结束以后 调用接口
+          let that = this
+          setTimeout(function(){
+            that.getSystemInfo();
+          }, 3500)
         }
       }
     })
@@ -60,7 +64,8 @@ App({
   toLogin(code) {
     if (!code) return
     let params = {
-      code: code
+      code: code,
+      loginAddress:''
     }
     let r = global.RequestFactory.getWeChatOpenId(params);
     r.finishBlock = (req) => {

@@ -4,7 +4,7 @@ Page({
     lists:[],
     totalPage: '', // 页面总页数
     currentPage: 1, // 当前的页数
-    pageSize: 5, // 每次加载请求的条数 默认10 
+    pageSize: 10, // 每次加载请求的条数 默认10 
     params: {},
   },
   onLoad: function (options) {

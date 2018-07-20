@@ -68,12 +68,12 @@ export default class Storage {
     }
 
     //登陆标记
-    static didLogin() {
-        return this.getterFor('didLogin');
+    static didAuthorize() {
+      return this.getterFor('authorize');
     }
 
-    static setDidLogin(didLogin) {
-        this.setterFor('didLogin', didLogin);
+    static setAuthorize(didLogin) {
+      this.setterFor('authorize', didLogin);
     }
 
     //当前登录用户Id

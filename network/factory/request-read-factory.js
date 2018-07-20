@@ -21,16 +21,16 @@ export default class RequestFactory {
     params.url = url
 
     // 手机型号
-    params.device = sysInfo.model
+    params.mobile = sysInfo.model
 
     // 手机系统类型
-    params.deviceType = 3
+    params.systemType = 3
 
     // 微信版本
-    params.wechatVersion = sysInfo.version
+    params.wxVersion = sysInfo.version
 
     // 系统版本
-    params.deviceVersion = sysInfo.system
+    params.systemVersion	 = sysInfo.system
 
     let req = new Request(params);
 
@@ -56,6 +56,11 @@ export default class RequestFactory {
   static exitLogin(params) {
     let url = Operation.sharedInstance().exitLogin;
     return this.request(url, params, '退出登录', true);
+  }
+  
+  static getActivityId(params) {
+    let url = Operation.sharedInstance().getActivityId;
+    return this.request(url, params, '获取活动编码', true);
   }
 
   // 上传图片的地址 
@@ -158,11 +163,22 @@ export default class RequestFactory {
     }
     return req 
   }
+  
+  /********************提交订单********************/
 
-  // makeOrder
   static makeOrder(params) {
     let url = Operation.sharedInstance().makeOrder;
     return this.request(url, params, '提交订单', true)
+  }
+
+  static canMakeSureOrder(params) {
+    let url = Operation.sharedInstance().canMakeSureOrder;
+    return this.request(url, params, '提交订单', true)
+  }
+
+  static canMakeSureOrder(params) {
+    let url = Operation.sharedInstance().canMakeSureOrder;
+    return this.request(url, params, '获取奖项是否可以申领', true)
   }
 
   /********************获取省市区********************/

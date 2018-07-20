@@ -1,10 +1,10 @@
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Event } = global
 Page({
   data: {
     currentTab:0,
     totalPage: '', // 页面总页数
     currentPage: 1, // 当前的页数
-    pageSize: 3, // 每次加载请求的条数 默认10 
+    pageSize: 10, // 每次加载请求的条数 默认10 
     params: {},
     lists: []
   },
@@ -17,7 +17,8 @@ Page({
     this.setData({
       params: params
     })
-    this.queryByCreateUserList(params)
+    this.queryByCreateUserList()
+    Event.emit('updateFeedback', this.queryByCreateUserList,this)
   },
   swichNav: function (e) {
     let cur = e.target.dataset.current;
@@ -38,8 +39,8 @@ Page({
       this.queryByCreateUserList(params)
     }
   },
-  queryByCreateUserList(params) {
-    let r = RequestFactory.queryByCreateUserList(params);
+  queryByCreateUserList() {
+    let r = RequestFactory.queryByCreateUserList(this.data.params);
     let { lists } = this.data
     r.finishBlock = (req) => {
       let datas = req.responseObject.data

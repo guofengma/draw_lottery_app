@@ -47,6 +47,7 @@ Page({
       Event.emit('updateAdressList')
       Tool.navigationPop()
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   },
   queryUserAddressList() {
@@ -66,6 +67,7 @@ Page({
         })
       }
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   },
   onUnload: function () {

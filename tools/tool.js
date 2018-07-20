@@ -616,10 +616,8 @@ export default class Tool {
     // 格式化服务器端返回的cookie
 
     static formatCookie(cookies) {
-      //console.log(cookies)
       let __cookies = [];
       (cookies.match(/([\w\-.]*)=([^\s]+);/g) ||[]).forEach((str) => {
-        console.log(str)
         if (str.indexOf('Path=/') !== 0) {
           __cookies.push(str);
         } else if (str.indexOf('token2') != -1){
@@ -688,8 +686,7 @@ export default class Tool {
         }
         if (req.responseObject.code==210){
           callBack =()=>{
-            let page = global.Storage.getWxOpenid() ? '/pages/login/login-wx/login-wx' :'/pages/login/login'
-            
+            let page ='/pages/login/login'           
             this.navigateTo(page+'?isBack='+true)
           }
         }
@@ -717,11 +714,14 @@ export default class Tool {
       global.Event.emit('didLogin');
       global.Storage.setWxOpenid(req.responseObject.data.openId)
       if (req.responseObject.data.id){
+        global.Storage.setAuthorize(true)
         global.Storage.setMemberId(req.responseObject.data.id)
       }
       global.Event.emit('refreshMemberInfoNotice');
     }
     
+    // 获取当前的路径
+
     static getCurrentPageUrl() {
       let pages = getCurrentPages()    //获取加载的页面
       let currentPage = pages[pages.length - 1]    //获取当前页面的对象

@@ -101,6 +101,7 @@ Page({
       r.finishBlock = (req) => {
         this.successCallBack("删除成功")
       };
+      Tool.showErrMsg(r)
       r.addToQueue();
     }
     Tool.showComfirm('确认删除该地址吗?', callBack)

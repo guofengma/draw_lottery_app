@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event } = global
+let { Tool, RequestFactory, Event, Storage } = global
 Page({
   data: {
     url:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/',
@@ -11,7 +11,9 @@ Page({
     ]
   },
   onLoad: function (options) {
-
+    this.setData({
+      userInfos: Storage.getUserAccountInfo() || ''
+    })
   },
   cellClicked(e){
     let page = e.currentTarget.dataset.page
@@ -19,10 +21,9 @@ Page({
   },
   logout(){
     let callBack = () => {
-      // exitLogin
       let r = global.RequestFactory.exitLogin();
       r.finishBlock = (req) => {
-        Tool.redirectTo('/pages/index/index')
+        Tool.navigationPop()
         Storage.setUserCookie(null)
         Storage.setMemberId(null)
         Event.emit('didLogin');

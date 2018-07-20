@@ -31,6 +31,10 @@ export default class Operation {
 
         this.exitLogin  ='/user/userLogin/exitLogin'
 
+        // 获取活动id 
+
+        this.getActivityId ='/user/activity/get'
+
         // 上传图片的地址
 
         this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUploadImage'
@@ -100,6 +104,10 @@ export default class Operation {
         // 提交实物订单
 
         this.makeOrder ='/user/securityCode/save'
+
+        // 获取奖项是否可以申领
+
+        this.canMakeSureOrder = '/user/securityCode/open'
       
       /*************  地址 *********************/
 
