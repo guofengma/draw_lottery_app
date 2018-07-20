@@ -6,7 +6,7 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        isNotice: Boolean
+      isNotice:Boolean
     },
 
     /**
@@ -38,6 +38,9 @@ Component({
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
+              if (req.responseObject.data === null) {
+                return
+              } else {
               console.log(req.responseObject.data)
               let datas = req.responseObject.data;
               let starts = datas.start;
@@ -80,9 +83,10 @@ Component({
             };
             Tool.showErrMsg(r);
             r.addToQueue();
+            }
         },
         prevPage () {
-          if(this.data.page === 1){
+          if(this.data.totals === 1){
             
           }else {
             this.data.page--
@@ -91,7 +95,7 @@ Component({
         },
         nextPage () {
           if(this.data.page === this.data.totals) {
-
+            this.showNotice()
           } else {
             this.data.page++
             this.noticeRequestHttp()

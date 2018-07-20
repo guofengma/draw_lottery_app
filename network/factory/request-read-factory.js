@@ -107,6 +107,11 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().shakeStartUrl;
     return this.request(url, params, '摇一摇', true)
   }
+  //中奖公告
+  static winnerRequest(params) {
+    let url = Operation.sharedInstance().homeWinnersUrl;
+    return this.request(url, params, '获奖名单', true)
+  }
   /********************我的奖品*************************/
 
   static queryActivityWordCard(params) {

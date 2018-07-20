@@ -17,13 +17,14 @@
   margin: 0rpx auto;
   border: none;
   border-radius: 10px;
-  margin-top: 350rpx;
-  padding-bottom: 150rpx;
+  margin-top: 500rpx;
+  padding-bottom: 313rpx;
 }
 .notice-Header{
   position: relative;
-  height: 181rpx;
-  background: #da2221;
+  height: 202rpx;
+  background:url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/noticebg.png') no-repeat center center;
+  background-size:cover;
   border-radius:8px 8px 0px 0px; 
 }
 .notice-people{
@@ -39,7 +40,7 @@
 }
 .notice-Title{
   display: block;
-  line-height: 181rpx;
+  line-height: 202rpx;
   text-align: center;
   color: #fff;
   font-size: 36rpx;
@@ -48,7 +49,7 @@
   height: 920rpx;
   background: #fff;
   border: none;
-  border-radius: 8rpx;
+  border-radius: 0 0 8rpx 8rpx;
 }
 .contentHeader{
   height: 77rpx;

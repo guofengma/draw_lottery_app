@@ -1,7 +1,13 @@
 <top-bar id='topBar'></top-bar>
 <sign-in isTrue='{{isTrue}}' bind:closeView='closeView'></sign-in>
 <notice wx:if="{{isNotice}}" bind:showNotice='showNotice'></notice>
+<audio id="myAudio" style='display:none'></audio>
+<audio id="myAudioShake" style='display:none'></audio>
 <view class="home-page">
+<view class="myAudio">
+  <image wx:if="{{isStop}}" animation="{{animationData}}" src="../../img/action.png" class="an-c an-r an-t animated rotate" bindtap='onStopbgMusic'></image>
+  <image wx:else src="../../img/stop.png" bindtap='onActionbgMusic'></image>
+</view>
   <view class="home-tree"></view>
   <view class="home-Notice" catchtap='showNotice'>
   <image src="../../img/Notice.png"></image>
@@ -16,26 +22,34 @@
     </view>
     <view class="home-winners">
         <view class="winners-btn">获奖名单</view>
-        <view class="winners-content">
-          <view class="text">
-            1、获奖名单 <view class="text-width"></view>  138****8888
+          <view class="winners-content">
+            <!-- <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
+              <view class="text">
+                {{index+1}}、获奖名单 <view class="text-width"></view>  {{item.telephone}}
+              </view>
+            </block> -->
+            <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2500">
+                <swiper-item>
+                  <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
+                    <view class="text">
+                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
+                    </view>
+                    <view class="text">
+                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
+                    </view>
+                      <view class="text">
+                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
+                    </view>
+                      <view class="text">
+                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
+                    </view>
+                      <view class="text">
+                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
+                    </view>
+                  </block>
+                </swiper-item>
+            </swiper> 
           </view>
-          <view class="text">
-            2、获奖名单 <view class="text-width"></view>  138****8888
-          </view>
-          <view class="text">
-            3、获奖名单 <view class="text-width"></view>  138****8888
-          </view>
-          <view class="text">
-            4、获奖名单 <view class="text-width"></view>  138****8888
-          </view>
-          <view class="text">
-            5、获奖名单 <view class="text-width"></view>  138****8888
-          </view>
-          <view class="text">
-            6、获奖名单 <view class="text-width"></view>  138****8888
-          </view>
-        </view>
     </view>    
   </view>
 
@@ -63,22 +77,22 @@
             <image src="../../img/wzj.png"></image>
             <view class="shakeText">别灰心、么么哒、再接再厉！</view>
            </view>
-           <view class="cardZJL" wx:if="{{iscardZJL}}">
+           <view class="cardZJL" wx:if="{{iscardZJL}}"> <!--字卡-->
               <image src="{{iscardUrl}}"></image>
               <view class="shakeText" style="font-weight:blod;">{{iscardName}}</view>
            </view>
-           <view class="hongbao" wx:if="{{ishongbao}}">
+           <view class="hongbao" wx:if="{{ishongbao}}"> <!--红包-->
               <image src="../../img/duoactive.png"></image>
               <view class="shakeText" style="font-weight:blod;">{{ishongbaoName}}</view>
            </view>
-           <view class="Material" wx:if="{{isMaterial}}">
+           <view class="Material" wx:if="{{isMaterial}}"> <!--实物-->
               <image src="{{isMaterialUrl}}"></image>
               <view class="shakeText" style="font-weight:blod;">{{isMaterialName}}</view>
            </view>
         </view>
         <view class="shakeBtnBox">
           <view class="shakeBtn" bindtap="closeBindshakeBox">继续摇奖</view>
-          <view class="shakeBtn shakeBtnRight">查看奖品</view>
+          <view class="shakeBtn shakeBtnRight" catchtap='awardClicked'>查看奖品</view>
         </view>
       </view>
   </view>
