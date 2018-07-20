@@ -149,22 +149,21 @@ Page({
             let arrLength = arrNumber.length;
             let arr = [];
             let num;
+            let t
             arrNumber.forEach((res, index, array) => {
-                    let t = Math.floor(index / 5);
-                    if (num !== t) {
-                        num = t;
-                        arr[t] = new Array();
-                    }
-                    arr[t].push({
-                        index: index + 1,
-                        tphone: res.telephone
-                    });
-                    this.setData({
-                        winnerBlock: arr
-                    })
-                })
-                // console.log(arr)
-
+                t = Math.floor(index / 5);
+                if (num !== t) {
+                    num = t;
+                    arr[t] = new Array();
+                }
+                arr[t].push({
+                    index: index + 1,
+                    tphone: res.telephone
+                });
+              })
+              this.setData({
+                winnerBlock: arr
+              })
             console.log(this.data.winnerBlock)
         };
         Tool.showErrMsg(r);

@@ -29,15 +29,12 @@
               </view>
             </block> -->
             <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2500">
-                <swiper-item>
-                  <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
-                    <view class="text">
+                <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
+                  <swiper-item>
+                    <view class="text" wx:for="{{item}}" wx:for-index="index" wx:key="n" wx:for-item="item">
                       {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
                     </view>
-                    <view class="text">
-                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
-                    </view>
-                      <view class="text">
+                    <!-- <view class="text">
                       {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
                     </view>
                       <view class="text">
@@ -46,8 +43,11 @@
                       <view class="text">
                       {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
                     </view>
-                  </block>
+                      <view class="text">
+                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
+                    </view> -->
                 </swiper-item>
+                </block>
             </swiper> 
           </view>
     </view>    
