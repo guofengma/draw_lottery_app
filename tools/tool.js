@@ -711,13 +711,12 @@ export default class Tool {
       let cookies = req.header['Set-Cookie']
       if (cookies) this.formatCookie(cookies)
       global.Storage.setUserAccountInfo(req.responseObject.data)
-      global.Event.emit('didLogin');
       global.Storage.setWxOpenid(req.responseObject.data.openId)
       if (req.responseObject.data.id){
         global.Storage.setAuthorize(true)
         global.Storage.setMemberId(req.responseObject.data.id)
       }
-      global.Event.emit('refreshMemberInfoNotice');
+      global.Event.emit('didLogin');
     }
     
     // 获取当前的路径

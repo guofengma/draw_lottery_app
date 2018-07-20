@@ -103,7 +103,7 @@ Page({
     didLogin() {
         this.selectComponent("#topBar").getActivtyId()
         this.setData({
-            isAuthorize: Storage.didAuthorize() || '',
+            isAuthorize: Storage.didAuthorize() || false,
         })
     },
     SecurityCodeRequestHttp() { // 防伪码验证

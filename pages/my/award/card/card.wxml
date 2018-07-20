@@ -16,29 +16,19 @@
           </view>
         </view>
       </block>
-      <!-- <view class="card-btn">
-        <image src="/img/duo.png"></image>
-      </view>
-      <view class="card-btn">
-        <image src="/img/duo.png"></image>
-      </view>
-      <view class="card-btn">
-        <image src="/img/duo.png"></image>
-      </view> -->
     </view>
     <view class='flexR'>
       <view class="card-fuseBtn {{disabled? 'cardActive':''}}"  catchtap='configListCard'> 立即合成</view>
-      <view class='address-btn' wx:if='{{showBtn}}' catchtap='chooseAddress'>地址选择</view>
+      <view wx:if='{{showBtn}}' class='big-view-1'>
+        <view animation="{{animationData}}" class='imgViews' wx:if='{{showBtn2}}'>
+          <image src='/img/clicked.png' mode='widthFix' style='width:100rpx'></image>
+        </view>
+        <view class='address-btn' catchtap='chooseAddress'>地址选择</view>
+      </view>
     </view>
   </view>
 </view>
 <bottom-bar index="1"></bottom-bar>
 
-<view class='model-view-bg' catchtap='modelClicked' wx:if='{{show}}'></view>
+<view class='model-view-bg model-view-bg-1' catchtap='modelClicked' wx:if='{{show}}'></view>
 
-
-<!-- <view animation="{{animationData}}">
-  <image src='/img/clicked.png' mode='widthFix' style='width:100rpx'></image>
-</view>
-
-<view class='model-view-bg' catchtap='modelClicked' wx:if='{{show}}'></view> -->
