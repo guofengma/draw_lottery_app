@@ -10,7 +10,8 @@ Component({
   methods: {
     getActivtyId(){
       this.setData({
-        activityId: Storage.getActivityId() || ''
+        activityId: Storage.getActivityId() || '',
+        userId: Storage.memberId() || '',
       })
     }
   },

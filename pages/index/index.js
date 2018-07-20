@@ -207,6 +207,7 @@ Page({
         })
     },
     showNotice: function(e) { // 显示公告
+        this.selectComponent("#topBar").this.getActivtyId()
         this.setData({
             isNotice: !this.data.isNotice
         })
