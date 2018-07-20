@@ -55,8 +55,8 @@
 
   <view class="home-tabar flexR">
     <view class="home-tabar-btn" catchtap='goPage'>活动详情</view>
-    <block wx:if='{{!userId}}'>
-      <button class='home-tabar-btn home-btn-borders' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信登陆</button>
+    <block wx:if='{{!isAuthorize}}'>
+      <button class='home-tabar-btn home-btn-borders' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">我的奖品</button>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">天天签到</button>
     </block>
     <block wx:else>

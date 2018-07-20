@@ -1,4 +1,4 @@
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Storage } = global
 Page({
   data: {
     lists:[],
@@ -8,12 +8,15 @@ Page({
     params: {},
   },
   onLoad: function (options) {
+    let activityId = Storage.getActivityId() || 1
     let params = {
       pageSize: this.data.pageSize,
-      page: this.data.currentPage
+      page: this.data.currentPage,
+      activityId: activityId
     }
     this.setData({
-      params: params
+      params: params,
+      activityId: activityId
     })
 
     this.queryActivityRedPackageList(params)

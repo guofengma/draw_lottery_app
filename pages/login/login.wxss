@@ -1,0 +1,16 @@
+.logo-view{
+  width: 158rpx;
+	border-radius: 20rpx;
+  overflow: hidden;
+  margin:0 auto;
+  margin-top:54rpx;
+  margin-bottom: 200rpx;
+}
+
+.logo-view image{
+  width: 100%;
+}
+
+.font-26{
+  text-align: center;
+}

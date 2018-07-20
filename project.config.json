@@ -136,6 +136,12 @@
 					"name": "集卡",
 					"pathName": "pages/my/award/card/card",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "微信登陆",
+					"pathName": "pages/login/login",
+					"query": ""
 				}
 			]
 		}

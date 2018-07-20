@@ -22,6 +22,7 @@ Page({
     r.finishBlock = (req) => {
       this.queryUserAddressList()
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   },
   getAddressId(e) {
@@ -40,6 +41,7 @@ Page({
           addressList: list
         })
       };
+      Tool.showErrMsg(r)
       r.addToQueue();
     }
     Tool.showComfirm('确认删除该地址吗?', callBack)
@@ -70,6 +72,7 @@ Page({
         })
       }
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   }
 })

@@ -1,20 +1,24 @@
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Storage } = global
 Page({
   data: {
     lists: [],
     totalPage: '', // 页面总页数
     currentPage: 1, // 当前的页数
-    pageSize: 5, // 每次加载请求的条数 默认10 
+    pageSize: 10, // 每次加载请求的条数 默认10 
     params: {},
     selectArr:{}, //保存选中的产品规格
+    activityId:'', //活动id
   },
   onLoad: function (options) {
+    let activityId = Storage.getActivityId() || 1
     let params = {
       pageSize: this.data.pageSize,
-      page: this.data.currentPage
+      page: this.data.currentPage,
+      activityId: activityId
     }
     this.setData({
-      params: params
+      params: params,
+      activityId: activityId
     })
     this.querySecuritycodeUsedList(params)
   },
@@ -62,6 +66,16 @@ Page({
     })
   },
   submitClicked(){
-    Tool.redirectTo('/pages/order-confirm/order-confirm?id=' + this.data.selectArr.id)
+    let params = {
+      id: this.data.selectArr.id
+    }
+    let r = RequestFactory.canMakeSureOrder(params);
+    let { lists } = this.data
+    r.finishBlock = (req) => {
+      Storage.setOrderList(this.data.selectArr)
+      Tool.redirectTo('/pages/order-confirm/order-confirm?id=' + this.data.selectArr.id)
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   }
 })

@@ -68,12 +68,12 @@ export default class Storage {
     }
 
     //登陆标记
-    static didLogin() {
-        return this.getterFor('didLogin');
+    static didAuthorize() {
+      return this.getterFor('authorize');
     }
 
-    static setDidLogin(didLogin) {
-        this.setterFor('didLogin', didLogin);
+    static setAuthorize(didLogin) {
+      this.setterFor('authorize', didLogin);
     }
 
     //当前登录用户Id
@@ -92,26 +92,6 @@ export default class Storage {
 
     static setSysInfo(sysInfo) {
         this.setterFor('sysInfo', sysInfo);
-    }
-    /**
-     * 获取历史搜索记录
-     */
-    static getHistorySearch() {
-        return this.getterFor('historySearch');
-    }
-
-    /**
-     * 设置历史搜索记录
-     */
-    static setHistorySearch(historyData) {
-        this.setterFor('historySearch', historyData);
-    }
-
-    /**
-    * 清除历史搜索记录
-    */
-    static clearHistorySearch() {
-        this.setterFor('historySearch', null);
     }
 
     // 获取 openId
@@ -161,6 +141,16 @@ export default class Storage {
 
     static getActivityId() {
       return this.getterFor('activityId');
+    }
+
+    // orderList
+
+    static setOrderList(info) {
+      this.setterFor('orderList', info)
+    }
+
+    static getOrderList() {
+      return this.getterFor('orderList');
     }
     
 }

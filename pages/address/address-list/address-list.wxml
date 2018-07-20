@@ -8,7 +8,7 @@
         <image src='{{item.duo_is==1? "/img/choose-red.png":"/img/choose-gray.png"}}' mode='widthFix'></image>
       </view>
       <view  data-index='{{index}}' class='address-view'>
-        <template is="address-info" data='{{...item,showDefault}}'/>
+        <template is="address-info" data='{{...item}}'/>
       </view>
     </view>
   </block>

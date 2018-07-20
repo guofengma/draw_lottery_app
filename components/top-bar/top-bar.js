@@ -5,14 +5,24 @@ Component({
 
   },
   data: {
-    activityId:''
+    activityId:'',
+    userId:''
   },
   methods: {
+    getUserId(){
+      
+    },
     getActivtyId(){
-      this.setData({
-        activityId: Storage.getActivityId() || '',
-        userId: Storage.memberId() || '',
-      })
+      let r = global.RequestFactory.getActivityId();
+      r.finishBlock = (req) => {
+        Storage.setActivityId(req.responseObject.data.id)
+        this.setData({
+          activityId: req.responseObject.data.id,
+          userId: Storage.memberId() || '',
+        })
+      }
+      Tool.showErrMsg(r)
+      r.addToQueue();
     }
   },
   ready: function () {

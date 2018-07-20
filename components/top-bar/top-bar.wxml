@@ -1,5 +1,5 @@
 <!--头部公用栏目  -->
 <view class='top-bar'>
   <view>活动编码:{{activityId}}</view>
-  <view>用户编码：1516165</view>
+  <view>用户编码：{{userId}}</view>
 </view>

@@ -28,6 +28,10 @@
 }
 .content{
   min-height: 300rpx;
+  color: #666666;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
 }
 .font-28{
   margin-top: 30rpx;

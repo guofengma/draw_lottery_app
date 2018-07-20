@@ -3,6 +3,13 @@ image{
 }
 .timer{
   position: absolute;
-  right: 40rpx;
-  top: 40rpx;
+  right: 64rpx;
+  top: 64rpx;
+  width: 120rpx;
+	height: 44rpx;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 22rpx;
+	border:  1rpx solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 22rpx;
 }

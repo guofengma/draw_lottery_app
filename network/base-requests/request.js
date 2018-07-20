@@ -11,12 +11,21 @@ export default class Request {
     getBaseUrl(bParam) {
         // 开发 
         // this.baseUrl = 'http://172.16.10.7:'
+<<<<<<< HEAD
         // this.baseUrl = 'http://172.16.10.21:'
         // this.baseUrl = 'http://172.16.10.4:'
         this.baseUrl = 'http://172.16.10.12:'
             // this.baseUrl = 'http://172.16.10.29:'
             // this.baseUrl = 'http://172.16.10.19:'
             // this.baseUrl = 'http://172.16.10.253:'
+=======
+        this.baseUrl = 'http://172.16.10.21:'
+        // this.baseUrl = 'http://172.16.10.4:'
+        // this.baseUrl = 'http://172.16.10.12:'
+        // this.baseUrl = 'http://172.16.10.29:'
+        // this.baseUrl = 'http://172.16.10.19:'
+        // this.baseUrl = 'http://172.16.10.253:'
+>>>>>>> 62696fd030954a8a4b97c4082ae24b8bd1729c73
 
         if (bParam.port) {
             this.baseUrl = this.baseUrl + bParam.port
