@@ -118,5 +118,32 @@ Page({
   },
   chooseAddress(){
     Tool.navigateTo('/pages/address/address-list/address-list?door=2')
+  },
+  tipsImg(){
+    let animation = wx.createAnimation({
+      duration: 1500,
+      timingFunction: 'ease',
+    })
+
+    this.animation = animation
+    this.setData({
+      animationData: animation.export()
+    })
+    let n = 0
+    let m = true
+    setInterval(function () {
+      n = n + 1;
+      if (m) {
+        this.animation.translateY(30).step()
+        m = !m;
+      } else {
+        this.animation.translateY(0).step()
+        m = !m;
+      }
+      this.setData({
+        animationData: this.animation.export()
+      })
+
+    }.bind(this), 1000)
   }
 })

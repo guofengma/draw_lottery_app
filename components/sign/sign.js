@@ -47,7 +47,7 @@ Component({
           this.sign()
         },
         sign_start: function() { // 签到
-            this.signRequestHttp()
+            this.signRequestHttp() // 调取签到接口
             //签到成功后重新调用后台接口加载新的签到数据
             // this.setData({
             //     for_signs: "block",
@@ -277,7 +277,7 @@ Component({
           Tool.showErrMsg(r);
           r.addToQueue();
         },
-        signReady () {
+        signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
             var getToday = new Date();
             var todayDate = getToday.getDate();
@@ -397,9 +397,9 @@ Component({
         }
     },
     ready: function() {
-      this.signListRequestHttp()
+      this.signListRequestHttp() // 获取签到天数
       setTimeout( ()=>{
-        this.signReady()
+        this.signReady() // 加载日历
       },1000)
         
     }

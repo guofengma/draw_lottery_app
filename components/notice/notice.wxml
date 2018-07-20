@@ -22,7 +22,8 @@
           <view class="noticeBtnbox">
               <view class="noticeBtn" bindtap='prevPage' wx:if="{{isBtnFalse}}">{{btnPrev}}</view>
               <view class="noticeBtn noticeFalse" bindtap='prevPage' wx:else="{{isBtnFalse}}">{{btnPrev}}</view> <!--上一条-->
-              <view class="noticeBtn noticeBtnRight" wx:if="{{btnNext}}" bindtap='nextPage'>{{btnNext}}</view>
+              <view class="noticeBtn noticeBtnRight" wx:if="{{isBtnNext}}" bindtap='nextPage'>{{btnNext}}</view>
+              <view class="noticeBtn noticeBtnRight" wx:else="{{isBtnNext}}" bindtap='showNotice'>{{btnNext}}</view>
           </view>
         </view>
         <view class="closeBtn" bindtap='showNotice'>

@@ -6,7 +6,7 @@ Component({
      * 组件的属性列表
      */
     properties: {
-      isNotice:Boolean
+        isNotice: Boolean
     },
 
     /**
@@ -32,15 +32,17 @@ Component({
         showNotice: function() { // 关闭公告
             this.triggerEvent('showNotice', false)
         },
-        noticeRequestHttp() {
+        noticeRequestHttp() { //  公告
             let data = {
                 page: this.data.page
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
-              if (req.responseObject.data === null) {
-                return
-              } else {
+              // console.log(typeof req.responseObject.data)
+              let datas = req.responseObject.data
+              console.log(typeof datas)
+              if (!Tool.isEmpty(datas)) {
+                console.log('不空')
               console.log(req.responseObject.data)
               let datas = req.responseObject.data;
               let starts = datas.start;
@@ -48,45 +50,50 @@ Component({
               this.setData({
                 totals: totals
               })
-              // console.log(starts)
-              let isUndefined = datas.data[0]
-              if(datas.total < 1) {
-                console.log('没了')
-                this.setData({
-                  isBtnFalse:false,
-                  btnNext: '关闭'
-                }) 
-              } else {
-                console.log('有')
-                this.setData({
-                  isBtnFalse: true
-                }) 
-              }
+                let isUndefined = datas.data[0]
+                if(datas.total < 1) {
+                  console.log('没了')
+                  this.setData({
+                    isBtnFalse:false,
+                    btnNext: '关闭'
+                  }) 
+                } else {
+                  console.log('有')
+                  this.setData({
+                    isBtnFalse: true
+                  }) 
+                }
               // Storage.setActivityId(datas.data[0].activity_id)
-              let html = datas.data[0].content
-              this.setData({
-                noticeTitle: datas.data[0].title
-              })
-              WxParse.wxParse('article', 'html', html, this, 5);
-              if ((totals - starts) === 1) {
-                this.setData({
-                  btnNext: '关闭',
-                  isBtnFalse:false
-                })
-                return false
-              } else {
-                this.setData({
-                  btnNext: '下一条',
-                  isBtnFalse: true
-                })
+                if (datas.data[0].content == "undefined" || datas.data[0].content == undefined) {
+                  return null
+                } else {
+                  let html = datas.data[0].content
+                  this.setData({
+                    noticeTitle: datas.data[0].title
+                  })
+                  WxParse.wxParse('article', 'html', html, this, 5);
+                }
+                if ((totals - starts) === 1) {
+                  this.setData({
+                    btnNext: '关闭',
+                    isBtnFalse:false,
+                    isBtnNext: false
+                  })
+                  return false
+                } else {
+                  this.setData({
+                    btnNext: '下一条',
+                    isBtnFalse: true,
+                    isBtnNext: true
+                  })
+                }
               } 
             };
             Tool.showErrMsg(r);
             r.addToQueue();
-            }
         },
         prevPage () {
-          if(this.data.totals === 1){
+          if(this.data.page === 1){
             
           }else {
             this.data.page--
@@ -95,7 +102,7 @@ Component({
         },
         nextPage () {
           if(this.data.page === this.data.totals) {
-            this.showNotice()
+
           } else {
             this.data.page++
             this.noticeRequestHttp()
@@ -103,7 +110,7 @@ Component({
         }
     },
     ready() {
-        this.noticeRequestHttp()
+        this.noticeRequestHttp() // 获取公告
         console.log('公告')
     }
 })

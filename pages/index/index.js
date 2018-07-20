@@ -15,7 +15,7 @@ Page({
         last_y: 0,
         last_z: 0,
         isShakeBox: false,
-        isNotice: false,
+        isNotice: true,
         code: '',
         isAuthorize: false,
         visiable: false,
@@ -28,6 +28,7 @@ Page({
         isMaterialName: '',
         iscardName: '',
         iscardUrl: '',
+        ishongbaoUrl: '',
         ishongbaoName: '',
         src: '',
         isStop: true,
@@ -40,17 +41,20 @@ Page({
     },
     onLoad: function() {
         this.getIsNumberHttp() // 获取抽奖次数
-        this.setData({
-                userId: Storage.memberId() || '',
-            })
-            // this.onStartMusic() // 播放音乐
+        this.setData({ // storage 中获取userId
+            userId: Storage.memberId() || '',
+        })
+        // this.onStartMusic() // 播放音乐
         this.getWinnerRequest() // 获取中奖名单
-        this.ani()
-        this.getIsNumberHttp()
+        this.ani() // 旋转动画
+        this.getIsNumberHttp() // 获取抽奖次数
         Event.on('didLogin', this.didLogin, this);
     },
     onReady: function() {
 
+    },
+    catchTouchMove: function (res) {
+      return false
     },
     onStartMusic() { // 启动音乐
         console.log('启动音乐')
@@ -100,7 +104,7 @@ Page({
             })
         }.bind(this), 1000)
     },
-    didLogin() {
+    didLogin() { // 获取 token
         this.selectComponent("#topBar").getActivtyId()
         this.setData({
             isAuthorize: Storage.didAuthorize() || '',
@@ -108,24 +112,27 @@ Page({
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let data = {
-            activityId: 17,
-            code: this.data.code
+          activityId: Storage.getActivityId(),
+          code: this.data.code
         };
         let r = RequestFactory.SecurityCodeRequest(data);
         r.finishBlock = (req) => {
             console.log(req.responseObject)
             wx.showModal({
-                title: '兑换成功',
-                content: '',
+                title: '兑换成功'
             })
-        };
+          // let num = req.responseObject.data
+          // this.setData({
+          //   isNumber: 
+          // })
+        }; 
         Tool.showErrMsg(r);
         r.addToQueue();
-        this.getIsNumberHttp()
+        this.getIsNumberHttp();
     },
     getIsNumberHttp() { // 查询摇奖次数
         let data = {
-            activityId: 17
+          activityId: Storage.getActivityId()
         };
         let r = RequestFactory.shakeNumberRequest(data);
         r.finishBlock = (req) => {
@@ -138,33 +145,32 @@ Page({
         Tool.showErrMsg(r);
         r.addToQueue();
     },
-    getWinnerRequest() { // 获取中奖名单
+    getWinnerRequest() { // 获取公告中奖名单
         let data = {
-            activityId: 17
+          activityId: Storage.getActivityId()
         };
         let r = RequestFactory.winnerRequest(data);
         r.finishBlock = (req) => {
-            console.log(req.responseObject)
             let arrNumber = req.responseObject.data;
             let arrLength = arrNumber.length;
             let arr = [];
             let num;
-            let t
             arrNumber.forEach((res, index, array) => {
-                t = Math.floor(index / 5);
+                let t = Math.floor(index / 5);
                 if (num !== t) {
                     num = t;
                     arr[t] = new Array();
                 }
+              let str = res.telephone
+              let telIphone = str.substr(0, 3) + "****" + str.substr(7)
                 arr[t].push({
-                    index: index + 1,
-                    tphone: res.telephone
+                  index: index + 1,
+                  tphone: telIphone
                 });
-              })
-              this.setData({
+            })
+            this.setData({
                 winnerBlock: arr
-              })
-            console.log(this.data.winnerBlock)
+            })
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -177,9 +183,9 @@ Page({
             let num = parseInt(that.data.isNumber)
             console.log('进入延时')
             if (num === 0) {
-                wx.showToast({
-                    title: '没有次数了',
-                })
+                // wx.showToast({
+                //     title: '没有次数了',
+                // })
             } else {
                 that.isShowSake = true
                 let lastTime = 0; //此变量用来记录上次摇动的时间
@@ -211,7 +217,7 @@ Page({
                             that.data.audioCtx.pause()
                             setTimeout(() => {
                                 let data = {
-                                    activityId: 17
+                                  activityId: Storage.getActivityId()
                                 };
                                 let r = RequestFactory.shakeStartRequest(data);
                                 r.finishBlock = (req) => {
@@ -283,7 +289,7 @@ Page({
         }, 1500)
     },
     onHide: function() {
-        this.isShowSake = false
+        this.isShowSake = false // 设置第一次进入
     },
     closeBindshakeBox: function() { // 摇一摇弹框
         this.setData({
@@ -308,20 +314,20 @@ Page({
         }
     },
     showNotice: function(e) { // 显示公告
-        //this.selectComponent("#topBar").getActivtyId()
+        // this.selectComponent("#topBar").getActivtyId()
         this.setData({
             isNotice: !this.data.isNotice
         })
     },
-    goPage() {
+    goPage() { // 跳转detail
         Tool.navigateTo('/pages/activity-detail/activity-detail')
     },
-    awardClicked() {
+    awardClicked() { // 跳转我的奖品
         if (this.getIsLogin()) {
             Tool.navigateTo('/pages/my/my')
         }
     },
-    getIsLogin() {
+    getIsLogin() { // 退出之后跳转登录
         let cookies = Storage.getUserCookie() || false
         if (!cookies) {
             Tool.navigateTo('/pages/login/login')
@@ -329,7 +335,7 @@ Page({
         }
         return true
     },
-    getPhoneNumber(e) {
+    getPhoneNumber(e) { // 获取手机
         if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
             console.log('用户拒绝了你的请求')
         } else {
@@ -340,7 +346,7 @@ Page({
             })
         }
     },
-    agreeGetUser(e) {
+    agreeGetUser(e) { // 获取授权
         if (!this.data.canIUse) {
             this.getUserInfo()
         }
@@ -351,7 +357,7 @@ Page({
             this.getLogin(e.detail.userInfo)
         }
     },
-    requetLogin() {
+    requetLogin() { // 登录
         let params = {
             encryptedData: this.data.encryptedData,
             iv: this.data.iv,
@@ -368,7 +374,7 @@ Page({
         Tool.showErrMsg(r)
         r.addToQueue();
     },
-    getUserInfo() {
+    getUserInfo() { // 获取授权
         wx.getUserInfo({
             success: res => {
                 this.getLogin(res.userInfo)
@@ -378,7 +384,7 @@ Page({
             }
         })
     },
-    getLogin(userInfo) {
+    getLogin(userInfo) { // 登录
         this.setData({
             userInfo: userInfo
         })

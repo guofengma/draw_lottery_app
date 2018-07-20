@@ -89,7 +89,7 @@
   line-height: 55rpx;
 }
 .winners-content{
-  width: 462rpx;
+  width: 470rpx;
   height: 329rpx;
   margin: 0 auto;
   overflow: hidden;
@@ -107,7 +107,7 @@
 }
 .text-width{
   display: inline-block;
-  width: 174rpx;
+  width: 160rpx;
 }
 .home-tabar{
   height: 88rpx;

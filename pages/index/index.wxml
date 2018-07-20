@@ -23,29 +23,12 @@
     <view class="home-winners">
         <view class="winners-btn">获奖名单</view>
           <view class="winners-content">
-            <!-- <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
-              <view class="text">
-                {{index+1}}、获奖名单 <view class="text-width"></view>  {{item.telephone}}
-              </view>
-            </block> -->
-            <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2500">
+            <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="6000">
                 <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
-                  <swiper-item>
+                  <swiper-item catchtouchmove='catchTouchMove'>
                     <view class="text" wx:for="{{item}}" wx:for-index="index" wx:key="n" wx:for-item="item">
                       {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
                     </view>
-                    <!-- <view class="text">
-                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
-                    </view>
-                      <view class="text">
-                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
-                    </view>
-                      <view class="text">
-                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
-                    </view>
-                      <view class="text">
-                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
-                    </view> -->
                 </swiper-item>
                 </block>
             </swiper> 
@@ -82,7 +65,7 @@
               <view class="shakeText" style="font-weight:blod;">{{iscardName}}</view>
            </view>
            <view class="hongbao" wx:if="{{ishongbao}}"> <!--红包-->
-              <image src="../../img/duoactive.png"></image>
+              <image src="{{ishongbaoUrl}}"></image>
               <view class="shakeText" style="font-weight:blod;">{{ishongbaoName}}</view>
            </view>
            <view class="Material" wx:if="{{isMaterial}}"> <!--实物-->

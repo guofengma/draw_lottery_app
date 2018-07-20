@@ -1,7 +1,7 @@
 let { Tool, RequestFactory} = global
 Page({
   data: {
-  
+    animationData: {}
   },
   onLoad: function (options) {
   
@@ -27,4 +27,7 @@ Page({
       }
     })
   },
+  onShow: function () {
+    
+  }
 })
