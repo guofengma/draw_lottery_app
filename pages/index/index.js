@@ -44,10 +44,9 @@ Page({
         this.setData({ // storage 中获取userId
             userId: Storage.memberId() || '',
         })
-        // this.onStartMusic() // 播放音乐
+        this.onStartMusic() // 播放音乐
         this.getWinnerRequest() // 获取中奖名单
         this.ani() // 旋转动画
-        this.getIsNumberHttp() // 获取抽奖次数
         Event.on('didLogin', this.didLogin, this);
     },
     onReady: function() {
