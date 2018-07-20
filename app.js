@@ -62,17 +62,17 @@ App({
     })
   },
   toLogin(code) {
-    if (!code) return
-    let params = {
-      code: code,
-      loginAddress:''
-    }
-    let r = global.RequestFactory.getWeChatOpenId(params);
-    r.finishBlock = (req) => {
-      Tool.loginOpt(req)
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    // if (!code) return
+    // let params = {
+    //   code: code,
+    //   loginAddress:''
+    // }
+    // let r = global.RequestFactory.getWeChatOpenId(params);
+    // r.finishBlock = (req) => {
+    //   Tool.loginOpt(req)
+    // }
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   },
   /**
    * 调用微信接口，获取设备信息接口

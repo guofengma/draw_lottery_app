@@ -35,3 +35,10 @@
 <bottom-bar index="1"></bottom-bar>
 
 <view class='model-view-bg' catchtap='modelClicked' wx:if='{{show}}'></view>
+
+
+<!-- <view animation="{{animationData}}">
+  <image src='/img/clicked.png' mode='widthFix' style='width:100rpx'></image>
+</view>
+
+<view class='model-view-bg' catchtap='modelClicked' wx:if='{{show}}'></view> -->
