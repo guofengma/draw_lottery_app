@@ -5,10 +5,10 @@
       <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">加急处理中</view>
       <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">客服已处理</view>
   </scroll-view>
-  <scroll-view scroll-y="true" class="scoll-h" >
+  <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower='onScroll'>
     <!--class type1 客服已处理 type2 加速处理中  -->
     <block wx:for='{{lists}}' wx:key='unique'>
-        <view class='feedback-content flexR-sb {{item.className}}'>
+        <view class='feedback-content flexR-sb {{item.className}}' >
           <view class='left'></view>
           <view class='right'>
             <view class='ellipsis title-fd font-28 flexR-sb'>{{item.feedback}}</view>
@@ -21,7 +21,7 @@
               <view class='flexR-sb types'>
                 <view class='type-state'>{{item.typeName}}</view>
                 <view class='btn-s-view'>
-                  <view class='btn-view flexR' wx:if='{{item.show}}'>查看详情</view>
+                  <view class='btn-view flexR' wx:if='{{item.show}}' data-id='{{item.id}}' catchtap='btnClicked'>查看详情</view>
                 </view>
               </view> 
             </view>

@@ -71,4 +71,8 @@ Page({
     })
     this.queryByCreateUserList(this.data.params)
   },
+  btnClicked(e){
+    let id = e.currentTarget.dataset.id
+    Tool.navigateTo('/pages/my/feedback/feedback-detail/feedback-detail?id='+id)
+  }
 })

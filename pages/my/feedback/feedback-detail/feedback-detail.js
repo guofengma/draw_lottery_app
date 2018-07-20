@@ -10,10 +10,12 @@ Page({
     this.findFeedbackById(options.id)
   },
   findFeedbackById(params) {
-    let r = RequestFactory.findFeedbackById(params);
+    let r = RequestFactory.findFeedbackById({ id: params});
     r.finishBlock = (req) => {
       let datas = req.responseObject.data
-      
+      this.setData({
+        list: datas
+      })
     };
     Tool.showErrMsg(r)
     r.addToQueue();

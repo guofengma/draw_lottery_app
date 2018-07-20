@@ -1,5 +1,6 @@
 .my-feedback{
   height: 100%;
+  box-sizing: border-box;
 }
 
 .bottom-content{
@@ -11,11 +12,11 @@
   width: 100%;
 	border-radius: 25rpx;
 	border: 1rpx  solid #dddddd;
-  margin-left: 30rpx;
 }
 .btn-s-view{
   width: 140rpx;
 	height: 50rpx;
+  margin-left: 30rpx;
 }
 .feedback-content{
   padding:0 30rpx;
