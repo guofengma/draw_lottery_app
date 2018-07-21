@@ -73,6 +73,6 @@ Page({
     r.addToQueue();
   },
   onUnload: function () {
-
+    Event.off('updateAdressList', this.queryUserAddressList)
   }
 })

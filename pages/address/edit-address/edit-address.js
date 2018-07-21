@@ -74,5 +74,8 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  onUnload: function () {
+    Event.off('updateAdressList', this.queryUserAddressList)
   }
 })

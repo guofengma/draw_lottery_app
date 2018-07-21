@@ -18,7 +18,7 @@ Page({
       params: params
     })
     this.queryByCreateUserList()
-    Event.emit('updateFeedback', this.queryByCreateUserList,this)
+    Event.on('updateFeedback', this.queryByCreateUserList,this)
   },
   swichNav: function (e) {
     let cur = e.target.dataset.current;

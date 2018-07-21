@@ -18,7 +18,7 @@ Component({
 
       if (Tool.getCurrentPageUrl() == page[index] ) return
 
-      Tool.navigateTo("/"+page[index])   
+      Tool.redirectTo("/"+page[index])   
     }
   },
   ready: function () {
