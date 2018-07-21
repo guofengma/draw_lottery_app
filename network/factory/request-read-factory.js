@@ -10,8 +10,6 @@ export default class RequestFactory {
   // 统一的请求 
   static request(url, params = {},name,hasCookie){
 
-    let sysInfo = global.Storage.sysInfo()
-
     // 是否需要携带cookie
     
     if (hasCookie) params.hasCookie = hasCookie
@@ -20,17 +18,18 @@ export default class RequestFactory {
 
     params.url = url
 
-    // 手机型号
-    params.mobile = sysInfo.model
+    // let sysInfo = global.Storage.sysInfo()
+    // // 手机型号
+    // params.mobile = sysInfo.model
 
-    // 手机系统类型
-    params.systemType = 3
+    // // 手机系统类型
+    // params.systemType = 3
 
-    // 微信版本
-    params.wxVersion = sysInfo.version
+    // // 微信版本
+    // params.wxVersion = sysInfo.version
 
-    // 系统版本
-    params.systemVersion	 = sysInfo.system
+    // // 系统版本
+    // params.systemVersion	 = sysInfo.system
 
     let req = new Request(params);
 
@@ -66,7 +65,7 @@ export default class RequestFactory {
   // 上传图片的地址 
   static aliyunOSSUploadImage() {
     let params = {
-      port: 8100
+      port: 8000
     }
     let baseUrl = new Request(params).getBaseUrl(params)
     let url = Operation.sharedInstance().aliyunOSSUploadImage;

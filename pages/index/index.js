@@ -331,7 +331,6 @@ Page({
         }
     },
     showNotice: function(e) { // 显示公告
-        // this.selectComponent("#topBar").getActivtyId()
         this.setData({
             isNotice: !this.data.isNotice
         })
@@ -379,6 +378,7 @@ Page({
         }
     },
     requetLogin() { // 登录
+        let sysInfo = global.Storage.sysInfo()
         let params = {
             encryptedData: this.data.encryptedData,
             iv: this.data.iv,
@@ -388,6 +388,18 @@ Page({
             loginAddress: '',
             sex: this.data.userInfo.gender
         }
+        // 手机型号
+        params.mobile = sysInfo.model
+
+        // 手机系统类型
+        params.systemType = 3
+
+        // 微信版本
+        params.wxVersion = sysInfo.version
+
+        // 系统版本
+        params.systemVersion = sysInfo.system
+        
         let r = global.RequestFactory.appWechatLogin(params);
         r.finishBlock = (req) => {
             Tool.loginOpt(req)

@@ -74,7 +74,7 @@ Page({
       })
       let { activeImg } = this.data
       let { showBtn } = this.data
-      if (datas[0].number>1) {
+      if (datas[0].number>0) {
         activeImg = this.data.imgUrl + datas[0].showImg2
         showBtn = true
       }
@@ -122,7 +122,8 @@ Page({
   },
   modelClicked(){
     this.setData({
-      show: !this.data.show
+      show: !this.data.show,
+      showBtn:true
     })
   },
   chooseAddress(){
