@@ -606,10 +606,11 @@ export default class Tool {
 
     // 判断人名
     static checkName(value) {
-      if (!(/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/.test(value))) {
-        return false
-      } else {
+      // !(/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/.test(value))
+      if (value.length > 1 && value.length<17) {
         return true
+      } else {
+        return false
       }
     }
 
@@ -680,6 +681,7 @@ export default class Tool {
 
     static showErrMsg(r) {
       r.failBlock = (req) => {
+        console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
         let callBack = ()=>{
 
@@ -690,7 +692,10 @@ export default class Tool {
             this.navigateTo(page+'?isBack='+true)
           }
         }
-        this.showAlert(req.responseObject.msg, callBack)
+        console.log(req.responseObject.msg)
+        if (req.responseObject.msg){
+          this.showAlert(req.responseObject.msg, callBack)
+        }
       }
     }
 

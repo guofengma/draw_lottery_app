@@ -132,24 +132,32 @@ Page({
         })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
-        let data = {
+        if(this.data.code === '' || this.data.code === null ) {
+            console.log('code为空')
+            wx.showModal({
+              title: '防伪码',
+              content: '请输入16位防伪码',
+            })
+        } else {
+          let data = {
             activityId: Storage.getActivityId() || '',
             code: this.data.code
-        };
-        let r = RequestFactory.SecurityCodeRequest(data);
-        r.finishBlock = (req) => {
+          };
+          let r = RequestFactory.SecurityCodeRequest(data);
+          r.finishBlock = (req) => {
             console.log(req.responseObject)
             wx.showModal({
               title: '兑换成功'
             })
-                // let num = req.responseObject.data
-                // this.setData({
-                //   isNumber: 
-                // })
-        };
-        Tool.showErrMsg(r);
-        r.addToQueue();
-        this.getIsNumberHttp();
+            // let num = req.responseObject.data
+            // this.setData({
+            //   isNumber: 
+            // })
+          };
+          Tool.showErrMsg(r);
+          r.addToQueue();
+          this.getIsNumberHttp();
+        }
     },
     getIsNumberHttp() { // 查询摇奖次数
         let data = {
@@ -172,6 +180,9 @@ Page({
         };
         let r = RequestFactory.winnerRequest(data);
         r.finishBlock = (req) => {
+          if (Tool.isEmpty(req.responseObject.data)) {
+              
+          } else {
             let arrNumber = req.responseObject.data;
             let arrLength = arrNumber.length;
             let arr = [];
@@ -183,7 +194,19 @@ Page({
                     arr[t] = new Array();
                 }
                 let str = res.telephone
-                let telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                let strL = parseInt(str)
+                let strl = strL.length
+                let telIphone = ''
+                if(str === null) {
+                    console.log('不选')
+                } else {
+                  if (strl > 11) {
+
+                  } else {
+                    telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                  }
+                }
+                console.log(str)
                 arr[t].push({
                     index: index + 1,
                     tphone: telIphone
@@ -192,6 +215,7 @@ Page({
             this.setData({
                 winnerBlock: arr
             })
+          }
         };
         Tool.showErrMsg(r);
         r.addToQueue();

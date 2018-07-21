@@ -60,7 +60,9 @@ Page({
       let datas = req.responseObject.data
       if (datas.length > 0) {
         datas.forEach((item)=>{
-          item.showDefault= item.default_status==1? true:false
+          if(this.data.door!=2){
+            item.showDefault = item.default_status == 1 ? true : false
+          }
         })
         this.setData({
           addressList: req.responseObject.data

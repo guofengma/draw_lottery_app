@@ -98,7 +98,7 @@
 }
 .closeBtn{
   position: absolute;
-  bottom:-188rpx;
+  bottom:-160rpx;
   left: 45%;
   width: 50rpx;
   height: 145rpx;

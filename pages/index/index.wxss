@@ -67,6 +67,8 @@
 .draw-number text{
   font-size: 28rpx;
   color: #e9d96a;
+  display: block;
+  text-align: center
 }
 .home-winners{
   width: 536rpx;

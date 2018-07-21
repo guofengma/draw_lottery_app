@@ -18,18 +18,23 @@ export default class RequestFactory {
 
     params.url = url
 
-    // let sysInfo = global.Storage.sysInfo()
-    // // 手机型号
-    // params.mobile = sysInfo.model
+    let sysInfo = global.Storage.sysInfo() || ''
 
-    // // 手机系统类型
-    // params.systemType = 3
+    if (sysInfo){
 
-    // // 微信版本
-    // params.wxVersion = sysInfo.version
+      // 手机型号
+      params.mobile = sysInfo.model
 
-    // // 系统版本
-    // params.systemVersion	 = sysInfo.system
+      // 手机系统类型
+      params.systemType = 3
+
+      // 微信版本
+      params.wxVersion = sysInfo.version
+
+      // 系统版本
+      params.systemVersion	 = sysInfo.system
+    }
+ 
 
     let req = new Request(params);
 
