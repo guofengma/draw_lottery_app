@@ -50,7 +50,6 @@ Page({
         setTimeout(function(){
           that.getIsNumberHttp() // 获取抽奖次数
         },5000)
-        
         Event.on('didLogin', this.didLogin, this);
     },
     onReady: function() {
@@ -110,7 +109,7 @@ Page({
     didLogin() { // 获取 token
         // this.selectComponent("#topBar").getActivtyId()
         this.setData({
-            isAuthorize: Storage.didAuthorize() || false,
+            isAuthorize: Storage.didAuthorize() || '',
         })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
