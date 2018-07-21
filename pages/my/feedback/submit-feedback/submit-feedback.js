@@ -8,6 +8,6 @@ Page({
   
   },
   goPage(){
-    Tool.navigateTo('/pages/my/feedback/my-feedback/my-feedback')
+    Tool.redirectTo('/pages/my/feedback/my-feedback/my-feedback')
   }
 })

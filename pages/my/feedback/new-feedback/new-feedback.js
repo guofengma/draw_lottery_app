@@ -75,7 +75,7 @@ Page({
     let r = RequestFactory.addFeedback(params);
     r.finishBlock = (req) => {
       Event.emit('updateFeedback')
-      Tool.navigateTo('/pages/my/feedback/submit-feedback/submit-feedback')
+      Tool.redirectTo('/pages/my/feedback/submit-feedback/submit-feedback')
     };
     Tool.showErrMsg(r)
     r.addToQueue();
