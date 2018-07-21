@@ -52,8 +52,8 @@ Page({
     onReady: function() {
 
     },
-    catchTouchMove: function (res) {
-      return false
+    catchTouchMove: function(res) {
+        return false
     },
     onStartMusic() { // 启动音乐
         console.log('启动音乐')
@@ -111,27 +111,27 @@ Page({
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let data = {
-          activityId: Storage.getActivityId(),
-          code: this.data.code
+            activityId: Storage.getActivityId(),
+            code: this.data.code
         };
         let r = RequestFactory.SecurityCodeRequest(data);
         r.finishBlock = (req) => {
             console.log(req.responseObject)
             wx.showModal({
-                title: '兑换成功'
-            })
-          // let num = req.responseObject.data
-          // this.setData({
-          //   isNumber: 
-          // })
-        }; 
+                    title: '兑换成功'
+                })
+                // let num = req.responseObject.data
+                // this.setData({
+                //   isNumber: 
+                // })
+        };
         Tool.showErrMsg(r);
         r.addToQueue();
         this.getIsNumberHttp();
     },
     getIsNumberHttp() { // 查询摇奖次数
         let data = {
-          activityId: Storage.getActivityId()
+            activityId: Storage.getActivityId()
         };
         let r = RequestFactory.shakeNumberRequest(data);
         r.finishBlock = (req) => {
@@ -146,7 +146,7 @@ Page({
     },
     getWinnerRequest() { // 获取公告中奖名单
         let data = {
-          activityId: Storage.getActivityId()
+            activityId: Storage.getActivityId()
         };
         let r = RequestFactory.winnerRequest(data);
         r.finishBlock = (req) => {
@@ -160,11 +160,11 @@ Page({
                     num = t;
                     arr[t] = new Array();
                 }
-              let str = res.telephone
-              let telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                let str = res.telephone
+                let telIphone = str.substr(0, 3) + "****" + str.substr(7)
                 arr[t].push({
-                  index: index + 1,
-                  tphone: telIphone
+                    index: index + 1,
+                    tphone: telIphone
                 });
             })
             this.setData({
@@ -216,7 +216,7 @@ Page({
                             that.data.audioCtx.pause()
                             setTimeout(() => {
                                 let data = {
-                                  activityId: Storage.getActivityId()
+                                    activityId: Storage.getActivityId()
                                 };
                                 let r = RequestFactory.shakeStartRequest(data);
                                 r.finishBlock = (req) => {
