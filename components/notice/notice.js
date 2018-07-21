@@ -110,7 +110,7 @@ Component({
         }
     },
     ready() {
-        this.noticeRequestHttp() // 获取公告
+        //this.noticeRequestHttp() // 获取公告
         console.log('公告')
     }
 })

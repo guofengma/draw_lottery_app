@@ -44,16 +44,31 @@ Page({
             userId: Storage.memberId() || '',
         })
         this.onStartMusic() // 播放音乐
-        this.getWinnerRequest() // 获取中奖名单
+        // this.getWinnerRequest() // 获取中奖名单
         this.ani() // 旋转动画
-        let that = this 
-        setTimeout(function(){
-          that.getIsNumberHttp() // 获取抽奖次数
-        },5000)
+        // let that = this 
+        // setTimeout(function(){
+        //   that.getIsNumberHttp() // 获取抽奖次数
+        // },5000)
+        this.getActivtyId()
         Event.on('didLogin', this.didLogin, this);
     },
     onReady: function() {
 
+    },
+    getActivtyId() {
+      let r = global.RequestFactory.getActivityId();
+      r.finishBlock = (req) => {
+        Storage.setActivityId(req.responseObject.data.id)
+        this.setData({
+          activityId: req.responseObject.data.id
+        })
+        this.getIsNumberHttp() // 获取抽奖次数
+        this.getWinnerRequest() // 获取中奖名单
+        this.selectComponent("#showNotice").noticeRequestHttp()
+      }
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     catchTouchMove: function (res) {
       return false
@@ -107,7 +122,7 @@ Page({
         }.bind(this), 1000)
     },
     didLogin() { // 获取 token
-        // this.selectComponent("#topBar").getActivtyId()
+        this.selectComponent("#topBar").getUserId()
         this.setData({
             isAuthorize: Storage.didAuthorize() || '',
         })

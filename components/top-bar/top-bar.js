@@ -2,7 +2,7 @@ let { Tool,Storage } = global
 
 Component({
   properties: {
-
+     canStart:Boolean
   },
   data: {
     activityId:'',
@@ -10,7 +10,10 @@ Component({
   },
   methods: {
     getUserId(){
-      
+      this.setData({
+        userId: Storage.memberId() || '',
+        activityId: Storage.getActivityId() || '',
+      })
     },
     getActivtyId(){
       let r = global.RequestFactory.getActivityId();
@@ -26,6 +29,9 @@ Component({
     }
   },
   ready: function () {
-    this.getActivtyId()
+    //this.getActivtyId()
+    if (!this.properties.canStart){
+      this.getActivtyId()
+    }
   }
 })

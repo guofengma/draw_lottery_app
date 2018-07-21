@@ -1,6 +1,6 @@
-<top-bar id='topBar'></top-bar>
+<top-bar id='topBar' canStart='{{true}}'></top-bar>
 <sign-in isTrue='{{isTrue}}' bind:closeView='closeView'></sign-in>
-<notice wx:if="{{isNotice}}" bind:showNotice='showNotice'></notice>
+<notice wx:if="{{isNotice}}" bind:showNotice='showNotice' id='showNotice'></notice>
 <audio id="myAudio" style='display:none'></audio>
 <audio id="myAudioShake" style='display:none'></audio>
 <view class="home-page">

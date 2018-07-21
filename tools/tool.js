@@ -684,12 +684,12 @@ export default class Tool {
         let callBack = ()=>{
 
         }
-        if (req.responseObject.code==210){
-          callBack =()=>{
-            let page ='/pages/login/login'           
-            this.navigateTo(page+'?isBack='+true)
-          }
-        }
+        // if (req.responseObject.code==210){
+        //   callBack =()=>{
+        //     let page ='/pages/login/login'           
+        //     this.navigateTo(page+'?isBack='+true)
+        //   }
+        // }
         this.showAlert(req.responseObject.msg, callBack)
       }
     }

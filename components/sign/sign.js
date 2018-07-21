@@ -397,10 +397,10 @@ Component({
         }
     },
     ready: function() {
-      this.signListRequestHttp() // 获取签到天数
-      setTimeout( ()=>{
-        this.signReady() // 加载日历
-      },1000)
+      // this.signListRequestHttp() // 获取签到天数
+      // setTimeout( ()=>{
+      //   this.signReady() // 加载日历
+      // },1000)
         
     }
 }) 
