@@ -335,6 +335,10 @@ Page({
         this.setData({
             isNotice: !this.data.isNotice
         })
+        if (this.data.isNotice){
+          this.selectComponent("#showNotice").noticeRequestHttp()
+        }
+        
     },
     goPage() { // 跳转detail
         Tool.navigateTo('/pages/activity-detail/activity-detail')
