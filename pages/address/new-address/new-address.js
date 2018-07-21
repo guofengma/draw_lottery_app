@@ -37,8 +37,12 @@ Page({
   },
   pickerClicked(e) {
     let region = e.detail.result
+    let content = []
+    if (region.length>0){
+      content = region[0].name + region[1].name + region[2].name
+    }
     this.setData({ 
-      content: region[0].name + region[1].name + region[2].name,
+      content: content,
       region: region
     })
     if (e.detail.btnType == 2) {
