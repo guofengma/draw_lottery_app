@@ -40,13 +40,16 @@ Page({
         offsetTop: {},
     },
     onLoad: function() {
-        this.getIsNumberHttp() // 获取抽奖次数
         this.setData({ // storage 中获取userId
             userId: Storage.memberId() || '',
         })
         this.onStartMusic() // 播放音乐
         this.getWinnerRequest() // 获取中奖名单
         this.ani() // 旋转动画
+        let that = this
+        setTimeout(function() {
+            that.getIsNumberHttp() // 获取抽奖次数
+        }, 5000)
         Event.on('didLogin', this.didLogin, this);
     },
     onReady: function() {
@@ -104,14 +107,14 @@ Page({
         }.bind(this), 1000)
     },
     didLogin() { // 获取 token
-        this.selectComponent("#topBar").getActivtyId()
+        // this.selectComponent("#topBar").getActivtyId()
         this.setData({
             isAuthorize: Storage.didAuthorize() || '',
         })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let data = {
-            activityId: Storage.getActivityId(),
+            activityId: Storage.getActivityId() || '',
             code: this.data.code
         };
         let r = RequestFactory.SecurityCodeRequest(data);
@@ -131,7 +134,7 @@ Page({
     },
     getIsNumberHttp() { // 查询摇奖次数
         let data = {
-            activityId: Storage.getActivityId()
+            activityId: Storage.getActivityId() || ''
         };
         let r = RequestFactory.shakeNumberRequest(data);
         r.finishBlock = (req) => {
@@ -146,7 +149,7 @@ Page({
     },
     getWinnerRequest() { // 获取公告中奖名单
         let data = {
-            activityId: Storage.getActivityId()
+            activityId: Storage.getActivityId() || ''
         };
         let r = RequestFactory.winnerRequest(data);
         r.finishBlock = (req) => {
@@ -216,7 +219,7 @@ Page({
                             that.data.audioCtx.pause()
                             setTimeout(() => {
                                 let data = {
-                                    activityId: Storage.getActivityId()
+                                    activityId: Storage.getActivityId() || ''
                                 };
                                 let r = RequestFactory.shakeStartRequest(data);
                                 r.finishBlock = (req) => {
