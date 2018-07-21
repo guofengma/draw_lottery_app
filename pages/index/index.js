@@ -183,7 +183,10 @@ Page({
                     arr[t] = new Array();
                 }
                 let str = res.telephone
-                let telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                let telIphone = ''
+                if(str){
+                   telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                }
                 arr[t].push({
                     index: index + 1,
                     tphone: telIphone
