@@ -25,7 +25,7 @@ export default class Request {
         // }
 
         this.baseUrl = 'https://ttdb-test.dnvhot.tech';
-
+    
         return this.baseUrl
     }
     constructor(bParam) {
