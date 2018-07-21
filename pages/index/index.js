@@ -132,31 +132,31 @@ Page({
         })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
-        if(this.data.code === '' || this.data.code === null ) {
+        if (this.data.code === '' || this.data.code === null) {
             console.log('code为空')
             wx.showModal({
-              title: '防伪码',
-              content: '请输入16位防伪码',
+                title: '防伪码',
+                content: '请输入16位防伪码',
             })
         } else {
-          let data = {
-            activityId: Storage.getActivityId() || '',
-            code: this.data.code
-          };
-          let r = RequestFactory.SecurityCodeRequest(data);
-          r.finishBlock = (req) => {
-            console.log(req.responseObject)
-            wx.showModal({
-              title: '兑换成功'
-            })
-            // let num = req.responseObject.data
-            // this.setData({
-            //   isNumber: 
-            // })
-          };
-          Tool.showErrMsg(r);
-          r.addToQueue();
-          this.getIsNumberHttp();
+            let data = {
+                activityId: Storage.getActivityId() || '',
+                code: this.data.code
+            };
+            let r = RequestFactory.SecurityCodeRequest(data);
+            r.finishBlock = (req) => {
+                console.log(req.responseObject)
+                wx.showModal({
+                        title: '兑换成功'
+                    })
+                    // let num = req.responseObject.data
+                    // this.setData({
+                    //   isNumber: 
+                    // })
+            };
+            Tool.showErrMsg(r);
+            r.addToQueue();
+            this.getIsNumberHttp();
         }
     },
     getIsNumberHttp() { // 查询摇奖次数
@@ -180,42 +180,42 @@ Page({
         };
         let r = RequestFactory.winnerRequest(data);
         r.finishBlock = (req) => {
-          if (Tool.isEmpty(req.responseObject.data)) {
-              
-          } else {
-            let arrNumber = req.responseObject.data;
-            let arrLength = arrNumber.length;
-            let arr = [];
-            let num;
-            arrNumber.forEach((res, index, array) => {
-                let t = Math.floor(index / 5);
-                if (num !== t) {
-                    num = t;
-                    arr[t] = new Array();
-                }
-                let str = res.telephone
-                let strL = parseInt(str)
-                let strl = strL.length
-                let telIphone = ''
-                if (Tool.isEmpty(str)) {
-                    console.log('不完整')
-                } else {
-                  if (strl < 11 || strl > 11) {
-                      console.log('手机号位数错误')
-                  } else {
-                    telIphone = str.substr(0, 3) + "****" + str.substr(7)
-                  }
-                }
-                // console.log(str)
-                arr[t].push({
-                    index: index + 1,
-                    tphone: telIphone
-                });
-            })
-            this.setData({
-                winnerBlock: arr
-            })
-          }
+            if (Tool.isEmpty(req.responseObject.data)) {
+
+            } else {
+                let arrNumber = req.responseObject.data;
+                let arrLength = arrNumber.length;
+                let arr = [];
+                let num;
+                arrNumber.forEach((res, index, array) => {
+                    let t = Math.floor(index / 5);
+                    if (num !== t) {
+                        num = t;
+                        arr[t] = new Array();
+                    }
+                    let str = res.telephone
+                    let strL = parseInt(str)
+                    let strl = strL.length
+                    let telIphone = ''
+                    if (Tool.isEmpty(str)) {
+                        console.log('不完整')
+                    } else {
+                        if (strl < 11 || strl > 11) {
+                            console.log('手机号位数错误')
+                        } else {
+                            telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                        }
+                    }
+                    // console.log(str)
+                    arr[t].push({
+                        index: index + 1,
+                        tphone: telIphone
+                    });
+                })
+                this.setData({
+                    winnerBlock: arr
+                })
+            }
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -226,7 +226,7 @@ Page({
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
-            // console.log('进入延时')
+                // console.log('进入延时')
             if (num === 0) {
                 // wx.showToast({
                 //     title: '没有次数了',
@@ -306,8 +306,8 @@ Page({
                                     console.log('停止背景音乐')
                                     console.log('进入异步失败操作')
                                     console.log(req.responseObject)
-                                    let start = ()=>{
-                                       wx.startAccelerometer();
+                                    let start = () => {
+                                        wx.startAccelerometer();
                                     }
                                     if (req.responseObject.code === 600) {
                                         console.log(req.responseObject)
@@ -323,7 +323,7 @@ Page({
                                             })
                                         wx.hideLoading()
                                     } else {
-                                      Tool.showAlert(req.responseObject.msg, start)
+                                        Tool.showAlert(req.responseObject.msg, start)
                                     }
                                 };
                                 r.addToQueue();
@@ -357,15 +357,17 @@ Page({
         }
     },
     closeView(e) { // 显示天天签到
-        let currentTime = new Date().getTime();
-        let getStartTime = this.data.activeStartTime
-        if (getStartTime < currentTime) {
-            Tool.showAlert('活动未开启')
-        } else {
-            if (this.getIsLogin()) {
-                this.setData({
-                    isTrue: !this.data.isTrue
-                })
+        if (this.getIsLogin()) {
+            let currentTime = new Date().getTime();
+            let getStartTime = this.data.activeStartTime
+            if (getStartTime < currentTime) {
+                Tool.showAlert('活动未开启')
+            } else {
+                if (this.getIsLogin()) {
+                    this.setData({
+                        isTrue: !this.data.isTrue
+                    })
+                }
             }
         }
     },
@@ -378,7 +380,9 @@ Page({
         }
     },
     goPage() { // 跳转detail
-        Tool.navigateTo('/pages/activity-detail/activity-detail')
+        if (this.getIsLogin()) {
+            Tool.navigateTo('/pages/activity-detail/activity-detail')
+        }
     },
     awardClicked() { // 跳转我的奖品
         if (this.getIsLogin()) {
@@ -416,27 +420,15 @@ Page({
         }
     },
     requetLogin() { // 登录
-        let sysInfo = global.Storage.sysInfo()
         let params = {
-                encryptedData: this.data.encryptedData,
-                iv: this.data.iv,
-                openId: Storage.getWxOpenid() || '',
-                name: this.data.userInfo.nickName,
-                headImgUrl: this.data.userInfo.avatarUrl,
-                loginAddress: '',
-                sex: this.data.userInfo.gender
-            }
-            // 手机型号
-        params.mobile = sysInfo.model
-
-        // 手机系统类型
-        params.systemType = 3
-
-        // 微信版本
-        params.wxVersion = sysInfo.version
-
-        // 系统版本
-        params.systemVersion = sysInfo.system
+            encryptedData: this.data.encryptedData,
+            iv: this.data.iv,
+            openId: Storage.getWxOpenid() || '',
+            name: this.data.userInfo.nickName,
+            headImgUrl: this.data.userInfo.avatarUrl,
+            loginAddress: '',
+            sex: this.data.userInfo.gender
+        }
 
         let r = global.RequestFactory.appWechatLogin(params);
         r.finishBlock = (req) => {
@@ -462,7 +454,7 @@ Page({
         Storage.setWxUserInfo(userInfo)
         this.requetLogin()
     },
-    onUnload: function() { 
+    onUnload: function() {
         Event.off('didLogin', this.didLogin);
     },
 })

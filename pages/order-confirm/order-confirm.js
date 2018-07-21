@@ -43,7 +43,7 @@ Page({
     }
     let r = RequestFactory.makeOrder(params);
     r.finishBlock = (req) => {
-      Tool.navigateTo('/pages/order-confirm/submit-order/submit-order')
+      Tool.redirectTo('/pages/order-confirm/submit-order/submit-order')
     };
     Tool.showErrMsg(r)
     r.addToQueue();
