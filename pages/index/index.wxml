@@ -37,11 +37,19 @@
   </view>
 
   <view class="home-tabar flexR">
-    <block wx:if='{{!isAuthorize}}'>
+    <!--获取手机按钮  -->
+    <block wx:if='{{!isAuthorize&&!visiable}}'>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">活动详情</button>
       <button class='home-tabar-btn home-btn-borders' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">我的奖品</button>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">天天签到</button>
     </block>
+    <!--获取用户头像按钮  -->
+    <block wx:elif='{{!isAuthorize&&visiable}}'>
+      <button open-type="getUserInfo" class='home-tabar-btn' bindgetuserinfo="agreeGetUser" lang="zh_CN">活动详情</button>
+      <button open-type="getUserInfo" class='home-tabar-btn home-btn-borders' bindgetuserinfo="agreeGetUser" lang="zh_CN">我的奖品</button>
+      <button open-type="getUserInfo" class='home-tabar-btn' bindgetuserinfo="agreeGetUser" lang="zh_CN">天天签到</button>
+    </block>
+    <!--正常点击按钮  -->
     <block wx:else>
       <view class="home-tabar-btn" catchtap='goPage'>活动详情</view>
       <view class="home-tabar-btn home-btn-borders" catchtap='awardClicked'>我的奖品</view>
@@ -83,7 +91,7 @@
 </view>
 
 
-<block wx:if="{{visiable}}">
+<!-- <block wx:if="{{visiable}}">
   <view class="model-view-bg-c">
     <view class="my-award-filter">
         <view class="title-c"><view>提示</view></view>
@@ -91,4 +99,4 @@
         <button open-type="getUserInfo" class="agree" bindgetuserinfo="agreeGetUser" lang="zh_CN">确定</button>
     </view>
   </view>
-</block>
+</block> -->
