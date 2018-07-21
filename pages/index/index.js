@@ -282,11 +282,11 @@ Page({
                                     console.log('停止背景音乐')
                                     console.log('进入异步失败操作')
                                     console.log(req.responseObject)
-                                    audioCtx = wx.createAudioContext('myAudioShake');
-                                    audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/fail.mp3');
-                                    audioCtx.play();
                                     if (req.responseObject.code === 600) {
                                         console.log(req.responseObject)
+                                        audioCtx = wx.createAudioContext('myAudioShake');
+                                        audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/fail.mp3');
+                                        audioCtx.play();
                                         let num = that.data.isNumber--
                                             that.setData({
                                                 isNumber: num,
@@ -295,6 +295,8 @@ Page({
                                                 isWzj: true
                                             })
                                         wx.hideLoading()
+                                    } else {
+                                      Tool.showAlert(req.responseObject.msg)
                                     }
                                 };
                                 r.addToQueue();
@@ -436,7 +438,7 @@ Page({
         Storage.setWxUserInfo(userInfo)
         this.requetLogin()
     },
-    onUnload: function() {
+    onUnload: function() { 
         Event.off('didLogin', this.didLogin);
     },
 })
