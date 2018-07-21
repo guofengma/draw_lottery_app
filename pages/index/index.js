@@ -347,16 +347,9 @@ Page({
         this.setData({
             isNotice: !this.data.isNotice
         })
-<<<<<<< HEAD
-        if(this.data.isNotice){
-          this.selectComponent("#showNotice").noticeRequestHttp()
-        }
-=======
         if (this.data.isNotice){
           this.selectComponent("#showNotice").noticeRequestHttp()
         }
-        
->>>>>>> 3616f966ca4e8c9467bce6448a4d099bf7529408
     },
     goPage() { // 跳转detail
         Tool.navigateTo('/pages/activity-detail/activity-detail')
