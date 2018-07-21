@@ -357,19 +357,18 @@ Page({
         }
     },
     closeView(e) { // 显示天天签到
-        let currentTime = new Date().getTime();
-        let getStartTime = this.data.activeStartTime
-        if (getStartTime < currentTime) {
-            wx.showModal({
-                title: '活动未开启',
-                content: '',
-            })
-        } else {
+        if (this.getIsLogin()) {
+          let currentTime = new Date().getTime();
+          let getStartTime = this.data.activeStartTime
+          if (getStartTime < currentTime) {
+            Tool.showAlert('活动未开启')
+          } else {
             if (this.getIsLogin()) {
-                this.setData({
-                    isTrue: !this.data.isTrue
-                })
+              this.setData({
+                isTrue: !this.data.isTrue
+              })
             }
+          }
         }
     },
     showNotice: function(e) { // 显示公告
@@ -381,12 +380,14 @@ Page({
         }
     },
     goPage() { // 跳转detail
+      if (this.getIsLogin()) {
         Tool.navigateTo('/pages/activity-detail/activity-detail')
+      }
     },
     awardClicked() { // 跳转我的奖品
-        if (this.getIsLogin()) {
-            Tool.navigateTo('/pages/my/my')
-        }
+      if (this.getIsLogin()) {
+          Tool.navigateTo('/pages/my/my')
+      }
     },
     getIsLogin() { // 退出之后跳转登录
         let cookies = Storage.getUserCookie() || false
@@ -419,7 +420,6 @@ Page({
         }
     },
     requetLogin() { // 登录
-        let sysInfo = global.Storage.sysInfo()
         let params = {
                 encryptedData: this.data.encryptedData,
                 iv: this.data.iv,
@@ -428,18 +428,7 @@ Page({
                 headImgUrl: this.data.userInfo.avatarUrl,
                 loginAddress: '',
                 sex: this.data.userInfo.gender
-            }
-            // 手机型号
-        params.mobile = sysInfo.model
-
-        // 手机系统类型
-        params.systemType = 3
-
-        // 微信版本
-        params.wxVersion = sysInfo.version
-
-        // 系统版本
-        params.systemVersion = sysInfo.system
+        }
 
         let r = global.RequestFactory.appWechatLogin(params);
         r.finishBlock = (req) => {
