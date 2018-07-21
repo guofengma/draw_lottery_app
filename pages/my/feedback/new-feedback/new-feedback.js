@@ -64,8 +64,8 @@ Page({
     }
     let obj = {
       activityCode: Storage.getActivityId() || '',
-      originalImg: JSON.stringify(this.data.originalImg) || '',
-      smallImg: JSON.stringify(this.data.smallImg) || '',
+      originalImg: JSON.stringify(this.data.originalImg) || JSON.stringify([]),
+      smallImg: JSON.stringify(this.data.smallImg) || JSON.stringify([]),
       'type': this.data.activeList.id
     }
     Object.assign(params, params, obj)

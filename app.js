@@ -67,6 +67,18 @@ App({
       code: code,
       loginAddress:''
     }
+    let sysInfo = global.Storage.sysInfo()
+    // 手机型号
+    params.mobile = sysInfo.model
+
+    // 手机系统类型
+    params.systemType = 3
+
+    // 微信版本
+    params.wxVersion = sysInfo.version
+
+    // 系统版本
+    params.systemVersion = sysInfo.system
     let r = global.RequestFactory.getWeChatOpenId(params);
     r.finishBlock = (req) => {
       Tool.loginOpt(req)

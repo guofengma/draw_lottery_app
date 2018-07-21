@@ -37,7 +37,7 @@ export default class Operation {
 
         // 上传图片的地址
 
-        this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUploadImage'
+        this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUpload'
 
       /************* 我的反馈 *********************/
 
