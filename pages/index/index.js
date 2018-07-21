@@ -45,12 +45,12 @@ Page({
             userId: Storage.memberId() || '',
         })
         this.onStartMusic() // 播放音乐
-        // this.getWinnerRequest() // 获取中奖名单
+            // this.getWinnerRequest() // 获取中奖名单
         this.ani() // 旋转动画
-        // let that = this 
-        // setTimeout(function(){
-        //   that.getIsNumberHttp() // 获取抽奖次数
-        // },5000)
+            // let that = this
+            // setTimeout(function(){
+            //   that.getIsNumberHttp() // 获取抽奖次数
+            // },5000)
         this.getActivtyId()
         Event.on('didLogin', this.didLogin, this);
     },
@@ -58,21 +58,21 @@ Page({
 
     },
     getActivtyId() { // 获取活动Id
-      let r = global.RequestFactory.getActivityId();
-      r.finishBlock = (req) => {
-        Storage.setActivityId(req.responseObject.data.id)
-        this.setData({
-          activityId: req.responseObject.data.id,
-          activeStartTime: req.responseObject.data.startTime
-        })
-        this.getIsNumberHttp() // 获取抽奖次数
-        this.getWinnerRequest() // 获取中奖名单
-        this.selectComponent("#showNotice").noticeRequestHttp()
-        this.selectComponent("#sign").signListRequestHttp()
-        this.selectComponent("#sign").signReady()
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+        let r = global.RequestFactory.getActivityId();
+        r.finishBlock = (req) => {
+            Storage.setActivityId(req.responseObject.data.id)
+            this.setData({
+                activityId: req.responseObject.data.id,
+                activeStartTime: req.responseObject.data.startTime
+            })
+            this.getIsNumberHttp() // 获取抽奖次数
+            this.getWinnerRequest() // 获取中奖名单
+            this.selectComponent("#showNotice").noticeRequestHttp()
+            this.selectComponent("#sign").signListRequestHttp()
+            this.selectComponent("#sign").signReady()
+        }
+        Tool.showErrMsg(r)
+        r.addToQueue();
     },
     catchTouchMove: function(res) {
         return false
@@ -332,23 +332,23 @@ Page({
         let getStartTime = this.data.activeStartTime
         if (getStartTime < currentTime) {
             wx.showModal({
-              title: '活动未开启',
-              content: '',
+                title: '活动未开启',
+                content: '',
             })
         } else {
-          if (this.getIsLogin()) {
-            this.setData({
-              isTrue: !this.data.isTrue
-            })
-          }
+            if (this.getIsLogin()) {
+                this.setData({
+                    isTrue: !this.data.isTrue
+                })
+            }
         }
     },
     showNotice: function(e) { // 显示公告
         this.setData({
             isNotice: !this.data.isNotice
         })
-        if (this.data.isNotice){
-          this.selectComponent("#showNotice").noticeRequestHttp()
+        if (this.data.isNotice) {
+            this.selectComponent("#showNotice").noticeRequestHttp()
         }
     },
     goPage() { // 跳转detail
@@ -392,15 +392,15 @@ Page({
     requetLogin() { // 登录
         let sysInfo = global.Storage.sysInfo()
         let params = {
-            encryptedData: this.data.encryptedData,
-            iv: this.data.iv,
-            openId: Storage.getWxOpenid() || '',
-            name: this.data.userInfo.nickName,
-            headImgUrl: this.data.userInfo.avatarUrl,
-            loginAddress: '',
-            sex: this.data.userInfo.gender
-        }
-        // 手机型号
+                encryptedData: this.data.encryptedData,
+                iv: this.data.iv,
+                openId: Storage.getWxOpenid() || '',
+                name: this.data.userInfo.nickName,
+                headImgUrl: this.data.userInfo.avatarUrl,
+                loginAddress: '',
+                sex: this.data.userInfo.gender
+            }
+            // 手机型号
         params.mobile = sysInfo.model
 
         // 手机系统类型
@@ -411,7 +411,7 @@ Page({
 
         // 系统版本
         params.systemVersion = sysInfo.system
-        
+
         let r = global.RequestFactory.appWechatLogin(params);
         r.finishBlock = (req) => {
             Tool.loginOpt(req)
