@@ -183,7 +183,7 @@
                         <button></button>
                     </view>
                     <view class="text-center"  wx:if="{{signtype=='2'}}">
-                        <button class="btn-qiandao1" bindtap="sign_end" >已签到</button>
+                        <button class="btn-qiandao1">已签到</button>
                         <button></button>
                     </view>
                 </view>
