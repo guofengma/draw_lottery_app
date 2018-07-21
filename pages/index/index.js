@@ -140,8 +140,8 @@ Page({
         r.finishBlock = (req) => {
             console.log(req.responseObject)
             wx.showModal({
-                    title: '兑换成功'
-                })
+              title: '兑换成功'
+            })
                 // let num = req.responseObject.data
                 // this.setData({
                 //   isNumber: 
