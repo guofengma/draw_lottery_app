@@ -170,7 +170,7 @@ button::after {
 /*微信小程序签到wxss*/
 
 .calendar_wrapper {
-    width: 554rpx;
+    width: 570rpx;
     height: 560rpx;
     margin: 10rpx auto;
     font-size: 24rpx;

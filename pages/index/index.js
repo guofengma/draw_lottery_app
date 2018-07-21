@@ -38,6 +38,7 @@ Page({
         animationData: {},
         winnerBlock: [],
         offsetTop: {},
+        activeStartTime: '',
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -56,16 +57,19 @@ Page({
     onReady: function() {
 
     },
-    getActivtyId() {
+    getActivtyId() { // 获取活动Id
       let r = global.RequestFactory.getActivityId();
       r.finishBlock = (req) => {
         Storage.setActivityId(req.responseObject.data.id)
         this.setData({
-          activityId: req.responseObject.data.id
+          activityId: req.responseObject.data.id,
+          activeStartTime: req.responseObject.data.startTime
         })
         this.getIsNumberHttp() // 获取抽奖次数
         this.getWinnerRequest() // 获取中奖名单
         this.selectComponent("#showNotice").noticeRequestHttp()
+        this.selectComponent("#sign").signListRequestHttp()
+        this.selectComponent("#sign").signReady()
       }
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -324,10 +328,19 @@ Page({
         }
     },
     closeView(e) { // 显示天天签到
-        if (this.getIsLogin()) {
-            this.setData({
-                isTrue: !this.data.isTrue
+        let currentTime = new Date().getTime();
+        let getStartTime = this.data.activeStartTime
+        if (getStartTime < currentTime) {
+            wx.showModal({
+              title: '活动未开启',
+              content: '',
             })
+        } else {
+          if (this.getIsLogin()) {
+            this.setData({
+              isTrue: !this.data.isTrue
+            })
+          }
         }
     },
     showNotice: function(e) { // 显示公告
@@ -335,6 +348,9 @@ Page({
         this.setData({
             isNotice: !this.data.isNotice
         })
+        if(this.data.isNotice){
+          this.selectComponent("#showNotice").noticeRequestHttp()
+        }
     },
     goPage() { // 跳转detail
         Tool.navigateTo('/pages/activity-detail/activity-detail')

@@ -1,6 +1,6 @@
 // components/top-bar/top-bar.js
 var signTime = require("signin.js");
-let { Tool, RequestFactory } = global
+let { Tool, RequestFactory, Storage } = global
 Component({
     /**
      * 组件的属性列表
@@ -44,7 +44,7 @@ Component({
      */
     methods: {
         onLoad:function() {
-          this.sign()
+          // this.signReady()
         },
         sign_start: function() { // 签到
             this.signRequestHttp() // 调取签到接口
@@ -54,12 +54,11 @@ Component({
             //     signtype: "2",
             //     powerData: powerData,
             // });
-            wx.showToast({
-                title: '签到成功',
-                icon: 'success',
-                duration: 1500
-            });
-            this.signReady()
+           setTimeout(()=>{
+             console.log('签到之后获取签到列表')
+             this.signListRequestHttp()
+             this.signReady()
+           },1000)
         },
         close_qdbox: function() { // 签到奖励弹框
             var seriesCount = this.data.seriesCount;
@@ -161,7 +160,6 @@ Component({
             console.log(signDate_arr[0]);
             signTime.dataTime.bulidCal(showYear, showMonth, that, signDate_arr);
             //初始化加载日历
-            // this.signReady()
             this.setData({
                 showYear: showYear,
                 showMonth: showMonth,
@@ -240,6 +238,7 @@ Component({
           })
         },
         signListRequestHttp(){ // 请求签到列表
+          console.log('再次获取列表')
           let timeData = '';
           let getToday = new Date();
           let todayDate = getToday.getDate();
@@ -253,11 +252,12 @@ Component({
           }
           console.log(timeData)
           let data = {
-            activityId:1,
+            activityId: Storage.getActivityId() || '',
             yearsMonth: timeData
           };
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
+            console.log(req.responseObject)
             let stringJson = req.responseObject.data;
               this.setData({
                 weekdays: req.responseObject.data || []
@@ -268,17 +268,26 @@ Component({
         },
         signRequestHttp(){ // 签到
           let data = {
-            activityId: 1
+            activityId: Storage.getActivityId() || ''
           };
           let r = RequestFactory.signRequest(data);
           r.finishBlock = (req) => {
-            console.log(req)
+            console.log(req.responseObject.code)
+            if (req.responseObject.code === 200) {
+              wx.showToast({
+                title: '签到成功',
+                icon: 'success',
+                duration: 1500
+              });
+            }
+            console.log(this.data.weekdays)
           };
           Tool.showErrMsg(r);
           r.addToQueue();
         },
         signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
+            console.log('调用了ready')
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -340,14 +349,13 @@ Component({
               var newdats = anns[p];
               var t = parseInt(p);
               // console.log(this.data.oneWeekDays)
-              // if (anns[0] === this.data.oneWeekDays) {
-              //   console.log('第一次签到')
-              //   this.setData({
-              //     signTitle: '首次签到',
-              //     signNumber: 1
-              //   })
-              // }
-             if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
+              if (anns[0] === this.data.oneWeekDays) {
+                console.log('第一次签到')
+                this.setData({
+                  signTitle: '首次签到',
+                  signNumber: 1
+                })
+              } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
                   console.log('连续签到了7')
                   this.setData({
                     signTitle: '连续签到7天',
@@ -401,6 +409,5 @@ Component({
       // setTimeout( ()=>{
       //   this.signReady() // 加载日历
       // },1000)
-        
     }
 }) 
