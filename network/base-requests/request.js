@@ -139,7 +139,7 @@ export default class Request {
             },
             fail: function() {
                 that.tryCount++;
-                
+
                 console.debug('<============================== 请求结束：' + that.name + '第' + that.tryCount + '次请求');
                 console.debug('==============================\n\n\n');
                 //请求失败重试

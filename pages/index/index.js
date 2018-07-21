@@ -197,16 +197,16 @@ Page({
                 let strL = parseInt(str)
                 let strl = strL.length
                 let telIphone = ''
-                if(str === null) {
-                    console.log('不选')
+                if (Tool.isEmpty(str)) {
+                    console.log('不完整')
                 } else {
-                  if (strl > 11) {
-
+                  if (strl < 11 || strl > 11) {
+                      console.log('手机号位数错误')
                   } else {
                     telIphone = str.substr(0, 3) + "****" + str.substr(7)
                   }
                 }
-                console.log(str)
+                // console.log(str)
                 arr[t].push({
                     index: index + 1,
                     tphone: telIphone
