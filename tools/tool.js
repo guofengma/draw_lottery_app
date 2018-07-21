@@ -606,10 +606,11 @@ export default class Tool {
 
     // 判断人名
     static checkName(value) {
-      if (!(/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/.test(value))) {
-        return false
-      } else {
+      // !(/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/.test(value))
+      if (value.length > 1 && value.length<17) {
         return true
+      } else {
+        return false
       }
     }
 
