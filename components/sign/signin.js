@@ -17,8 +17,8 @@ var dataTime = {
         //判断当前月份第一天周几
         var curMonthDays = new Date(dCalDate.getFullYear(), (dCalDate.getMonth() + 1), 0).getDate();
         //判断当前月份有多少天
-        console.log("本月共有 " + curMonthDays + " 天");
-        console.log("本月第一天周 " + iDayOfFirst);
+        // console.log("本月共有 " + curMonthDays + " 天");
+        // console.log("本月第一天周 " + iDayOfFirst);
         var iDaysInMonth = (iMonth, iYear);
         var iVarDate = 1;
         var d, w;

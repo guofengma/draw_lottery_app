@@ -55,7 +55,7 @@ Component({
             //     powerData: powerData,
             // });
            setTimeout(()=>{
-             console.log('签到之后获取签到列表')
+            //  console.log('签到之后获取签到列表')
              this.signListRequestHttp()
              this.signReady()
            },1000)
@@ -115,7 +115,7 @@ Component({
                 var newdats = anns[p];
                 signDate_arr.push(newdats);
             }
-            console.log(signDate_arr[0]);
+            // console.log(signDate_arr[0]);
             signTime.dataTime.bulidCal(showYear, showMonth, that, signDate_arr);
             // this.signReady()
             //初始化加载日历
@@ -238,7 +238,7 @@ Component({
           })
         },
         signListRequestHttp(){ // 请求签到列表
-          console.log('再次获取列表')
+          // console.log('再次获取列表')
           let timeData = '';
           let getToday = new Date();
           let todayDate = getToday.getDate();
@@ -257,7 +257,7 @@ Component({
           };
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
-            console.log(req.responseObject)
+            // console.log(req.responseObject)
             let stringJson = req.responseObject.data;
               this.setData({
                 weekdays: req.responseObject.data || []
@@ -287,7 +287,7 @@ Component({
         },
         signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
-            console.log('调用了ready')
+            // console.log('调用了ready')
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();

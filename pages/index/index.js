@@ -157,7 +157,7 @@ Page({
         };
         let r = RequestFactory.shakeNumberRequest(data);
         r.finishBlock = (req) => {
-            console.log(req.responseObject)
+            // console.log(req.responseObject)
             let num = req.responseObject.data
             this.setData({
                 isNumber: num
@@ -200,9 +200,9 @@ Page({
     onShow: function() { // 进行摇一摇
         let that = this;
         setTimeout(() => {
-            console.log(that.data.isNumber)
+            // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
-            console.log('进入延时')
+            // console.log('进入延时')
             if (num === 0) {
                 // wx.showToast({
                 //     title: '没有次数了',
@@ -282,11 +282,14 @@ Page({
                                     console.log('停止背景音乐')
                                     console.log('进入异步失败操作')
                                     console.log(req.responseObject)
-                                    audioCtx = wx.createAudioContext('myAudioShake');
-                                    audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/fail.mp3');
-                                    audioCtx.play();
+                                    let start = ()=>{
+                                       wx.startAccelerometer();
+                                    }
                                     if (req.responseObject.code === 600) {
                                         console.log(req.responseObject)
+                                        audioCtx = wx.createAudioContext('myAudioShake');
+                                        audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/fail.mp3');
+                                        audioCtx.play();
                                         let num = that.data.isNumber--
                                             that.setData({
                                                 isNumber: num,
@@ -295,6 +298,8 @@ Page({
                                                 isWzj: true
                                             })
                                         wx.hideLoading()
+                                    } else {
+                                      Tool.showAlert(req.responseObject.msg, start)
                                     }
                                 };
                                 r.addToQueue();
@@ -436,7 +441,7 @@ Page({
         Storage.setWxUserInfo(userInfo)
         this.requetLogin()
     },
-    onUnload: function() {
+    onUnload: function() { 
         Event.off('didLogin', this.didLogin);
     },
 })

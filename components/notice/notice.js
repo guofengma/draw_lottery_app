@@ -40,10 +40,10 @@ Component({
             r.finishBlock = (req) => {
               // console.log(typeof req.responseObject.data)
               let datas = req.responseObject.data
-              console.log(typeof datas)
+              // console.log(typeof datas)
               if (!Tool.isEmpty(datas)) {
-                console.log('不空')
-              console.log(req.responseObject.data)
+                // console.log('不空')
+              // console.log(req.responseObject.data)
               let datas = req.responseObject.data;
               let starts = datas.start;
               let totals = datas.total;
@@ -52,13 +52,13 @@ Component({
               })
                 let isUndefined = datas.data[0]
                 if(datas.total < 1) {
-                  console.log('没了')
+                  // console.log('没了')
                   this.setData({
                     isBtnFalse:false,
                     btnNext: '关闭'
                   }) 
                 } else {
-                  console.log('有')
+                  // console.log('有')
                   this.setData({
                     isBtnFalse: true
                   }) 
