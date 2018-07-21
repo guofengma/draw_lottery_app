@@ -681,6 +681,7 @@ export default class Tool {
 
     static showErrMsg(r) {
       r.failBlock = (req) => {
+        console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
         let callBack = ()=>{
 
@@ -691,7 +692,10 @@ export default class Tool {
             this.navigateTo(page+'?isBack='+true)
           }
         }
-        this.showAlert(req.responseObject.msg, callBack)
+        console.log(req.responseObject.msg)
+        if (req.responseObject.msg){
+          this.showAlert(req.responseObject.msg, callBack)
+        }
       }
     }
 
