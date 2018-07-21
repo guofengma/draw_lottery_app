@@ -1,17 +1,20 @@
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
-<sign-in isTrue='{{isTrue}}' bind:closeView='closeView' id="sign"></sign-in>
+<sign-in isTrue='{{isTrue}}' bind:closeView='closeView' bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
 <notice wx:if="{{isNotice}}" bind:showNotice='showNotice' id='showNotice'></notice>
 <audio id="myAudio" style='display:none'></audio>
 <audio id="myAudioShake" style='display:none'></audio>
+<movable-area>
 <view class="home-page">
-<view class="myAudio">
-  <image wx:if="{{isStop}}" animation="{{animationData}}" src="../../img/action.png" class="an-c an-r an-t animated rotate" bindtap='onStopbgMusic'></image>
-  <image wx:else src="../../img/stop.png" bindtap='onActionbgMusic'></image>
-</view>
-  <view class="home-tree"></view>
-  <view class="home-Notice" catchtap='showNotice'>
-  <image src="../../img/Notice.png"></image>
+  <view class="myAudio">
+    <image wx:if="{{isStop}}" animation="{{animationData}}" src="../../img/action.png" class="an-c an-r an-t animated rotate" bindtap='onStopbgMusic'></image>
+    <image wx:else src="../../img/stop.png" bindtap='onActionbgMusic'></image>
   </view>
+  <view class="home-tree"></view>
+   <movable-view x="{{320}}" y="{{280}}" direction="all">
+      <view class="home-Notice" catchtap='showNotice'>
+        <image src="../../img/Notice.png"></image>
+      </view>
+    </movable-view>
   <view class="home-inside">
     <view class="inputBox">
       <input class="security-code" placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
@@ -80,7 +83,7 @@
       </view>
   </view>
 </view>
-
+</movable-area>
 
 <block wx:if="{{visiable}}">
   <view class="model-view-bg-c">

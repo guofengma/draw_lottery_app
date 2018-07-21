@@ -360,10 +360,7 @@ Page({
         let currentTime = new Date().getTime();
         let getStartTime = this.data.activeStartTime
         if (getStartTime < currentTime) {
-            wx.showModal({
-                title: '活动未开启',
-                content: '',
-            })
+            Tool.showAlert('活动未开启')
         } else {
             if (this.getIsLogin()) {
                 this.setData({

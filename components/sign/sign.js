@@ -6,7 +6,9 @@ Component({
      * 组件的属性列表
      */
     properties: {
-      isTrue:Boolean
+      isTrue:Boolean,
+      isAuthorize: Boolean,
+      visiable: Boolean,
     },
     /**
      * 组件的初始数据
@@ -279,6 +281,8 @@ Component({
                 icon: 'success',
                 duration: 1500
               });
+            } else {
+              return null
             }
             console.log(this.data.weekdays)
           };
