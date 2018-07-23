@@ -774,6 +774,7 @@ export default class Tool {
 
     static isIPhoneX(that) {
       let isIPhoneX = global.Storage.sysInfo().isIphoneX
+      console.log(global.Storage.sysInfo())
       let className = isIPhoneX ? 'fixed-bottom-iPhoneX' :'fixed-bottom'
       let showBottom = isIPhoneX
       that.setData({
