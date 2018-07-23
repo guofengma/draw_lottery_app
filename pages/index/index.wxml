@@ -49,18 +49,18 @@
 
   <view class="home-tabar flexR {{isIPhoneX.className}}">
     <!--获取手机按钮  -->
-    <!-- <block wx:if='{{!isAuthorize&&!visiable}}'>
+    <block wx:if='{{!isAuthorize&&!visiable}}'>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">活动详情</button>
       <button class='home-tabar-btn home-btn-borders' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">我的奖品</button>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">天天签到</button>
-    </block> -->
+    </block>
     <!--获取用户头像按钮  -->
-    <!-- <block wx:elif='{{!isAuthorize&&visiable}}'>
+    <block wx:elif='{{!isAuthorize&&visiable}}'>
       <button open-type="getUserInfo" class='home-tabar-btn' bindgetuserinfo="agreeGetUser" lang="zh_CN">活动详情</button>
       <button open-type="getUserInfo" class='home-tabar-btn home-btn-borders' bindgetuserinfo="agreeGetUser" lang="zh_CN">我的奖品</button>
       <button open-type="getUserInfo" class='home-tabar-btn' bindgetuserinfo="agreeGetUser" lang="zh_CN">天天签到</button>
-    </block> -->
-    <!--正常点击按钮  -->
+    </block>
+    <!--正常点击按钮 -->
     <block>
       <view class="home-tabar-btn" catchtap='goPage'>活动详情</view>
       <view class="home-tabar-btn home-btn-borders" catchtap='awardClicked'>我的奖品</view>
