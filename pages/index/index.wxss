@@ -70,7 +70,7 @@
 .home-winners{
   width: 536rpx;
   height: 430rpx;
-  margin: 60rpx auto;
+  margin: 94rpx auto;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/honeBorder.png') no-repeat center center;
   background-size:100%;
 }
@@ -238,4 +238,18 @@ movable-view {
 movable-area {
   height: 100%;
   width: 100%;
+}
+.rotate{
+  animation:rotaed 2s linear infinite;
+-moz-animation:rotaed 2s linear infinite; /* Firefox */
+-webkit-animation:rotaed 2s linear infinite; /* Safari and Chrome */
+-o-animation:rotaed 2s linear infinite; /* Opera */
+}
+@keyframes rotaed {
+  0%{
+    transform: rotate(0deg)
+  }
+  100%{
+    transform:  rotate(359deg)
+  }
 }

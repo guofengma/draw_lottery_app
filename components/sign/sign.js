@@ -46,7 +46,6 @@ Component({
      */
     methods: {
         onLoad:function() {
-          // this.signReady()
         },
         sign_start: function() { // 签到
             this.signRequestHttp() // 调取签到接口
@@ -119,7 +118,6 @@ Component({
             }
             // console.log(signDate_arr[0]);
             signTime.dataTime.bulidCal(showYear, showMonth, that, signDate_arr);
-            // this.signReady()
             //初始化加载日历
             this.setData({
                 showYear: showYear,
@@ -168,68 +166,6 @@ Component({
             });
 
         },
-        sign: function(options) { // 签到
-            var getToday = new Date();
-            var todayDate = getToday.getDate();
-            var todayMonths = getToday.getMonth();
-            var todayMonth = (todayMonths + 1);
-            var todayYear = getToday.getFullYear();
-            var todayss = getToday.getDate();
-            if (todayMonth < 10) {
-                var todayMonthss = "0" + todayMonth;
-            } else {
-                var todayMonthss = todayMonth;
-            }
-            console.log(todayss);
-            var godates = todayYear + "-" + todayMonthss + "-01";
-            var that = this;
-            var data = { seriesCount: 1, signDays: [] };
-            var $datas = data;
-            var signDate_arr = new Array();
-            var anns = $datas.signDays;
-            var count_signday = $datas.seriesCount;
-            if (count_signday > 9) {
-                var series_gos = "0";
-            } else if (count_signday < 0) {
-                var series_gos = 99;
-            } else {
-                var series_gos = 10 - parseInt(count_signday);
-            } 
-            anns.push(todayss) //  存放今日的签到日期
-            that.setData({
-                seriesCount: count_signday,
-                series_gos: series_gos,
-            });
-            for (var p in anns) { //遍历json对象的每个key/value对,p为key
-                var newdats = anns[p];
-                signDate_arr.push(newdats);
-            }
-            if (signDate_arr.indexOf(todayss) > -1) {
-                console.log("当前已签到");
-                that.setData({
-                    signtype: "2",
-                });
-            } else {
-                console.log("当前未签到");
-                that.setData({
-                    signtype: "1",
-                });
-            }
-            console.log(signDate_arr[0]);
-            signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
-            //初始化加载日历
-            this.setData({
-                todayDate: todayDate,
-                todayMonth: todayMonth,
-                todayYear: todayYear,
-                prevYear: todayYear,
-                nextYear: todayYear,
-                prevMonth: todayMonth,
-                nextMonth: todayMonth,
-                showYear: todayYear,
-                showMonth: todayMonth,
-            });
-        },
         closeView: function() { // 关闭日历
           console.log(1)
           this.triggerEvent('closeView',false)
@@ -240,7 +176,6 @@ Component({
           })
         },
         signListRequestHttp(){ // 请求签到列表
-          // console.log('再次获取列表')
           let timeData = '';
           let getToday = new Date();
           let todayDate = getToday.getDate();
@@ -291,7 +226,6 @@ Component({
         },
         signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
-            // console.log('调用了ready')
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -353,25 +287,26 @@ Component({
               var newdats = anns[p];
               var t = parseInt(p);
               // console.log(this.data.oneWeekDays)
-              if (anns[0] === this.data.oneWeekDays) {
+              if (anns[0] == this.data.oneWeekDays) {
                 console.log('第一次签到')
                 this.setData({
                   signTitle: '首次签到',
                   signNumber: 1
                 })
-              } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 7) {
+              }  
+              if ((anns[t + 1] - anns[p]) == 1 && anns.length == 7) {
                   console.log('连续签到了7')
                   this.setData({
                     signTitle: '连续签到7天',
                     signNumber: 3
                   })
-              } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 15){
+              } else if ((anns[t + 1] - anns[p]) == 1 && anns.length == 15){
                 console.log('连续签到了15天')
                   this.setData({
                     signTitle: '连续签到15天',
                     signNumber: 5
                   })
-              } else if ((anns[t + 1] - anns[p]) === 1 && anns.length === 30){
+              } else if ((anns[t + 1] - anns[p]) == 1 && anns.length == 30){
                 console.log('连续签到了30天')
                   this.setData({
                     signTitle: '连续签到30天',

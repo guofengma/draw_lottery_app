@@ -133,22 +133,13 @@ Page({
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let  code = this.data.code;
-      // if (code == 1000000000000001) {
-      //   wx.showModal({
-      //     title: '防伪码',
-      //     content: '防伪码兑换成功',
-      //   })
-      // } else if (code == 1000000000000002){
-      //   wx.showModal({
-      //     title: '防伪码',
-      //     content: '防伪码已使用',
-      //   })
-      // } else {
-      //     wx.showModal({
-      //       title: '防伪码',
-      //       content: '防伪码错误',
-      //     })
-      // }
+        this.setData({
+          userId: Storage.memberId() || ''
+        })
+        console.log(this.data.userId)
+        if(this.data.userId == '' || this.data.userId == null){
+          return 
+        }
         if (this.data.code === '' || this.data.code === null) {
             console.log('code为空')
             wx.showModal({
@@ -211,19 +202,18 @@ Page({
                         arr[t] = new Array();
                     }
                     let str = res.telephone
-                    let strL = parseInt(str)
-                    let strl = strL.length
+                    let strL = str.length
                     let telIphone = ''
                     if (Tool.isEmpty(str)) {
                         console.log('不完整')
                     } else {
-                        if (strl < 11 || strl > 11) {
+                        if (strL < 11 || strL > 11) {
                             console.log('手机号位数错误')
                         } else {
                             telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                            console.log(telIphone)
                         }
                     }
-                    // console.log(str)
                     arr[t].push({
                         index: index + 1,
                         tphone: telIphone
