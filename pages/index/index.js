@@ -133,22 +133,22 @@ Page({
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let  code = this.data.code;
-      if (code == 1000000000000001) {
-        wx.showModal({
-          title: '防伪码',
-          content: '防伪码兑换成功',
-        })
-      } else if (code == 1000000000000002){
-        wx.showModal({
-          title: '防伪码',
-          content: '防伪码已使用',
-        })
-      } else {
-          wx.showModal({
-            title: '防伪码',
-            content: '防伪码错误',
-          })
-      }
+      // if (code == 1000000000000001) {
+      //   wx.showModal({
+      //     title: '防伪码',
+      //     content: '防伪码兑换成功',
+      //   })
+      // } else if (code == 1000000000000002){
+      //   wx.showModal({
+      //     title: '防伪码',
+      //     content: '防伪码已使用',
+      //   })
+      // } else {
+      //     wx.showModal({
+      //       title: '防伪码',
+      //       content: '防伪码错误',
+      //     })
+      // }
         if (this.data.code === '' || this.data.code === null) {
             console.log('code为空')
             wx.showModal({
@@ -172,7 +172,7 @@ Page({
                     // })
             };
             Tool.showErrMsg(r);
-            // r.addToQueue();
+            r.addToQueue();
             this.getIsNumberHttp();
         }
     },
