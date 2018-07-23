@@ -31,7 +31,8 @@ Component({
   ready: function () {
     //this.getActivtyId()
     if (!this.properties.canStart){
-      this.getActivtyId()
+      //this.getActivtyId()
+      this.getUserId()
     }
   }
 })

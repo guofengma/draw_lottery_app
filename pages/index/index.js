@@ -4,7 +4,6 @@ const app = getApp()
 let { Tool, RequestFactory, Storage, Event } = global
 Page({
     data: {
-        motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -443,7 +442,7 @@ Page({
             openId: Storage.getWxOpenid() || '',
             name: this.data.userInfo.nickName,
             headImgUrl: this.data.userInfo.avatarUrl,
-            loginAddress: '',
+            loginAddress: Storage.getLocation() || '',
             sex: this.data.userInfo.gender
         }
 

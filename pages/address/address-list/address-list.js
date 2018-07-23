@@ -30,7 +30,7 @@ Page({
     }
   },
   goPage(){
-    Tool.navigateTo('/pages/address/edit-address/edit-address')
+    Tool.navigateTo('/pages/address/edit-address/edit-address?door='+this.data.door)
   },
   updateOrderAddress(address){
     address.showDefault = false

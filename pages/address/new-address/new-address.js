@@ -12,6 +12,7 @@ Page({
     addressType:0, // 1新建地址 2修改地址
     region:[],// 省市区的数组
     isChoose:false, // 是否选择为默认地址
+    door:1, // 1常规 2 朵地址
   },
   onLoad: function (options) {
     wx.setNavigationBarTitle({
@@ -21,7 +22,8 @@ Page({
       this.getEditAddressList(JSON.parse(options.address))
     }
     this.setData({
-      addressType: options.type || ''
+      addressType: options.type || '',
+      door: options.door || '',
     })
   },
   getEditAddressList(address){

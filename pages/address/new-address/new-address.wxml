@@ -11,11 +11,11 @@
   <textarea placeholder="请输入详细地址" placeholder-style="color:#999;" class='font-26' name='address' value='{{address.address}}'/>
 
   <view class='font-26 whiteBg group-line'>
-    <view class='flexR-sb' wx:if='{{addressType==1}}'>
+    <view class='flexR-sb' wx:if='{{addressType==1&&door==1}}'>}}'>
       设为默认地址
       <image src='{{isChoose? "/img/choose-red.png":"/img/choose-gray.png"}}' catchtap='chooseClicked' mode='widthFix'></image>
     </view>
-    <view class='flexR-sb red' wx:else  catchtap='deleteAddress'>删除地址</view>
+    <view class='flexR-sb red' wx:if='{{addressType!=1}}'  catchtap='deleteAddress'>删除地址</view>
   </view>
 
   <button formType="submit" class='default-btn fixed-bottom btn' >保存</button>

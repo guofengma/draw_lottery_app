@@ -2,10 +2,14 @@ let { Tool, RequestFactory, Event } = global
 
 Page({
   data: {
-    addressList:[]
+    addressList:[],
+    door:''
   },
 
   onLoad: function (options) {
+    this.setData({
+      door: options.door || '',
+    })
     this.queryUserAddressList() 
     Event.on('updateAdressList', this.queryUserAddressList, this)
   },
@@ -53,7 +57,7 @@ Page({
   },
   newAddress(list, types=1) {
 
-    let page = '/pages/address/new-address/new-address?type=' + types
+    let page = '/pages/address/new-address/new-address?type=' + types+"&door="+this.data.door
 
     if (types){
       page = page + '&address=' + JSON.stringify(list)

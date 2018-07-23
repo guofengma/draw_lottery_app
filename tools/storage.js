@@ -152,5 +152,18 @@ export default class Storage {
     static getOrderList() {
       return this.getterFor('orderList');
     }
+
+    // 存储地理定位
+    
+    static setLocation(info) {
+      this.setterFor('userLocation', info)
+    }
+
+    static getLocation() {
+      return this.getterFor('userLocation');
+    }
+
+
+
     
 }

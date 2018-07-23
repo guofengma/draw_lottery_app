@@ -20,7 +20,8 @@ App({
     userInfo: null,
     openid: null,
     code: null,
-    flag: false//退出登录使用参数
+    flag: false,//退出登录使用参数
+    location:'',// 地理信息
   },
   wxLogin() {
     // 小程序登录
@@ -33,8 +34,8 @@ App({
           // 启动页结束以后 调用接口
           let that = this
           setTimeout(function(){
-            that.getSystemInfo();
-          }, 3500)
+            that.getLocation()
+          }, 3100)
         }
       }
     })
@@ -65,20 +66,8 @@ App({
     if (!code) return
     let params = {
       code: code,
-      loginAddress:''
+      loginAddress: this.globalData.location || ''
     }
-    let sysInfo = global.Storage.sysInfo()
-    // 手机型号
-    params.mobile = sysInfo.model
-
-    // 手机系统类型
-    params.systemType = 3
-
-    // 微信版本
-    params.wxVersion = sysInfo.version
-
-    // 系统版本
-    params.systemVersion = sysInfo.system
     let r = global.RequestFactory.getWeChatOpenId(params);
     r.finishBlock = (req) => {
       Tool.loginOpt(req)
@@ -93,18 +82,8 @@ App({
     let that = this
     try {
       //调用微信接口，获取设备信息接口
-      let res = wx.getSystemInfoSync()
-      res.screenHeight = res.screenHeight * res.pixelRatio;
-      res.screenWidth = res.screenWidth * res.pixelRatio;
-      res.windowHeight = res.windowHeight * res.pixelRatio;
-      res.windowWidth = res.windowWidth * res.pixelRatio;
-      let rate = 750.0 / res.screenWidth;
-      res.rate = rate;
-      res.screenHeight = res.screenHeight * res.rate;
-      res.screenWidth = res.screenWidth * res.rate;
-      res.windowHeight = res.windowHeight * res.rate;
-      res.windowWidth = res.windowWidth * res.rate;
-      Storage.setSysInfo(res);
+      let res = this.setSystemInfo()
+      Storage.setSysInfo(res); // 存储数据
       that.getUserInfos(that.globalData.code)
       that.globalData.systemInfo = res
       typeof cb == "function" && cb(that.globalData.systemInfo)
@@ -112,5 +91,31 @@ App({
     catch (e) {
 
     }
-  }
+  },
+  setSystemInfo(){  //设备信息
+    let res = wx.getSystemInfoSync()
+    res.screenHeight = res.screenHeight * res.pixelRatio;
+    res.screenWidth = res.screenWidth * res.pixelRatio;
+    res.windowHeight = res.windowHeight * res.pixelRatio;
+    res.windowWidth = res.windowWidth * res.pixelRatio;
+    let rate = 750.0 / res.screenWidth;
+    res.rate = rate;
+    res.screenHeight = res.screenHeight * res.rate;
+    res.screenWidth = res.screenWidth * res.rate;
+    res.windowHeight = res.windowHeight * res.rate;
+    res.windowWidth = res.windowWidth * res.rate;
+    return res
+  },
+  getLocation() {
+    // 获取地址
+    let callBack = (res) => {
+      if (res) {
+        let address = res.originalData.result.addressComponent
+        this.globalData.location = address.country+ address.province + address.city + address.district
+        Storage.setLocation(this.globalData.location)
+      }
+      this.getSystemInfo()
+    }
+    Tool.queryLocation(callBack)
+  },
 })
