@@ -1,5 +1,6 @@
  <import src='/components/input-line/input-line.wxml' /> 
  <import src='/components/cell-line/cell-line.wxml' /> 
+ <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
 <top-bar/>
 <form bindsubmit="formSubmit" >
@@ -18,7 +19,7 @@
     <view class='flexR-sb red' wx:if='{{addressType!=1}}'  catchtap='deleteAddress'>删除地址</view>
   </view>
 
-  <button formType="submit" class='default-btn fixed-bottom btn' >保存</button>
-
+  <button formType="submit" class='default-btn {{isIPhoneX.className}} btn' >保存</button>
+  <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 </form>
  

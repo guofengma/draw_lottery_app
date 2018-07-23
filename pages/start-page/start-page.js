@@ -24,6 +24,10 @@ Page({
       time: time
     });
   },
+  subClicked(){
+    clearTimeout(this.data.time);
+    Tool.redirectTo('/pages/index/index')
+  },
   onUnload: function () {
     clearTimeout(this.data.time);
   }

@@ -1,5 +1,5 @@
 <import src='/components/address-info/address-info.wxml' />
-
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 <top-bar/>
 <view class='addressList'>
   <block wx:for='{{addressList}}' wx:key='unique'>
@@ -13,5 +13,6 @@
     </view>
   </block>
 
-  <view class='default-btn fixed-bottom' catchtap='goPage'>管理</view>
+  <view class='default-btn {{isIPhoneX.className}}' catchtap='goPage'>管理</view>
 </view>
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

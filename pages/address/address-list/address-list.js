@@ -6,6 +6,7 @@ Page({
     door:0, // 2 朵地址
   },
   onLoad: function (options) {
+    Tool.isIPhoneX(this)
     let showDefault = this.data.showDefault ||''
     if (options.door==2){
       showDefault = false
