@@ -40,7 +40,8 @@ Page({
         SignActivtyId: false,
         disabled:false,
         isPlusNumber: false,
-        isReduceNumber:false,
+        isReduceNumber: false,
+        isDrawn:true,
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -197,6 +198,7 @@ Page({
                   //   isNumber: 
                   // })
                 this.getIsNumberHttp()
+                wx.startAccelerometer();
               };
               Tool.showErrMsg(r);
               r.addToQueue();
@@ -220,6 +222,7 @@ Page({
                   isPlusNumber:false
                 })
             },1500)
+          wx.startAccelerometer();
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -373,9 +376,11 @@ Page({
                                               isShowModelTitle: '很遗憾，未中奖',
                                               isShakeBox: true,
                                               isWzj: true,
-                                              isReduceNumber: true
+                                              isReduceNumber: true,
+                                              isDrawn:false
                                             })
                                         wx.hideLoading()
+                                          // that.getIsNumberHttp()
                                     } else {
                                         Tool.showAlert(req.responseObject.msg, start)
                                     }
@@ -396,6 +401,7 @@ Page({
         this.isShowSake = false // 设置第一次进入
     },
     closeBindshakeBox: function() { // 摇一摇弹框
+        let that = this
         this.setData({
             isShakeBox: false
         })
@@ -409,6 +415,11 @@ Page({
             wx.startAccelerometer();
             this.onActionbgMusic();
         }
+        setTimeout(()=>{
+          that.setData({
+            isReduceNumber: false
+          })
+        },1500)
     },
     closeView(e) { // 显示天天签到
         // if (this.getIsLogin()) {

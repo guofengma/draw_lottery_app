@@ -93,9 +93,13 @@
               <view class="shakeText" style="font-weight:blod;">{{isMaterialName}}</view>
            </view>
         </view>
-        <view class="shakeBtnBox">
+        <view class="shakeBtnBox" wx:if="{{}}">
           <view class="shakeBtn" bindtap="closeBindshakeBox">继续摇奖</view>
           <view class="shakeBtn shakeBtnRight" catchtap='awardClicked'>查看奖品</view>
+        </view>
+        <view class="shakeBtnBox" wx:else>
+          <view class="shakeBtn" bindtap="closeBindshakeBox">我知道了</view>
+          <view class="shakeBtn shakeBtnRight" bindtap='closeBindshakeBox'>继续摇奖</view>
         </view>
       </view>
   </view>
