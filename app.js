@@ -14,6 +14,7 @@ App({
     global.Tool = Tool;
     global.Event = Event;
     global.RequestFactory = RequestFactory;
+    this.getSystemInfo()
     this.wxLogin()
   },
   globalData: {
@@ -84,7 +85,6 @@ App({
       //调用微信接口，获取设备信息接口
       let res = this.setSystemInfo()
       Storage.setSysInfo(res); // 存储数据
-      that.getUserInfos(that.globalData.code)
       that.globalData.systemInfo = res
       typeof cb == "function" && cb(that.globalData.systemInfo)
     }
@@ -119,7 +119,7 @@ App({
         this.globalData.location = address.country+ address.province + address.city + address.district
         Storage.setLocation(this.globalData.location)
       }
-      this.getSystemInfo()
+      this.getUserInfos(this.globalData.code)
     }
     Tool.queryLocation(callBack)
   },

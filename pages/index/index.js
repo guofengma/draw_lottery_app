@@ -64,11 +64,9 @@ Page({
                 activityId: req.responseObject.data.id,
                 activeStartTime: req.responseObject.data.startTime
             })
-          if (this.getIsLogin()) {
+          if (this.getIsLogin(false)) {
                 let currentTime = new Date().getTime(); // 当前时间
                 let getStartTime = this.data.activeStartTime //活动开始时间
-                console.log(currentTime)
-                console.log(getStartTime - currentTime)
                 if (getStartTime > currentTime) {
                   console.log('活动未开启')
                     this.setData({
@@ -443,11 +441,13 @@ Page({
             Tool.navigateTo('/pages/my/my')
         }
     },
-    getIsLogin() { // 退出之后跳转登录
+    getIsLogin(isGoPage) { // 退出之后跳转登录
         let cookies = Storage.getUserCookie() || false
         if (!cookies) {
+          if (isGoPage===undefined){
             Tool.navigateTo('/pages/login/login')
-            return false
+          }
+          return false
         }
         return true
     },
