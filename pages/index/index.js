@@ -1,10 +1,8 @@
 //index.js
 //获取应用实例
-const app = getApp()
 let { Tool, RequestFactory, Storage, Event } = global
 Page({
     data: {
-        motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -44,13 +42,9 @@ Page({
         this.setData({ // storage 中获取userId
             userId: Storage.memberId() || '',
         })
+        Tool.isIPhoneX(this)
         this.onStartMusic() // 播放音乐
-            // this.getWinnerRequest() // 获取中奖名单
         this.ani() // 旋转动画
-            // let that = this
-            // setTimeout(function(){
-            //   that.getIsNumberHttp() // 获取抽奖次数
-            // },5000)
         this.getActivtyId()
         Event.on('didLogin', this.didLogin, this);
     },
@@ -61,6 +55,7 @@ Page({
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
             Storage.setActivityId(req.responseObject.data.id)
+            Storage.setActivityCode(req.responseObject.data.code)
             this.setData({
                 activityId: req.responseObject.data.id,
                 activeStartTime: req.responseObject.data.startTime
@@ -433,7 +428,7 @@ Page({
             openId: Storage.getWxOpenid() || '',
             name: this.data.userInfo.nickName,
             headImgUrl: this.data.userInfo.avatarUrl,
-            loginAddress: '',
+            loginAddress: Storage.getLocation() || '',
             sex: this.data.userInfo.gender
         }
 

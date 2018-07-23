@@ -3,6 +3,7 @@
  */
 'use strict';
 
+let bmap = require('../libs/baidu-map/bmap-wx.min');
 
 //工具类
 
@@ -720,7 +721,7 @@ export default class Tool {
       console.log("openId" + req.responseObject.data.openId)
       if (req.responseObject.data.id){
         global.Storage.setAuthorize(true)
-        global.Storage.setMemberId(req.responseObject.data.id)
+        global.Storage.setMemberId(req.responseObject.data.code)
       }
       global.Event.emit('didLogin');
     }
@@ -733,5 +734,53 @@ export default class Tool {
       let url = currentPage.route    //当前页面url
       return url
     }
+
+    //调用微信接口，获取定位信息
+    static queryLocation(cb = (res) => { }, complete = () => { }) {
+      wx.getLocation({
+        // type:'gcj02',
+        success: function (res) {
+          let that = this;
+          /* 获取定位地理位置 */
+          // 新建bmap对象
+          let BMap = new bmap.BMapWX({
+            ak: global.TCGlobal.BaiduMapKey
+          });
+          let fail = function (data) {
+            console.log(data);
+          };
+          let success = function (data) {
+            //返回数据内，已经包含经纬度
+            res.wxMarkerData = data.wxMarkerData;
+            res.originalData = data.originalData;
+            cb(res);
+          }
+          // 发起regeocoding检索请求
+          BMap.regeocoding({
+            fail: fail,
+            success: success
+          });
+        },
+        fail: function () {
+          cb(null);
+        },
+        complete: function () {
+          complete();
+        }
+      })
+    }
+
+    // 是否是iPhone 34rpx的底部像素差
+
+    static isIPhoneX(that) {
+      let isIPhoneX = global.Storage.sysInfo().isIphoneX
+      let className = isIPhoneX ? 'fixed-bottom-iPhoneX' :'fixed-bottom'
+      let showBottom = isIPhoneX
+      that.setData({
+        isIPhoneX: { isIPhoneX, showBottom, className }
+      })
+      return { isIPhoneX,showBottom, className}
+    }
+
 }
 

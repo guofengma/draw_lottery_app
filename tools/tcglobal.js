@@ -17,7 +17,7 @@ let TCGlobal = {
     version:'V1.0',
     AppId: 'wxb149b67e84af7551',//小程序AppID
     Secret: 'ea39f6e44bd620a5381d2454e4e8e4b4',//小程序Secret
-    BaiduMapKey: 'isXMvA8KolOhA9UireE9IsXOYFQl8XGw',
+    BaiduMapKey: 'BazNALkeiEEMMvZjWmPeXlRqOyd0BlnL',
     WXPayKey: '',//商户平台32位密钥
     WXPayAccount: '',
     WXPayMchId: '',//商户Id

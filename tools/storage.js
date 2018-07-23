@@ -143,6 +143,16 @@ export default class Storage {
       return this.getterFor('activityId');
     }
 
+    // 存活动code
+
+    static setActivityCode(info) {
+      this.setterFor('activityCode', info)
+    }
+
+    static getActivityCode() {
+      return this.getterFor('activityCode');
+    }
+
     // orderList
 
     static setOrderList(info) {
@@ -152,5 +162,18 @@ export default class Storage {
     static getOrderList() {
       return this.getterFor('orderList');
     }
+
+    // 存储地理定位
+    
+    static setLocation(info) {
+      this.setterFor('userLocation', info)
+    }
+
+    static getLocation() {
+      return this.getterFor('userLocation');
+    }
+
+
+
     
 }

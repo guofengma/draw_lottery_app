@@ -124,6 +124,12 @@ button::after{
   width: 100%;
   z-index: 999;
 }
+.fixed-bottom-iPhoneX{
+  position: fixed;
+  bottom: 34rpx;
+  width: 100%;
+  z-index: 999;
+}
 .fixed-top{
   position: fixed;
   top:0;

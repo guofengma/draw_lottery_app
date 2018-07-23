@@ -1,5 +1,10 @@
-<view class='bottomBar'>
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='bottomBar {{isIPhoneX.className}}'>
   <view class='{{index==0? "active":""}}' catchtap='goPage' data-index='0'>实物奖品</view>
   <view class='{{index==1? "active":""}}' catchtap='goPage' data-index='1'>字卡奖品</view>
   <view class='{{index==2? "active":""}}' catchtap='goPage' data-index='2'>我的红包</view>
 </view>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" /> 
