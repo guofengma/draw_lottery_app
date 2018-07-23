@@ -7,6 +7,7 @@ Page({
   },
 
   onLoad: function (options) {
+    Tool.isIPhoneX(this)
     this.setData({
       door: options.door || '',
     })

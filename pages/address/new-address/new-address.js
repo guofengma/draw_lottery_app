@@ -15,6 +15,7 @@ Page({
     door:1, // 1常规 2 朵地址
   },
   onLoad: function (options) {
+    Tool.isIPhoneX(this)
     wx.setNavigationBarTitle({
       title: this.data.navbar[options.type-1]
     })

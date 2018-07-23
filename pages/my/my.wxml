@@ -1,5 +1,6 @@
-<top-bar/>
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
+<top-bar/>
 <view class='my'>
   <view class='user-img-view whiteBg'>
     <image src='{{userInfos.headImgUrl}}' class='userImg'></image>
@@ -12,4 +13,6 @@
   </block>
 </view>
 
-<view class='default-btn fixed-bottom' catchtap='logout'>退出登录</view>
+<view class='default-btn {{isIPhoneX.className}}' catchtap='logout'>退出登录</view>
+
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

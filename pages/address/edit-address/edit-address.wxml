@@ -1,4 +1,5 @@
 <import src='/components/address-info/address-info.wxml' />
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
 <top-bar/>
 <view class='addressList'>
@@ -17,5 +18,7 @@
     </view>
   </block>
 
-  <view class='default-btn fixed-bottom' catchtap='newAddress'>添加新地址</view>
+  <view class='default-btn {{isIPhoneX.className}}' catchtap='newAddress'>添加新地址</view>
+
+  <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 </view>
