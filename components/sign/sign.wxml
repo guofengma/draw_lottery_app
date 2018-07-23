@@ -191,6 +191,9 @@
                         <button class="btn-qiandao1">已签到</button>
                         <button></button>
                     </view>
+                    <view class="text-center"  wx:if="{{signtype=='3'}}">
+                        <button class="btn-qiandao1" bindtap='endStartSign'>立即签到</button>
+                    </view>
                 </view>
             </view>
         </view>

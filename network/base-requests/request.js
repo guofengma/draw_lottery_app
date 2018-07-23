@@ -13,18 +13,18 @@ export default class Request {
         // this.baseUrl = 'http://172.16.10.7:'
         // this.baseUrl = 'http://172.16.10.21:'
         // this.baseUrl = 'http://172.16.10.4:'
-        this.baseUrl = 'http://172.16.10.12:'
+        // this.baseUrl = 'http://172.16.10.12:'
         // this.baseUrl = 'http://172.16.10.29:'
         // this.baseUrl = 'http://172.16.10.19:'
         // this.baseUrl = 'http://172.16.10.253:'
 
-        if (bParam.port) {
-            this.baseUrl = this.baseUrl + bParam.port
-        } else {
-            this.baseUrl = this.baseUrl + '8002';
-        }
+        // if (bParam.port) {
+        //     this.baseUrl = this.baseUrl + bParam.port
+        // } else {
+        //     this.baseUrl = this.baseUrl + '8002';
+        // }
 
-        // this.baseUrl = 'https://ttdb-test.dnvhot.tech';
+        this.baseUrl = 'https://ttdb-test.dnvhot.tech';
 
         // this.baseUrl = 'https://ttdb.dnvhot.tech';
 

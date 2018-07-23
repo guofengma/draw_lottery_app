@@ -25,7 +25,7 @@
 }
 .home-inside{
   width: 536rpx;
-  height: 644rpx;
+  height: 678rpx;
   margin: 0 auto;
 }
 .inputBox{
@@ -57,20 +57,21 @@
 }
 .draw-number{
   width: 280rpx;
-  height: 30rpx;
+  /* height: 30rpx; */
   line-height: 30rpx;
   margin: 28rpx auto;
+  position: relative;
 }
 .draw-number text{
   font-size: 28rpx;
   color: #e9d96a;
   display: block;
-  text-align: center
+  text-align: center;
 }
 .home-winners{
   width: 536rpx;
   height: 430rpx;
-  margin: 94rpx auto;
+  margin: 60rpx auto;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/honeBorder.png') no-repeat center center;
   background-size:100%;
 }
@@ -241,9 +242,51 @@ movable-area {
 }
 .rotate{
   animation:rotaed 2s linear infinite;
--moz-animation:rotaed 2s linear infinite; /* Firefox */
--webkit-animation:rotaed 2s linear infinite; /* Safari and Chrome */
--o-animation:rotaed 2s linear infinite; /* Opera */
+  -moz-animation:rotaed 2s linear infinite; /* Firefox */
+  -webkit-animation:rotaed 2s linear infinite; /* Safari and Chrome */
+  -o-animation:rotaed 2s linear infinite; /* Opera */
+}
+.numberPlus{
+  /* height:30px;
+  overflow: hidden;
+  position: absolute;
+  width: 280rpx;
+  margin: 0 auto;
+  display: inline-block !important; */
+}
+.isNumberPlus{
+  position: absolute;
+  top: 0rpx;
+  right: 120rpx;
+  text-align: center;
+  color: #ffec00;
+  animation:plusScale 2s linear  infinite;
+  -moz-animation:plusScale 2s linear  infinite; /* Firefox */
+  -webkit-animation:plusScale 2s linear  infinite; /* Safari and Chrome */
+  -o-animation:plusScale 2s linear  infinite; /* Opera */
+}
+.isNumberReduce{
+  position: absolute;
+  top: 0rpx;
+  right: 120rpx;
+  text-align: center;
+  color: #ffec00;
+  animation:plusScale 2s linear infinite;
+  -moz-animation:plusScale 2s linear infinite; /* Firefox */
+  -webkit-animation:plusScale 2s linear infinite; /* Safari and Chrome */
+  -o-animation:plusScale 2s linear infinite; /* Opera */
+}
+.cishu{
+  animation:anim1 2s linear infinite;
+  -moz-animation:anim1 2s linear infinite; /* Firefox */
+  -webkit-animation:anim1 2s linear infinite; /* Safari and Chrome */
+  -o-animation:anim1 2s linear infinite; /* Opera */
+}
+.cishu1{
+  animation:anim2 2s linear infinite;
+  -moz-animation:anim2 2s linear infinite; /* Firefox */
+  -webkit-animation:anim2 2s linear infinite; /* Safari and Chrome */
+  -o-animation:anim2 2s linear infinite; /* Opera */
 }
 @keyframes rotaed {
   0%{
@@ -255,4 +298,32 @@ movable-area {
 } 
 .iPhoneX-line{
   background:#dddddd;
+}
+@keyframes plusScale{
+  0%{
+    transform:  scale(5)
+  }
+  100%{
+    transform:  scale(0)
+  }
+}
+@keyframes reduceScale{
+  100%{
+    transform:  scale(5)
+  }
+  0%{
+    transform:  scale(0)
+  }
+}
+@keyframes anim1{
+  0% {top: 30px;opacity: 1}
+  50% {top: -30px;opacity: 1}
+  75% {top: -30px ;opacity: 0}
+  100%{top:30px;opacity: 0}
+}
+@-webkit-keyframes anim2{
+  0% {top: -30px;opacity: 0}
+  25% {top: 30px;opacity: 0}
+  50% {top: 30px;opacity: 1}
+  100%{top: -30px;opacity: 1}
 }

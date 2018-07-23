@@ -9,6 +9,7 @@ Component({
       isTrue:Boolean,
       isAuthorize: Boolean,
       visiable: Boolean,
+      SignActivtyId: Boolean
     },
     /**
      * 组件的初始数据
@@ -226,6 +227,7 @@ Component({
         },
         signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
+            console.log()
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -315,18 +317,24 @@ Component({
               }
               signDate_arr.push(newdats);
             }
-            if (signDate_arr.indexOf(todayss) > -1) {
-              console.log("当前已签到");
-              that.setData({
-                signtype: "2",
-              });
+            console.log(this.data.SignActivtyId)
+            if (this.data.SignActivtyId == true) {
+              if (signDate_arr.indexOf(todayss) > -1) {
+                console.log("当前已签到");
+                that.setData({
+                  signtype: "2",
+                });
+              } else {
+                console.log("当前未签到");
+                that.setData({
+                  signtype: "1",
+                });
+              }
             } else {
-              console.log("当前未签到");
               that.setData({
-                signtype: "1",
+                signtype: "3",
               });
             }
-            // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历
             this.setData({
@@ -341,12 +349,17 @@ Component({
               showMonth: todayMonth,
             });
           },500)
+        },
+        endStartSign (){
+          wx.showToast({
+            title: '活动未开启',
+          })
         }
     },
     ready: function() {
       // this.signListRequestHttp() // 获取签到天数
       // setTimeout( ()=>{
-      //   this.signReady() // 加载日历
+        // this.signReady() // 加载日历
       // },1000)
     }
 }) 

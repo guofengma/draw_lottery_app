@@ -1,7 +1,7 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
-<sign-in isTrue='{{isTrue}}' bind:closeView='closeView' bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
+<sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' bind:closeView='closeView' bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
 <notice wx:if="{{isNotice}}" bind:showNotice='showNotice' id='showNotice'></notice>
 <audio id="myAudio" style='display:none'></audio>
 <audio id="myAudioShake" style='display:none'></audio>
@@ -19,11 +19,17 @@
     </movable-view>
   <view class="home-inside">
     <view class="inputBox">
-      <input class="security-code" placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
+      <input class="security-code" disabled="{{disabled}}" placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
       <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">
-      <text>您有 {{isNumber}}次 摇奖机会</text>
+        <view class="isNumberPlus" wx:if="{{isPlusNumber}}">+1</view>
+        <view class="isNumberReduce" wx:if="{{isReduceNumber}}">-1</view>
+      <!-- <view class="numberPlus"> -->
+        <text class="">
+          您有{{isNumber}}次摇奖机会
+        </text>
+      <!-- </view> -->
     </view>
     <view class="home-winners">
         <view class="winners-btn">获奖名单</view>
@@ -43,19 +49,19 @@
 
   <view class="home-tabar flexR {{isIPhoneX.className}}">
     <!--获取手机按钮  -->
-    <block wx:if='{{!isAuthorize&&!visiable}}'>
+    <!-- <block wx:if='{{!isAuthorize&&!visiable}}'>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">活动详情</button>
       <button class='home-tabar-btn home-btn-borders' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">我的奖品</button>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">天天签到</button>
-    </block>
+    </block> -->
     <!--获取用户头像按钮  -->
-    <block wx:elif='{{!isAuthorize&&visiable}}'>
+    <!-- <block wx:elif='{{!isAuthorize&&visiable}}'>
       <button open-type="getUserInfo" class='home-tabar-btn' bindgetuserinfo="agreeGetUser" lang="zh_CN">活动详情</button>
       <button open-type="getUserInfo" class='home-tabar-btn home-btn-borders' bindgetuserinfo="agreeGetUser" lang="zh_CN">我的奖品</button>
       <button open-type="getUserInfo" class='home-tabar-btn' bindgetuserinfo="agreeGetUser" lang="zh_CN">天天签到</button>
-    </block>
+    </block> -->
     <!--正常点击按钮  -->
-    <block wx:else>
+    <block>
       <view class="home-tabar-btn" catchtap='goPage'>活动详情</view>
       <view class="home-tabar-btn home-btn-borders" catchtap='awardClicked'>我的奖品</view>
       <view class="home-tabar-btn" catchtap='closeView'>天天签到</view>

@@ -37,6 +37,10 @@ Page({
         winnerBlock: [],
         offsetTop: {},
         activeStartTime: '',
+        SignActivtyId: false,
+        disabled:false,
+        isPlusNumber: false,
+        isReduceNumber:false,
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -60,6 +64,24 @@ Page({
                 activityId: req.responseObject.data.id,
                 activeStartTime: req.responseObject.data.startTime
             })
+          if (this.getIsLogin()) {
+                let currentTime = new Date().getTime(); // 当前时间
+                let getStartTime = this.data.activeStartTime //活动开始时间
+                console.log(currentTime)
+                console.log(getStartTime - currentTime)
+                if (getStartTime > currentTime) {
+                  console.log('活动未开启')
+                    this.setData({
+                      SignActivtyId: false
+                    })
+                } else {
+                  console.log('这？')
+                    this.setData({
+                      SignActivtyId: true // 活动开启
+                    })
+                }
+            console.log(this.data.SignActivtyId)
+            }
             this.getIsNumberHttp() // 获取抽奖次数
             this.getWinnerRequest() // 获取中奖名单
             this.selectComponent("#showNotice").noticeRequestHttp()
@@ -98,6 +120,15 @@ Page({
         this.setData({
             code: e.detail.value
         })
+        if(this.data.SignActivtyId == false) { // 活动未开启input 无法输入
+            this.setData({
+              disabled:true
+            })
+        } else {
+          this.setData({
+            disabled:false
+          })
+        }
     },
     ani() { // 旋转动画
         var n = 0;
@@ -131,48 +162,64 @@ Page({
         this.setData({
           userId: Storage.memberId() || ''
         })
-        console.log(this.data.userId)
-        if(this.data.userId == '' || this.data.userId == null){
-          return 
-        }
-        if (this.data.code === '' || this.data.code === null) {
-            console.log('code为空')
-            wx.showModal({
-                title: '防伪码',
-                content: '请输入16位防伪码',
-            })
+        // console.log(this.data.userId)
+        if(this.data.SignActivtyId == false){
+          wx.showModal({
+            title: '防伪码',
+            content: '活动未开启',
+          })
         } else {
-            let data = {
-                activityId: Storage.getActivityId() || '',
-                code: this.data.code
-            };
-            let r = RequestFactory.SecurityCodeRequest(data);
-            r.finishBlock = (req) => {
-                console.log(req.responseObject)
-                wx.showModal({
-                        title: '兑换成功'
-                    })
-                    // let num = req.responseObject.data
-                    // this.setData({
-                    //   isNumber: 
-                    // })
-            };
-            Tool.showErrMsg(r);
-            r.addToQueue();
-            this.getIsNumberHttp();
-        }
+          if(this.data.userId == '' || this.data.userId == null){
+            return 
+          }
+          if (this.data.code === '' || this.data.code === null) {
+              console.log('code为空')
+              wx.showToast({
+                title: '请输入16位防伪码',
+              })
+          } else {
+              let data = {
+                  activityId: Storage.getActivityId() || '',
+                  code: this.data.code
+              };
+              let r = RequestFactory.SecurityCodeRequest(data);
+              r.finishBlock = (req) => {
+                  console.log(req.responseObject)
+                  // Tool.showModal('兑换成功')
+                  wx.showToast({
+                    title: '兑换成功',
+                  })
+                  this.setData({
+                    isPlusNumber:true
+                  })
+                  // let num = req.responseObject.data
+                  // this.setData({
+                  //   isNumber: 
+                  // })
+                this.getIsNumberHttp()
+              };
+              Tool.showErrMsg(r);
+              r.addToQueue();
+          }
+      }  
     },
     getIsNumberHttp() { // 查询摇奖次数
         let data = {
             activityId: Storage.getActivityId() || ''
         };
+        let that = this
         let r = RequestFactory.shakeNumberRequest(data);
         r.finishBlock = (req) => {
             // console.log(req.responseObject)
             let num = req.responseObject.data
             this.setData({
-                isNumber: num
+              isNumber: num,
             })
+            setTimeout(()=>{
+                that.setData({
+                  isPlusNumber:false
+                })
+            },1500)
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -196,6 +243,9 @@ Page({
                         num = t;
                         arr[t] = new Array();
                     }
+                  if (res.telephone == null | res.telIphone == ''){
+                      return
+                  } else {
                     let str = res.telephone
                     let strL = str.length
                     let telIphone = ''
@@ -206,9 +256,10 @@ Page({
                             console.log('手机号位数错误')
                         } else {
                             telIphone = str.substr(0, 3) + "****" + str.substr(7)
-                            console.log(telIphone)
+                            // console.log(telIphone)
                         }
                     }
+                  } 
                     arr[t].push({
                         index: index + 1,
                         tphone: telIphone
@@ -230,9 +281,9 @@ Page({
             let num = parseInt(that.data.isNumber)
                 // console.log('进入延时')
             if (num === 0) {
-                // wx.showToast({
-                //     title: '没有次数了',
-                // })
+                wx.showToast({
+                    title: '没有次数了',
+                })
             } else {
                 that.isShowSake = true
                 let lastTime = 0; //此变量用来记录上次摇动的时间
@@ -271,10 +322,10 @@ Page({
                                     console.log('进入异步成功')
                                     console.log(req.responseObject)
                                     let num = that.data.isNumber--
-                                        audioCtx = wx.createAudioContext('myAudioShake');
+                                    audioCtx = wx.createAudioContext('myAudioShake');
                                     audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/success.mp3');
                                     audioCtx.play();
-                                    if (req.responseObject.data.ptype === 1) { // 实物
+                                    if (req.responseObject.data.ptype == 1) { // 实物
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -283,7 +334,7 @@ Page({
                                             isMaterialUrl: req.responseObject.data.imgUrl,
                                             isMaterialName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype === 2) { // 字卡
+                                    } else if (req.responseObject.data.ptype == 2) { // 字卡
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -292,7 +343,7 @@ Page({
                                             iscardUrl: req.responseObject.data.imgUrl,
                                             iscardName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype === 3) { // 红包
+                                    } else if (req.responseObject.data.ptype == 3) { // 红包
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -318,10 +369,11 @@ Page({
                                         audioCtx.play();
                                         let num = that.data.isNumber--
                                             that.setData({
-                                                isNumber: num,
-                                                isShowModelTitle: '很遗憾，未中奖',
-                                                isShakeBox: true,
-                                                isWzj: true
+                                              isNumber: num,
+                                              isShowModelTitle: '很遗憾，未中奖',
+                                              isShakeBox: true,
+                                              isWzj: true,
+                                              isReduceNumber: true
                                             })
                                         wx.hideLoading()
                                     } else {
@@ -359,19 +411,19 @@ Page({
         }
     },
     closeView(e) { // 显示天天签到
-        if (this.getIsLogin()) {
-            let currentTime = new Date().getTime();
-            let getStartTime = this.data.activeStartTime
-            if (getStartTime < currentTime) {
-                Tool.showAlert('活动未开启')
-            } else {
+        // if (this.getIsLogin()) {
+        //     let currentTime = new Date().getTime();
+        //     let getStartTime = this.data.activeStartTime
+        //     if (getStartTime < currentTime) {
+        //         Tool.showAlert('活动未开启')
+        //     } else {
                 if (this.getIsLogin()) {
                     this.setData({
                         isTrue: !this.data.isTrue
                     })
                 }
-            }
-        }
+        //     }
+        // }
     },
     showNotice: function(e) { // 显示公告
         this.setData({

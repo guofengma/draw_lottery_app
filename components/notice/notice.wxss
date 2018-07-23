@@ -14,7 +14,7 @@
 .noticeModel{
   width: 690rpx;
   /* height: 868rpx; */
-  margin: 10rpx auto;
+  margin: 15rpx auto;
   border: none;
   border-radius: 10px;
   position: relative;
