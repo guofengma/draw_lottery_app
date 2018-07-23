@@ -1,3 +1,5 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
 <sign-in isTrue='{{isTrue}}' bind:closeView='closeView' bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
 <notice wx:if="{{isNotice}}" bind:showNotice='showNotice' id='showNotice'></notice>
@@ -39,7 +41,7 @@
     </view>    
   </view>
 
-  <view class="home-tabar flexR">
+  <view class="home-tabar flexR {{isIPhoneX.className}}">
     <!--获取手机按钮  -->
     <block wx:if='{{!isAuthorize&&!visiable}}'>
       <button class='home-tabar-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">活动详情</button>
@@ -103,3 +105,5 @@
     </view>
   </view>
 </block> -->
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

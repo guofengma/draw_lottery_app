@@ -721,7 +721,7 @@ export default class Tool {
       console.log("openId" + req.responseObject.data.openId)
       if (req.responseObject.data.id){
         global.Storage.setAuthorize(true)
-        global.Storage.setMemberId(req.responseObject.data.id)
+        global.Storage.setMemberId(req.responseObject.data.code)
       }
       global.Event.emit('didLogin');
     }
@@ -769,5 +769,18 @@ export default class Tool {
         }
       })
     }
+
+    // 是否是iPhone 34rpx的底部像素差
+
+    static isIPhoneX(that) {
+      let isIPhoneX = global.Storage.sysInfo().isIphoneX
+      let className = isIPhoneX ? 'fixed-bottom-iPhoneX' :'fixed-bottom'
+      let showBottom = isIPhoneX
+      that.setData({
+        isIPhoneX: { isIPhoneX, showBottom, className }
+      })
+      return { isIPhoneX,showBottom, className}
+    }
+
 }
 

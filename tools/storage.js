@@ -143,6 +143,16 @@ export default class Storage {
       return this.getterFor('activityId');
     }
 
+    // 存活动code
+
+    static setActivityCode(info) {
+      this.setterFor('activityCode', info)
+    }
+
+    static getActivityCode() {
+      return this.getterFor('activityCode');
+    }
+
     // orderList
 
     static setOrderList(info) {

@@ -12,13 +12,14 @@ Component({
     getUserId(){
       this.setData({
         userId: Storage.memberId() || '',
-        activityId: Storage.getActivityId() || '',
+        activityId: Storage.getActivityCode() || '',
       })
     },
     getActivtyId(){
       let r = global.RequestFactory.getActivityId();
       r.finishBlock = (req) => {
         Storage.setActivityId(req.responseObject.data.id)
+        Storage.setActivityCode(req.responseObject.data.code)
         this.setData({
           activityId: req.responseObject.data.id,
           userId: Storage.memberId() || '',

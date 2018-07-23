@@ -11,6 +11,7 @@ Page({
     ]
   },
   onLoad: function (options) {
+    Tool.isIPhoneX(this)
     this.setData({
       userInfos: Storage.getUserAccountInfo() || ''
     })

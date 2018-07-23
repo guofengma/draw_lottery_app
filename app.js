@@ -94,6 +94,11 @@ App({
   },
   setSystemInfo(){  //设备信息
     let res = wx.getSystemInfoSync()
+    if (res.model.search('iPhone X') != -1) {
+      res.isIphoneX = true
+    } else{
+      res.isIphoneX = false
+    }
     res.screenHeight = res.screenHeight * res.pixelRatio;
     res.screenWidth = res.screenWidth * res.pixelRatio;
     res.windowHeight = res.windowHeight * res.pixelRatio;

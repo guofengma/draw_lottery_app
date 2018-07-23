@@ -1,3 +1,4 @@
+@import "/components/iPhoneX-line/iPhoneX-line";
 .bottomBar>view{
   width: 33.3%;
   height: 100rpx;
@@ -13,12 +14,27 @@
 .bottomBar>view:first-child{
   border-left: 0
 }
-.bottomBar{
+/* .bottomBar{
   position: fixed;
   bottom: 0;
   width: 100%;
-}
+} */
 .bottomBar>view.active{
   background-color: #da2221;
   color: #fff;
+}
+.bottomBar.no-red-view>view{
+  width:50%;
+}
+.fixed-bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+}
+.fixed-bottom-iPhoneX{
+  position: fixed;
+  bottom: 34rpx;
+  width: 100%;
+  z-index: 999;
 }

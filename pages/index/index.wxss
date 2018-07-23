@@ -1,4 +1,4 @@
-/* @import "/components/address-info/address-info"; */
+@import "/components/iPhoneX-line/iPhoneX-line";
 .home-page{
   position: relative;
   width: 750rpx;
@@ -110,10 +110,10 @@
 }
 .home-tabar{
   height: 88rpx;
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
   z-index: 99;
-  width: 100%;
+  width: 100%; */
 }
 .home-tabar-btn{
   width: 33.3%;
@@ -238,4 +238,7 @@ movable-view {
 movable-area {
   height: 100%;
   width: 100%;
+}
+.iPhoneX-line{
+  background:#dddddd;
 }
