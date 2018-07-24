@@ -39,12 +39,17 @@
                                     {{item == null ? '' : item.normalday}}
                                     </view>
                                    <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
                                     <block wx:elif="{{item.normalday== isweekDays}}">
                                       <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
+                                    </block>
+                                     <block wx:elif="{{isBreak}}">
+                                      <view class="{{borderBreak}}" bindtap='closeSingBox'>
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
@@ -64,12 +69,17 @@
                                   {{item == null ? '' : item.normalday}}
                                 </view>
                                   <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
                                     <block wx:elif="{{item.normalday== isweekDays}}">
                                       <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
+                                    </block>
+                                     <block wx:elif="{{isBreak}}">
+                                      <view class="{{borderBreak}}" bindtap='closeSingBox'>
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
@@ -89,12 +99,17 @@
                                       {{item == null ? '' : item.normalday}}
                                     </view>
                                      <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
                                     <block wx:elif="{{item.normalday== isweekDays}}">
                                       <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
+                                    </block>
+                                     <block wx:elif="{{item.normalday== signIsArr}}">
+                                      <view class="{{borderBreak}}" bindtap='closeSingBox'>
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
@@ -110,16 +125,21 @@
                                 <view wx:if="{{item.signday=='is'}}" style="display:none">
                                       {{item == null ? '' : item.normalday}}
                                   </view>
-                                  <view wx:else="{{item.signday!=='is'}}" style="display:block">
+                                  <view wx:else="{{item.signday!=='is' }}" style="display:block">
                                       {{item == null ? '' : item.normalday}}
                                     </view>
                                       <block wx:if="{{item.normalday == oneWeekDays}}">
-                                            <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                            <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                               {{item == null ? '' : item.normalday}}
                                             </view>
                                           </block>
                                         <block wx:elif="{{item.normalday== isweekDays}}">
                                           <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                            {{item == null ? '' : item.normalday}}
+                                          </view>
+                                        </block>
+                                         <block wx:elif="{{item.normalday== signIsArr && isBreak}}">
+                                          <view class="{{borderBreak}}">
                                             {{item == null ? '' : item.normalday}}
                                           </view>
                                         </block>
@@ -139,7 +159,7 @@
                                       {{item == null ? '' : item.normalday}}
                                     </view>
                                      <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
@@ -148,6 +168,11 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
+                                     <!-- <block wx:elif="{{isBreak}}">
+                                      <view class="{{borderBreak}}">
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
+                                    </block> -->
                                     <block wx:else="{{item.signday=='is'}}">
                                      <view class="day_hover" wx:if="{{item.signday=='is'}}">
                                         {{item == null ? '' : item.normalday}}
@@ -173,6 +198,11 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
+                                     <!-- <block wx:elif="{{isBreak}}">
+                                      <view class="{{borderBreak}}" bindtap='closeSingBox'>
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
+                                    </block> -->
                                     <block wx:else="{{item.signday=='is'}}">
                                      <view class="day_hover" wx:if="{{item.signday=='is'}}">
                                         {{item == null ? '' : item.normalday}}
@@ -229,6 +259,19 @@
           </view>
         </view>
      </view> 
+  <view class="model-view-bg" wx:if="{{tipOne}}">
+      <view class="signShowBox"><!--连续签到弹框-->
+        <view class="signContent">
+          <text class="signRedText" >{{signTitleOne}}</text>
+          <view class="signBlankText">
+            赠送 <text class="signRedText">{{signNumberOne}}次</text>免费抽奖机会
+          </view>
+        </view>
+        <view class="closeBtn" bindtap='closeSingBoxOne'>
+            <image src="../../img/close-x.png"></image>
+          </view>
+        </view>
+     </view>  
     <view class="closeBtn" bindtap='closeView'>  <!--关闭日历-->
       <image src="../../img/close-x.png"></image>
     </view>

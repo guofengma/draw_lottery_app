@@ -42,13 +42,15 @@ Page({
         isPlusNumber: false,
         isReduceNumber: false,
         isDrawn:true,
+        preHint: '',
+        sufHint: '',
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
             userId: Storage.memberId() || '',
         })
         Tool.isIPhoneX(this)
-        this.onStartMusic() // 播放音乐
+        // this.onStartMusic() // 播放音乐
         this.ani() // 旋转动画
         this.getActivtyId()
         Event.on('didLogin', this.didLogin, this);
@@ -63,7 +65,9 @@ Page({
             Storage.setActivityCode(req.responseObject.data.code)
             this.setData({
                 activityId: req.responseObject.data.id,
-                activeStartTime: req.responseObject.data.startTime
+                activeStartTime: req.responseObject.data.startTime,
+                preHint: req.responseObject.data.preHint,
+                sufHint: req.responseObject.data.sufHint,
             })
           if (this.getIsLogin(false)) {
                 let currentTime = new Date().getTime(); // 当前时间
@@ -103,7 +107,7 @@ Page({
     onStopbgMusic() { // 停止音乐
         // wx.stopBackgroundAudio();
         clearInterval(this.data.setAniTime)
-        this.data.audioCtx.pause()
+        // this.data.audioCtx.pause()
         this.setData({
             isStop: false
         })
@@ -113,21 +117,28 @@ Page({
             isStop: true
         })
         this.onStartMusic()
-        this.ani(0)
+        // this.ani(0)
     },
     bindinputCode(e) { // 获取输入防伪码
         this.setData({
             code: e.detail.value
         })
-        if(this.data.SignActivtyId == false) { // 活动未开启input 无法输入
-            this.setData({
-              disabled:true
-            })
-        } else {
-          this.setData({
-            disabled:false
-          })
-        }
+    },
+    bindFocus(){
+      if (this.data.SignActivtyId == false) { // 活动未开启input 无法输入
+        this.setData({
+          disabled: true
+        })
+        wx.showModal({
+          title: '',
+          content: this.data.sufHint,
+        })
+
+      } else {
+        this.setData({
+          disabled: false
+        })
+      }
     },
     ani() { // 旋转动画
         var n = 0;
@@ -163,18 +174,19 @@ Page({
         })
         // console.log(this.data.userId)
         if(this.data.SignActivtyId == false){
-          wx.showModal({
-            title: '防伪码',
-            content: '活动未开启',
-          })
+            wx.showModal({
+              title: '',
+              content: '活动未开启',
+            })
         } else {
           if(this.data.userId == '' || this.data.userId == null){
             return 
           }
           if (this.data.code === '' || this.data.code === null) {
               console.log('code为空')
-              wx.showToast({
-                title: '请输入16位防伪码',
+              wx.showModal({
+                title: '',
+                content: '请输入16位防伪码',
               })
           } else {
               let data = {
@@ -191,10 +203,6 @@ Page({
                   this.setData({
                     isPlusNumber:true
                   })
-                  // let num = req.responseObject.data
-                  // this.setData({
-                  //   isNumber: 
-                  // })
                 this.getIsNumberHttp()
                 wx.startAccelerometer();
               };
@@ -277,14 +285,15 @@ Page({
     isShowSake: false,
     onShow: function() { // 进行摇一摇
         let that = this;
+        // this.data.audioCtx.play()
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
                 // console.log('进入延时')
             if (num === 0) {
-                wx.showToast({
-                    title: '没有次数了',
-                })
+                // wx.showToast({
+                //     title: '没有次数了',
+                // })
             } else {
                 that.isShowSake = true
                 let lastTime = 0; //此变量用来记录上次摇动的时间
@@ -322,34 +331,38 @@ Page({
                                 r.finishBlock = (req) => {
                                     console.log('进入异步成功')
                                     console.log(req.responseObject)
+                                    console.log(typeof req.responseObject.ptype)
                                     let num = that.data.isNumber--
                                     audioCtx = wx.createAudioContext('myAudioShake');
                                     audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/success.mp3');
                                     audioCtx.play();
-                                    if (req.responseObject.data.ptype == 1) { // 实物
+                                    if (req.responseObject.data.ptype === 1) { // 实物
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
                                             isShakeBox: true,
                                             isMaterial: true,
+                                            isReduceNumber: true,
                                             isMaterialUrl: req.responseObject.data.imgUrl,
                                             isMaterialName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype == 2) { // 字卡
+                                    } else if (req.responseObject.data.ptype === 2) { // 字卡
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
                                             isShakeBox: true,
                                             iscardZJL: true,
+                                            isReduceNumber: true,
                                             iscardUrl: req.responseObject.data.imgUrl,
                                             iscardName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype == 3) { // 红包
+                                    } else if (req.responseObject.data.ptype === 3) { // 红包
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
                                             isShakeBox: true,
                                             ishongbao: true,
+                                            isReduceNumber: true,
                                             // isMaterialUrl: req.responseObject.data.imgUrl,
                                             ishongbaoName: req.responseObject.data.awardName
                                         })
@@ -431,26 +444,39 @@ Page({
                         isTrue: !this.data.isTrue
                     })
                 }
+      // if (this.data.isTrue){
+      //   this.data.audioCtx.pause()
+      // }else {
+      //   this.data.audioCtx.play()
+      // }
+          // this.data.audioCtx.pause()
         //     }
         // }
     },
     showNotice: function(e) { // 显示公告
+      this.setData({
+          isNotice: !this.data.isNotice
+      })
+      if (this.data.isNotice) {
+          this.selectComponent("#showNotice").noticeRequestHttp()
+      }
+      if (this.data.SignActivtyId) {
         this.setData({
-            isNotice: !this.data.isNotice
+          isTrue: true
         })
-        if (this.data.isNotice) {
-            this.selectComponent("#showNotice").noticeRequestHttp()
-        }
+      } 
     },
     goPage() { // 跳转detail
         if (this.getIsLogin()) {
             Tool.navigateTo('/pages/activity-detail/activity-detail')
         }
+      // this.data.audioCtx.pause()
     },
     awardClicked() { // 跳转我的奖品
         if (this.getIsLogin()) {
             Tool.navigateTo('/pages/my/my')
         }
+      // this.data.audioCtx.pause()
     },
     getIsLogin(isGoPage) { // 退出之后跳转登录
         let cookies = Storage.getUserCookie() || false

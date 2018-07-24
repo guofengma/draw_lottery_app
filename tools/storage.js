@@ -173,7 +173,11 @@ export default class Storage {
       return this.getterFor('userLocation');
     }
 
-
-
-    
+    // 存储当前日期
+    static setNewDataDay(day) {
+      return this.setterFor('weekday',weekday)
+    }
+    static getNewDataDay(day) {
+      return this.getterFor('weekday', weekday)
+    }
 }

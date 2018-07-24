@@ -321,7 +321,7 @@ movable-area {
   75% {top: -30px ;opacity: 0}
   100%{top:30px;opacity: 0}
 }
-@-webkit-keyframes anim2{
+@keyframes anim2{
   0% {top: -30px;opacity: 0}
   25% {top: 30px;opacity: 0}
   50% {top: 30px;opacity: 1}
