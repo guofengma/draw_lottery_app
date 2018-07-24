@@ -49,7 +49,6 @@ Component({
               let totals = datas.total;
                 this.setData({
                   totals: totals,
-                  starts:starts
                 })
                 // console.log(datas.data[0].content)
                 // if(starts == 0) {
@@ -100,7 +99,8 @@ Component({
         },
         prevPage () {
           console.log(this.data.starts)
-          if(this.data.page === 1 && this.data.starts){
+          console.log(this.data.page)
+          if(this.data.starts == 0 && this.data.page == 1){
             this.setData({
               isBtnFalse: '1',
             })
