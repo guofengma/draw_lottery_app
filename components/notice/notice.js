@@ -99,17 +99,24 @@ Component({
         },
         prevPage () {
           console.log(this.data.starts)
+          let pages = this.data.page
+          pages--
           console.log(this.data.page)
           if(this.data.starts == 0 && this.data.page == 1){
             this.setData({
               isBtnFalse: '1',
             })
           }else {
-            this.data.page--
+            this.setData({
+              page: pages
+            })
             this.noticeRequestHttp()
+            console.log(this.data.page)
           }
         },
         nextPage () {
+          let pages = this.data.page
+          pages++
           if(this.data.page === this.data.totals) {
               
           } else {
@@ -118,7 +125,9 @@ Component({
               noticeFalse: ''
             })
             console.log(this.data.isBtnFalse)
-            this.data.page++
+            this.setData({
+              page: pages
+            })
             this.noticeRequestHttp()
           }
         }
