@@ -173,8 +173,9 @@ Page({
           }
           if (this.data.code === '' || this.data.code === null) {
               console.log('code为空')
-              wx.showToast({
-                title: '请输入16位防伪码',
+              wx.showModal({
+                title: '',
+                content: '请输入16位防伪码',
               })
           } else {
               let data = {
@@ -322,34 +323,38 @@ Page({
                                 r.finishBlock = (req) => {
                                     console.log('进入异步成功')
                                     console.log(req.responseObject)
+                                    console.log(typeof req.responseObject.ptype)
                                     let num = that.data.isNumber--
                                     audioCtx = wx.createAudioContext('myAudioShake');
                                     audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/success.mp3');
                                     audioCtx.play();
-                                    if (req.responseObject.data.ptype == 1) { // 实物
+                                    if (req.responseObject.data.ptype === 1) { // 实物
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
                                             isShakeBox: true,
                                             isMaterial: true,
+                                            isReduceNumber: true,
                                             isMaterialUrl: req.responseObject.data.imgUrl,
                                             isMaterialName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype == 2) { // 字卡
+                                    } else if (req.responseObject.data.ptype === 2) { // 字卡
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
                                             isShakeBox: true,
                                             iscardZJL: true,
+                                            isReduceNumber: true,
                                             iscardUrl: req.responseObject.data.imgUrl,
                                             iscardName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype == 3) { // 红包
+                                    } else if (req.responseObject.data.ptype === 3) { // 红包
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
                                             isShakeBox: true,
                                             ishongbao: true,
+                                            isReduceNumber: true,
                                             // isMaterialUrl: req.responseObject.data.imgUrl,
                                             ishongbaoName: req.responseObject.data.awardName
                                         })
