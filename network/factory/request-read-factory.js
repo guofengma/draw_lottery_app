@@ -143,6 +143,11 @@ export default class RequestFactory {
     return this.request(url, params, '我的实物列表', true)
   }
 
+  static getCardNumber(params) {
+    let url = Operation.sharedInstance().getCardNumber;
+    return this.request(url, params, '查询集齐金朵字人数', true)
+  }
+
   /******************** 地址 *************************/
 
   static addUserAddress(params) {

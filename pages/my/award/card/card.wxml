@@ -4,6 +4,9 @@
 <template is="logo-bar" data=''/>
 <view class="card-content"> <!--card 灰色背景层-->
   <view class="card-inside"> <!--card 字卡存放层-->
+    <view class='gray flexR font-24 cardNum'>
+      <text class='red'>{{cardNum}}</text>人已集齐，获得奖品
+    </view>
     <view class="card-bgCard"><!--大图-->
       <image src="{{activeImg}}"></image>
     </view>

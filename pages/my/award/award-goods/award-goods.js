@@ -10,6 +10,7 @@ Page({
     activityId:'', //活动id
   },
   onLoad: function (options) {
+    Tool.isIPhoneX(this)
     let activityId = Storage.getActivityId() || 1
     let params = {
       pageSize: this.data.pageSize,

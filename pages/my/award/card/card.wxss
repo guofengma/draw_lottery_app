@@ -11,10 +11,14 @@
   height: 760rpx;
   margin: 0 auto;
 }
+.cardNum{
+  margin-top: 55rpx;
+  margin-bottom: 20rpx;
+}
 .card-bgCard{
   width: 350rpx;
   height: 464rpx;
-  margin: 75rpx auto auto auto;
+  margin: 0 auto; 
 }
 .card-bgCard image{
   width: 350rpx;

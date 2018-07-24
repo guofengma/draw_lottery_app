@@ -134,6 +134,10 @@ export default class Operation {
 
         this.queryUserAddressListByDuoIs = '/user/userAddress/queryUserAddressListByDuoIs'
 
+        // 查询集齐金朵字人数
+
+        this.getCardNumber = '/user/activityMergeWordCard/findActivityMergeWordCardByActivityId'
+
 
       /**********  获取省市区 *******************/
 

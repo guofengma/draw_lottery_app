@@ -396,6 +396,7 @@ Component({
             }
             // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
+            console.log(this.data.signDays)
             //初始化加载日历
             this.setData({
               todayDate: todayDate,

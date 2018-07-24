@@ -39,6 +39,7 @@ Page({
     activeImg:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/duo-dark.png',
     imgUrl:"https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/",
     activityId:1,
+    cardNum:0,//集卡人说
     show:false,
     showBtn: false,
     showBtn2:false
@@ -48,6 +49,7 @@ Page({
       activityId:Storage.getActivityId() || ''
     })
     this.queryActivityWordCard()
+    this.getCardNumber()
   },
   cardClicked(e){
     let index = e.currentTarget.dataset.index
@@ -56,6 +58,19 @@ Page({
     this.setData({
       activeImg: this.data.imgUrl+activeImg
     })
+  },
+  getCardNumber(){
+    let params = {
+      activityId: this.data.activityId
+    }
+    let r = RequestFactory.getCardNumber(params);
+    r.finishBlock = (req) => {
+      this.setData({
+        cardNum: req.responseObject.data || 0
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
   queryActivityWordCard() {
     let params = {

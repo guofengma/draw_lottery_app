@@ -29,7 +29,7 @@
     <image src='/img/no-result-bg.png' mode='widthFix'></image>
     <view class='font-26 gray'>暂无礼品~</view>
   </view>
-  <view class='sub-bar whiteBg' wx:if='{{lists.length>0}}'>
+  <view class='sub-bar whiteBg {{isIPhoneX.isIPhoneX? "sub-bar-x":""}}' wx:if='{{lists.length>0}}'>
     <view class='redBg sub-btn fr flexR font-26' catchtap='submitClicked' >提交</view>
   </view>
 </view>
