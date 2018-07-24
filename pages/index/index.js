@@ -253,23 +253,28 @@ Page({
                         num = t;
                         arr[t] = new Array();
                     }
-                    let str = res.telephone
-                    let strL = str.length
-                    let telIphone = ''
-                    if (Tool.isEmpty(str)) {
-                        console.log('不完整')
-                    } else {
-                        if (strL < 11 || strL > 11) {
-                            console.log('手机号位数错误')
-                        } else {
-                            telIphone = str.substr(0, 3) + "****" + str.substr(7)
-                            // console.log(telIphone)
-                        }
-                    }
-                    arr[t].push({
+                    if(res.telephone == null) {
+                        console.log('wei NUll')
+                    }else {                   
+                      let str = res.telephone
+                      let strL = str.length
+                      let telIphone = ''
+                      if (Tool.isEmpty(str)) {
+                          console.log('不完整')
+                      } else {
+                          if (strL < 11 || strL > 11) {
+                              console.log('手机号位数错误')
+                          } else {
+                              telIphone = str.substr(0, 3) + "****" + str.substr(7)
+                              // console.log(telIphone)
+                          }
+                      }
+                      arr[t].push({
                         index: index + 1,
                         tphone: telIphone
-                    });
+                      });
+                    }
+                   
                 })
                 this.setData({
                     winnerBlock: arr
@@ -318,7 +323,6 @@ Page({
                             wx.showLoading({
                                 title: '摇奖中...'
                             })
-                            that.data.audioCtx.pause()
                             setTimeout(() => {
                                 let data = {
                                     activityId: Storage.getActivityId() || ''
@@ -456,6 +460,7 @@ Page({
       if (this.data.isNotice) {
           this.selectComponent("#showNotice").noticeRequestHttp()
       }
+      console.log(this.data.SignActivtyId)
       if (this.data.SignActivtyId) {
         this.setData({
           isTrue: true
