@@ -242,6 +242,7 @@ Page({
             if (Tool.isEmpty(req.responseObject.data)) {
 
             } else {
+            console.log(req.responseObject.data[0].telephone)
                 let arrNumber = req.responseObject.data;
                 let arrLength = arrNumber.length;
                 let arr = [];
@@ -252,9 +253,6 @@ Page({
                         num = t;
                         arr[t] = new Array();
                     }
-                  if (res.telephone == null | res.telIphone == ''){
-                      return
-                  } else {
                     let str = res.telephone
                     let strL = str.length
                     let telIphone = ''
@@ -268,7 +266,6 @@ Page({
                             // console.log(telIphone)
                         }
                     }
-                  } 
                     arr[t].push({
                         index: index + 1,
                         tphone: telIphone
@@ -285,7 +282,6 @@ Page({
     isShowSake: false,
     onShow: function() { // 进行摇一摇
         let that = this;
-        // this.data.audioCtx.play()
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
