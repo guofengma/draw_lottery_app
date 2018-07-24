@@ -41,6 +41,7 @@ Component({
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
               let datas = req.responseObject.data
+              console.log(datas)
               if (!Tool.isEmpty(datas)) {
                 // console.log('不空')
               let datas = req.responseObject.data;
@@ -50,6 +51,7 @@ Component({
                   totals: totals,
                   starts:starts
                 })
+                // console.log(datas.data[0].content)
                 // if(starts == 0) {
                 //   console.log('222')
                 //   this.setData({
@@ -70,7 +72,7 @@ Component({
                 //     isBtnFalse: "1",
                 //   }) 
                 // }
-                if (datas.data[0].content == "undefined" || datas.data[0].content == undefined) {
+                if (datas.data[0].content == "null" || datas.data[0].content == null) {
                   return null
                 } else {
                   let html = datas.data[0].content
@@ -97,7 +99,8 @@ Component({
             r.addToQueue();
         },
         prevPage () {
-          if(this.data.page ===1 ){
+          console.log(this.data.starts)
+          if(this.data.page === 1 && this.data.starts){
             this.setData({
               isBtnFalse: '1',
             })

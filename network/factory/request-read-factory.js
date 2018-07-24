@@ -116,6 +116,11 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().homeWinnersUrl;
     return this.request(url, params, '获奖名单', true)
   }
+  // 判断用户是否签到
+  static signIsTrueRequest (params) {
+    let url = Operation.sharedInstance().signIsTrueUrl;
+    return this.request(url, params, '用户是否签到', true)
+  }
   /********************我的奖品*************************/
 
   static queryActivityWordCard(params) {
