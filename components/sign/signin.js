@@ -23,7 +23,7 @@ var dataTime = {
         var iVarDate = 1;
         var d, w;
         for (d = iDayOfFirst; d < 7; d++) {
-            // console.log(signday);
+            console.log(signday);
             if (signday.indexOf(iVarDate) > -1) {
                 //console.log(111);
                 aMonth[0][d] = {
@@ -69,7 +69,7 @@ var dataTime = {
             }
         }
         //处理每月其他天位置
-        // console.log(aMonth);
+        console.log(aMonth);
         return aMonth;
     },
     //日历签到完成

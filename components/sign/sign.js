@@ -60,14 +60,10 @@ Component({
         sign_start: function() { // 签到
             this.signRequestHttp() // 调取签到接口
             //签到成功后重新调用后台接口加载新的签到数据
-            // this.setData({
-            //     for_signs: "block",
-            //     signtype: "2",
-            //     powerData: powerData,
-            // });
            setTimeout(()=>{
             //  console.log('签到之后获取签到列表')
              this.signListRequestHttp()
+             this.getIsNumberHttp()
              this.signReady()
            },1000)
         },
@@ -235,6 +231,7 @@ Component({
                 icon: 'success',
                 duration: 1500
               });
+              
             } else {
               return null
             }
@@ -260,7 +257,6 @@ Component({
             var godates = todayYear + "-" + todayMonthss + "-01";
             var that = this;
             var signDay = this.data.weekdays
-            // console.log(signDay)
             var data = { seriesCount: 1, signDays: [] };
             let yearDate = [];
             let result = [];
@@ -294,6 +290,7 @@ Component({
             }
             console.log(yearDate)
             // let signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+            // console.log(signJsonNew)
             // for (var i = 0; i < signJsonNew.length; i++) {
             //   var obj = signJsonNew[i];
             //   var isExist = false;
@@ -339,13 +336,13 @@ Component({
               var t = parseInt(p);
               // console.log(this.data.oneWeekDays)
               if (anns[0] == this.data.oneWeekDays) {
-                console.log('第一次签到')
+                // console.log('第一次签到')
                 this.setData({
                   signTitleOne: '首次签到',
                   signNumberOne: 1
                 })
               }
-              console.log(anns)
+              // console.log(anns)
                 // for(let i  in arrResult) {
                 //   // console.log(arrResult[i])
                 //   if (anns.indexOf(arrResult[i]) == -1) {
@@ -357,9 +354,9 @@ Component({
                 //     // anns.push(arrResult[i])
                 //   }
                 // }
-                console.log(anns)
+                // console.log(anns)
               if ((anns[t + 1] - anns[p]) == 1 && anns.length == 7) {
-                  console.log('连续签到了7')
+                  // console.log('连续签到了7')
                   this.setData({
                     signTitle: '连续签到7天',
                     signNumber: 3
@@ -397,7 +394,7 @@ Component({
                 signtype: "3",
               });
             }
-            console.log(signDate_arr)
+            // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历
             this.setData({
@@ -412,32 +409,32 @@ Component({
               showMonth: todayMonth,
             });
           },500)
-          // function getBetweenDateStr(start, end) {
-          //   var result = [];
-          //   var beginDay = start.split("-");
-          //   var endDay = end.split("-");
-          //   var diffDay = new Date();
-          //   var dateList = new Array;
-          //   var i = 0;
-          //   diffDay.setDate(beginDay[2]);
-          //   diffDay.setMonth(beginDay[1] - 1);
-          //   diffDay.setFullYear(beginDay[0]);
-          //   result.push(start);
-          //   while (i == 0) {
-          //     var countDay = diffDay.getTime() + 24 * 60 * 60 * 1000;
-          //     diffDay.setTime(countDay);
-          //     dateList[2] = diffDay.getDate();
-          //     dateList[1] = diffDay.getMonth() + 1;
-          //     dateList[0] = diffDay.getFullYear();
-          //     if (String(dateList[1]).length == 1) { dateList[1] = "0" + dateList[1] };
-          //     if (String(dateList[2]).length == 1) { dateList[2] = "0" + dateList[2] };
-          //     result.push(dateList[0] + "-" + dateList[1] + "-" + dateList[2]);
-          //     if (dateList[0] == endDay[0] && dateList[1] == endDay[1] && dateList[2] == endDay[2]) {
-          //       i = 1;
-          //     }
-          //   };
-          //   return result;
-          // };
+          function getBetweenDateStr(start, end) {
+            var result = [];
+            var beginDay = start.split("-");
+            var endDay = end.split("-");
+            var diffDay = new Date();
+            var dateList = new Array;
+            var i = 0;
+            diffDay.setDate(beginDay[2]);
+            diffDay.setMonth(beginDay[1] - 1);
+            diffDay.setFullYear(beginDay[0]);
+            result.push(start);
+            while (i == 0) {
+              var countDay = diffDay.getTime() + 24 * 60 * 60 * 1000;
+              diffDay.setTime(countDay);
+              dateList[2] = diffDay.getDate();
+              dateList[1] = diffDay.getMonth() + 1;
+              dateList[0] = diffDay.getFullYear();
+              if (String(dateList[1]).length == 1) { dateList[1] = "0" + dateList[1] };
+              if (String(dateList[2]).length == 1) { dateList[2] = "0" + dateList[2] };
+              result.push(dateList[0] + "-" + dateList[1] + "-" + dateList[2]);
+              if (dateList[0] == endDay[0] && dateList[1] == endDay[1] && dateList[2] == endDay[2]) {
+                i = 1;
+              }
+            };
+            return result;
+          };
         },
         endStartSign (){
           let currentTime = new Date().getTime(); // 当前时间
@@ -452,7 +449,29 @@ Component({
               title: this.data.tipStart,
             })
           }
-        }
+        },
+      getIsNumberHttp() { // 查询摇奖次数
+        let data = {
+          activityId: Storage.getActivityId() || ''
+        };
+        let that = this
+        let r = RequestFactory.shakeNumberRequest(data);
+        r.finishBlock = (req) => {
+          // console.log(req.responseObject)
+          let num = req.responseObject.data
+          this.setData({
+            isNumber: num,
+          })
+          setTimeout(() => {
+            that.setData({
+              isPlusNumber: false
+            })
+          }, 1500)
+          wx.startAccelerometer();
+        };
+        Tool.showErrMsg(r);
+        r.addToQueue();
+      }
     },
     ready: function() {
       // this.signListRequestHttp() // 获取签到天数

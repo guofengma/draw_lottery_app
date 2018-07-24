@@ -23,6 +23,7 @@ Component({
         noticeCountent: '',
         noticeTitle: '',
         totals: 0,
+        starts:0,
         noticeFalse: 'isBtnFalse'
     },
 
@@ -39,7 +40,6 @@ Component({
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
-              console.log(this.data.isBtnFalse)
               let datas = req.responseObject.data
               if (!Tool.isEmpty(datas)) {
                 // console.log('不空')
@@ -48,27 +48,28 @@ Component({
               let totals = datas.total;
                 this.setData({
                   totals: totals,
+                  starts:starts
                 })
-                if(starts == 0) {
-                  console.log('222')
-                  this.setData({
-                    isBtnFalse: "1",
-                    // noticeFalse: 'noticeFalse',
-                  })
-                }
-                let isUndefined = datas.data[0]
-                if(datas.total < 1) {
-                  console.log('没了')
-                  this.setData({
-                    isBtnFalse:"1",
-                    btnNext: '关闭'
-                  }) 
-                } else {
-                  console.log('有')
-                  this.setData({
-                    isBtnFalse: "2",
-                  }) 
-                }
+                // if(starts == 0) {
+                //   console.log('222')
+                //   this.setData({
+                //     isBtnFalse: "1",
+                //     // noticeFalse: 'noticeFalse',
+                //   })
+                // }
+                // let isUndefined = datas.data[0]
+                // if(datas.total < 1) {
+                //   console.log('没了')
+                //   this.setData({
+                //     isBtnFalse:"1",
+                //     btnNext: '关闭'
+                //   }) 
+                // } else {
+                //   console.log('有')
+                //   this.setData({
+                //     isBtnFalse: "1",
+                //   }) 
+                // }
                 if (datas.data[0].content == "undefined" || datas.data[0].content == undefined) {
                   return null
                 } else {
@@ -81,25 +82,25 @@ Component({
                 if ((totals - starts) === 1) {
                   this.setData({
                     btnNext: '关闭',
-                    isBtnFalse:"2",
                     isBtnNext: false,
                   })
                   return false
                 } else {
                   this.setData({
                     btnNext: '下一条',
-                    isBtnFalse: "2",
                     isBtnNext: true,
                   })
                 }
               }
-              console.log(this.data.isBtnFalse) 
             };
             Tool.showErrMsg(r);
             r.addToQueue();
         },
         prevPage () {
-          if(this.data.page === 1){
+          if(this.data.page ===1 ){
+            this.setData({
+              isBtnFalse: '1',
+            })
           }else {
             this.data.page--
             this.noticeRequestHttp()
@@ -110,8 +111,10 @@ Component({
               
           } else {
             this.setData({
-              isBtnFalse: '3'
+              isBtnFalse: '2',
+              noticeFalse: ''
             })
+            console.log(this.data.isBtnFalse)
             this.data.page++
             this.noticeRequestHttp()
           }
