@@ -3,7 +3,7 @@
 <top-bar/>
 <view class='my'>
   <view class='user-img-view whiteBg'>
-    <image src='{{userInfos.headImgUrl}}' class='userImg'></image>
+    <image src='{{userInfos.headImgUrl || "/img/default-user.png"}}' class='userImg'></image>
     <text class='font-30'>{{userInfos.name}}</text>
   </view>
   <block wx:for='{{datas}}' wx:key='unique'>

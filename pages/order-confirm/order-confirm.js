@@ -37,6 +37,10 @@ Page({
     r.addToQueue();
   },
   makeOrder(){
+    if (!this.data.address.id){
+      Tool.showAlert('请选择收货地址~')
+      return
+    }
     let params = {
       addressId: this.data.address.id,
       id: this.data.list.id
