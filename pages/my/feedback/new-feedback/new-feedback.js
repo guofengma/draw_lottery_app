@@ -70,7 +70,8 @@ Page({
       return
     }
     let obj = {
-      activityCode: Storage.getActivityId() || '',
+      activityId: Storage.getActivityId() || '',
+      activityCode: Storage.getActivityCode() || '',
       originalImg: JSON.stringify(this.data.originalImg) || JSON.stringify([]),
       smallImg: JSON.stringify(this.data.smallImg) || JSON.stringify([]),
       'type': this.data.activeList.id

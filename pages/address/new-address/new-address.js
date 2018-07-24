@@ -54,15 +54,6 @@ Page({
   },
   formSubmit(e){
     let params = e.detail.value
-    if (this.data.region[0]) {
-      params.provinceCode = this.data.region[0].name;
-    }
-    if (this.data.region[1]) {
-      params.cityCode = this.data.region[1].name;
-    }
-    if (this.data.region[2]) {
-      params.areaCode = this.data.region[2].name;
-    }
     if (!Tool.checkName(params.receiver)) {
       Tool.showAlert("收货人姓名长度需在2-16位之间");
       return
@@ -74,11 +65,22 @@ Page({
     if (this.data.region.length == 0) {
       Tool.showAlert("请选择你所在的省市区");
       return
+    } else{
+      if (this.data.region[0]) {
+        params.provinceCode = this.data.region[0].name;
+      }
+      if (this.data.region[1]) {
+        params.cityCode = this.data.region[1].name;
+      }
+      if (this.data.region[2]) {
+        params.areaCode = this.data.region[2].name;
+      }
     }
     if (Tool.isEmptyStr(params.address)) {
       Tool.showAlert("请输入详细地址");
       return
     }
+   
     if (this.data.addressType==1){
       params.defaultStatus = this.data.isChoose ? 1 : 2
     } else if (this.data.addressType == 2){

@@ -60,14 +60,14 @@ Page({
 
     let page = '/pages/address/new-address/new-address?type=' + types+"&door="+this.data.door
 
-    if (types){
+    if (types==2){
       page = page + '&address=' + JSON.stringify(list)
     }
     Tool.navigateTo(page)
   },
   queryUserAddressList() {
     let params = {
-      sort: 'default_status'
+      // sort: 'default_status'
     }
     let r = RequestFactory.queryUserAddressList(params);
     r.finishBlock = (req) => {

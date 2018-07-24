@@ -40,7 +40,7 @@
   margin-top: 20rpx;
 }
 .addressList{
-  padding-bottom: 120rpx;
+  padding-bottom: 150rpx;
 }
 .address-info-leftbar{
   width: 100%;

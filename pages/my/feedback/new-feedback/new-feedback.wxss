@@ -29,15 +29,10 @@
   color: #666;
 }
 .view-right{
-  width: 240rpx;
-  height: 40rpx;
 	border: 1rpx solid  #e2e2e2;
   font-size: 24rpx;
   margin-left: 16rpx;
   position: relative;
-  padding-right: 32rpx;
-  background: #ebebeb  url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/down-icon.png) no-repeat 240rpx center;
-  background-size: 16rpx;
 }
 .choose{
   justify-content: flex-start;
@@ -69,7 +64,7 @@
   font-size: 28rpx;
   margin:40rpx 0 20rpx 0;
 }
-textarea{
+.textarea{
   font-size: 24rpx;
   width: 100%;
   box-sizing: border-box;
@@ -88,4 +83,13 @@ textarea{
 .default-btn{
   height: 60rpx;
   width: 170rpx;
+}
+.selectInfo{
+  width: 240rpx;
+  height: 40rpx;
+  background: #ebebeb  url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/down-icon.png) no-repeat 210rpx center;
+  box-sizing: border-box;
+  padding-right: 32rpx;
+  text-align: center;
+  background-size: 16rpx;
 }
