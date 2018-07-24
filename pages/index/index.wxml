@@ -1,7 +1,7 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
-<sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' bind:closeView='closeView' bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
+<sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' startTime="{{activeStartTime}}" tipStart ="{{preHint}}" tipStop ="{{sufHint}}" bind:closeView='closeView' bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
 <notice wx:if="{{isNotice}}" bind:showNotice='showNotice' id='showNotice'></notice>
 <audio id="myAudio" style='display:none'></audio>
 <audio id="myAudioShake" style='display:none'></audio>
@@ -19,7 +19,7 @@
     </movable-view>
   <view class="home-inside">
     <view class="inputBox">
-      <input class="security-code" disabled="{{disabled}}" placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
+      <input class="security-code" disabled="{{disabled}}" bindfocus='bindFocus' placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
       <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">

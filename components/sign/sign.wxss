@@ -340,6 +340,14 @@ button::after {
   line-height: 70rpx;
   text-align: center;
 }
+.borderBreak{
+  border-radius: 50%;
+  background: #ddd !important;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
 .backgroundHeader{
   background-color: #bf201f;
   position: absolute;

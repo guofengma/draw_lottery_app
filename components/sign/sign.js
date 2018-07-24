@@ -9,7 +9,10 @@ Component({
       isTrue:Boolean,
       isAuthorize: Boolean,
       visiable: Boolean,
-      SignActivtyId: Boolean
+      SignActivtyId: Boolean,
+      tipStart: String,
+      startTime: Number,
+      tipStop: String
     },
     /**
      * 组件的初始数据
@@ -32,14 +35,20 @@ Component({
         powerData: "0",
         isSigncontinuity: 'none',
         hoverClass:'borderHover',
+        borderBreak: 'borderBreak',
         isTrue:true,
         tip: false,
+        tipOne: false,
         isNumber: '3',
         weekdays: [],
         isweekDays: [],
         oneWeekDays: [],
         signTitle: '连续签到7天',
         signNumber: '',
+        isBreak:false,
+        signTitleOne: '',
+        signNumberOne: '',
+        signIsArr: [],
     },
 
     /**
@@ -127,8 +136,14 @@ Component({
         },
         sign_next: function() { // 下一页
             console.log("下一月");
+          // let getToday = new Date();
+          // let todayDate = getToday.getDate();
+          // let todayMonths = getToday.getMonth();
+          // let todayMonth = (todayMonths + 1);
             var showMonth = this.data.showMonth;
             var todayMonth = this.data.todayMonth;
+            console.log(showMonth)
+            console.log(todayMonth)
             if (todayMonth == showMonth) {
                 wx.showToast({
                     title: '未签到不能查看',
@@ -136,6 +151,8 @@ Component({
                     duration: 1500
                 });
                 return;
+            } else if (showMonth < todayMonth){
+               this.signReady()
             }
             if (showMonth == "12") {
                 var showMonth = "1";
@@ -150,16 +167,6 @@ Component({
             } else {
                 var showMonths = todayMonth;
             }
-            var godates = showYear + "-" + showMonths + "-01";
-            var $datas = { seriesCount: 1, signDays: []};
-            var signDate_arr = new Array();
-            var anns = $datas.signDays;
-            for (var p in anns) { //遍历json对象的每个key/value对,p为key
-                var newdats = anns[p];
-                signDate_arr.push(newdats);
-            }
-            console.log(signDate_arr[0]);
-            signTime.dataTime.bulidCal(showYear, showMonth, that, signDate_arr);
             //初始化加载日历
             this.setData({
                 showYear: showYear,
@@ -171,9 +178,14 @@ Component({
           console.log(1)
           this.triggerEvent('closeView',false)
         },
-        closeSingBox: function () { // 关闭连续签到
+        closeSingBox () { // 关闭连续签到
           this.setData({
             tip:!this.data.tip
+          })
+        },
+        closeSingBoxOne() {
+          this.setData({
+            tipOne: !this.data.tipOne
           })
         },
         signListRequestHttp(){ // 请求签到列表
@@ -208,6 +220,12 @@ Component({
           let data = {
             activityId: Storage.getActivityId() || ''
           };
+          let getToday = new Date();
+          let todayDate = getToday.getDate();
+          let todayMonths = getToday.getMonth();
+          let todayMonth = (todayMonths + 1);
+          let todayYear = getToday.getFullYear();
+          let todayss = getToday.getDate();
           let r = RequestFactory.signRequest(data);
           r.finishBlock = (req) => {
             console.log(req.responseObject.code)
@@ -217,6 +235,7 @@ Component({
                 icon: 'success',
                 duration: 1500
               });
+              // Storage.setNewDataDay(todayss)
             } else {
               return null
             }
@@ -244,9 +263,13 @@ Component({
             var signDay = this.data.weekdays
             // console.log(signDay)
             var data = { seriesCount: 1, signDays: [] };
+            let yearDate = [];
+            let result = [];
             for (let p in signDay) { // 获取签到列表的每一天
               let signJson = signDay[p].signTime
-              let weekDays = 0 ;
+              let weekDays = 0;
+              let t = parseInt(p)
+              yearDate.push(signJson);
               if (todayss > 10 ) {
                 weekDays = parseInt(signDay[p].signTime.substr(8, 2))
                 data.signDays.push(weekDays)
@@ -268,8 +291,35 @@ Component({
                     isweekDays: arr
                   })
                 }
-              }  
+              }
             }
+            console.log(yearDate)
+            let signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+            for (var i = 0; i < signJsonNew.length; i++) {
+              var obj = signJsonNew[i];
+              var isExist = false;
+              for (var j = 0; j < yearDate.length; j++) {
+                var aj = yearDate[j];
+                if (obj == aj) {
+                  isExist = true;
+                  break;
+                }
+              }
+              if (!isExist) {
+                result.push(obj);
+              }
+            }
+            let resultWeekDays = 0
+            let arrResult = []
+            for (let i in result) {
+              if (todayss > 10) {
+                resultWeekDays = parseInt(result[i].substr(8, 2))
+              } else {
+                resultWeekDays = parseInt(result[i].substr(9, 1))
+              }
+              arrResult.push(resultWeekDays)
+            }
+            console.log(arrResult)
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -286,16 +336,29 @@ Component({
               series_gos: series_gos,
             });
             for (var p in anns) { //遍历json对象的每个key/value对,p为key
-              var newdats = anns[p];
+              let newdats = anns[p];
               var t = parseInt(p);
               // console.log(this.data.oneWeekDays)
               if (anns[0] == this.data.oneWeekDays) {
                 console.log('第一次签到')
                 this.setData({
-                  signTitle: '首次签到',
-                  signNumber: 1
+                  signTitleOne: '首次签到',
+                  signNumberOne: 1
                 })
-              }  
+              }
+              console.log(anns)
+                // for(let i  in arrResult) {
+                //   // console.log(arrResult[i])
+                //   if (anns.indexOf(arrResult[i]) == -1) {
+                //     console.log('漏签')
+                //       // this.setData({
+                //       //   isBreak: true,
+                //       //   signIsArr: arrResult[i]
+                //       // })
+                //     // anns.push(arrResult[i])
+                //   }
+                // }
+                console.log(anns)
               if ((anns[t + 1] - anns[p]) == 1 && anns.length == 7) {
                   console.log('连续签到了7')
                   this.setData({
@@ -314,18 +377,18 @@ Component({
                     signTitle: '连续签到30天',
                     signNumber: 7
                   })
-              }
+              } 
               signDate_arr.push(newdats);
             }
-            console.log(this.data.SignActivtyId)
-            if (this.data.SignActivtyId == true) {
+            // console.log(this.data.SignActivtyId)
+            if (this.data.SignActivtyId) {
               if (signDate_arr.indexOf(todayss) > -1) {
-                console.log("当前已签到");
+                // console.log("当前已签到");
                 that.setData({
                   signtype: "2",
                 });
               } else {
-                console.log("当前未签到");
+                // console.log("当前未签到");
                 that.setData({
                   signtype: "1",
                 });
@@ -335,6 +398,7 @@ Component({
                 signtype: "3",
               });
             }
+            console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历
             this.setData({
@@ -349,11 +413,46 @@ Component({
               showMonth: todayMonth,
             });
           },500)
+          function getBetweenDateStr(start, end) {
+            var result = [];
+            var beginDay = start.split("-");
+            var endDay = end.split("-");
+            var diffDay = new Date();
+            var dateList = new Array;
+            var i = 0;
+            diffDay.setDate(beginDay[2]);
+            diffDay.setMonth(beginDay[1] - 1);
+            diffDay.setFullYear(beginDay[0]);
+            result.push(start);
+            while (i == 0) {
+              var countDay = diffDay.getTime() + 24 * 60 * 60 * 1000;
+              diffDay.setTime(countDay);
+              dateList[2] = diffDay.getDate();
+              dateList[1] = diffDay.getMonth() + 1;
+              dateList[0] = diffDay.getFullYear();
+              if (String(dateList[1]).length == 1) { dateList[1] = "0" + dateList[1] };
+              if (String(dateList[2]).length == 1) { dateList[2] = "0" + dateList[2] };
+              result.push(dateList[0] + "-" + dateList[1] + "-" + dateList[2]);
+              if (dateList[0] == endDay[0] && dateList[1] == endDay[1] && dateList[2] == endDay[2]) {
+                i = 1;
+              }
+            };
+            return result;
+          };
         },
         endStartSign (){
-          wx.showToast({
-            title: '活动未开启',
-          })
+          let currentTime = new Date().getTime(); // 当前时间
+          let getStartTime = this.data.startTime //活动开始时间
+          if (currentTime < getStartTime) {
+            console.log('活动结束')
+            wx.showToast({
+              title: this.data.tipStop,
+            })
+          } else {
+            wx.showToast({
+              title: this.data.tipStart,
+            })
+          }
         }
     },
     ready: function() {
