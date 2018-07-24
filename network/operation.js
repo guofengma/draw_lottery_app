@@ -81,6 +81,9 @@ export default class Operation {
 
         // 获奖名单
         this.homeWinnersUrl = '/user/securitycodeUsed/queryWinList'
+
+        // 判断用户是否签到
+        this.signIsTrueUrl = '/user/activitySign/findDayActivitySignData'
       
       /*************  我的奖品 *********************/
 

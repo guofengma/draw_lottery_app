@@ -21,7 +21,7 @@ Component({
         signDay: [{ "signDay": "9" }, { "signDay": "11" }, { "signDay": "12" }, { "signDay": "15" }],
         signs: [1, 2, 3, 5, 6, 7],
         signtype: "1",
-        signDays: [], // 存放 已签到的天数
+        signDays: [], // 存放 月
         todayDate: "1",
         todayMonth: "",
         todayYear: "",
@@ -179,7 +179,7 @@ Component({
             tip:!this.data.tip
           })
         },
-        closeSingBoxOne() {
+        closeSingBoxOne() { // 首次签到
           this.setData({
             tipOne: !this.data.tipOne
           })
@@ -289,33 +289,33 @@ Component({
               }
             }
             console.log(yearDate)
-            // let signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
-            // console.log(signJsonNew)
-            // for (var i = 0; i < signJsonNew.length; i++) {
-            //   var obj = signJsonNew[i];
-            //   var isExist = false;
-            //   for (var j = 0; j < yearDate.length; j++) {
-            //     var aj = yearDate[j];
-            //     if (obj == aj) {
-            //       isExist = true;
-            //       break;
-            //     }
-            //   }
-            //   if (!isExist) {
-            //     result.push(obj);
-            //   }
-            // }
-            // let resultWeekDays = 0
-            // let arrResult = []
-            // for (let i in result) {
-            //   if (todayss > 10) {
-            //     resultWeekDays = parseInt(result[i].substr(8, 2))
-            //   } else {
-            //     resultWeekDays = parseInt(result[i].substr(9, 1))
-            //   }
-            //   arrResult.push(resultWeekDays)
-            // }
-            // console.log(arrResult)
+            let signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+            console.log(signJsonNew)
+            for (var i = 0; i < signJsonNew.length; i++) {
+              var obj = signJsonNew[i];
+              var isExist = false;
+              for (var j = 0; j < yearDate.length; j++) {
+                var aj = yearDate[j];
+                if (obj == aj) {
+                  isExist = true;
+                  break;
+                }
+              }
+              if (!isExist) {
+                result.push(obj);
+              }
+            }
+            let resultWeekDays = 0
+            let arrResult = []
+            for (let i in result) {
+              if (todayss > 10) {
+                resultWeekDays = parseInt(result[i].substr(8, 2))
+              } else {
+                resultWeekDays = parseInt(result[i].substr(9, 1))
+              }
+              arrResult.push(resultWeekDays)
+            }
+            console.log(arrResult)
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -342,19 +342,21 @@ Component({
                   signNumberOne: 1
                 })
               }
-              // console.log(anns)
-                // for(let i  in arrResult) {
-                //   // console.log(arrResult[i])
-                //   if (anns.indexOf(arrResult[i]) == -1) {
-                //     console.log('漏签')
-                //       // this.setData({
-                //       //   isBreak: true,
-                //       //   signIsArr: arrResult[i]
-                //       // })
-                //     // anns.push(arrResult[i])
-                //   }
-                // }
-                // console.log(anns)
+              // for(let i  in arrResult) {
+              //   // console.log(arrResult[i])
+              //   if (anns.indexOf(arrResult[i]) == -1) {
+              //     console.log('漏签')
+              //       this.setData({
+              //         isBreak: true,
+              //         signIsArr: arrResult[i]
+              //       })
+              //     // anns.push(arrResult[i])
+              //   }
+              // }
+              this.setData({
+                signIsArr: arrResult
+              })
+              console.log(this.data.signIsArr)
               if ((anns[t + 1] - anns[p]) == 1 && anns.length == 7) {
                   // console.log('连续签到了7')
                   this.setData({
@@ -362,13 +364,13 @@ Component({
                     signNumber: 3
                   })
               } else if ((anns[t + 1] - anns[p]) == 1 && anns.length == 15){
-                console.log('连续签到了15天')
+                // console.log('连续签到了15天')
                   this.setData({
                     signTitle: '连续签到15天',
                     signNumber: 5
                   })
               } else if ((anns[t + 1] - anns[p]) == 1 && anns.length == 30){
-                console.log('连续签到了30天')
+                // console.log('连续签到了30天')
                   this.setData({
                     signTitle: '连续签到30天',
                     signNumber: 7
@@ -376,7 +378,6 @@ Component({
               } 
               signDate_arr.push(newdats);
             }
-            // console.log(this.data.SignActivtyId)
             if (this.data.SignActivtyId) {
               if (signDate_arr.indexOf(todayss) > -1) {
                 // console.log("当前已签到");
@@ -396,7 +397,6 @@ Component({
             }
             // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
-            console.log(this.data.signDays)
             //初始化加载日历
             this.setData({
               todayDate: todayDate,
@@ -451,33 +451,33 @@ Component({
             })
           }
         },
-      getIsNumberHttp() { // 查询摇奖次数
-        let data = {
-          activityId: Storage.getActivityId() || ''
-        };
-        let that = this
-        let r = RequestFactory.shakeNumberRequest(data);
-        r.finishBlock = (req) => {
-          // console.log(req.responseObject)
-          let num = req.responseObject.data
-          this.setData({
-            isNumber: num,
-          })
-          setTimeout(() => {
-            that.setData({
-              isPlusNumber: false
+        getIsNumberHttp() { // 查询摇奖次数
+          let data = {
+            activityId: Storage.getActivityId() || ''
+          };
+          let that = this
+          let r = RequestFactory.shakeNumberRequest(data);
+          r.finishBlock = (req) => {
+            // console.log(req.responseObject)
+            let num = req.responseObject.data
+            this.setData({
+              isNumber: num,
             })
-          }, 1500)
-          wx.startAccelerometer();
-        };
-        Tool.showErrMsg(r);
-        r.addToQueue();
-      }
+            setTimeout(() => {
+              that.setData({
+                isPlusNumber: false
+              })
+            }, 1500)
+            wx.startAccelerometer();
+          };
+          Tool.showErrMsg(r);
+          r.addToQueue();
+        }
     },
     ready: function() {
       // this.signListRequestHttp() // 获取签到天数
       // setTimeout( ()=>{
-        // this.signReady() // 加载日历
+      //   this.signReady() // 加载日历
       // },1000)
     }
 }) 

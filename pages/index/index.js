@@ -44,6 +44,7 @@ Page({
         isDrawn:true,
         preHint: '',
         sufHint: '',
+        actStauts: ''
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -68,6 +69,7 @@ Page({
                 activeStartTime: req.responseObject.data.startTime,
                 preHint: req.responseObject.data.preHint,
                 sufHint: req.responseObject.data.sufHint,
+                actStauts: req.responseObject.data.actStauts
             })
           if (this.getIsLogin(false)) {
                 let currentTime = new Date().getTime(); // 当前时间
@@ -116,7 +118,7 @@ Page({
         this.setData({
             isStop: true
         })
-        this.onStartMusic()
+        // this.onStartMusic()
         // this.ani(0)
     },
     bindinputCode(e) { // 获取输入防伪码
@@ -125,15 +127,15 @@ Page({
         })
     },
     bindFocus(){
-      if (this.data.SignActivtyId == false) { // 活动未开启input 无法输入
+   // 活动未开启input 无法输入
+      if (this.data.actStauts == 4 || this.data.actStauts == '4') {
         this.setData({
           disabled: true
         })
-        wx.showModal({
+        wx.showModal({  // 活动未开启
           title: '',
           content: this.data.sufHint,
         })
-
       } else {
         this.setData({
           disabled: false
@@ -287,6 +289,9 @@ Page({
     isShowSake: false,
     onShow: function() { // 进行摇一摇
         let that = this;
+        if(this.getIsLogin(false)){
+
+        } else {
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
@@ -336,7 +341,7 @@ Page({
                                     audioCtx = wx.createAudioContext('myAudioShake');
                                     audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/success.mp3');
                                     audioCtx.play();
-                                    if (req.responseObject.data.ptype === 1) { // 实物
+                                  if (req.responseObject.data.ptype == 1 || req.responseObject.data.ptype == '1') { // 实物
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -346,7 +351,7 @@ Page({
                                             isMaterialUrl: req.responseObject.data.imgUrl,
                                             isMaterialName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype === 2) { // 字卡
+                                  } else if (req.responseObject.data.ptype == 2 || req.responseObject.data.ptype == '2') { // 字卡
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -356,7 +361,7 @@ Page({
                                             iscardUrl: req.responseObject.data.imgUrl,
                                             iscardName: req.responseObject.data.awardName
                                         })
-                                    } else if (req.responseObject.data.ptype === 3) { // 红包
+                                  } else if (req.responseObject.data.ptype == 3 || req.responseObject.data.ptype == '3') { // 红包
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -407,6 +412,7 @@ Page({
                 wx.onAccelerometerChange(shake)
             }
         }, 1500)
+      }  
     },
     onHide: function() {
         this.isShowSake = false // 设置第一次进入
@@ -444,14 +450,6 @@ Page({
                         isTrue: !this.data.isTrue
                     })
                 }
-      // if (this.data.isTrue){
-      //   this.data.audioCtx.pause()
-      // }else {
-      //   this.data.audioCtx.play()
-      // }
-          // this.data.audioCtx.pause()
-        //     }
-        // }
     },
     showNotice: function(e) { // 显示公告
       this.setData({
@@ -460,18 +458,41 @@ Page({
       if (this.data.isNotice) {
           this.selectComponent("#showNotice").noticeRequestHttp()
       }
-      console.log(this.data.SignActivtyId)
-      if (this.data.SignActivtyId) {
-        this.setData({
-          isTrue: true
-        })
-      } 
+      // console.log(this.data.SignActivtyId)
+      // if (this.data.SignActivtyId) {
+      //   this.setData({
+      //     isTrue: true
+      //   })
+      // } 
+      this.getIsSign()
+    },
+    getIsSign(){ // 用户是否签到
+        let data = {
+          activityId: Storage.getActivityId() || ''
+        }
+        let r = RequestFactory.signIsTrueRequest(data);
+        r.finishBlock = (req) => {
+          console.log(req.responseObject.data.userId)
+          let userId = req.responseObject.data.userId
+          if(userId == null || userId =='null'){
+            console.log('未签到')
+            this.setData({
+              isTrue: true
+            })
+          }else {
+            console.log('已签到')
+            this.setData({
+              isTrue: false
+            })
+          }
+        }
+        Tool.showErrMsg(r)
+        r.addToQueue();
     },
     goPage() { // 跳转detail
         if (this.getIsLogin()) {
             Tool.navigateTo('/pages/activity-detail/activity-detail')
         }
-      // this.data.audioCtx.pause()
     },
     awardClicked() { // 跳转我的奖品
         if (this.getIsLogin()) {
