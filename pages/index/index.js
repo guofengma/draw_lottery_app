@@ -289,9 +289,10 @@ Page({
     isShowSake: false,
     onShow: function() { // 进行摇一摇
         let that = this;
-        if(this.getIsLogin(false)){
-
-        } else {
+        // if(this.getIsLogin(false)){
+        //     console.log('为登录')
+        //   wx.startAccelerometer();
+        // } else {
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
@@ -412,7 +413,7 @@ Page({
                 wx.onAccelerometerChange(shake)
             }
         }, 1500)
-      }  
+      // }  
     },
     onHide: function() {
         this.isShowSake = false // 设置第一次进入
@@ -449,6 +450,7 @@ Page({
                     this.setData({
                         isTrue: !this.data.isTrue
                     })
+                    wx.startAccelerometer()
                 }
     },
     showNotice: function(e) { // 显示公告

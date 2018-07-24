@@ -35,8 +35,9 @@ Component({
             this.triggerEvent('showNotice', false)
         },
         noticeRequestHttp() { //  公告
+            let pages = this.data.page 
             let data = {
-                page: this.data.page
+              page: pages
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
@@ -98,42 +99,51 @@ Component({
             r.addToQueue();
         },
         prevPage () {
-          console.log(this.data.starts)
-          let pages = this.data.page
-          pages--
           console.log(this.data.page)
-          if(this.data.starts == 0 && this.data.page == 1){
-            this.setData({
-              isBtnFalse: '1',
-            })
+          if (this.data.page == 1 || this.data.page == '1'){
+            console.log('这里')
+          //   this.setData({
+          //   isBtnFalse: '1',
+          // })
           }else {
+            console.log('执行')
+            let pages = this.data.page
+            pages--
             this.setData({
-              page: pages
+              page: pages,
+              
             })
+            if (pages == 1){
+              this.setData({
+                isBtnFalse: '1',
+              })
+            }
             this.noticeRequestHttp()
+            
             console.log(this.data.page)
           }
         },
         nextPage () {
-          let pages = this.data.page
-          pages++
+          
           if(this.data.page === this.data.totals) {
-              
+                console.log(1)
           } else {
+            let pages = this.data.page
+            pages++
             this.setData({
+              page: pages,
               isBtnFalse: '2',
               noticeFalse: ''
             })
-            console.log(this.data.isBtnFalse)
-            this.setData({
-              page: pages
-            })
             this.noticeRequestHttp()
+            
+            console.log(this.data.page)
           }
         }
     },
     ready() {
         // this.noticeRequestHttp() // 获取公告
         console.log('公告')
+        console.log(this.data.page)
     }
 })
