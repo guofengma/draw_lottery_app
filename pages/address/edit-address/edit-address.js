@@ -66,10 +66,7 @@ Page({
     Tool.navigateTo(page)
   },
   queryUserAddressList() {
-    let params = {
-      // sort: 'default_status'
-    }
-    let r = RequestFactory.queryUserAddressList(params);
+    let r = RequestFactory.queryUserAddressList({},this.data.door);
     r.finishBlock = (req) => {
       if (req.responseObject.data.length > 0) {
         this.setData({

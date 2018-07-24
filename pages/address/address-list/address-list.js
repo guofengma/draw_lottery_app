@@ -52,11 +52,11 @@ Page({
     r.addToQueue();
   },
   queryUserAddressList() {
-    let str = this.data.door == 1 ? "efault_status" :"duo_is"
-    let params = {
-      sort:str
-    }
-    let r = RequestFactory.queryUserAddressList(params);
+    // let str = this.data.door == 1 ? "efault_status" :"duo_is"
+    // let params = {
+    //   sort:str
+    // }
+    let r = RequestFactory.queryUserAddressList({}, this.data.door);
     r.finishBlock = (req) => { 
       let datas = req.responseObject.data
       if (datas.length > 0) {

@@ -160,8 +160,10 @@ export default class RequestFactory {
     return this.request(url, params, '修改地址', true)
   }
 
-  static queryUserAddressList(params) {
-    let url = Operation.sharedInstance().queryUserAddressList;
+  static queryUserAddressList(params,types) {
+    let url = ''
+    url = types == 1 ? Operation.sharedInstance().queryUserAddressList : Operation.sharedInstance().queryUserAddressListByDuoIs
+    //let url = Operation.sharedInstance().queryUserAddressList;
     let req = this.request(url, params, '获取地址列表', true);
     req.preprocessCallback = (req, firstData) => {
       let data = req.responseObject.data

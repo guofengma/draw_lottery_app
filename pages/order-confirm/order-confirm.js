@@ -24,7 +24,8 @@ Page({
     let params = {
       sort: "efault_status"
     }
-    let r = RequestFactory.queryUserAddressList(params);
+    //let r = RequestFactory.queryUserAddressList(params);
+    let r = RequestFactory.queryUserAddressList({}, 1);
     r.finishBlock = (req) => {
       let datas = req.responseObject.data
       if (datas.length > 0) {

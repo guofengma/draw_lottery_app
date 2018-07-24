@@ -130,6 +130,10 @@ export default class Operation {
 
         this.queryUserAddressList ='/user/userAddress/queryUserAddressList'
 
+        // 查询朵地址
+
+        this.queryUserAddressListByDuoIs = '/user/userAddress/queryUserAddressListByDuoIs'
+
 
       /**********  获取省市区 *******************/
 
