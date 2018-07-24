@@ -22,7 +22,7 @@
     </view>
     <view class='write-some'>
       <view class='red'>您有什么问题或建议向对我们说?</view>
-      <textarea placeholder='请详细描述问题的相关信息，有助于我们快速定位问题的原因，谢谢'  name='feedback'></textarea>
+      <textarea placeholder='{{placeholder.placeholder}}' disabled='{{placeholder.disabled}}' name='feedback'></textarea>
     </view>
     
     <view class='update-img-view'>

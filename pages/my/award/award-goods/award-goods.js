@@ -66,6 +66,10 @@ Page({
     })
   },
   submitClicked(){
+    if (!this.data.selectArr.id){
+      Tool.showAlert('请选择实物奖品')
+      return
+    }
     let params = {
       id: this.data.selectArr.id
     }

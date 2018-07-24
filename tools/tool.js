@@ -292,7 +292,7 @@ export default class Tool {
     //弹窗提示
     static showAlert(msg, okCB = () => { }) {
         wx.showModal({
-            title: '提示',
+            title: '',
             content: msg,
             showCancel: false,
             success: function (res) {
@@ -309,7 +309,7 @@ export default class Tool {
         showCancel: true,
         cancelText: '取消',
         confirmText: '确认',
-        cancelColor:'#da2221',
+        cancelColor:'#000',
         confirmColor:'#da2221',
         success: function (res) {
           if (res.confirm) {

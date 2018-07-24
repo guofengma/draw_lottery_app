@@ -61,7 +61,7 @@
       <button open-type="getUserInfo" class='home-tabar-btn' bindgetuserinfo="agreeGetUser" lang="zh_CN">天天签到</button>
     </block>
     <!--正常点击按钮 -->
-    <block>
+    <block wx:else>
       <view class="home-tabar-btn" catchtap='goPage'>活动详情</view>
       <view class="home-tabar-btn home-btn-borders" catchtap='awardClicked'>我的奖品</view>
       <view class="home-tabar-btn" catchtap='closeView'>天天签到</view>
