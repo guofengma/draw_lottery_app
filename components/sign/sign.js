@@ -203,10 +203,15 @@ Component({
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
             let stringJson = req.responseObject.data;
-            // console.log(stringJson)
+            console.log(stringJson)
+            if (stringJson == [] || stringJson == '[]'){
+                console.log('')
+            }else {
               this.setData({
                 weekdays: req.responseObject.data || []
               })
+            }
+             
           };
           Tool.showErrMsg(r);
           r.addToQueue();
