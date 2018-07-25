@@ -11,10 +11,14 @@
   height: 760rpx;
   margin: 0 auto;
 }
+.cardNum{
+  margin-top: 55rpx;
+  margin-bottom: 20rpx;
+}
 .card-bgCard{
   width: 350rpx;
   height: 464rpx;
-  margin: 75rpx auto auto auto;
+  margin: 0 auto; 
 }
 .card-bgCard image{
   width: 350rpx;
@@ -77,8 +81,25 @@
   background-color: #da2221;
   color: #fff;
 }
-.model-view-bg{
+.model-view-bg-1{
   background: url(https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/succ-card.png) no-repeat;
   background-size: 100% 100%;
   background-color: rgba(0,0,0,.5); 
+}
+.showImg-view{
+  position: absolute;
+
+}
+
+.imgViews{
+  position: absolute;
+  top:-170rpx;
+  left: 80rpx;
+}
+
+.big-view-1,.big-view-2{
+  position: relative;
+}
+.big-view-2 .imgViews{
+  left: 40rpx;
 }

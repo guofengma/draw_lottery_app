@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.3",
+	"libVersion": "2.2.0",
 	"appid": "wxb149b67e84af7551",
 	"projectname": "draw_lottery",
 	"isGameTourist": false,
@@ -33,7 +33,6 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
 			"list": [
 				{
 					"id": -1,
@@ -135,6 +134,12 @@
 					"id": -1,
 					"name": "集卡",
 					"pathName": "pages/my/award/card/card",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "微信登陆",
+					"pathName": "pages/login/login",
 					"query": ""
 				}
 			]

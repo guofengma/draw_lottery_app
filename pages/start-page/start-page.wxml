@@ -1,4 +1,4 @@
 <view class='fixed-top'>
-  <image src='/img/default-user.png' mode='widthFix'></image>
-  <view class='timer'>{{second}}s</view>
+  <image src='https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yw_images/start.jpg' mode='widthFix'></image>
+  <view class='timer flexR' catchtap='subClicked'>{{second}}s</view>
 </view>

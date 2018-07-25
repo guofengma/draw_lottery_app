@@ -115,12 +115,21 @@ button::after{
 .font-22{
   font-size: 22rpx;
 }
+.font-24{
+  font-size: 24rpx;
+}
 .font-28{
   font-size: 28rpx;
 }
 .fixed-bottom{
   position: fixed;
   bottom: 0;
+  width: 100%;
+  z-index: 999;
+}
+.fixed-bottom-iPhoneX{
+  position: fixed;
+  bottom: 34rpx;
   width: 100%;
   z-index: 999;
 }
@@ -206,6 +215,7 @@ button::after{
 .scoll-h{
   height: 100%;
   padding-top:80rpx;
+  padding-bottom: 20rpx;
 }
 .tab-content{
   margin-top: 80rpx;

@@ -1,5 +1,5 @@
 <import src='/components/address-info/address-info.wxml' />
-
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 <top-bar/>
 <view class='addressList'>
   <block wx:for='{{addressList}}' wx:key='unique'>
@@ -8,10 +8,11 @@
         <image src='{{item.duo_is==1? "/img/choose-red.png":"/img/choose-gray.png"}}' mode='widthFix'></image>
       </view>
       <view  data-index='{{index}}' class='address-view'>
-        <template is="address-info" data='{{...item,showDefault}}'/>
+        <template is="address-info" data='{{...item}}'/>
       </view>
     </view>
   </block>
 
-  <view class='default-btn fixed-bottom' catchtap='goPage'>管理</view>
+  <view class='default-btn {{isIPhoneX.className}}' catchtap='goPage'>管理</view>
 </view>
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

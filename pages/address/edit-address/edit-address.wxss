@@ -1,5 +1,7 @@
 @import "/components/address-info/address-info";
 
+@import "/components/iPhoneX-line/iPhoneX-line";
+
 .address-edit-choose image{
   width: 32rpx;
 }
@@ -38,8 +40,11 @@
   margin-top: 20rpx;
 }
 .addressList{
-  padding-bottom: 120rpx;
+  padding-bottom: 150rpx;
 }
 .address-info-leftbar{
   width: 100%;
+}
+.iPhoneX-line{
+  background-color:#da2221;
 }

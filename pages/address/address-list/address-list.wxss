@@ -1,7 +1,8 @@
 @import "/components/address-info/address-info";
+@import "/components/iPhoneX-line/iPhoneX-line";
 
 .addressList{
-  padding-bottom: 130rpx;
+  padding-bottom:150rpx;
 }
 .address-info{
   margin-bottom: 20rpx;
@@ -20,4 +21,7 @@
 }
 .addressList-line{
   margin-top: 20rpx;
+}
+.iPhoneX-line{
+  background-color:#da2221;
 }

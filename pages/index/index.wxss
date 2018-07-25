@@ -1,4 +1,4 @@
-/* @import "/components/address-info/address-info"; */
+@import "/components/iPhoneX-line/iPhoneX-line";
 .home-page{
   position: relative;
   width: 750rpx;
@@ -18,9 +18,6 @@
 .home-Notice{
   width:65rpx;
   height: 65rpx;
-  position: absolute;
-  right: 90rpx;
-  top: 548rpx;
 }
 .home-Notice image{
   width: 130rpx;
@@ -28,7 +25,7 @@
 }
 .home-inside{
   width: 536rpx;
-  height: 644rpx;
+  height: 678rpx;
   margin: 0 auto;
 }
 .inputBox{
@@ -59,14 +56,17 @@
   font-size: 28rpx;
 }
 .draw-number{
-  width: 240rpx;
-  height: 30rpx;
+  width: 280rpx;
+  /* height: 30rpx; */
   line-height: 30rpx;
   margin: 28rpx auto;
+  position: relative;
 }
 .draw-number text{
   font-size: 28rpx;
   color: #e9d96a;
+  display: block;
+  text-align: center;
 }
 .home-winners{
   width: 536rpx;
@@ -89,29 +89,35 @@
   line-height: 55rpx;
 }
 .winners-content{
-  width: 462rpx;
+  width: 470rpx;
   height: 329rpx;
   margin: 0 auto;
+  overflow: hidden;
+  position: relative;
 }
 .winners-content .text{
   font-size: 24rpx;
   color: #fff;
   width: 460rpx;
   white-space: nowrap;
-  margin-bottom: 30rpx;
+  margin-bottom: 40rpx;
+}
+.winners-container{
+  height: 329rpx;
 }
 .text-width{
   display: inline-block;
-  width: 174rpx;
+  width: 160rpx;
 }
 .home-tabar{
   height: 88rpx;
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
   z-index: 99;
+  width: 100%; */
 }
 .home-tabar-btn{
-  width: 245rpx;
+  width: 33.3%;
   height: 88rpx;
   background: #dddddd;
   display: inline-block;
@@ -119,6 +125,7 @@
   text-align: center;
   font-size: 28rpx;
   padding: 0 1rpx 0 1rpx;
+  border-radius: 0;
 }
 .home-btn-borders{
   border-left:6rpx solid #fff; 
@@ -186,4 +193,137 @@
   width: 191rpx;
   height: 272rpx;
   margin: 0 auto;
+}
+
+/*模态背景框，半透明黑色，全屏*/
+
+.login-2{
+  margin-top: 40rpx;
+  text-align: center;
+}
+.myAudio{
+  position: fixed;
+  right: 58rpx;
+  top: 133rpx;
+  width: 45rpx;
+  height: 45rpx;
+  border: none;
+  border-radius: 50%;
+  background:transparent;
+  transform-style: preserve-3d;
+  transform: matrix3d(-0.0941083, -0.995562, 0, 0, 0.995562, -0.0941083, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transform-origin: 50% 50% 0px;
+}
+.myAudio image{
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+}
+.swiper_container {
+ height: 329rpx;
+}
+.swiper_item {
+  font-size: 25rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 2px;
+}
+movable-view {
+  height:65rpx;
+  width: 65rpx;
+  z-index: 99999;
+  color: #fff;
+}
+
+movable-area {
+  height: 100%;
+  width: 100%;
+}
+.rotate{
+  animation:rotaed 2s linear infinite;
+  -moz-animation:rotaed 2s linear infinite; /* Firefox */
+  -webkit-animation:rotaed 2s linear infinite; /* Safari and Chrome */
+  -o-animation:rotaed 2s linear infinite; /* Opera */
+}
+.numberPlus{
+  /* height:30px;
+  overflow: hidden;
+  position: absolute;
+  width: 280rpx;
+  margin: 0 auto;
+  display: inline-block !important; */
+}
+.isNumberPlus{
+  position: absolute;
+  top: 0rpx;
+  right: 120rpx;
+  text-align: center;
+  color: #ffec00;
+  animation:plusScale 2s linear  infinite;
+  -moz-animation:plusScale 2s linear  infinite; /* Firefox */
+  -webkit-animation:plusScale 2s linear  infinite; /* Safari and Chrome */
+  -o-animation:plusScale 2s linear  infinite; /* Opera */
+}
+.isNumberReduce{
+  position: absolute;
+  top: 0rpx;
+  right: 120rpx;
+  text-align: center;
+  color: #ffec00;
+  animation:plusScale 2s linear infinite;
+  -moz-animation:plusScale 2s linear infinite; /* Firefox */
+  -webkit-animation:plusScale 2s linear infinite; /* Safari and Chrome */
+  -o-animation:plusScale 2s linear infinite; /* Opera */
+}
+.cishu{
+  animation:anim1 2s linear infinite;
+  -moz-animation:anim1 2s linear infinite; /* Firefox */
+  -webkit-animation:anim1 2s linear infinite; /* Safari and Chrome */
+  -o-animation:anim1 2s linear infinite; /* Opera */
+}
+.cishu1{
+  animation:anim2 2s linear infinite;
+  -moz-animation:anim2 2s linear infinite; /* Firefox */
+  -webkit-animation:anim2 2s linear infinite; /* Safari and Chrome */
+  -o-animation:anim2 2s linear infinite; /* Opera */
+}
+@keyframes rotaed {
+  0%{
+    transform: rotate(0deg)
+  }
+  100%{
+    transform:  rotate(359deg)
+  }
+} 
+.iPhoneX-line{
+  background:#dddddd;
+}
+@keyframes plusScale{
+  0%{
+    transform:  scale(5)
+  }
+  100%{
+    transform:  scale(0)
+  }
+}
+@keyframes reduceScale{
+  100%{
+    transform:  scale(5)
+  }
+  0%{
+    transform:  scale(0)
+  }
+}
+@keyframes anim1{
+  0% {top: 30px;opacity: 1}
+  50% {top: -30px;opacity: 1}
+  75% {top: -30px ;opacity: 0}
+  100%{top:30px;opacity: 0}
+}
+@keyframes anim2{
+  0% {top: -30px;opacity: 0}
+  25% {top: 30px;opacity: 0}
+  50% {top: 30px;opacity: 1}
+  100%{top: -30px;opacity: 1}
 }

@@ -1,4 +1,4 @@
-<view class="model-view-bg" style='overflow:auto' wx:if="{{isTrue}}">
+<view class="model-view-bg"  style='overflow:auto' wx:if="{{isTrue}}">
   <view class="viewcontent">
     <view class="bacgroundRgba">
       <view class="backgroundHeader"></view>
@@ -33,13 +33,13 @@
                             <view class="month_day">
                                 <view class="day_list"  wx:for="{{signDays[0]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item">
                                     <view wx:if="{{item.signday=='is'}}" style="display:none">
-                                    {{item == null ? '' : item.normalday}}
+                                        {{item == null ? '' : item.normalday}}
                                     </view>
-                                    <view wx:else="{{item.signday!=='is'}}" style="display:block">
-                                    {{item == null ? '' : item.normalday}}
+                                  <view wx:else="{{item.signday!=='is'}}" class="" style="display:block">
+                                      {{item == null ? '' : item.normalday}}
                                     </view>
-                                   <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                  <block wx:if="{{item.normalday == oneWeekDays}}">
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
@@ -48,23 +48,28 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
-                                    <block wx:else="{{item.signday=='is'}}">
-                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                    <!-- <block wx:elif="{{item.normalday== signIsArr[index]}}">
+                                      <view class="{{borderBreak}}">
                                         {{item == null ? '' : item.normalday}}
-                                       </view>
+                                      </view>
+                                    </block> -->
+                                    <block wx:else="{{item.signday=='is'}}">
+                                    <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
                                     </block>
                                 </view>
                             </view>
                             <view class="month_day">
                                 <view class="day_list"  wx:for="{{signDays[1]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item">
                                 <view wx:if="{{item.signday=='is'}}" style="display:none">
-                                  {{item == null ? '' : item.normalday}}
-                                </view>
-                                <view wx:else="{{item.signday!=='is'}}" style="display:block">
-                                  {{item == null ? '' : item.normalday}}
-                                </view>
+                                        {{item == null ? '' : item.normalday}}
+                                    </view>
+                                  <view wx:else="{{item.signday!=='is'}}" class="" style="display:block">
+                                      {{item == null ? '' : item.normalday}}
+                                    </view>
                                   <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
@@ -73,23 +78,28 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
-                                    <block wx:else="{{item.signday=='is'}}">
-                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                    <block wx:elif="{{item.normalday== signIsArr[index]}}">
+                                      <view class="{{borderBreak}}">
                                         {{item == null ? '' : item.normalday}}
-                                       </view>
+                                      </view>
+                                    </block>
+                                    <block wx:else="{{item.signday=='is'}}">
+                                    <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
                                     </block>
                                 </view>
                             </view>
                             <view class="month_day">
                                 <view class="day_list"  wx:for="{{signDays[2]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item">
                                     <view wx:if="{{item.signday=='is'}}" style="display:none">
+                                        {{item == null ? '' : item.normalday}}
+                                    </view>
+                                  <view wx:else="{{item.signday!=='is'}}" class="" style="display:block">
                                       {{item == null ? '' : item.normalday}}
                                     </view>
-                                    <view wx:else="{{item.signday!=='is'}}" style="display:block">
-                                      {{item == null ? '' : item.normalday}}
-                                    </view>
-                                     <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                  <block wx:if="{{item.normalday == oneWeekDays}}">
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
@@ -98,43 +108,58 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
-                                    <block wx:else="{{item.signday=='is'}}">
-                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                    <block wx:elif="{{item.normalday== signIsArr[index]}}">
+                                      <view class="{{borderBreak}}">
                                         {{item == null ? '' : item.normalday}}
-                                       </view>
+                                      </view>
+                                    </block>
+                                    <block wx:else="{{item.signday=='is'}}">
+                                    <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
                                     </block>
                                 </view>
                             </view>
                             <view class="month_day">
                                 <view class="day_list"  wx:for="{{signDays[3]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item">
-                                <view wx:if="{{item.signday=='is'}}" style="display:none">
-                                      {{item == null ? '' : item.normalday}}
-                                  </view>
-                                  <view wx:else="{{item.signday!=='is'}}" style="display:block">
+                                  <view wx:if="{{item.signday=='is'}}" style="display:none">
+                                        {{item == null ? '' : item.normalday}}
+                                    </view>
+                                  <view wx:else="{{item.signday!=='is'}}" class="" style="display:block">
                                       {{item == null ? '' : item.normalday}}
                                     </view>
-                                    <block wx:if="{{item.normalday== isweekDays}}">
+                                  <block wx:if="{{item.normalday == oneWeekDays}}">
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
+                                          {{item == null ? '' : item.normalday}}
+                                        </view>
+                                      </block>
+                                    <block wx:elif="{{item.normalday== isweekDays}}">
                                       <view class="{{hoverClass}}" bindtap='closeSingBox'>
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
-                                    <block wx:else="{{item.signday=='is'}}">
-                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                    <block wx:elif="{{item.normalday== signIsArr[index]}}">
+                                      <view class="{{borderBreak}}">
                                         {{item == null ? '' : item.normalday}}
-                                       </view>
+                                      </view>
+                                    </block>
+                                    <block wx:else="{{item.signday=='is'}}">
+                                    <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
                                     </block>
                                 </view>
                             </view>
                             <view class="month_day">
                                 <view class="day_list"  wx:for="{{signDays[4]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item">
                                 <view wx:if="{{item.signday=='is'}}" style="display:none">
+                                        {{item == null ? '' : item.normalday}}
+                                    </view>
+                                  <view wx:else="{{item.signday!=='is'}}" class="" style="display:block">
                                       {{item == null ? '' : item.normalday}}
                                     </view>
-                                    <view wx:else="{{item.signday!=='is'}}" style="display:block">
-                                      {{item == null ? '' : item.normalday}}
-                                    </view>
-                                     <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                  <block wx:if="{{item.normalday == oneWeekDays}}">
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
@@ -143,23 +168,28 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
-                                    <block wx:else="{{item.signday=='is'}}">
-                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                    <block wx:elif="{{item.normalday==signIsArr[index]}}">
+                                      <view class="{{borderBreak}}">
                                         {{item == null ? '' : item.normalday}}
-                                       </view>
+                                      </view>
+                                    </block>
+                                    <block wx:else="{{item.signday=='is'}}">
+                                    <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
                                     </block>
                                 </view>
                             </view>
                             <view class="month_day">
                                 <view class="day_list"  wx:for="{{signDays[5]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item">
                                 <view wx:if="{{item.signday=='is'}}" style="display:none">
+                                        {{item == null ? '' : item.normalday}}
+                                    </view>
+                                  <view wx:else="{{item.signday!=='is'}}" class="" style="display:block">
                                       {{item == null ? '' : item.normalday}}
                                     </view>
-                                    <view wx:else="{{item.signday!=='is'}}" style="display:block">
-                                      {{item == null ? '' : item.normalday}}
-                                    </view>
-                                    <block wx:if="{{item.normalday == oneWeekDays}}">
-                                        <view class="{{hoverClass}}" bindtap='closeSingBox'>
+                                  <block wx:if="{{item.normalday == oneWeekDays}}">
+                                        <view class="{{hoverClass}}" bindtap='closeSingBoxOne'>
                                           {{item == null ? '' : item.normalday}}
                                         </view>
                                       </block>
@@ -168,10 +198,15 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
-                                    <block wx:else="{{item.signday=='is'}}">
-                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                    <block wx:elif="{{item.normalday== signIsArr[index]}}">
+                                      <view class="{{borderBreak}}">
                                         {{item == null ? '' : item.normalday}}
-                                       </view>
+                                      </view>
+                                    </block>
+                                    <block wx:else="{{item.signday=='is'}}">
+                                    <view class="day_hover" wx:if="{{item.signday=='is'}}">
+                                        {{item == null ? '' : item.normalday}}
+                                      </view>
                                     </block>
                                 </view>
                             </view>
@@ -180,9 +215,14 @@
                     </view>
                     <view class="text-center"  wx:if="{{signtype=='1'}}">
                         <button class="btn-qiandao"  bindtap="sign_start" >立即签到</button>
+                        <button></button>
                     </view>
                     <view class="text-center"  wx:if="{{signtype=='2'}}">
-                        <button class="btn-qiandao1" bindtap="sign_end" >已签到</button>
+                        <button class="btn-qiandao1">已签到</button>
+                        <button></button>
+                    </view>
+                    <view class="text-center"  wx:if="{{signtype=='3'}}">
+                        <button class="btn-qiandao1" bindtap='endStartSign'>立即签到</button>
                     </view>
                 </view>
             </view>
@@ -219,6 +259,19 @@
           </view>
         </view>
      </view> 
+  <view class="model-view-bg" wx:if="{{tipOne}}">
+      <view class="signShowBox"><!--连续签到弹框-->
+        <view class="signContent">
+          <text class="signRedText" >{{signTitleOne}}</text>
+          <view class="signBlankText">
+            赠送 <text class="signRedText">{{signNumberOne}}次</text>免费抽奖机会
+          </view>
+        </view>
+        <view class="closeBtn" bindtap='closeSingBoxOne'>
+            <image src="../../img/close-x.png"></image>
+          </view>
+        </view>
+     </view>  
     <view class="closeBtn" bindtap='closeView'>  <!--关闭日历-->
       <image src="../../img/close-x.png"></image>
     </view>

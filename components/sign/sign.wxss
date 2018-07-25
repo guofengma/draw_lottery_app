@@ -170,7 +170,7 @@ button::after {
 /*微信小程序签到wxss*/
 
 .calendar_wrapper {
-    width: 554rpx;
+    width: 570rpx;
     height: 560rpx;
     margin: 10rpx auto;
     font-size: 24rpx;
@@ -339,6 +339,19 @@ button::after {
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
+}
+.borderBreak{
+  border-radius: 50%;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/notfoo.png') no-repeat center center;
+  background-size: 60%;
+  width: 80rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index: 999999;
 }
 .backgroundHeader{
   background-color: #bf201f;

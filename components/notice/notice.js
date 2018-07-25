@@ -1,12 +1,13 @@
 import WxParse from '../../libs/wxParse/wxParse.js';
-let { Tool, RequestFactory, Storage } = global
+let { Tool, RequestFactory } = global
 
 Component({
     /**
      * 组件的属性列表
      */
     properties: {
-        isNotice: Boolean
+        isNotice: Boolean,
+
     },
 
     /**
@@ -15,10 +16,17 @@ Component({
     data: {
         isTrue: true,
         isNotice: false,
-        btnText: '下一条',
+        btnNext: '下一条',
+        btnPrev: '上一条',
+        isBtnFalse: '1',
+        isClass: '',
         page: 1,
         noticeCountent: '',
-        noticeTitle: ''
+        noticeTitle: '',
+        totals: 0,
+        starts:0,
+        noticeFalse: 'isBtnFalse',
+        datasisNull: ''
     },
 
     /**
@@ -28,38 +36,101 @@ Component({
         showNotice: function() { // 关闭公告
             this.triggerEvent('showNotice', false)
         },
-        noticeRequestHttp() {
+          myCatchTouch() {
+            return
+          },
+        noticeRequestHttp() { //  公告
+            let pages = this.data.page 
             let data = {
-                page: this.data.page
+              page: pages
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
-              console.log(req.responseObject)
-              let datas = req.responseObject.data
-              if(datas.data[0] === '') {
-                console.log('没了')
+              this.data.datasisNull = req.responseObject.data.total
+              let datas = req.responseObject.data;
+              let starts = datas.start;
+              let totals = datas.total;
+              console.log(datas)
+              if (totals == 0) {
+                  console.log('没有公告')
+                  return
+              } else {
+
+                this.setData({
+                  totals: totals,
+                })
+                if (datas.data[0].content == "undefined" || datas.data[0].content == null) {
+                  return null
+                } else {
+                  let html = datas.data[0].content
+                  this.setData({
+                    noticeTitle: datas.data[0].title
+                  })
+                  WxParse.wxParse('article', 'html', html, this, 5);
+                }
+                if ((totals - starts) === 1) {
+                  this.setData({
+                    btnNext: '关闭',
+                    isBtnNext: false,
+                  })
+                  return false
+                } else {
+                  this.setData({
+                    btnNext: '下一条',
+                    isBtnNext: true,
+                  })
+                }
               }
-              Storage.setActivityId(datas.data[0].activity_id)
-              let html = datas.data[0].content
-              this.setData({
-                noticeTitle: datas.data[0].title
-              })
-              WxParse.wxParse('article', 'html', html, this, 5);
+             
+               
             };
             Tool.showErrMsg(r);
             r.addToQueue();
         },
         prevPage () {
-          this.data.page --
-          this.noticeRequestHttp()
+          console.log(this.data.page)
+          if (this.data.page == 1 || this.data.page == '1'){
+            console.log('这里')
+          //   this.setData({
+          //   isBtnFalse: '1',
+          // })
+          }else {
+            console.log('执行')
+            let pages = this.data.page
+            pages--
+            this.setData({
+              page: pages,
+            })
+            if (pages == 1){
+              this.setData({
+                isBtnFalse: '1',
+              })
+            }
+            this.noticeRequestHttp()
+            
+            console.log(this.data.page)
+          }
         },
         nextPage () {
-          this.data.page ++
-          this.noticeRequestHttp()
+          
+          if(this.data.page === this.data.totals) {
+                console.log(1)
+          } else {
+            let pages = this.data.page
+            pages++
+            this.setData({
+              page: pages,
+              isBtnFalse: '2',
+              noticeFalse: ''
+            })
+            this.noticeRequestHttp()
+            
+            console.log(this.data.page)
+          }
         }
     },
     ready() {
-        this.noticeRequestHttp()
+        // this.noticeRequestHttp() // 获取公告
         console.log('公告')
     }
 })

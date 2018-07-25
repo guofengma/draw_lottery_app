@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/start-page/start-page",
         "pages/index/index",
         "pages/address/new-address/new-address",
         "pages/address/address-list/address-list",
@@ -16,8 +17,8 @@
         "pages/order-confirm/submit-order/submit-order",
         "pages/my/my-order/my-order",
         "pages/logistics/logistics",
-        "pages/start-page/start-page",
-        "pages/activity-detail/activity-detail"
+        "pages/activity-detail/activity-detail",
+        "pages/login/login"
     ],
     "window": {
         "backgroundTextStyle": "light",

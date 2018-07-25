@@ -1,14 +1,15 @@
 @import "/components/logo-bar/logo-bar";
 
 .award-goods-page{
-  padding-bottom: 120rpx;
-  height: 100%;
+  padding-bottom: 110rpx; 
+  height:calc(100% - 260rpx);
+  margin-top: 170rpx;
+  overflow: hidden;
 }
 .scroll{
-  height:calc(100% - 290rpx);
-  padding-bottom: 10rpx;
+  height: 100%;
   box-sizing: border-box;
-  margin-top: 170rpx;
+  /* padding-bottom: 20rpx; */
 }
 .left{
   width: 15%;
@@ -34,13 +35,16 @@
   padding: 0 30rpx;
   justify-content: flex-start
 }
-.sub-bar{
+.sub-bar,.sub-bar-x{
   height: 88rpx;
   position: fixed;
   bottom: 101rpx;
   left: 0;
   width: 100%;
   border-bottom: 1rpx solid #eee;
+}
+.sub-bar-x{
+  bottom: 135rpx;
 }
 .sub-btn{
   width: 190rpx;

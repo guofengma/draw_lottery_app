@@ -13,7 +13,8 @@
   flex-wrap: wrap;
 }
 .userImg{
-  height: 100%;
+  height: 170rpx;
+  width: 170rpx;
 }
 .selected-img{
   overflow: hidden;

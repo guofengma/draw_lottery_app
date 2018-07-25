@@ -13,17 +13,18 @@
 }
 .noticeModel{
   width: 690rpx;
-  height: 1100rpx;
-  margin: 0rpx auto;
+  /* height: 868rpx; */
+  margin: 15rpx auto;
   border: none;
   border-radius: 10px;
-  margin-top: 350rpx;
-  padding-bottom: 150rpx;
+  position: relative;
 }
 .notice-Header{
   position: relative;
-  height: 181rpx;
-  background: #da2221;
+  width: 690rpx;
+  height:185rpx;
+  background:url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/noticebg.png') no-repeat center center;
+  /* background-size:320px 101px; */
   border-radius:8px 8px 0px 0px; 
 }
 .notice-people{
@@ -39,26 +40,32 @@
 }
 .notice-Title{
   display: block;
-  line-height: 181rpx;
+  line-height: 185rpx;
   text-align: center;
   color: #fff;
   font-size: 36rpx;
 }
 .noticeContent{
-  height: 920rpx;
+  height: 755rpx;
   background: #fff;
   border: none;
-  border-radius: 8rpx;
+  border-radius: 0 0 8rpx 8rpx;
 }
 .contentHeader{
-  height: 77rpx;
+  width: 660rpx;
+  /* height: 77rpx; */
   line-height: 77rpx;
   text-align: center;
   font-size: 30rpx;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space:normal;
+  margin: 0 auto;
+  word-break:break-all;
 }
 .contentScroll{
   width: 600rpx;
-  height: 657rpx;
+  height:500rpx;
   margin: 0 auto;
   background: #eeeeee;
   border: none;
@@ -91,9 +98,13 @@
 .noticeBtnRight{
   float: right;
 }
+.noticeFalse{
+  background: #dddddd !important;
+  color: #999 !important;
+}
 .closeBtn{
   position: absolute;
-  bottom:-188rpx;
+  bottom:-120rpx;
   left: 45%;
   width: 50rpx;
   height: 145rpx;

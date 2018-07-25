@@ -20,12 +20,24 @@ export default class Operation {
     /*************  注册登录相关接口 *********************/
        
         // 验证openid是否注册
-        this.verifyWechat = '/user/memberLogin/verifyWechat'
 
+        this.getWeChatOpenId = '/user/userLogin/getWeChatOpenId'
+
+        // 微信登陆
+
+        this.appWechatLogin ='/user/userLogin/decryptPhone'
+
+        // 退出登录
+
+        this.exitLogin  ='/user/userLogin/exitLogin'
+
+        // 获取活动id 
+
+        this.getActivityId ='/user/activity/get'
 
         // 上传图片的地址
 
-        this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUploadImage'
+        this.aliyunOSSUploadImage ='/commonAPI/ossClient/aliyunOSSUpload'
 
       /************* 我的反馈 *********************/
 
@@ -60,6 +72,18 @@ export default class Operation {
 
         // 公告
         this.noticeListUrl = '/user/notice/queryActivityNoticePageList'
+
+        //获取摇奖次数
+        this.shakeNumberUrl = '/user/activityCount/query'
+        
+        // 摇一摇开启
+        this.shakeStartUrl = '/user/securityCode/lottery'
+
+        // 获奖名单
+        this.homeWinnersUrl = '/user/securitycodeUsed/queryWinList'
+
+        // 判断用户是否签到
+        this.signIsTrueUrl = '/user/activitySign/findDayActivitySignData'
       
       /*************  我的奖品 *********************/
 
@@ -78,6 +102,22 @@ export default class Operation {
         // 我的红包列表
 
         this.queryActivityRedPackageList ='/user/activityRedPackage/queryActivityRedPackageList'
+
+        // 红包数量
+
+        this.getRedPackageNum = '/user/activityRedPackage/query'
+
+        // 我的实物列表
+
+        this.querySecuritycodeUsedList = '/user/securitycodeUsed/querySecuritycodeUsedList'
+
+        // 提交实物订单
+
+        this.makeOrder ='/user/securityCode/save'
+
+        // 获取奖项是否可以申领
+
+        this.canMakeSureOrder = '/user/securityCode/open'
       
       /*************  地址 *********************/
 
@@ -96,6 +136,14 @@ export default class Operation {
         // 查询列表
 
         this.queryUserAddressList ='/user/userAddress/queryUserAddressList'
+
+        // 查询朵地址
+
+        this.queryUserAddressListByDuoIs = '/user/userAddress/queryUserAddressListByDuoIs'
+
+        // 查询集齐金朵字人数
+
+        this.getCardNumber = '/user/activityMergeWordCard/findActivityMergeWordCardByActivityId'
 
 
       /**********  获取省市区 *******************/

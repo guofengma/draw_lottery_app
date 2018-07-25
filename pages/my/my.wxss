@@ -1,3 +1,5 @@
+@import "/components/iPhoneX-line/iPhoneX-line";
+
 .userImg{
   width: 120rpx;
   height: 120rpx;
@@ -27,4 +29,7 @@
 .big-btn{
   margin-top: 90rpx;
   height: 80rpx;
+}
+.iPhoneX-line{
+  background-color:#da2221;
 }

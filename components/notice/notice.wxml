@@ -1,5 +1,5 @@
 <import src="../../libs/wxParse/wxParse.wxml" />
-<view class="model-view-bg" style='overflow:auto' wx:if="{{isTrue}}">
+<view class="model-view-bg"  catchtouchmove='myCatchTouch' style='overflow:auto' wx:if="{{isTrue}}">
     <view class="noticeModel">
         <view class="notice-Header">
           <view class="notice-people">
@@ -20,8 +20,10 @@
               </scroll-view>
           </view>
           <view class="noticeBtnbox">
-              <view class="noticeBtn" bindtap='prevPage'>上一条</view>
-              <view class="noticeBtn noticeBtnRight" wx:if="{{btnText}}" bindtap='nextPage'>{{btnText}}</view>
+              <view class="noticeBtn noticeFalse" wx:if="{{isBtnFalse == '1'}}">{{btnPrev}}</view>
+              <view class="noticeBtn " bindtap='prevPage' wx:elif="{{isBtnFalse == '2'}}">{{btnPrev}}</view> <!--上一条-->
+              <view class="noticeBtn noticeBtnRight" wx:if="{{isBtnNext}}" bindtap='nextPage'>{{btnNext}}</view> 
+              <view class="noticeBtn noticeBtnRight" wx:else="{{isBtnNext}}" bindtap='showNotice'>{{btnNext}}</view>
           </view>
         </view>
         <view class="closeBtn" bindtap='showNotice'>

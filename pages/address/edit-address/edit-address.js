@@ -2,10 +2,15 @@ let { Tool, RequestFactory, Event } = global
 
 Page({
   data: {
-    addressList:[]
+    addressList:[],
+    door:''
   },
 
   onLoad: function (options) {
+    Tool.isIPhoneX(this)
+    this.setData({
+      door: options.door || '',
+    })
     this.queryUserAddressList() 
     Event.on('updateAdressList', this.queryUserAddressList, this)
   },
@@ -22,6 +27,7 @@ Page({
     r.finishBlock = (req) => {
       this.queryUserAddressList()
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   },
   getAddressId(e) {
@@ -40,6 +46,7 @@ Page({
           addressList: list
         })
       };
+      Tool.showErrMsg(r)
       r.addToQueue();
     }
     Tool.showComfirm('确认删除该地址吗?', callBack)
@@ -51,18 +58,15 @@ Page({
   },
   newAddress(list, types=1) {
 
-    let page = '/pages/address/new-address/new-address?type=' + types
+    let page = '/pages/address/new-address/new-address?type=' + types+"&door="+this.data.door
 
-    if (types){
+    if (types==2){
       page = page + '&address=' + JSON.stringify(list)
     }
     Tool.navigateTo(page)
   },
   queryUserAddressList() {
-    let params = {
-      sort: 'default_status'
-    }
-    let r = RequestFactory.queryUserAddressList(params);
+    let r = RequestFactory.queryUserAddressList({},this.data.door);
     r.finishBlock = (req) => {
       if (req.responseObject.data.length > 0) {
         this.setData({
@@ -70,6 +74,10 @@ Page({
         })
       }
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  onUnload: function () {
+    Event.off('updateAdressList', this.queryUserAddressList)
   }
 })

@@ -4,10 +4,10 @@ Page({
   data: {
     addressList:[],
     door:0, // 2 朵地址
-    showDefault:true,
   },
   onLoad: function (options) {
-    let showDefault = this.data.showDefault
+    Tool.isIPhoneX(this)
+    let showDefault = this.data.showDefault ||''
     if (options.door==2){
       showDefault = false
     }
@@ -31,9 +31,10 @@ Page({
     }
   },
   goPage(){
-    Tool.navigateTo('/pages/address/edit-address/edit-address')
+    Tool.navigateTo('/pages/address/edit-address/edit-address?door='+this.data.door)
   },
-  updateOrderAddress(e){
+  updateOrderAddress(address){
+    address.showDefault = false
     Storage.setOrderAddress(address)
     Event.emit('updateOrderAddress')
     Tool.navigationPop()
@@ -47,24 +48,32 @@ Page({
       Event.emit('updateAdressList')
       Tool.navigationPop()
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   },
   queryUserAddressList() {
-    let str = this.data.door == 1 ? "efault_status" :"duo_is"
-    let params = {
-      sort:str
-    }
-    let r = RequestFactory.queryUserAddressList(params);
-    r.finishBlock = (req) => {
-      if (req.responseObject.data.length > 0) {
+    // let str = this.data.door == 1 ? "efault_status" :"duo_is"
+    // let params = {
+    //   sort:str
+    // }
+    let r = RequestFactory.queryUserAddressList({}, this.data.door);
+    r.finishBlock = (req) => { 
+      let datas = req.responseObject.data
+      if (datas.length > 0) {
+        datas.forEach((item)=>{
+          if(this.data.door!=2){
+            item.showDefault = item.default_status == 1 ? true : false
+          }
+        })
         this.setData({
           addressList: req.responseObject.data
         })
       }
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   },
   onUnload: function () {
-
+    Event.off('updateAdressList', this.queryUserAddressList)
   }
 })

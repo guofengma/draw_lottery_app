@@ -12,8 +12,10 @@ Page({
     addressType:0, // 1新建地址 2修改地址
     region:[],// 省市区的数组
     isChoose:false, // 是否选择为默认地址
+    door:1, // 1常规 2 朵地址
   },
   onLoad: function (options) {
+    Tool.isIPhoneX(this)
     wx.setNavigationBarTitle({
       title: this.data.navbar[options.type-1]
     })
@@ -21,7 +23,8 @@ Page({
       this.getEditAddressList(JSON.parse(options.address))
     }
     this.setData({
-      addressType: options.type || ''
+      addressType: options.type || '',
+      door: options.door || '',
     })
   },
   getEditAddressList(address){
@@ -37,8 +40,12 @@ Page({
   },
   pickerClicked(e) {
     let region = e.detail.result
+    let content = []
+    if (region.length>0){
+      content = region[0].name + region[1].name + region[2].name
+    }
     this.setData({ 
-      content: region[0].name + region[1].name + region[2].name,
+      content: content,
       region: region
     })
     if (e.detail.btnType == 2) {
@@ -47,15 +54,6 @@ Page({
   },
   formSubmit(e){
     let params = e.detail.value
-    if (this.data.region[0]) {
-      params.provinceCode = this.data.region[0].name;
-    }
-    if (this.data.region[1]) {
-      params.cityCode = this.data.region[1].name;
-    }
-    if (this.data.region[2]) {
-      params.areaCode = this.data.region[2].name;
-    }
     if (!Tool.checkName(params.receiver)) {
       Tool.showAlert("收货人姓名长度需在2-16位之间");
       return
@@ -67,11 +65,22 @@ Page({
     if (this.data.region.length == 0) {
       Tool.showAlert("请选择你所在的省市区");
       return
+    } else{
+      if (this.data.region[0]) {
+        params.provinceCode = this.data.region[0].name;
+      }
+      if (this.data.region[1]) {
+        params.cityCode = this.data.region[1].name;
+      }
+      if (this.data.region[2]) {
+        params.areaCode = this.data.region[2].name;
+      }
     }
     if (Tool.isEmptyStr(params.address)) {
       Tool.showAlert("请输入详细地址");
       return
     }
+   
     if (this.data.addressType==1){
       params.defaultStatus = this.data.isChoose ? 1 : 2
     } else if (this.data.addressType == 2){
@@ -101,6 +110,7 @@ Page({
       r.finishBlock = (req) => {
         this.successCallBack("删除成功")
       };
+      Tool.showErrMsg(r)
       r.addToQueue();
     }
     Tool.showComfirm('确认删除该地址吗?', callBack)

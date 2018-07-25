@@ -3,6 +3,7 @@
  */
 'use strict';
 
+let bmap = require('../libs/baidu-map/bmap-wx.min');
 
 //工具类
 
@@ -291,7 +292,7 @@ export default class Tool {
     //弹窗提示
     static showAlert(msg, okCB = () => { }) {
         wx.showModal({
-            title: '提示',
+            title: '',
             content: msg,
             showCancel: false,
             success: function (res) {
@@ -308,7 +309,7 @@ export default class Tool {
         showCancel: true,
         cancelText: '取消',
         confirmText: '确认',
-        cancelColor:'#da2221',
+        cancelColor:'#000',
         confirmColor:'#da2221',
         success: function (res) {
           if (res.confirm) {
@@ -606,10 +607,11 @@ export default class Tool {
 
     // 判断人名
     static checkName(value) {
-      if (!(/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/.test(value))) {
-        return false
-      } else {
+      // !(/^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/.test(value))
+      if (value.length > 1 && value.length<17) {
         return true
+      } else {
+        return false
       }
     }
 
@@ -623,7 +625,10 @@ export default class Tool {
         } else if (str.indexOf('token2') != -1){
           let token2 = str.slice(7)
           __cookies.push(token2);
-        }
+        } else if (str.indexOf('SESSION') != -1) {
+          let SESSION = str.slice(7)
+          __cookies.push(SESSION);
+        } 
       });
       //  最后发送的
       let myCookie = __cookies.join('')
@@ -677,18 +682,21 @@ export default class Tool {
 
     static showErrMsg(r) {
       r.failBlock = (req) => {
+        console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
         let callBack = ()=>{
 
         }
         if (req.responseObject.code==210){
           callBack =()=>{
-            let page = global.Storage.getWxOpenid() ? '/pages/login/login-wx/login-wx' :'/pages/login/login'
-            
+            let page ='/pages/login/login'           
             this.navigateTo(page+'?isBack='+true)
           }
         }
-        this.showAlert(req.responseObject.msg, callBack)
+        console.log(req.responseObject.msg)
+        if (req.responseObject.msg){
+          this.showAlert(req.responseObject.msg, callBack)
+        }
       }
     }
 
@@ -707,12 +715,71 @@ export default class Tool {
     static loginOpt(req){
       // 获取 cookies
       let cookies = req.header['Set-Cookie']
-      this.formatCookie(cookies)
+      if (cookies) this.formatCookie(cookies)
       global.Storage.setUserAccountInfo(req.responseObject.data)
-      global.Event.emit('didLogin');
-      global.Storage.setWxOpenid(req.responseObject.data.openid)
-      global.Storage.setMemberId(req.responseObject.data.id)
-      global.Event.emit('refreshMemberInfoNotice');
+      global.Storage.setWxOpenid(req.responseObject.data.openId)
+      if (req.responseObject.data.id){
+        global.Storage.setAuthorize(true)
+        global.Storage.setMemberId(req.responseObject.data.code)
+        global.Event.emit('didLogin');
+      }
+    }
+    
+    // 获取当前的路径
+
+    static getCurrentPageUrl() {
+      let pages = getCurrentPages()    //获取加载的页面
+      let currentPage = pages[pages.length - 1]    //获取当前页面的对象
+      let url = currentPage.route    //当前页面url
+      return url
+    }
+
+    //调用微信接口，获取定位信息
+    static queryLocation(cb = (res) => { }, complete = () => { }) {
+      wx.getLocation({
+        // type:'gcj02',
+        success: function (res) {
+          let that = this;
+          /* 获取定位地理位置 */
+          // 新建bmap对象
+          let BMap = new bmap.BMapWX({
+            ak: global.TCGlobal.BaiduMapKey
+          });
+          let fail = function (data) {
+            console.log(data);
+          };
+          let success = function (data) {
+            //返回数据内，已经包含经纬度
+            res.wxMarkerData = data.wxMarkerData;
+            res.originalData = data.originalData;
+            cb(res);
+          }
+          // 发起regeocoding检索请求
+          BMap.regeocoding({
+            fail: fail,
+            success: success
+          });
+        },
+        fail: function () {
+          cb(null);
+        },
+        complete: function () {
+          complete();
+        }
+      })
+    }
+
+    // 是否是iPhone 34rpx的底部像素差
+
+    static isIPhoneX(that) {
+      let isIPhoneX = global.Storage.sysInfo().isIphoneX
+      console.log(global.Storage.sysInfo())
+      let className = isIPhoneX ? 'fixed-bottom-iPhoneX' :'fixed-bottom'
+      let showBottom = isIPhoneX
+      that.setData({
+        isIPhoneX: { isIPhoneX, showBottom, className }
+      })
+      return { isIPhoneX,showBottom, className}
     }
 
 }

@@ -5,14 +5,14 @@
   <template is="logo-bar" data=''/>
 <!-- </view> -->
 <view class='red-envelopes-page'>
-  <scroll-view scroll-x class='scroll' wx:if='{{lists.length>0}}'>
+  <scroll-view scroll-y class='scroll' wx:if='{{lists.length>0}}' bindscrolltolower='onScroll'>
     <block wx:for='{{lists}}' wx:key='unique'>
       <view  class='container'>
         <view class='flexR-sb'>
-          <view class='font-28'>{{item.name}}</view>
-          <view class='red'>+{{item.amout}}</view>
+          <view class='font-28'>{{item.award_name}}</view>
+          <view class='red'>+{{item.money}}</view>
         </view>
-        <view class='gray font-22'>{{item.num}}</view>
+        <view class='gray font-22'>{{item.code}}</view>
         <view class='gray font-22'>{{item.createTime}}</view>
       </view>
     </block>

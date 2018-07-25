@@ -1,0 +1,7 @@
+
+<view class='logo-view'>
+   <image src='/img/logo-img.png' mode='widthFix'></image>
+   <view class='font-26'>抽奖活动</view>
+</view>
+
+<view class='big-btn' catchtap='wxLogin'>微信登录</view>

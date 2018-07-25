@@ -1,23 +1,39 @@
-// components/top-bar/top-bar.js
+let { Tool,Storage } = global
+
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
-
+     canStart:Boolean
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
-
+    activityId:'',
+    userId:''
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
-
+    getUserId(){
+      this.setData({
+        userId: Storage.memberId() || '',
+        activityId: Storage.getActivityCode() || '',
+      })
+    },
+    getActivtyId(){
+      let r = global.RequestFactory.getActivityId();
+      r.finishBlock = (req) => {
+        Storage.setActivityId(req.responseObject.data.id)
+        Storage.setActivityCode(req.responseObject.data.code)
+        this.setData({
+          activityId: req.responseObject.data.id,
+          userId: Storage.memberId() || '',
+        })
+      }
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    }
+  },
+  ready: function () {
+    //this.getActivtyId()
+    if (!this.properties.canStart){
+      //this.getActivtyId()
+      this.getUserId()
+    }
   }
 })
