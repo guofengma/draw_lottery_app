@@ -203,7 +203,7 @@ Component({
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
             let stringJson = req.responseObject.data;
-            console.log(stringJson)
+            // console.log(stringJson)
               this.setData({
                 weekdays: req.responseObject.data || []
               })
@@ -254,7 +254,7 @@ Component({
             var godates = todayYear + "-" + todayMonthss + "-01";
             var that = this;
             var signDay = this.data.weekdays
-            console.log(signDay)
+            // console.log(signDay)
             var data = { seriesCount: 1, signDays: [] };
             let yearDate = [];
             let result = [];
@@ -375,7 +375,7 @@ Component({
             }
             let currentTime = this.data.activeEndTime
             let getStartTime = this.data.activeStartTime //活动开始时间
-            console.log(getStartTime > currentTime)
+            // console.log(getStartTime > currentTime)
             if (getStartTime > currentTime) {
                 that.setData({
                   signtype: "3",
@@ -397,7 +397,7 @@ Component({
              this.setData({
               signIsArr: arrResult
             })
-            console.log(this.data.signIsArr)
+            // console.log(this.data.signIsArr)
             // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历

@@ -6,7 +6,8 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        isNotice: Boolean
+        isNotice: Boolean,
+
     },
 
     /**
@@ -24,7 +25,8 @@ Component({
         noticeTitle: '',
         totals: 0,
         starts:0,
-        noticeFalse: 'isBtnFalse'
+        noticeFalse: 'isBtnFalse',
+        datasisNull: ''
     },
 
     /**
@@ -44,38 +46,20 @@ Component({
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
-              let datas = req.responseObject.data
-              console.log(datas)
-              if (!Tool.isEmpty(datas)) {
-                // console.log('不空')
+              this.data.datasisNull = req.responseObject.data.total
               let datas = req.responseObject.data;
               let starts = datas.start;
               let totals = datas.total;
+              console.log(datas)
+              if (totals == 0) {
+                  console.log('没有公告')
+                  return
+              } else {
+
                 this.setData({
                   totals: totals,
                 })
-                // console.log(datas.data[0].content)
-                // if(starts == 0) {
-                //   console.log('222')
-                //   this.setData({
-                //     isBtnFalse: "1",
-                //     // noticeFalse: 'noticeFalse',
-                //   })
-                // }
-                // let isUndefined = datas.data[0]
-                // if(datas.total < 1) {
-                //   console.log('没了')
-                //   this.setData({
-                //     isBtnFalse:"1",
-                //     btnNext: '关闭'
-                //   }) 
-                // } else {
-                //   console.log('有')
-                //   this.setData({
-                //     isBtnFalse: "1",
-                //   }) 
-                // }
-                if (datas.data[0].content == "null" || datas.data[0].content == null) {
+                if (datas.data[0].content == "undefined" || datas.data[0].content == null) {
                   return null
                 } else {
                   let html = datas.data[0].content
@@ -97,6 +81,8 @@ Component({
                   })
                 }
               }
+             
+               
             };
             Tool.showErrMsg(r);
             r.addToQueue();
@@ -146,6 +132,5 @@ Component({
     ready() {
         // this.noticeRequestHttp() // 获取公告
         console.log('公告')
-        console.log(this.data.page)
     }
 })

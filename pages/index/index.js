@@ -45,7 +45,8 @@ Page({
         actStauts: '' ,
         isDisplay: true,
         shakeStartMusicSrc:'',
-        shakeStopMusicSrc: ''
+        shakeStopMusicSrc: '',
+        isShowNotice:false
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -84,12 +85,12 @@ Page({
                 if (getStartTime > currentTime) {
                   console.log('活动未开启')
                     this.setData({
-                      SignActivtyId: false
+                      SignActivtyId: true
                     })
                 } else {
                   console.log('这？')
                     this.setData({
-                      SignActivtyId: true // 活动开启
+                      SignActivtyId: false // 活动开启
                     })
                 }
                 console.log(this.data.SignActivtyId)
@@ -133,7 +134,7 @@ Page({
    // 活动未开启input 无法输入
       let currentTime = this.data.activeEndTime
       let getStartTime = this.data.activeStartTime //活动开始时间
-      console.log(getStartTime > currentTime)
+      // console.log(getStartTime > currentTime)
       if (getStartTime > currentTime) {
         console.log('活动未开启')
         this.setData({
@@ -318,10 +319,9 @@ Page({
     isShowSake: false,
     onShow: function() { // 进行摇一摇
         let that = this;
-        // if(this.getIsLogin(false)){
-        //     console.log('为登录')
-        //   wx.startAccelerometer();
-        // } else {
+        if(this.getIsLogin(false)){
+            console.log('为登录')
+        } else {
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
@@ -442,7 +442,7 @@ Page({
                 wx.onAccelerometerChange(shake)
             }
         }, 1500)
-      // }  
+      }  
     },
     onHide: function() {
         this.isShowSake = false // 设置第一次进入

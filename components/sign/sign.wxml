@@ -1,4 +1,4 @@
-<view class="model-view-bg" catchtouchmove='myCatchTouch' style='overflow:auto' wx:if="{{isTrue}}">
+<view class="model-view-bg"  style='overflow:auto' wx:if="{{isTrue}}">
   <view class="viewcontent">
     <view class="bacgroundRgba">
       <view class="backgroundHeader"></view>
