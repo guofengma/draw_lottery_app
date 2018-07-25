@@ -26,7 +26,6 @@ Component({
         totals: 0,
         starts:0,
         noticeFalse: 'isBtnFalse',
-        datasisNull: 0
     },
 
     /**
@@ -36,8 +35,8 @@ Component({
         showNotice: function() { // 关闭公告
           this.triggerEvent('showNotice', false, this.data.datasisNull)
         },
-        IsdatasisNull (){
-          this.triggerEvent('IsdatasisNull',this.data.datasisNull)
+        istotal(){
+          this.triggerEvent('istotal', this.data.dataTotal)
         },
         myCatchTouch() {
             return
@@ -49,16 +48,18 @@ Component({
             }
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
-              this.data.datasisNull = req.responseObject.data.total
               let datas = req.responseObject.data;
               let starts = datas.start;
               let totals = datas.total;
+              this.setData({
+                datasisNull: totals
+              })
               console.log(datas)
               if (totals == 0) {
                   console.log('没有公告')
                   return
               } else {
-
+                
                 this.setData({
                   totals: totals,
                 })

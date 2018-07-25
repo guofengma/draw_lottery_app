@@ -25,5 +25,6 @@
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "抽奖系统",
         "navigationBarTextStyle": "black"
-    }
+    },
+    "debug": true
 }

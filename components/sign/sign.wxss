@@ -339,6 +339,10 @@ button::after {
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index:9999;
 }
 .borderBreak{
   border-radius: 50%;

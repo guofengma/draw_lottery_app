@@ -283,10 +283,10 @@ movable-area {
   -o-animation:anim1 2s linear infinite; /* Opera */
 }
 .cishu1{
-  animation:anim2 2s linear infinite;
-  -moz-animation:anim2 2s linear infinite; /* Firefox */
-  -webkit-animation:anim2 2s linear infinite; /* Safari and Chrome */
-  -o-animation:anim2 2s linear infinite; /* Opera */
+  animation:anim2 2s linear 2;
+  -moz-animation:anim2 2s linear 2; /* Firefox */
+  -webkit-animation:anim2 2s linear 2; /* Safari and Chrome */
+  -o-animation:anim2 2s linear 2; /* Opera */
 }
 @keyframes rotaed {
   0%{

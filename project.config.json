@@ -33,6 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
+			"current": 18,
 			"list": [
 				{
 					"id": -1,
@@ -141,6 +142,11 @@
 					"name": "微信登陆",
 					"pathName": "pages/login/login",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "签到测试",
+					"pathName": "pages/test/sign_in"
 				}
 			]
 		}
