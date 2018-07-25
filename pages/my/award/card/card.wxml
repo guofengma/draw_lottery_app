@@ -21,9 +21,14 @@
       </block>
     </view>
     <view class='flexR'>
-      <view class="card-fuseBtn {{disabled? 'cardActive':''}}"  catchtap='configListCard'> 立即合成</view>
+      <view class='big-view-2'>
+        <view animation="{{animationData}}" class='imgViews' wx:if="{{showTips1}}">
+          <image src='/img/clicked.png' mode='widthFix' style='width:100rpx'></image>
+        </view> 
+        <view class="card-fuseBtn {{disabled? 'cardActive':''}}"  catchtap='configListCard'> 立即合成</view>
+      </view>
       <view wx:if='{{showBtn}}' class='big-view-1'>
-        <view animation="{{animationData}}" class='imgViews' wx:if='{{showBtn2}}'>
+        <view animation="{{animationData}}" class='imgViews' wx:if='{{showTips2}}'>
           <image src='/img/clicked.png' mode='widthFix' style='width:100rpx'></image>
         </view>
         <view class='address-btn' catchtap='chooseAddress'>地址选择</view>
