@@ -95,11 +95,12 @@ Component({
             if (showMonth == "1") {
                 var showMonth = "12";
                 var showYear = parseInt(this.data.showYear) - 1;
+                console.log(showYear)
             } else {
                 var showMonth = parseInt(this.data.showMonth) - 1;
                 var showYear = this.data.showYear;
             }
-            if (parseInt(todayMonth - 3) == showMonth) {
+            if (parseInt(todayMonth - 3) == showMonth ) {
                 wx.showToast({
                     title: '不能查看更多了',
                     icon: 'loading',
@@ -140,7 +141,7 @@ Component({
             var todayMonth = this.data.todayMonth;
             console.log(showMonth)
             console.log(todayMonth)
-            if (showMonth == todayMonth) {
+            if (showMonth == todayMonth ) {
                 // wx.showToast({
                 //     title: '未签到不能查看',
                 //     icon: 'loading',
@@ -455,11 +456,11 @@ Component({
           if (currentTime < getStartTime) {
             console.log('活动结束')
             wx.showToast({
-              title: this.data.tipStop,
+              title: this.data.tipStart,
             })
           } else {
             wx.showToast({
-              title: this.data.tipStart,
+              title: this.data.tipStop,
             })
           }
         },

@@ -19,7 +19,10 @@
     </movable-view>
   <view class="home-inside">
     <view class="inputBox">
-      <input class="security-code" disabled="{{disabled}}" bindfocus='bindFocus' placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
+    <view bindtap='bindBlur' wx:if="{{isDisplay}}" style='font-size:28rpx;text-indent:15rpx;line-height:73rpx;color:#999;width:340rpx;height:73rpx;float:left;background:transparent'>
+      请输入16位防伪码
+    </view>
+      <input class="security-code" wx:else="{{disabled}}" bindfocus='bindFocus' placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
       <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">

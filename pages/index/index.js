@@ -37,14 +37,16 @@ Page({
         winnerBlock: [],
         offsetTop: {},
         activeStartTime: '',
+        activeEndTime: '',
         SignActivtyId: false,
         disabled:false,
         isPlusNumber: false,
         isReduceNumber: false,
         isDrawn:true,
-        preHint: '',
-        sufHint: '',
-        actStauts: ''
+        preHint: '', // 开始提示
+        sufHint: '', // 结束提示
+        actStauts: '' ,
+        isDisplay: true
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -67,12 +69,14 @@ Page({
             this.setData({
                 activityId: req.responseObject.data.id,
                 activeStartTime: req.responseObject.data.startTime,
+               activeEndTime: req.responseObject.data.endTimem,
                 preHint: req.responseObject.data.preHint,
                 sufHint: req.responseObject.data.sufHint,
                 actStauts: req.responseObject.data.actStauts
             })
           if (this.getIsLogin(false)) {
-                let currentTime = new Date().getTime(); // 当前时间
+                // let currentTime = new Date().getTime(); // 当前时间
+                let currentTime = this.data.activeEndTime
                 let getStartTime = this.data.activeStartTime //活动开始时间
                 if (getStartTime > currentTime) {
                   console.log('活动未开启')
@@ -128,21 +132,10 @@ Page({
     },
     bindFocus(){
    // 活动未开启input 无法输入
-      // if (this.data.actStauts == 4 || this.data.actStauts == '4') {
-      //   this.setData({
-      //     disabled: true
-      //   })
-      //   wx.showModal({  // 活动未开启
-      //     title: '',
-      //     content: this.data.sufHint,
-      //   })
-      // } else {
-      //   this.setData({
-      //     disabled: false
-      //   })
-      // }
-      let currentTime = new Date().getTime(); // 当前时间
+      // let currentTime = new Date().getTime(); // 当前时间
+      let currentTime = this.data.activeEndTime
       let getStartTime = this.data.activeStartTime //活动开始时间
+      console.log(getStartTime > currentTime)
       if (getStartTime > currentTime) {
         console.log('活动未开启')
         this.setData({
@@ -150,14 +143,35 @@ Page({
         })
         wx.showModal({  // 活动未开启
           title: '',
-          content: this.data.sufHint,
+          content: this.data.preHint,
         })
       } else {
         console.log('这？')
         this.setData({
-          disabled: false
+          disabled: false,
+          isDisplay: false
         })
       } 
+    },
+    bindBlur(){
+      let currentTime = this.data.activeEndTime
+      let getStartTime = this.data.activeStartTime //活动开始时间
+      console.log(getStartTime > currentTime)
+      if (getStartTime > currentTime) {
+        console.log('活动未开启')
+        this.setData({
+          disabled: true
+        })
+        wx.showModal({  // 活动未开启
+          title: '',
+          content: this.data.preHint,
+        })
+      } else {
+        this.setData({
+          disabled: false,
+          isDisplay: false
+        })
+      }
     },
     ani() { // 旋转动画
         var n = 0;
@@ -192,11 +206,10 @@ Page({
           userId: Storage.memberId() || ''
         })
         // console.log(this.data.userId)
-      if (this.data.actStauts == 1 || this.data.actStauts == '1'){
-            wx.showModal({
-              title: '',
-              content: '活动未开启',
-            })
+      let currentTime = this.data.activeEndTime
+      let getStartTime = this.data.activeStartTime //活动开始时间
+      if (getStartTime > currentTime){
+          Tool.showAlert('活动未开启')
         } else {
           if(this.data.userId == '' || this.data.userId == null){
             return 
@@ -463,19 +476,27 @@ Page({
         //     if (getStartTime < currentTime) {
         //         Tool.showAlert('活动未开启')
         //     } else {
-                if (this.getIsLogin()) {
-                    this.setData({
-                        isTrue: !this.data.isTrue
-                    })
-                    wx.startAccelerometer()
-                }
+        this.selectComponent("#sign").signListRequestHttp()
+        this.selectComponent("#sign").signReady()
+        if (this.getIsLogin()) {
+            this.setData({
+                isTrue: !this.data.isTrue
+            })
+            wx.startAccelerometer()
+        }
     },
     showNotice: function(e) { // 显示公告
-      this.setData({
+      let currentTime = this.data.activeEndTime
+      let getStartTime = this.data.activeStartTime //活动开始时间
+      if (getStartTime > currentTime){
+        this.setData({
           isNotice: !this.data.isNotice
-      })
-      if (this.data.isNotice) {
+        })
+        if (this.data.isNotice) {
           this.selectComponent("#showNotice").noticeRequestHttp()
+        }
+      } else {
+        this.getIsSign()
       }
       // console.log(this.data.SignActivtyId)
       // if (this.data.SignActivtyId) {
@@ -483,7 +504,7 @@ Page({
       //     isTrue: true
       //   })
       // } 
-      this.getIsSign()
+     
     },
     getIsSign(){ // 用户是否签到
         let data = {
