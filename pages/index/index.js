@@ -515,8 +515,10 @@ Page({
           this.setData({
             isTrue: true
           })
-          this.selectComponent("#sign").signListRequestHttp()
-          this.selectComponent("#sign").signReady()
+          if (this.data.isAuthorize){
+            this.selectComponent("#sign").signListRequestHttp()
+            this.selectComponent("#sign").signReady()
+          }
         }else {
           console.log('已签到')
           this.setData({
