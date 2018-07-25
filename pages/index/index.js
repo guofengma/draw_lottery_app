@@ -61,7 +61,7 @@ Page({
     onReady: function() {
 
     },
-    getActivtyId() { // 获取活动Id
+    getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
             Storage.setActivityId(req.responseObject.data.id)
@@ -76,8 +76,6 @@ Page({
                 shakeStartMusicSrc: req.responseObject.data.winMusic,
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
-            console.log(this.data.shakeStartMusicSrc)
-            console.log(this.data.shakeStopMusicSrc)
           // if (this.getIsLogin(false)) {
                 // let currentTime = new Date().getTime(); // 当前时间
                 let currentTime = this.data.activeEndTime
@@ -95,9 +93,14 @@ Page({
                 }
                 console.log(this.data.SignActivtyId)
             // }
-            //this.getIsNumberHttp() // 获取抽奖次数
-            this.getWinnerRequest() // 获取中奖名单
-            this.selectComponent("#showNotice").noticeRequestHttp()
+            if (callBack){
+              this.getIsNumberHttp() // 获取抽奖次数
+              return
+            }
+            if (this.data.activityId){
+              this.getWinnerRequest() // 获取中奖名单
+              this.selectComponent("#showNotice").noticeRequestHttp()
+            }
         }
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -194,7 +197,14 @@ Page({
     },
     didLogin() { // 获取 token
       this.selectComponent("#topBar").getUserId()
-      this.getIsNumberHttp() // 获取抽奖次数
+      if (this.data.activityId){
+        this.getIsNumberHttp()
+      } else {
+        let callBack = () => {
+          this.getIsNumberHttp() // 获取抽奖次数
+        }
+        this.getActivtyId(callBack)
+      }
       this.setData({
         isAuthorize: Storage.didAuthorize() || '',
       })
@@ -506,8 +516,10 @@ Page({
           this.setData({
             isTrue: true
           })
-          this.selectComponent("#sign").signListRequestHttp()
-          this.selectComponent("#sign").signReady()
+          if (this.data.isAuthorize){
+            this.selectComponent("#sign").signListRequestHttp()
+            this.selectComponent("#sign").signReady()
+          }
         }else {
           console.log('已签到')
           this.setData({

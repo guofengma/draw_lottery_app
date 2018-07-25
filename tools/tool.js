@@ -718,12 +718,11 @@ export default class Tool {
       if (cookies) this.formatCookie(cookies)
       global.Storage.setUserAccountInfo(req.responseObject.data)
       global.Storage.setWxOpenid(req.responseObject.data.openId)
-      console.log("openId" + req.responseObject.data.openId)
       if (req.responseObject.data.id){
         global.Storage.setAuthorize(true)
         global.Storage.setMemberId(req.responseObject.data.code)
+        global.Event.emit('didLogin');
       }
-      global.Event.emit('didLogin');
     }
     
     // 获取当前的路径

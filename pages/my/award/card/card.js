@@ -16,7 +16,7 @@ Page({
         "icon2": '/img/duoactive.png',
         "showImg1": 'duo-dark.png',
         "showImg2": 'duo-bg.png',
-        'number': 1
+        'number': 0
       },
       {
         'name': '女',
@@ -24,7 +24,7 @@ Page({
         "icon2": '/img/nvactive.png',
         "showImg1": 'nv-dark.png',
         "showImg2": 'nv-bg.png',
-        'number': 1
+        'number': 0
       },
       {
         name:'郎',
@@ -32,7 +32,7 @@ Page({
         "icon2": '/img/langactive.png',
         "showImg1": 'lang-dark.png',
         "showImg2": 'lang-bg.png',
-        'number': 1
+        'number': 0
       }
     ],
     disabled: false,
@@ -51,20 +51,8 @@ Page({
     this.setData({
       activityId:Storage.getActivityId() || ''
     })
-    // this.queryActivityWordCard()
-    // this.getCardNumber()
-    // this.tipsImg()
-    let disabled = this.getCardNum() < 3 ? false : true
-    let { showTips1 } = this.data
-    if (this.data.datas[0].number == 0 && !disabled) {
-      console.log(1111)
-      showTips1 = true
-      this.tipsImg()
-    }
-    this.setData({
-      disabled: disabled,
-      showTips1: showTips1
-    })
+    this.queryActivityWordCard()
+    this.getCardNumber()
   },
   cardClicked(e){
     let index = e.currentTarget.dataset.index
@@ -108,9 +96,9 @@ Page({
         activeImg = this.data.imgUrl + datas[0].showImg2
         showBtn = true
       }
-      let disabled = this.getCardNum()<3? false:true
-      let { showTips1 } = this.data.showTips1
-      if (datas[0].number == 0 && !disabled) {
+      let disabled = this.getCardNum() < 3 ? false : true
+      let { showTips1 } = this.data
+      if (datas[0].number == 0 && disabled) {
         showTips1 = true
         this.tipsImg()
       }
@@ -139,7 +127,8 @@ Page({
     let num = this.getCardNum()
     if (num < 3) return
     this.setData({
-      showTips1: false
+      showTips1: false,
+      isStop:true
     })
     let params = {
       activityId: this.data.activityId
