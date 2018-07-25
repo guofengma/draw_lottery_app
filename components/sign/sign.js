@@ -140,7 +140,7 @@ Component({
             var todayMonth = this.data.todayMonth;
             console.log(showMonth)
             console.log(todayMonth)
-            if (todayMonth == showMonth) {
+            if (showMonth == todayMonth) {
                 // wx.showToast({
                 //     title: '未签到不能查看',
                 //     icon: 'loading',
@@ -148,9 +148,6 @@ Component({
                 // });
                 // return;
               
-            } else {
-              this.signReady()
-                return
             }
             if (showMonth == "12") {
                 var showMonth = "1";
@@ -219,7 +216,7 @@ Component({
             // if ()
             // console.log(req.responseObject)
             let stringJson = req.responseObject.data;
-            // if (stringJson.)
+            console.log(stringJson)
               this.setData({
                 weekdays: req.responseObject.data || []
               })
@@ -250,14 +247,12 @@ Component({
             } else {
               return null
             }
-            console.log(this.data.weekdays)
           };
           Tool.showErrMsg(r);
           r.addToQueue();
         },
         signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
-            console.log()
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -272,6 +267,7 @@ Component({
             var godates = todayYear + "-" + todayMonthss + "-01";
             var that = this;
             var signDay = this.data.weekdays
+            console.log(signDay)
             var data = { seriesCount: 1, signDays: [] };
             let yearDate = [];
             let result = [];
@@ -305,14 +301,16 @@ Component({
             }
             // console.log(yearDate)
             let signJsonNew = ''
-            if (signDay[0].signTime == undefined || signDay[0].signTime == 'undefined') {
-
+            if (signDay.length == 0) {
+              console.log('空')
+              return null 
             } else {
-              signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+              if (signDay[0].signTime == undefined || signDay[0].signTime == 'undefined') {
+
+              } else {
+                signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+              }
             }
-            // if (signDay[0].signTime == null || signDay[0].signTime == 'null'){
-             
-            // }
             // console.log(signJsonNew)
             for (var i = 0; i < signJsonNew.length; i++) {
               var obj = signJsonNew[i];
@@ -339,6 +337,7 @@ Component({
               arrResult.push(resultWeekDays)
             }
             // console.log(arrResult)
+           
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -365,9 +364,6 @@ Component({
                   signNumberOne: 1
                 })
               }
-              this.setData({
-                signIsArr: arrResult
-              })
               // console.log(this.data.signIsArr)
               if ((anns[t + 1] - anns[p]) == 1 && anns.length == 7) {
                   // console.log('连续签到了7')
@@ -407,6 +403,10 @@ Component({
                 signtype: "3",
               });
             }
+             this.setData({
+              signIsArr: arrResult
+            })
+            console.log(this.data.signIsArr)
             // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
             //初始化加载日历
@@ -421,7 +421,7 @@ Component({
               showYear: todayYear,
               showMonth: todayMonth,
             });
-          },500)
+          },600)
           function getBetweenDateStr(start, end) {
             var result = [];
             var beginDay = start.split("-");

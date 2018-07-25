@@ -128,7 +128,23 @@ Page({
     },
     bindFocus(){
    // 活动未开启input 无法输入
-      if (this.data.actStauts == 4 || this.data.actStauts == '4') {
+      // if (this.data.actStauts == 4 || this.data.actStauts == '4') {
+      //   this.setData({
+      //     disabled: true
+      //   })
+      //   wx.showModal({  // 活动未开启
+      //     title: '',
+      //     content: this.data.sufHint,
+      //   })
+      // } else {
+      //   this.setData({
+      //     disabled: false
+      //   })
+      // }
+      let currentTime = new Date().getTime(); // 当前时间
+      let getStartTime = this.data.activeStartTime //活动开始时间
+      if (getStartTime > currentTime) {
+        console.log('活动未开启')
         this.setData({
           disabled: true
         })
@@ -137,10 +153,11 @@ Page({
           content: this.data.sufHint,
         })
       } else {
+        console.log('这？')
         this.setData({
           disabled: false
         })
-      }
+      } 
     },
     ani() { // 旋转动画
         var n = 0;
@@ -175,7 +192,7 @@ Page({
           userId: Storage.memberId() || ''
         })
         // console.log(this.data.userId)
-        if(this.data.SignActivtyId == false){
+      if (this.data.actStauts == 1 || this.data.actStauts == '1'){
             wx.showModal({
               title: '',
               content: '活动未开启',
