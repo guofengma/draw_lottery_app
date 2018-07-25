@@ -30,9 +30,6 @@ Page({
         ishongbaoName: '',
         src: '',
         isStop: true,
-        audioCtx: '',
-        setTime: '',
-        setAniTime: '',
         animationData: {},
         winnerBlock: [],
         offsetTop: {},
@@ -46,7 +43,9 @@ Page({
         preHint: '', // 开始提示
         sufHint: '', // 结束提示
         actStauts: '' ,
-        isDisplay: true
+        isDisplay: true,
+        shakeStartMusicSrc:'',
+        shakeStopMusicSrc: ''
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -72,7 +71,9 @@ Page({
                 activeEndTime: req.responseObject.data.endTime,
                 preHint: req.responseObject.data.preHint,
                 sufHint: req.responseObject.data.sufHint,
-                actStauts: req.responseObject.data.actStauts
+                actStauts: req.responseObject.data.actStauts,
+                shakeStartMusicSrc: req.responseObject.data.winMusic,
+                shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
           // if (this.getIsLogin(false)) {
                 // let currentTime = new Date().getTime(); // 当前时间
@@ -128,7 +129,6 @@ Page({
     },
     bindFocus(){
    // 活动未开启input 无法输入
-      // let currentTime = new Date().getTime(); // 当前时间
       let currentTime = this.data.activeEndTime
       let getStartTime = this.data.activeStartTime //活动开始时间
       console.log(getStartTime > currentTime)
@@ -183,7 +183,6 @@ Page({
             //连续动画需要添加定时器,所传参数每次+1就行
         this.data.setAniTime = setInterval(function() {
             n = n + 1;
-            // console.log(n);
             this.animation.rotate(180 * (n)).step()
             this.setData({
                 animationData: this.animation.export()
@@ -367,7 +366,7 @@ Page({
                                     console.log(typeof req.responseObject.ptype)
                                     let num = that.data.isNumber--
                                     audioCtx = wx.createAudioContext('myAudioShake');
-                                    audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/success.mp3');
+                                    audioCtx.setSrc(this.data.shakeStartMusicSrc);
                                     audioCtx.play();
                                   if (req.responseObject.data.ptype == 1 || req.responseObject.data.ptype == '1') { // 实物
                                         that.setData({
@@ -412,7 +411,7 @@ Page({
                                     if (req.responseObject.code === 600) {
                                         console.log(req.responseObject)
                                         audioCtx = wx.createAudioContext('myAudioShake');
-                                        audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/fail.mp3');
+                                        audioCtx.setSrc(this.data.shakeStopMusicSrc);
                                         audioCtx.play();
                                         let num = that.data.isNumber--
                                             that.setData({
@@ -467,12 +466,6 @@ Page({
         },1500)
     },
     closeView(e) { // 显示天天签到
-        // if (this.getIsLogin()) {
-        //     let currentTime = new Date().getTime();
-        //     let getStartTime = this.data.activeStartTime
-        //     if (getStartTime < currentTime) {
-        //         Tool.showAlert('活动未开启')
-        //     } else {
         this.selectComponent("#sign").signListRequestHttp()
         this.selectComponent("#sign").signReady()
         if (this.getIsLogin()) {
@@ -496,13 +489,6 @@ Page({
       } else {
         this.getIsSign()
       }
-      // console.log(this.data.SignActivtyId)
-      // if (this.data.SignActivtyId) {
-      //   this.setData({
-      //     isTrue: true
-      //   })
-      // } 
-     
     },
     getIsSign(){ // 用户是否签到
       let data = {

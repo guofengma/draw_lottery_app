@@ -12,6 +12,7 @@ Component({
       SignActivtyId: Boolean,
       tipStart: String,
       startTime: Number,
+      endTime: Number,
       tipStop: String
     },
     /**
@@ -66,20 +67,6 @@ Component({
              this.getIsNumberHttp()
              this.signReady()
            },1000)
-        },
-        close_qdbox: function() { // 签到奖励弹框
-            var seriesCount = this.data.seriesCount;
-            // var seriesCount = seriesCount+1;
-            if (seriesCount < 10) {
-                var series_gos = 10 - seriesCount;
-            } else {
-                var series_gos = "0";
-            }
-            this.setData({
-                seriesCount: seriesCount,
-                series_gos: series_gos,
-                for_signs: "none",
-            });
         },
         sign_end: function() { // 到底了
             wx.showToast({
@@ -141,14 +128,15 @@ Component({
             var todayMonth = this.data.todayMonth;
             console.log(showMonth)
             console.log(todayMonth)
-            if (showMonth == todayMonth ) {
-                // wx.showToast({
-                //     title: '未签到不能查看',
-                //     icon: 'loading',
-                //     duration: 1500
-                // });
-                // return;
-              
+          if (todayMonth == showMonth ) {
+                wx.showToast({
+                    title: '未签到不能查看',
+                    icon: 'loading',
+                    duration: 1500
+                });
+                return;
+          } else if (todayMonth > showMonth) {
+              this.signReady()
             }
             if (showMonth == "12") {
                 var showMonth = "1";
@@ -214,8 +202,6 @@ Component({
           };
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
-            // if ()
-            // console.log(req.responseObject)
             let stringJson = req.responseObject.data;
             console.log(stringJson)
               this.setData({
@@ -387,7 +373,14 @@ Component({
               } 
               signDate_arr.push(newdats);
             }
-            if (this.data.SignActivtyId) {
+            let currentTime = this.data.activeEndTime
+            let getStartTime = this.data.activeStartTime //活动开始时间
+            console.log(getStartTime > currentTime)
+            if (getStartTime > currentTime) {
+                that.setData({
+                  signtype: "3",
+                });
+            } else {
               if (signDate_arr.indexOf(todayss) > -1) {
                 // console.log("当前已签到");
                 that.setData({
@@ -399,11 +392,8 @@ Component({
                   signtype: "1",
                 });
               }
-            } else {
-              that.setData({
-                signtype: "3",
-              });
             }
+            
              this.setData({
               signIsArr: arrResult
             })
@@ -485,6 +475,9 @@ Component({
           };
           Tool.showErrMsg(r);
           r.addToQueue();
+        },
+        myCatchTouch() {
+          retrun;
         }
     },
     ready: function() {
