@@ -3,14 +3,14 @@
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
 <sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' startTime="{{activeStartTime}}" tipStart ="{{preHint}}" tipStop ="{{sufHint}}" bind:closeView='closeView' bind:getIsNumberHttp="getIsNumberHttp" bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
 <notice wx:if="{{isNotice}}" bind:showNotice='showNotice' id='showNotice'></notice>
-<audio id="myAudio" style='display:none'></audio>
+<!-- <audio id="myAudio" style='display:none'></audio> -->
 <audio id="myAudioShake" style='display:none'></audio>
 <movable-area>
 <view class="home-page">
-  <view class="myAudio">
+  <!-- <view class="myAudio">
     <image wx:if="{{isStop}}"  src="../../img/action.png" class="an-c an-r an-t animated rotate" bindtap='onStopbgMusic'></image>
     <image wx:else src="../../img/stop.png" bindtap='onActionbgMusic'></image>
-  </view>
+  </view> -->
   <view class="home-tree"></view>
    <movable-view x="{{50}}" y="{{50}}" direction="all">
       <view class="home-Notice" catchtap='showNotice'>
