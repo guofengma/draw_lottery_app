@@ -34,6 +34,9 @@ Component({
         showNotice: function() { // 关闭公告
             this.triggerEvent('showNotice', false)
         },
+          myCatchTouch() {
+            return
+          },
         noticeRequestHttp() { //  公告
             let pages = this.data.page 
             let data = {

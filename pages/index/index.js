@@ -30,9 +30,6 @@ Page({
         ishongbaoName: '',
         src: '',
         isStop: true,
-        audioCtx: '',
-        setTime: '',
-        setAniTime: '',
         animationData: {},
         winnerBlock: [],
         offsetTop: {},
@@ -46,7 +43,9 @@ Page({
         preHint: '', // 开始提示
         sufHint: '', // 结束提示
         actStauts: '' ,
-        isDisplay: true
+        isDisplay: true,
+        shakeStartMusicSrc:'',
+        shakeStopMusicSrc: ''
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -69,12 +68,16 @@ Page({
             this.setData({
                 activityId: req.responseObject.data.id,
                 activeStartTime: req.responseObject.data.startTime,
-               activeEndTime: req.responseObject.data.endTimem,
+                activeEndTime: req.responseObject.data.endTime,
                 preHint: req.responseObject.data.preHint,
                 sufHint: req.responseObject.data.sufHint,
-                actStauts: req.responseObject.data.actStauts
+                actStauts: req.responseObject.data.actStauts,
+                shakeStartMusicSrc: req.responseObject.data.winMusic,
+                shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
-          if (this.getIsLogin(false)) {
+            console.log(this.data.shakeStartMusicSrc)
+            console.log(this.data.shakeStopMusicSrc)
+          // if (this.getIsLogin(false)) {
                 // let currentTime = new Date().getTime(); // 当前时间
                 let currentTime = this.data.activeEndTime
                 let getStartTime = this.data.activeStartTime //活动开始时间
@@ -89,13 +92,11 @@ Page({
                       SignActivtyId: false // 活动开启
                     })
                 }
-            console.log(this.data.SignActivtyId)
-            }
-            this.getIsNumberHttp() // 获取抽奖次数
+                console.log(this.data.SignActivtyId)
+            // }
+            //this.getIsNumberHttp() // 获取抽奖次数
             this.getWinnerRequest() // 获取中奖名单
             this.selectComponent("#showNotice").noticeRequestHttp()
-            this.selectComponent("#sign").signListRequestHttp()
-            this.selectComponent("#sign").signReady()
         }
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -111,9 +112,7 @@ Page({
         this.data.audioCtx.src = 'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/wxshakeBg.mp3'
     },
     onStopbgMusic() { // 停止音乐
-        // wx.stopBackgroundAudio();
         clearInterval(this.data.setAniTime)
-        // this.data.audioCtx.pause()
         this.setData({
             isStop: false
         })
@@ -132,7 +131,6 @@ Page({
     },
     bindFocus(){
    // 活动未开启input 无法输入
-      // let currentTime = new Date().getTime(); // 当前时间
       let currentTime = this.data.activeEndTime
       let getStartTime = this.data.activeStartTime //活动开始时间
       console.log(getStartTime > currentTime)
@@ -187,7 +185,6 @@ Page({
             //连续动画需要添加定时器,所传参数每次+1就行
         this.data.setAniTime = setInterval(function() {
             n = n + 1;
-            // console.log(n);
             this.animation.rotate(180 * (n)).step()
             this.setData({
                 animationData: this.animation.export()
@@ -195,10 +192,11 @@ Page({
         }.bind(this), 1000)
     },
     didLogin() { // 获取 token
-        this.selectComponent("#topBar").getUserId()
-        this.setData({
-            isAuthorize: Storage.didAuthorize() || '',
-        })
+      this.selectComponent("#topBar").getUserId()
+      this.getIsNumberHttp() // 获取抽奖次数
+      this.setData({
+        isAuthorize: Storage.didAuthorize() || '',
+      })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let  code = this.data.code;
@@ -370,7 +368,7 @@ Page({
                                     console.log(typeof req.responseObject.ptype)
                                     let num = that.data.isNumber--
                                     audioCtx = wx.createAudioContext('myAudioShake');
-                                    audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/success.mp3');
+                                    audioCtx.setSrc(this.data.shakeStartMusicSrc);
                                     audioCtx.play();
                                   if (req.responseObject.data.ptype == 1 || req.responseObject.data.ptype == '1') { // 实物
                                         that.setData({
@@ -415,7 +413,7 @@ Page({
                                     if (req.responseObject.code === 600) {
                                         console.log(req.responseObject)
                                         audioCtx = wx.createAudioContext('myAudioShake');
-                                        audioCtx.setSrc('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/fail.mp3');
+                                        audioCtx.setSrc(this.data.shakeStopMusicSrc);
                                         audioCtx.play();
                                         let num = that.data.isNumber--
                                             that.setData({
@@ -470,12 +468,6 @@ Page({
         },1500)
     },
     closeView(e) { // 显示天天签到
-        // if (this.getIsLogin()) {
-        //     let currentTime = new Date().getTime();
-        //     let getStartTime = this.data.activeStartTime
-        //     if (getStartTime < currentTime) {
-        //         Tool.showAlert('活动未开启')
-        //     } else {
         this.selectComponent("#sign").signListRequestHttp()
         this.selectComponent("#sign").signReady()
         if (this.getIsLogin()) {
@@ -486,126 +478,122 @@ Page({
         }
     },
     showNotice: function(e) { // 显示公告
+      this.setData({
+        isNotice: !this.data.isNotice
+      })
+      if (this.data.isNotice) {
+        this.selectComponent("#showNotice").noticeRequestHttp()
+      }
       let currentTime = this.data.activeEndTime
       let getStartTime = this.data.activeStartTime //活动开始时间
-      if (getStartTime > currentTime){
-        this.setData({
-          isNotice: !this.data.isNotice
-        })
-        if (this.data.isNotice) {
-          this.selectComponent("#showNotice").noticeRequestHttp()
-        }
+      if (getStartTime > currentTime){ // 没开始
+       
       } else {
         this.getIsSign()
       }
-      // console.log(this.data.SignActivtyId)
-      // if (this.data.SignActivtyId) {
-      //   this.setData({
-      //     isTrue: true
-      //   })
-      // } 
-     
     },
     getIsSign(){ // 用户是否签到
-        let data = {
-          activityId: Storage.getActivityId() || ''
+      let data = {
+        activityId: Storage.getActivityId() || ''
+      }
+      let r = RequestFactory.signIsTrueRequest(data);
+      r.finishBlock = (req) => {
+        console.log(req.responseObject.data.userId)
+        let userId = req.responseObject.data.userId
+        if(userId == null || userId =='null'){
+          console.log('未签到')
+          this.setData({
+            isTrue: true
+          })
+          this.selectComponent("#sign").signListRequestHttp()
+          this.selectComponent("#sign").signReady()
+        }else {
+          console.log('已签到')
+          this.setData({
+            isTrue: false
+          })
         }
-        let r = RequestFactory.signIsTrueRequest(data);
-        r.finishBlock = (req) => {
-          console.log(req.responseObject.data.userId)
-          let userId = req.responseObject.data.userId
-          if(userId == null || userId =='null'){
-            console.log('未签到')
-            this.setData({
-              isTrue: true
-            })
-          }else {
-            console.log('已签到')
-            this.setData({
-              isTrue: false
-            })
-          }
-        }
-        Tool.showErrMsg(r)
-        r.addToQueue();
+      }
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     goPage() { // 跳转detail
-        if (this.getIsLogin()) {
-            Tool.navigateTo('/pages/activity-detail/activity-detail')
-        }
+      if (this.getIsLogin()) {
+          Tool.navigateTo('/pages/activity-detail/activity-detail')
+      }
     },
     awardClicked() { // 跳转我的奖品
-        if (this.getIsLogin()) {
-            Tool.navigateTo('/pages/my/my')
-        }
-      // this.data.audioCtx.pause()
+      if (this.getIsLogin()) {
+          Tool.navigateTo('/pages/my/my')
+      }
+    // this.data.audioCtx.pause()
     },
     getIsLogin(isGoPage) { // 退出之后跳转登录
-        let cookies = Storage.getUserCookie() || false
-        if (!cookies) {
-          if (isGoPage===undefined){
-            Tool.navigateTo('/pages/login/login')
-          }
-          return false
+      let cookies = Storage.getUserCookie() || false
+      if (!cookies) {
+        if (isGoPage===undefined){
+          Tool.navigateTo('/pages/login/login')
         }
-        return true
+        return false
+      }
+      return true
     },
     getPhoneNumber(e) { // 获取手机
-        if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-            console.log('用户拒绝了你的请求')
-        } else {
-            this.setData({
-                encryptedData: e.detail.encryptedData,
-                iv: e.detail.iv,
-                visiable: !this.data.visiable,
-            })
-        }
+      if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+          console.log('用户拒绝了你的请求')
+      } else {
+        this.setData({
+            encryptedData: e.detail.encryptedData,
+            iv: e.detail.iv,
+            visiable: !this.data.visiable,
+        })
+      }
     },
     agreeGetUser(e) { // 获取授权
-        if (!this.data.canIUse) {
-            this.getUserInfo()
-        }
-        this.setData({
-            visiable: !this.data.visiable
-        })
-        if (e.detail.userInfo !== undefined) {
-            this.getLogin(e.detail.userInfo)
-        }
+      if (!this.data.canIUse) {
+        this.getUserInfo()
+      }
+      this.setData({
+          visiable: !this.data.visiable
+      })
+      if (e.detail.userInfo !== undefined) {
+        this.getLogin(e.detail.userInfo)
+      }
     },
     requetLogin() { // 登录
-        let params = {
-            encryptedData: this.data.encryptedData,
-            iv: this.data.iv,
-            openId: Storage.getWxOpenid() || '',
-            name: this.data.userInfo.nickName,
-            headImgUrl: this.data.userInfo.avatarUrl,
-            loginAddress: Storage.getLocation() || '',
-            sex: this.data.userInfo.gender
-        }
+      let params = {
+        encryptedData: this.data.encryptedData,
+        iv: this.data.iv,
+        openId: Storage.getWxOpenid() || '',
+        name: this.data.userInfo.nickName,
+        headImgUrl: this.data.userInfo.avatarUrl,
+        loginAddress: Storage.getLocation() || '',
+        sex: this.data.userInfo.gender
+      }
 
-        let r = global.RequestFactory.appWechatLogin(params);
-        r.finishBlock = (req) => {
-            Tool.loginOpt(req)
-        }
-        Tool.showErrMsg(r)
-        r.addToQueue();
+      let r = global.RequestFactory.appWechatLogin(params);
+      r.finishBlock = (req) => {
+          Tool.loginOpt(req)
+      }
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     getUserInfo() { // 获取授权
-        wx.getUserInfo({
-            success: res => {
-                this.getLogin(res.userInfo)
-            },
-            fail: function() {
+      wx.getUserInfo({
+        success: res => {
+            this.getLogin(res.userInfo)
+        },
+        fail: function() {
 
-            }
-        })
+        }
+      })
     },
     getLogin(userInfo) { // 登录
-        this.setData({
-            userInfo: userInfo
-        })
-        Storage.setWxUserInfo(userInfo)
-        this.requetLogin()
+      this.setData({
+          userInfo: userInfo
+      })
+      Storage.setWxUserInfo(userInfo)
+      this.requetLogin()
     },
     onUnload: function() {
         Event.off('didLogin', this.didLogin);
