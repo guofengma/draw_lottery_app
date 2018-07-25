@@ -39,10 +39,11 @@ Page({
     activeImg:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/duo-dark.png',
     imgUrl:"https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/",
     activityId:1,
-    cardNum:0,//集卡人说
+    cardNum:0,//集卡人数
     show:false,
     showBtn: false,
-    showBtn2:false
+    showBtn2:false,
+    timer:null,
   },
   onLoad: function (options) {
     this.setData({
@@ -148,18 +149,18 @@ Page({
     Tool.navigateTo('/pages/address/address-list/address-list?door=2')
   },
   tipsImg(){
+    clearInterval(this.data.timer)
     let animation = wx.createAnimation({
       duration: 1500,
       timingFunction: 'ease',
     })
-
     this.animation = animation
     this.setData({
       animationData: animation.export()
     })
     let n = 0
     let m = true
-    setInterval(function () {
+    let timer = setInterval(function () {
       n = n + 1;
       if (m) {
         this.animation.translateY(30).step()
@@ -169,9 +170,13 @@ Page({
         m = !m;
       }
       this.setData({
-        animationData: this.animation.export()
+        animationData: this.animation.export(),
+        timer: timer
       })
 
     }.bind(this), 1000)
+  },
+  onUnload(){
+    clearInterval(this.data.timer)
   }
 })

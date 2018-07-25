@@ -97,6 +97,10 @@
   left: 80rpx;
 }
 
-.big-view-1{
+.big-view-1,big-view-2{
   position: relative;
+}
+.imgViews2{
+  position: absolute;
+  top:2
 }
