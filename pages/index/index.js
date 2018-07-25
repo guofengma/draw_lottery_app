@@ -61,7 +61,7 @@ Page({
     onReady: function() {
 
     },
-    getActivtyId(callBack) { // 获取活动Id
+    getActivtyId() { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
             Storage.setActivityId(req.responseObject.data.id)
@@ -76,6 +76,8 @@ Page({
                 shakeStartMusicSrc: req.responseObject.data.winMusic,
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
+            console.log(this.data.shakeStartMusicSrc)
+            console.log(this.data.shakeStopMusicSrc)
           // if (this.getIsLogin(false)) {
                 // let currentTime = new Date().getTime(); // 当前时间
                 let currentTime = this.data.activeEndTime
@@ -93,14 +95,9 @@ Page({
                 }
                 console.log(this.data.SignActivtyId)
             // }
-            if (callBack){
-              this.getIsNumberHttp() // 获取抽奖次数
-              return
-            }
-            if (this.data.activityId){
-              this.getWinnerRequest() // 获取中奖名单
-              this.selectComponent("#showNotice").noticeRequestHttp()
-            }
+            //this.getIsNumberHttp() // 获取抽奖次数
+            this.getWinnerRequest() // 获取中奖名单
+            this.selectComponent("#showNotice").noticeRequestHttp()
         }
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -197,14 +194,7 @@ Page({
     },
     didLogin() { // 获取 token
       this.selectComponent("#topBar").getUserId()
-      if (this.data.activityId){
-        this.getIsNumberHttp()
-      } else {
-        let callBack = () => {
-          this.getIsNumberHttp() // 获取抽奖次数
-        }
-        this.getActivtyId(callBack)
-      }
+      this.getIsNumberHttp() // 获取抽奖次数
       this.setData({
         isAuthorize: Storage.didAuthorize() || '',
       })
@@ -329,9 +319,6 @@ Page({
     isShowSake: false,
     onShow: function() { // 进行摇一摇
         let that = this;
-        if(this.getIsLogin(false)){
-            console.log('为登录')
-        } else {
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
@@ -451,8 +438,7 @@ Page({
                 }
                 wx.onAccelerometerChange(shake)
             }
-        }, 1500)
-      }  
+        }, 1500) 
     },
     onHide: function() {
         this.isShowSake = false // 设置第一次进入
@@ -481,12 +467,10 @@ Page({
     closeView(e) { // 显示天天签到
         this.selectComponent("#sign").signListRequestHttp()
         this.selectComponent("#sign").signReady()
-        if (this.getIsLogin()) {
-            this.setData({
-                isTrue: !this.data.isTrue
-            })
-            wx.startAccelerometer()
-        }
+        this.setData({
+          isTrue: !this.data.isTrue
+        })
+        wx.startAccelerometer()
     },
     showNotice: function(e) { // 显示公告
       this.setData({
@@ -516,7 +500,7 @@ Page({
           this.setData({
             isTrue: true
           })
-          if (this.data.isAuthorize){
+          if (this.data.isAuthorize) {
             this.selectComponent("#sign").signListRequestHttp()
             this.selectComponent("#sign").signReady()
           }
