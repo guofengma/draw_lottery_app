@@ -204,10 +204,15 @@ Component({
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
             let stringJson = req.responseObject.data;
-            // console.log(stringJson)
+            console.log(stringJson)
+            if (stringJson == [] || stringJson == '[]'){
+                console.log('')
+            }else {
               this.setData({
                 weekdays: req.responseObject.data || []
               })
+            }
+             
           };
           Tool.showErrMsg(r);
           r.addToQueue();
@@ -288,43 +293,43 @@ Component({
               }
             }
             // console.log(yearDate)
-            let signJsonNew = ''
-            if (signDay.length == 0) {
-              console.log('空')
-              return null 
-            } else {
-              if (signDay[0].signTime == undefined || signDay[0].signTime == 'undefined') {
+            // let signJsonNew = ''
+            // if (signDay.length == 0) {
+            //   console.log('空')
+            //   return null 
+            // } else {
+            //   if (signDay[0].signTime == undefined || signDay[0].signTime == 'undefined') {
 
-              } else {
-                signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
-              }
-            }
+            //   } else {
+            //     signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+            //   }
+            // }
             // console.log(signJsonNew)
-            for (var i = 0; i < signJsonNew.length; i++) {
-              var obj = signJsonNew[i];
-              var isExist = false;
-              for (var j = 0; j < yearDate.length; j++) {
-                var aj = yearDate[j];
-                if (obj == aj) {
-                  isExist = true;
-                  break;
-                }
-              }
-              if (!isExist) {
-                result.push(obj);
-              }
-            }
-            let resultWeekDays = 0
-            let arrResult = []
-            for (let i in result) {
-              if (todayss > 10) {
-                resultWeekDays = parseInt(result[i].substr(8, 2))
-              } else {
-                resultWeekDays = parseInt(result[i].substr(9, 1))
-              }
-              arrResult.push(resultWeekDays)
-            }
-            // console.log(arrResult)
+            // for (var i = 0; i < signJsonNew.length; i++) {
+            //   var obj = signJsonNew[i];
+            //   var isExist = false;
+            //   for (var j = 0; j < yearDate.length; j++) {
+            //     var aj = yearDate[j];
+            //     if (obj == aj) {
+            //       isExist = true;
+            //       break;
+            //     }
+            //   }
+            //   if (!isExist) {
+            //     result.push(obj);
+            //   }
+            // }
+            // let resultWeekDays = 0
+            // let arrResult = []
+            // for (let i in result) {
+            //   if (todayss > 10) {
+            //     resultWeekDays = parseInt(result[i].substr(8, 2))
+            //   } else {
+            //     resultWeekDays = parseInt(result[i].substr(9, 1))
+            //   }
+            //   arrResult.push(resultWeekDays)
+            // }
+            // // console.log(arrResult)
            
             var $datas = data;
             var signDate_arr = new Array();
@@ -395,9 +400,9 @@ Component({
               }
             }
             
-             this.setData({
-              signIsArr: arrResult
-            })
+            //  this.setData({
+            //   signIsArr: arrResult
+            // })
             // console.log(this.data.signIsArr)
             // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
@@ -414,32 +419,32 @@ Component({
               showMonth: todayMonth,
             });
           },600)
-          function getBetweenDateStr(start, end) {
-            var result = [];
-            var beginDay = start.split("-");
-            var endDay = end.split("-");
-            var diffDay = new Date();
-            var dateList = new Array;
-            var i = 0;
-            diffDay.setDate(beginDay[2]);
-            diffDay.setMonth(beginDay[1] - 1);
-            diffDay.setFullYear(beginDay[0]);
-            result.push(start);
-            while (i == 0) {
-              var countDay = diffDay.getTime() + 24 * 60 * 60 * 1000;
-              diffDay.setTime(countDay);
-              dateList[2] = diffDay.getDate();
-              dateList[1] = diffDay.getMonth() + 1;
-              dateList[0] = diffDay.getFullYear();
-              if (String(dateList[1]).length == 1) { dateList[1] = "0" + dateList[1] };
-              if (String(dateList[2]).length == 1) { dateList[2] = "0" + dateList[2] };
-              result.push(dateList[0] + "-" + dateList[1] + "-" + dateList[2]);
-              if (dateList[0] == endDay[0] && dateList[1] == endDay[1] && dateList[2] == endDay[2]) {
-                i = 1;
-              }
-            };
-            return result;
-          };
+          // function getBetweenDateStr(start, end) {
+          //   var result = [];
+          //   var beginDay = start.split("-");
+          //   var endDay = end.split("-");
+          //   var diffDay = new Date();
+          //   var dateList = new Array;
+          //   var i = 0;
+          //   diffDay.setDate(beginDay[2]);
+          //   diffDay.setMonth(beginDay[1] - 1);
+          //   diffDay.setFullYear(beginDay[0]);
+          //   result.push(start);
+          //   while (i == 0) {
+          //     var countDay = diffDay.getTime() + 24 * 60 * 60 * 1000;
+          //     diffDay.setTime(countDay);
+          //     dateList[2] = diffDay.getDate();
+          //     dateList[1] = diffDay.getMonth() + 1;
+          //     dateList[0] = diffDay.getFullYear();
+          //     if (String(dateList[1]).length == 1) { dateList[1] = "0" + dateList[1] };
+          //     if (String(dateList[2]).length == 1) { dateList[2] = "0" + dateList[2] };
+          //     result.push(dateList[0] + "-" + dateList[1] + "-" + dateList[2]);
+          //     if (dateList[0] == endDay[0] && dateList[1] == endDay[1] && dateList[2] == endDay[2]) {
+          //       i = 1;
+          //     }
+          //   };
+          //   return result;
+          // };
         },
         endStartSign (){
           let currentTime = new Date().getTime(); // 当前时间
@@ -479,6 +484,68 @@ Component({
         },
         myCatchTouch() {
           retrun;
+        },
+        signI(){
+          var getToday = new Date();
+          var todayDate = getToday.getDate();
+          var todayMonths = getToday.getMonth();
+          var todayMonth = (todayMonths + 1);
+          var todayYear = getToday.getFullYear();
+          var todayss = getToday.getDate();
+          if (todayMonth < 10) {
+            var todayMonthss = "0" + todayMonth;
+          } else {
+            var todayMonthss = todayMonth;
+          }
+          console.log(todayss);
+          var godates = todayYear + "-" + todayMonthss + "-01";
+          var that = this;
+          var data = { seriesCount: 1, signDays: [] };
+          var $datas = data;
+          var signDate_arr = new Array();
+          var anns = $datas.signDays;
+          var count_signday = $datas.seriesCount;
+          if (count_signday > 9) {
+            var series_gos = "0";
+          } else if (count_signday < 0) {
+            var series_gos = 99;
+          } else {
+            var series_gos = 10 - parseInt(count_signday);
+          }
+          that.setData({
+            seriesCount: count_signday,
+            series_gos: series_gos,
+          });
+          for (var p in anns) { //遍历json对象的每个key/value对,p为key
+            var newdats = anns[p];
+            signDate_arr.push(newdats);
+          }
+          if (signDate_arr.indexOf(todayss) > -1) {
+            console.log("当前已签到");
+            that.setData({
+              signtype: "2",
+            });
+          } else {
+            console.log("当前未签到");
+            that.setData({
+              signtype: "1",
+            });
+          }
+          console.log(signDate_arr[0]);
+          signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
+          //初始化加载日历
+
+          this.setData({
+            todayDate: todayDate,
+            todayMonth: todayMonth,
+            todayYear: todayYear,
+            prevYear: todayYear,
+            nextYear: todayYear,
+            prevMonth: todayMonth,
+            nextMonth: todayMonth,
+            showYear: todayYear,
+            showMonth: todayMonth,
+          });
         }
     },
     ready: function() {
@@ -486,5 +553,6 @@ Component({
       // setTimeout( ()=>{
       //   this.signReady() // 加载日历
       // },1000)
+      // this.signI()
     }
 }) 

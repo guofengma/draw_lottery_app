@@ -6,8 +6,8 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        isNotice: Boolean,
-
+      isNotice: Boolean,
+      datasisNull: Number
     },
 
     /**
@@ -26,7 +26,7 @@ Component({
         totals: 0,
         starts:0,
         noticeFalse: 'isBtnFalse',
-        datasisNull: ''
+        datasisNull: 0
     },
 
     /**
@@ -34,11 +34,14 @@ Component({
      */
     methods: {
         showNotice: function() { // 关闭公告
-            this.triggerEvent('showNotice', false)
+          this.triggerEvent('showNotice', false, this.data.datasisNull)
         },
-          myCatchTouch() {
+        IsdatasisNull (){
+          this.triggerEvent('IsdatasisNull',this.data.datasisNull)
+        },
+        myCatchTouch() {
             return
-          },
+        },
         noticeRequestHttp() { //  公告
             let pages = this.data.page 
             let data = {

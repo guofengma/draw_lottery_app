@@ -46,7 +46,7 @@ Page({
         isDisplay: true,
         shakeStartMusicSrc:'',
         shakeStopMusicSrc: '',
-        isShowNotice:false
+        isShowNotice:false,
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -57,6 +57,11 @@ Page({
         this.ani() // 旋转动画
         this.getActivtyId()
         Event.on('didLogin', this.didLogin, this);
+      // IsdatasisNull()
+    },
+    IsdatasisNull(e){
+        let num = e.detail
+        console.log(num)
     },
     onReady: function() {
 
@@ -368,7 +373,7 @@ Page({
                                     // audioCtx = wx.createAudioContext('myAudioShake');
                                     // audioCtx.setSrc(this.data.shakeStartMusicSrc);
                                     // audioCtx.play();
-                                  if (req.responseObject.data.ptype == 1 || req.responseObject.data.ptype == '1') { // 实物
+                                  if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -378,7 +383,7 @@ Page({
                                             isMaterialUrl: req.responseObject.data.imgUrl,
                                             isMaterialName: req.responseObject.data.awardName
                                         })
-                                  } else if (req.responseObject.data.ptype == 2 || req.responseObject.data.ptype == '2') { // 字卡
+                                  } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -388,7 +393,7 @@ Page({
                                             iscardUrl: req.responseObject.data.imgUrl,
                                             iscardName: req.responseObject.data.awardName
                                         })
-                                  } else if (req.responseObject.data.ptype == 3 || req.responseObject.data.ptype == '3') { // 红包
+                                  } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
                                         that.setData({
                                             isNumber: num,
                                             isShowModelTitle: '恭喜你，中奖啦',
@@ -437,6 +442,7 @@ Page({
                     }
                 }
                 wx.onAccelerometerChange(shake)
+                this.getWinnerRequest() // 获取中奖名单
             // }
         }, 1500) 
     },
@@ -465,12 +471,12 @@ Page({
         },1500)
     },
     closeView(e) { // 显示天天签到
-        this.selectComponent("#sign").signListRequestHttp()
-        this.selectComponent("#sign").signReady()
-        this.setData({
-          isTrue: !this.data.isTrue
-        })
-        wx.startAccelerometer()
+      this.setData({
+        isTrue: !this.data.isTrue
+      })
+      this.selectComponent("#sign").signListRequestHttp()
+      this.selectComponent("#sign").signReady()       
+      wx.startAccelerometer()
     },
     showNotice: function(e) { // 显示公告
       this.setData({
