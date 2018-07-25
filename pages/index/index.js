@@ -92,9 +92,11 @@ Page({
                 }
                 console.log(this.data.SignActivtyId)
             // }
-            //this.getIsNumberHttp() // 获取抽奖次数
-            this.getWinnerRequest() // 获取中奖名单
-            this.selectComponent("#showNotice").noticeRequestHttp()
+            if (this.data.activityId){
+              this.getIsNumberHttp() // 获取抽奖次数
+              this.getWinnerRequest() // 获取中奖名单
+              this.selectComponent("#showNotice").noticeRequestHttp()
+            }
         }
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -191,7 +193,7 @@ Page({
     },
     didLogin() { // 获取 token
       this.selectComponent("#topBar").getUserId()
-      this.getIsNumberHttp() // 获取抽奖次数
+      // this.getIsNumberHttp() // 获取抽奖次数
       this.setData({
         isAuthorize: Storage.didAuthorize() || '',
       })
