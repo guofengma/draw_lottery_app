@@ -46,7 +46,7 @@ Page({
         isDisplay: true,
         shakeStartMusicSrc:'',
         shakeStopMusicSrc: '',
-        isShowNotice:false
+        isShowNotice:false,
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -57,6 +57,11 @@ Page({
         this.ani() // 旋转动画
         this.getActivtyId()
         Event.on('didLogin', this.didLogin, this);
+      // IsdatasisNull()
+    },
+    IsdatasisNull(e){
+        let num = e.detail
+        console.log(num)
     },
     onReady: function() {
 
@@ -480,13 +485,13 @@ Page({
       if (this.data.isNotice) {
         this.selectComponent("#showNotice").noticeRequestHttp()
       }
-      // let currentTime = this.data.activeEndTime
-      // let getStartTime = this.data.activeStartTime //活动开始时间
-      // if (getStartTime > currentTime){ // 没开始
+      let currentTime = this.data.activeEndTime
+      let getStartTime = this.data.activeStartTime //活动开始时间
+      if (getStartTime > currentTime){ // 没开始
        
-      // } else {
-      //   this.getIsSign()
-      // }
+      } else {
+        this.getIsSign()
+      }
     },
     getIsSign(){ // 用户是否签到
       let data = {
