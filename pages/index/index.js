@@ -58,7 +58,7 @@ Page({
         this.getActivtyId()
         this.selectComponent("#sign").signReady()       
         Event.on('didLogin', this.didLogin, this);
-        istotal()
+        // istotal()
     },
     onReady: function() {
 
@@ -327,9 +327,9 @@ Page({
         let that = this;
         setTimeout(() => {
             let num = parseInt(that.data.isNumber)
-            if(num == 0) {
-              Tool.showAlert('没有次数')
-            } else {
+            // if(num == 0) {
+            //   Tool.showAlert('没有次数')
+            // } else {
  
                 that.isShowSake = true
                 let lastTime = 0; //此变量用来记录上次摇动的时间
@@ -441,7 +441,7 @@ Page({
                 }
                 wx.onAccelerometerChange(shake)
                 this.getWinnerRequest() // 获取中奖名单
-            }
+            // }
         }, 1500) 
     },
     onHide: function() {
