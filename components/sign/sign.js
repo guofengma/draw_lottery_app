@@ -195,11 +195,12 @@ Component({
           } else {
             timeData = todayYear + "-" + todayMonth
           }
-          console.log(timeData)
+          // console.log(timeData)
           let data = {
             activityId: Storage.getActivityId() || '',
             yearsMonth: timeData
           };
+          console.log(data)
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
             let stringJson = req.responseObject.data;
