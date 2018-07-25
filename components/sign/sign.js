@@ -61,12 +61,10 @@ Component({
         sign_start: function() { // 签到
             this.signRequestHttp() // 调取签到接口
             //签到成功后重新调用后台接口加载新的签到数据
-           setTimeout(()=>{
-            //  console.log('签到之后获取签到列表')
-             this.signListRequestHttp()
-             this.getIsNumberHttp()
-             this.signReady()
-           },1000)
+          //  setTimeout(()=>{
+          //   //  console.log('签到之后获取签到列表')
+             
+          //  },1000)
         },
         sign_end: function() { // 到底了
             wx.showToast({
@@ -235,7 +233,9 @@ Component({
                 icon: 'success',
                 duration: 1500
               });
-              
+              this.signListRequestHttp()
+              this.getIsNumberHttp()
+              this.signReady()
             } else {
               return null
             }
@@ -245,6 +245,7 @@ Component({
         },
         signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
+            console.log('ready')
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -294,16 +295,14 @@ Component({
             console.log(yearDate)
             let signJsonNew = ''
             if (signDay.length == 0) {
-              console.log('空')
-              return null 
-            } else {
+              return false 
+            } else if(signDay.length == 2){
               if (signDay[0].signTime == undefined || signDay[0].signTime == 'undefined') {
 
               } else {
-                signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+                signJsonNew = this.f(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
               }
-            }
-            // console.log(signJsonNew)
+            
             for (var i = 0; i < signJsonNew.length; i++) {
               var obj = signJsonNew[i];
               var isExist = false;
@@ -328,8 +327,7 @@ Component({
               }
               arrResult.push(resultWeekDays)
             }
-            console.log(arrResult)
-           
+            }
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -380,7 +378,6 @@ Component({
             }
             let currentTime = this.data.activeEndTime
             let getStartTime = this.data.activeStartTime //活动开始时间
-            // console.log(getStartTime > currentTime)
             if (getStartTime > currentTime) {
                 that.setData({
                   signtype: "3",
@@ -399,9 +396,9 @@ Component({
               }
             }
             
-             this.setData({
-              signIsArr: arrResult
-            })
+            //  this.setData({
+            //   signIsArr: arrResult
+            // })
             // console.log(this.data.signIsArr)
             // console.log(signDate_arr)
             signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
@@ -418,7 +415,8 @@ Component({
               showMonth: todayMonth,
             });
           },600)
-          function getBetweenDateStr(start, end) {
+          function f(start, end) {
+            console.log('执行')
             var result = [];
             var beginDay = start.split("-");
             var endDay = end.split("-");
@@ -429,21 +427,21 @@ Component({
             diffDay.setMonth(beginDay[1] - 1);
             diffDay.setFullYear(beginDay[0]);
             result.push(start);
-            // while (i == 0) {
-            //   var countDay = diffDay.getTime() + 24 * 60 * 60 * 1000;
-            //   diffDay.setTime(countDay);
-            //   dateList[2] = diffDay.getDate();
-            //   dateList[1] = diffDay.getMonth() + 1;
-            //   dateList[0] = diffDay.getFullYear();
-            //   if (String(dateList[1]).length == 1) { dateList[1] = "0" + dateList[1] };
-            //   if (String(dateList[2]).length == 1) { dateList[2] = "0" + dateList[2] };
-            //   result.push(dateList[0] + "-" + dateList[1] + "-" + dateList[2]);
-            //   if (dateList[0] == endDay[0] && dateList[1] == endDay[1] && dateList[2] == endDay[2]) {
-            //     i = 1;
-            //   }
-            // };
+            while (i == 0) {
+              var countDay = diffDay.getTime() + 24 * 60 * 60 * 1000;
+              diffDay.setTime(countDay);
+              dateList[2] = diffDay.getDate();
+              dateList[1] = diffDay.getMonth() + 1;
+              dateList[0] = diffDay.getFullYear();
+              if (String(dateList[1]).length == 1) { dateList[1] = "0" + dateList[1] };
+              if (String(dateList[2]).length == 1) { dateList[2] = "0" + dateList[2] };
+              result.push(dateList[0] + "-" + dateList[1] + "-" + dateList[2]);
+              if (dateList[0] == endDay[0] && dateList[1] == endDay[1] && dateList[2] == endDay[2]) {
+                i = 1;
+              }
+            };
             return result;
-          };
+          }
         },
         endStartSign (){
           let currentTime = new Date().getTime(); // 当前时间
@@ -490,5 +488,6 @@ Component({
       // setTimeout( ()=>{
       //   this.signReady() // 加载日历
       // },1000)
+      // this.signI()
     }
 }) 

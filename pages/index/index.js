@@ -46,7 +46,7 @@ Page({
         isDisplay: true,
         shakeStartMusicSrc:'',
         shakeStopMusicSrc: '',
-        isShowNotice:false
+        isShowNotice:false,
     },
     onLoad: function() {
         this.setData({ // storage 中获取userId
@@ -56,10 +56,16 @@ Page({
         // this.onStartMusic() // 播放音乐
         this.ani() // 旋转动画
         this.getActivtyId()
+        this.selectComponent("#sign").signReady()       
         Event.on('didLogin', this.didLogin, this);
+        istotal()
     },
     onReady: function() {
 
+    },
+    istotal(e) {
+      let num = e.detail
+      console.log(num)
     },
     getActivtyId() { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
@@ -321,13 +327,10 @@ Page({
         let that = this;
         setTimeout(() => {
             let num = parseInt(that.data.isNumber)
-                // console.log('进入延时')
-            // if (num == 0) {
-            //     // wx.showToast({
-            //     //     title: '没有次数了',
-            //     // })
-            //     return 
-            // } else {
+            if(num == 0) {
+              Tool.showAlert('没有次数')
+            } else {
+ 
                 that.isShowSake = true
                 let lastTime = 0; //此变量用来记录上次摇动的时间
                 let x = 0,
@@ -365,9 +368,9 @@ Page({
                                     console.log(req.responseObject)
                                     console.log(typeof req.responseObject.ptype)
                                     let num = that.data.isNumber--
-                                    // audioCtx = wx.createAudioContext('myAudioShake');
-                                    // audioCtx.setSrc(this.data.shakeStartMusicSrc);
-                                    // audioCtx.play();
+                                    audioCtx = wx.createAudioContext('myAudioShake');
+                                    audioCtx.setSrc(this.data.shakeStartMusicSrc);
+                                    audioCtx.play();
                                   if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                                         that.setData({
                                             isNumber: num,
@@ -410,9 +413,9 @@ Page({
                                     }
                                     if (req.responseObject.code === 600) {
                                         console.log(req.responseObject)
-                                        // audioCtx = wx.createAudioContext('myAudioShake');
-                                        // audioCtx.setSrc(this.data.shakeStopMusicSrc);
-                                        // audioCtx.play();
+                                        audioCtx = wx.createAudioContext('myAudioShake');
+                                        audioCtx.setSrc(this.data.shakeStopMusicSrc);
+                                        audioCtx.play();
                                         let num = that.data.isNumber--
                                             that.setData({
                                               isNumber: num,
@@ -438,7 +441,7 @@ Page({
                 }
                 wx.onAccelerometerChange(shake)
                 this.getWinnerRequest() // 获取中奖名单
-            // }
+            }
         }, 1500) 
     },
     onHide: function() {
@@ -480,13 +483,13 @@ Page({
       if (this.data.isNotice) {
         this.selectComponent("#showNotice").noticeRequestHttp()
       }
-      // let currentTime = this.data.activeEndTime
-      // let getStartTime = this.data.activeStartTime //活动开始时间
-      // if (getStartTime > currentTime){ // 没开始
+      let currentTime = this.data.activeEndTime
+      let getStartTime = this.data.activeStartTime //活动开始时间
+      if (getStartTime > currentTime){ // 没开始
        
-      // } else {
-      //   this.getIsSign()
-      // }
+      } else {
+        this.getIsSign()
+      }
     },
     getIsSign(){ // 用户是否签到
       let data = {
