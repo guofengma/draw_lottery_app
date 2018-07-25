@@ -48,11 +48,11 @@
                                         {{item == null ? '' : item.normalday}}
                                       </view>
                                     </block>
-                                    <block wx:elif="{{item.normalday== signIsArr[index]}}">
+                                    <!-- <block wx:elif="{{item.normalday== signIsArr[index]}}">
                                       <view class="{{borderBreak}}">
                                         {{item == null ? '' : item.normalday}}
                                       </view>
-                                    </block>
+                                    </block> -->
                                     <block wx:else="{{item.signday=='is'}}">
                                     <view class="day_hover" wx:if="{{item.signday=='is'}}">
                                         {{item == null ? '' : item.normalday}}
