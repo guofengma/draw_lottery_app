@@ -60,7 +60,7 @@ Page({
     onReady: function() {
 
     },
-    getActivtyId() { // 获取活动Id
+    getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
             Storage.setActivityId(req.responseObject.data.id)
@@ -92,8 +92,11 @@ Page({
                 }
                 console.log(this.data.SignActivtyId)
             // }
-            if (this.data.activityId){
+            if (callBack){
               this.getIsNumberHttp() // 获取抽奖次数
+              return
+            }
+            if (this.data.activityId){
               this.getWinnerRequest() // 获取中奖名单
               this.selectComponent("#showNotice").noticeRequestHttp()
             }
@@ -193,7 +196,14 @@ Page({
     },
     didLogin() { // 获取 token
       this.selectComponent("#topBar").getUserId()
-      // this.getIsNumberHttp() // 获取抽奖次数
+      if (this.data.activityId){
+        this.getIsNumberHttp()
+      } else {
+        let callBack = () => {
+          this.getIsNumberHttp() // 获取抽奖次数
+        }
+        this.getActivtyId(callBack)
+      }
       this.setData({
         isAuthorize: Storage.didAuthorize() || '',
       })
