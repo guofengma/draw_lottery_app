@@ -132,23 +132,25 @@ Component({
         },
         sign_next: function() { // 下一页
             console.log("下一月");
-          // let getToday = new Date();
-          // let todayDate = getToday.getDate();
-          // let todayMonths = getToday.getMonth();
-          // let todayMonth = (todayMonths + 1);
+          let getToday = new Date();
+          let todayDate = getToday.getDate();
+          let todayMonths = getToday.getMonth();
+            let todayMonth1 = (todayMonths + 1);
             var showMonth = this.data.showMonth;
             var todayMonth = this.data.todayMonth;
             console.log(showMonth)
             console.log(todayMonth)
             if (todayMonth == showMonth) {
-                wx.showToast({
-                    title: '未签到不能查看',
-                    icon: 'loading',
-                    duration: 1500
-                });
-                return;
-            } else if (showMonth < todayMonth){
-               this.signReady()
+                // wx.showToast({
+                //     title: '未签到不能查看',
+                //     icon: 'loading',
+                //     duration: 1500
+                // });
+                // return;
+              
+            } else {
+              this.signReady()
+                return
             }
             if (showMonth == "12") {
                 var showMonth = "1";
@@ -163,6 +165,17 @@ Component({
             } else {
                 var showMonths = todayMonth;
             }
+            var godates = showYear + "-" + showMonths + "-01";
+
+            var $datas = { seriesCount: 1, signDays: [] };
+            var anns = $datas.signDays;
+            var signDate_arr = [];
+            for (var p in anns) { //遍历json对象的每个key/value对,p为key
+              var newdats = anns[p];
+              signDate_arr.push(newdats);
+            }
+            // console.log(signDate_arr[0]);
+            signTime.dataTime.bulidCal(showYear, showMonth, that, signDate_arr);
             //初始化加载日历
             this.setData({
                 showYear: showYear,
@@ -203,8 +216,10 @@ Component({
           };
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
+            // if ()
             // console.log(req.responseObject)
             let stringJson = req.responseObject.data;
+            // if (stringJson.)
               this.setData({
                 weekdays: req.responseObject.data || []
               })
@@ -288,12 +303,17 @@ Component({
                 }
               }
             }
-            console.log(yearDate)
-            // let signJsonNew = ''
+            // console.log(yearDate)
+            let signJsonNew = ''
+            if (signDay[0].signTime == undefined || signDay[0].signTime == 'undefined') {
+
+            } else {
+              signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+            }
             // if (signDay[0].signTime == null || signDay[0].signTime == 'null'){
-              let signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+             
             // }
-            console.log(signJsonNew)
+            // console.log(signJsonNew)
             for (var i = 0; i < signJsonNew.length; i++) {
               var obj = signJsonNew[i];
               var isExist = false;
@@ -318,7 +338,7 @@ Component({
               }
               arrResult.push(resultWeekDays)
             }
-            console.log(arrResult)
+            // console.log(arrResult)
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
@@ -348,7 +368,7 @@ Component({
               this.setData({
                 signIsArr: arrResult
               })
-              console.log(this.data.signIsArr)
+              // console.log(this.data.signIsArr)
               if ((anns[t + 1] - anns[p]) == 1 && anns.length == 7) {
                   // console.log('连续签到了7')
                   this.setData({

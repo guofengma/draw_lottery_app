@@ -77,12 +77,12 @@ Page({
                 if (getStartTime > currentTime) {
                   console.log('活动未开启')
                     this.setData({
-                      SignActivtyId: false
+                      SignActivtyId: true
                     })
                 } else {
                   console.log('这？')
                     this.setData({
-                      SignActivtyId: true // 活动开启
+                      SignActivtyId: false // 活动开启
                     })
                 }
             console.log(this.data.SignActivtyId)
@@ -289,10 +289,9 @@ Page({
     isShowSake: false,
     onShow: function() { // 进行摇一摇
         let that = this;
-        // if(this.getIsLogin(false)){
-        //     console.log('为登录')
-        //   wx.startAccelerometer();
-        // } else {
+        if(this.getIsLogin(false)){
+            console.log('为登录')
+        } else {
         setTimeout(() => {
             // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
@@ -413,7 +412,7 @@ Page({
                 wx.onAccelerometerChange(shake)
             }
         }, 1500)
-      // }  
+      }  
     },
     onHide: function() {
         this.isShowSake = false // 设置第一次进入

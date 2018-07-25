@@ -125,7 +125,7 @@
                                   <view wx:if="{{item.signday=='is'}}" style="display:none">
                                         {{item == null ? '' : item.normalday}}
                                     </view>
-                                  <view wx:else="{{item.signday!=='is' && isBreak}}" class="" style="display:block">
+                                  <view wx:else="{{item.signday!=='is'}}" class="" style="display:block">
                                       {{item == null ? '' : item.normalday}}
                                     </view>
                                   <block wx:if="{{item.normalday == oneWeekDays}}">
