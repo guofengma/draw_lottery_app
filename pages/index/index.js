@@ -320,14 +320,14 @@ Page({
     onShow: function() { // 进行摇一摇
         let that = this;
         setTimeout(() => {
-            // console.log(that.data.isNumber)
             let num = parseInt(that.data.isNumber)
                 // console.log('进入延时')
-            if (num === 0) {
-                // wx.showToast({
-                //     title: '没有次数了',
-                // })
-            } else {
+            // if (num == 0) {
+            //     // wx.showToast({
+            //     //     title: '没有次数了',
+            //     // })
+            //     return 
+            // } else {
                 that.isShowSake = true
                 let lastTime = 0; //此变量用来记录上次摇动的时间
                 let x = 0,
@@ -365,9 +365,9 @@ Page({
                                     console.log(req.responseObject)
                                     console.log(typeof req.responseObject.ptype)
                                     let num = that.data.isNumber--
-                                    audioCtx = wx.createAudioContext('myAudioShake');
-                                    audioCtx.setSrc(this.data.shakeStartMusicSrc);
-                                    audioCtx.play();
+                                    // audioCtx = wx.createAudioContext('myAudioShake');
+                                    // audioCtx.setSrc(this.data.shakeStartMusicSrc);
+                                    // audioCtx.play();
                                   if (req.responseObject.data.ptype == 1 || req.responseObject.data.ptype == '1') { // 实物
                                         that.setData({
                                             isNumber: num,
@@ -410,9 +410,9 @@ Page({
                                     }
                                     if (req.responseObject.code === 600) {
                                         console.log(req.responseObject)
-                                        audioCtx = wx.createAudioContext('myAudioShake');
-                                        audioCtx.setSrc(this.data.shakeStopMusicSrc);
-                                        audioCtx.play();
+                                        // audioCtx = wx.createAudioContext('myAudioShake');
+                                        // audioCtx.setSrc(this.data.shakeStopMusicSrc);
+                                        // audioCtx.play();
                                         let num = that.data.isNumber--
                                             that.setData({
                                               isNumber: num,
@@ -437,7 +437,7 @@ Page({
                     }
                 }
                 wx.onAccelerometerChange(shake)
-            }
+            // }
         }, 1500) 
     },
     onHide: function() {
