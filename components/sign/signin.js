@@ -47,18 +47,19 @@ var dataTime = {
                         //console.log(111);
                         aMonth[w][d] = {
                             signday: "is",
-                            classname: '',
+                            classname: '1',
                             normalday: iVarDate,
                         };
                     } else {
                         //console.log(22);
                         aMonth[w][d] = {
                             signday: "nois",
+                            classname:'2',
                             normalday: iVarDate,
                         };
                     }
                     if (iVarDate == curMonthDays) {
-                        // console.log(aMonth);
+                        console.log(aMonth);
                         that.setData({
                             signDays: aMonth,
                         });
