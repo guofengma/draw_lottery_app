@@ -16,7 +16,7 @@ Page({
         "icon2": '/img/duoactive.png',
         "showImg1": 'duo-dark.png',
         "showImg2": 'duo-bg.png',
-        'number': 0
+        'number': 1
       },
       {
         'name': '女',
@@ -24,7 +24,7 @@ Page({
         "icon2": '/img/nvactive.png',
         "showImg1": 'nv-dark.png',
         "showImg2": 'nv-bg.png',
-        'number': 0
+        'number': 1
       },
       {
         name:'郎',
@@ -32,25 +32,39 @@ Page({
         "icon2": '/img/langactive.png',
         "showImg1": 'lang-dark.png',
         "showImg2": 'lang-bg.png',
-        'number': 0
+        'number': 1
       }
     ],
     disabled: false,
     activeImg:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/duo-dark.png',
     imgUrl:"https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/",
-    activityId:1,
+    activityId:'',
     cardNum:0,//集卡人数
     show:false,
-    showBtn: false,
-    showBtn2:false,
+    showBtn: false, // 是否展示地址按钮
     timer:null,
+    isStop:false,// 是否停止动画
+    showTips1:false, // 是否显示合成字卡的手势 
+    showTips2: false, // 是否显示选择地址提示手势
   },
   onLoad: function (options) {
     this.setData({
       activityId:Storage.getActivityId() || ''
     })
-    this.queryActivityWordCard()
-    this.getCardNumber()
+    // this.queryActivityWordCard()
+    // this.getCardNumber()
+    // this.tipsImg()
+    let disabled = this.getCardNum() < 3 ? false : true
+    let { showTips1 } = this.data
+    if (this.data.datas[0].number == 0 && !disabled) {
+      console.log(1111)
+      showTips1 = true
+      this.tipsImg()
+    }
+    this.setData({
+      disabled: disabled,
+      showTips1: showTips1
+    })
   },
   cardClicked(e){
     let index = e.currentTarget.dataset.index
@@ -95,11 +109,17 @@ Page({
         showBtn = true
       }
       let disabled = this.getCardNum()<3? false:true
+      let { showTips1 } = this.data.showTips1
+      if (datas[0].number == 0 && !disabled) {
+        showTips1 = true
+        this.tipsImg()
+      }
       this.setData({
         datas: datas,
         disabled: disabled,
         activeImg: activeImg,
-        showBtn: showBtn
+        showBtn: showBtn,
+        showTips1: showTips1
       })
     };
     Tool.showErrMsg(r)
@@ -118,17 +138,21 @@ Page({
   configListCard(){
     let num = this.getCardNum()
     if (num < 3) return
+    this.setData({
+      showTips1: false
+    })
     let params = {
       activityId: this.data.activityId
     }
     let r = RequestFactory.configListCard(params);
     r.finishBlock = (req) => {
-      this.tipsImg()
       let { datas } = this.data
       if (datas[0].number == 0) {
         this.setData({
-          showBtn2: true
+          showTips2: true,
+          isStop: false,
         })
+        this.tipsImg()
       }
       this.queryActivityWordCard()
       this.modelClicked()
@@ -144,11 +168,11 @@ Page({
   },
   chooseAddress(){
     this.setData({
-      showBtn2: false
+      showTips2: false
     })
     Tool.navigateTo('/pages/address/address-list/address-list?door=2')
   },
-  tipsImg(){
+  tipsImg(){ //动画效果
     clearInterval(this.data.timer)
     let animation = wx.createAnimation({
       duration: 1500,
@@ -161,6 +185,10 @@ Page({
     let n = 0
     let m = true
     let timer = setInterval(function () {
+      if (this.data.isStop) {
+        clearInterval(this.data.timer)
+        return
+      }
       n = n + 1;
       if (m) {
         this.animation.translateY(30).step()
