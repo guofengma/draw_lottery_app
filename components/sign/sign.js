@@ -289,7 +289,10 @@ Component({
               }
             }
             console.log(yearDate)
-            let signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+            // let signJsonNew = ''
+            // if (signDay[0].signTime == null || signDay[0].signTime == 'null'){
+              let signJsonNew = getBetweenDateStr(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
+            // }
             console.log(signJsonNew)
             for (var i = 0; i < signJsonNew.length; i++) {
               var obj = signJsonNew[i];
@@ -342,17 +345,6 @@ Component({
                   signNumberOne: 1
                 })
               }
-              // for(let i  in arrResult) {
-              //   // console.log(arrResult[i])
-              //   if (anns.indexOf(arrResult[i]) == -1) {
-              //     console.log('漏签')
-              //       this.setData({
-              //         isBreak: true,
-              //         signIsArr: arrResult[i]
-              //       })
-              //     // anns.push(arrResult[i])
-              //   }
-              // }
               this.setData({
                 signIsArr: arrResult
               })
