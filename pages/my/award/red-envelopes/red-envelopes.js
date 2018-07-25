@@ -8,7 +8,7 @@ Page({
     params: {},
   },
   onLoad: function (options) {
-    let activityId = Storage.getActivityId() || 1
+    let activityId = Storage.getActivityId() || ''
     let params = {
       pageSize: this.data.pageSize,
       page: this.data.currentPage,
@@ -51,5 +51,5 @@ Page({
       params: params
     })
     this.queryActivityRedPackageList(this.data.params)
-  },
+  }
 })

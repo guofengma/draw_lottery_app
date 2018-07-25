@@ -142,6 +142,11 @@ export default class RequestFactory {
     let url = Operation.sharedInstance().queryActivityRedPackageList;
     return this.request(url, params, '我的红包列表', true)
   }
+
+  static getRedPackageNum(params) {
+    let url = Operation.sharedInstance().getRedPackageNum;
+    return this.request(url, params, '红包数量', true)
+  }
   
   static querySecuritycodeUsedList(params) {
     let url = Operation.sharedInstance().querySecuritycodeUsedList;

@@ -38,7 +38,7 @@
                 <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
                   <swiper-item catchtouchmove='catchTouchMove'>
                     <view class="text" wx:for="{{item}}" wx:for-index="index" wx:key="n" wx:for-item="item">
-                      {{item.index}}、获奖名单 <view class="text-width"></view>  {{item.tphone}}
+                      {{item.index}}、{{item.prizeName}} <view class="text-width"></view>  {{item.tphone}}
                     </view>
                 </swiper-item>
                 </block>

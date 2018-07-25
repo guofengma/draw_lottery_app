@@ -173,11 +173,13 @@ export default class Storage {
       return this.getterFor('userLocation');
     }
 
-    // 存储当前日期
-    static setNewDataDay(day) {
-      return this.setterFor('weekday',weekday)
+    // 红包数量是否大于0 
+
+    static setRedPackageNum(info) {
+      return this.setterFor('RedPackageNum', info)
     }
-    static getNewDataDay(day) {
-      return this.getterFor('weekday', weekday)
+
+    static getRedPackageNum(day) {
+      return this.getterFor('RedPackageNum')
     }
 }
