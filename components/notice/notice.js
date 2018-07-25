@@ -100,6 +100,11 @@ Component({
         prevPage () {
           console.log(this.data.starts)
           console.log(this.data.page)
+          // let page = this.data.page
+          // page--
+          // this.setData{
+          //   page:page
+          // }
           if(this.data.starts == 0 && this.data.page == 1){
             this.setData({
               isBtnFalse: '1',
