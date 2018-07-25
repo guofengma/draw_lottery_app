@@ -258,9 +258,44 @@ Component({
             var signDay = this.data.weekdays
             // console.log(signDay)
             var data = { seriesCount: 1, signDays: [] };
+<<<<<<< HEAD
             
             // console.log(yearDate)
             // let signJsonNew = ''
+=======
+            let yearDate = [];
+            let result = [];
+            for (let p in signDay) { // 获取签到列表的每一天
+              let signJson = signDay[p].signTime
+              let weekDays = 0;
+              let t = parseInt(p)
+              yearDate.push(signJson);
+              if (todayss > 10 ) {
+                weekDays = parseInt(signDay[p].signTime.substr(8, 2))
+                data.signDays.push(weekDays)
+              } else {
+                weekDays = parseInt(signDay[p].signTime.substr(9, 1))
+                data.signDays.push(weekDays)
+              }
+              if (signDay[0].hadWinCount !== 2) { // 获取列表中第一个天表示第一次签到
+                this.setData({
+                  oneWeekDays: parseInt(signDay[0].signTime.substr(8, 2))
+                })
+              }
+              if (signDay[p].hadWinCount !== 2) { // 获取连续签到7天
+                let arr = [];
+                arr.push(weekDays)
+                // console.log(arr)
+                if(arr.indexOf(weekDays) > -1) {
+                  this.setData({
+                    isweekDays: arr
+                  })
+                }
+              }
+            }
+            console.log(yearDate)
+            let signJsonNew = ''
+>>>>>>> 74789443f9e887bb2c7ae64f997cd457d3861de2
             if (signDay.length == 0) {
               return false 
             } else if(signDay.length == 2){
@@ -294,7 +329,6 @@ Component({
               }
               arrResult.push(resultWeekDays)
             }
-            // // console.log(arrResult)
             }
             var getToday = new Date();
             var todayDate = getToday.getDate();
