@@ -273,7 +273,8 @@ Page({
                       }
                       arr[t].push({
                         index: index + 1,
-                        tphone: telIphone
+                        tphone: telIphone,
+                        prizeName: res.prizeName
                       });
                     }
                    

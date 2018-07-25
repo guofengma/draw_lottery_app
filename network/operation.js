@@ -103,6 +103,10 @@ export default class Operation {
 
         this.queryActivityRedPackageList ='/user/activityRedPackage/queryActivityRedPackageList'
 
+        // 红包数量
+
+        this.getRedPackageNum = '/user/activityRedPackage/query'
+
         // 我的实物列表
 
         this.querySecuritycodeUsedList = '/user/securitycodeUsed/querySecuritycodeUsedList'
