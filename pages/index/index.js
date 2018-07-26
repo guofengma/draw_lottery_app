@@ -344,8 +344,8 @@ Page({
     isShowSake: false,
     onShow: function () { // 进行摇一摇
       let that = this;
-      let num = wx.getStorage('IsNumber');
-      console.log(num)
+      let num = ''
+      // console.log(num)
       this.isShowSake = true
       let SignActivtyId = this.data.SignActivtyId
       let isAcitivityEnd = this.data.isAcitivityEnd
