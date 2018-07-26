@@ -537,6 +537,9 @@ Page({
       this.setData({
         isNotice: !this.data.isNotice
       })
+      if (this.data.isNotice) {
+        this.selectComponent("#showNotice").noticeRequestHttp()
+      } 
     },
     showNotice: function (e) { // 显示公告
         this.setData({
