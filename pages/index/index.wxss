@@ -46,6 +46,16 @@
   padding-left: 15rpx;
   font-size: 28rpx;
 }
+.modelViewInput{
+  font-size:28rpx;
+  text-indent:15rpx;
+  line-height:73rpx;
+  color:#999;
+  width:354rpx;
+  height:73rpx;
+  float:left;
+  background:transparent;
+}
 .securit-btn{
   width: 103rpx;
   height: 73rpx;
@@ -263,10 +273,10 @@ movable-area {
   right: 120rpx;
   text-align: center;
   color: #ffec00;
-  animation:plusScale 2s linear  infinite;
-  -moz-animation:plusScale 2s linear  infinite; /* Firefox */
-  -webkit-animation:plusScale 2s linear  infinite; /* Safari and Chrome */
-  -o-animation:plusScale 2s linear  infinite; /* Opera */
+  animation:plusScale 2s linear  2;
+  -moz-animation:plusScale 2s linear  2; /* Firefox */
+  -webkit-animation:plusScale 2s linear  2; /* Safari and Chrome */
+  -o-animation:plusScale 2s linear  2; /* Opera */
 }
 .isNumberReduce{
   position: absolute;
@@ -274,10 +284,10 @@ movable-area {
   right: 120rpx;
   text-align: center;
   color: #ffec00;
-  animation:plusScale 2s linear infinite;
-  -moz-animation:plusScale 2s linear infinite; /* Firefox */
-  -webkit-animation:plusScale 2s linear infinite; /* Safari and Chrome */
-  -o-animation:plusScale 2s linear infinite; /* Opera */
+  animation:plusScale 2s linear 2;
+  -moz-animation:plusScale 2s linear 2; /* Firefox */
+  -webkit-animation:plusScale 2s linear 2; /* Safari and Chrome */
+  -o-animation:plusScale 2s linear 2; /* Opera */
 }
 .cishu{
   animation:anim1 2s linear infinite;
