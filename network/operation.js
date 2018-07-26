@@ -159,6 +159,8 @@ export default class Operation {
 
         /**********  订单物流列表 *******************/
         this.querySecuritycodeUsedListByHadReceive = '/user/securitycodeUsed/querySecuritycodeUsedListByHadReceive';
+        this.getDelivery = '/user/delivery/bird';
+
     }
 
     static sharedInstance() {
