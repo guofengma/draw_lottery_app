@@ -119,14 +119,14 @@ Page({
             })
             let currentTime = new Date().getTime(); // 当前时间
             let getStartTime = this.data.activeStartTime //活动开始时间
-            if (getStartTime > currentTime) {
+            if (getStartTime > currentTime) { // 活动未开启
                 this.setData({
                     SignActivtyId: false
                 })
             } else {
               let isAcitivityPause = false 
-              if (req.responseObject.data.actStauts ==3) {
-                isAcitivityPause = true
+              if (req.responseObject.data.actStauts ==3) { // 活动暂停
+                isAcitivityPause = true 
               }
               this.setData({
                 isAcitivityPause: isAcitivityPause, // 活动开启
@@ -136,7 +136,7 @@ Page({
             console.log(req.responseObject.data.endTime, currentTime)
             if (req.responseObject.data.endTime > currentTime){
               this.setData({
-                isAcitivityEnd: false  // 活动为结束
+                isAcitivityEnd: false  // 活动未结束
               })
             } else{
               this.setData({
@@ -355,9 +355,16 @@ Page({
       if (this.data.isfalse) {
         Tool.showAlert('未授权')
         return false
-      } else if (this.data.SignActivtyId) {
+      } else if (this.data.SignActivtyId) { // 活动未开启
+        console.log('活动未开启时进入')
         Tool.showAlert(this.data.preHint)
+        return false
+      } else if (this.data.isAcitivityEnd){ // 活动已结束
+        console.log('活动已结束时进入')
+        Tool.showAlert(this.data.sufHint)
+        return false
       } else {
+            console.log('进入摇一摇')
             let num = 0
             let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
             let x = 0,
@@ -378,7 +385,10 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-                    console.log('speed:'+speed)
+<<<<<<< HEAD
+                    // console.log('speed:'+speed)
+=======
+>>>>>>> 8663b2e693ae7edacfed578ce4ffacc04bf33856
                     if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
                     
                             that.setData({
