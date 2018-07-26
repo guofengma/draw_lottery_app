@@ -526,8 +526,10 @@ Page({
           isTrue: !this.data.isTrue,
           isFixed:!this.data.isFixed
         })
-        // this.selectComponent("#sign").signListRequestHttp()
-        this.selectComponent("#sign").signListRequestHttp()
+        // 
+        if (this.data.isTrue){
+          this.selectComponent("#sign").signListRequestHttp()
+        }
         // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
