@@ -33,7 +33,7 @@
     <view bindtap='bindBlur' wx:if="{{isDisplay}}" class="modelViewInput">
       请输入16位防伪码
     </view>
-      <input class="security-code" wx:else="{{disabled}}" bindfocus='bindFocus' placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode" readonly="{{SignActivtyId}}"></input>
+      <input class="security-code" wx:else="{{disabled}}" bindfocus='bindFocus' placeholder='请输入16位防伪码'  maxlength="16" bindinput="bindinputCode"></input>
       <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">
