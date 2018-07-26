@@ -201,7 +201,7 @@ Page({
         }
     },
     bindBlur() {
-        let currentTime = this.data.activeEndTime
+        get
         let getStartTime = this.data.activeStartTime //活动开始时间
         console.log(getStartTime > currentTime)
         if (getStartTime > currentTime) {
@@ -233,7 +233,7 @@ Page({
             userId: Storage.memberId() || ''
         })
         // console.log(this.data.userId)
-        let currentTime = this.data.activeEndTime
+        get
         let getStartTime = this.data.activeStartTime //活动开始时间
         if (getStartTime > currentTime) {
             Tool.showAlert('活动未开启')
@@ -566,6 +566,15 @@ Page({
         // }
     },
     getIsSign() { // 用户是否签到
+        if (this.getIsLogin(false)){
+          this.setData({
+            isTrue: true,
+            isFixed: true,
+            isNotice: false
+          })
+          this.selectComponent("#sign").signListRequestHttp()
+          return
+        }
         let data = {
             activityId: Storage.getActivityId() || ''
         }
@@ -608,10 +617,10 @@ Page({
       //   this.data.audioCtx.pause()
       // }
     },
-    getIsLogin(isGoPage) { // 退出之后跳转登录
+    getIsLogin(isGoPage=true) { // 退出之后跳转登录
         let cookies = Storage.getUserCookie() || false
         if (!cookies) {
-            if (isGoPage === undefined) {
+            if (isGoPage) {
                 Tool.navigateTo('/pages/login/login')
             }
             return false

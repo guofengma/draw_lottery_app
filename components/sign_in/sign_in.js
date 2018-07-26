@@ -46,6 +46,8 @@ Component({
     },
     signListRequestHttp(month, preMonth) { // 请求签到列表
       this.calendar()
+      let cookies = Storage.getUserCookie() || false
+      if (!cookies) return
       let timeData = '';
       if (!month) {
         let getToday = new Date();
