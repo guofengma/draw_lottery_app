@@ -99,7 +99,7 @@ Page({
     onReady: function () {
 
     },
-    getActivtyId(callBack) { // 获取活动Id
+    getActivtyId() { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
           if (req.responseObject.data == null || req.responseObject.data == 'null'){
@@ -132,10 +132,11 @@ Page({
                 isAcitivityPause = true 
               }
               this.setData({
-                isAcitivityPause: isAcitivityPause, // 活动开启
-                SignActivtyId: true
+                isAcitivityPause: isAcitivityPause,  
+                SignActivtyId: true// 活动开启
               })
             }
+            console.log(req.responseObject.data.endTime, currentTime)
             if (req.responseObject.data.endTime > currentTime){
               this.setData({
                 isAcitivityEnd: false  // 活动未结束
@@ -146,9 +147,6 @@ Page({
               })
             }
             // }
-            if (callBack!==undefined){
-              this.getIsNumberHttp()
-            }
             //this.getIsNumberHttp() // 获取抽奖次数
             this.getWinnerRequest() // 获取中奖名单
             // this.selectComponent("#showNotice").noticeRequestHttp()
@@ -188,67 +186,68 @@ Page({
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         // console.log(getStartTime > currentTime)
-        if (getStartTime > currentTime) {
+        if (this.data.SignActivtyId) {
             console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
-        } else {
+          this.setData({
+            disabled: false,
+            isDisplay: false
+          })
+        } else if (!this.data.isAcitivityEnd){ // 活动已结束
             console.log('这？')
-            this.setData({
-                disabled: false,
-                isDisplay: false
-            })
+          Tool.showAlert(this.data.sufHint)
+        } else {
+          this.setData({
+            disabled: true
+          })
+          Tool.showAlert(this.data.preHint)
         }
+     
     },
     bindBlur() {
+        let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
-        if (getStartTime > currentTime) {
-            console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
+        console.log(getStartTime > currentTime)
+        if (this.data.SignActivtyId) {
+          this.setData({
+            disabled: false,
+            isDisplay: false
+          })
+        } else if (this.data.isAcitivityEnd) { // 活动已结束
+          console.log('结束')
+          Tool.showAlert(this.data.sufHint)
         } else {
-            this.setData({
-                disabled: false,
-                isDisplay: false
-            })
+          console.log('活动未开启')
+          this.setData({
+            disabled: true
+          })
+          Tool.showAlert(this.data.preHint)
         }
     },
     didLogin() { // 获取 token
-      this.selectComponent("#topBar").getUserId()
-      this.getIsNumberHttp() // 获取抽奖次数
-      let callBack = () =>{
-        this.getIsNumberHttp()
-      }
-      if (this.data.activityId){
-        this.getIsNumberHttp()
-      } else {
-        this.getActivtyId(callBack)
-      }
-      this.setData({
-          isAuthorize: Storage.didAuthorize() || '',
-      })
+        this.selectComponent("#topBar").getUserId()
+        this.getIsNumberHttp() // 获取抽奖次数
+        this.setData({
+            isAuthorize: Storage.didAuthorize() || '',
+        })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let code = this.data.code;
         this.setData({
             userId: Storage.memberId() || ''
         })
+      console.log(!this.data.SignActivtyId)
         // console.log(this.data.userId)
-        get
+        let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
-        if (getStartTime > currentTime) {
-            Tool.showAlert('活动未开启')
-        } else {
+        if (!this.data.SignActivtyId) {
+            Tool.showAlert(this.data.preHint)
+        } else if (this.data.isAcitivityEnd){
+            Tool.showAlert(this.data.sufHint)
+        } else if (this.data.isAcitivityPause){
+            this.setData({
+              disabled: true
+            })
+        }else {
             if (this.data.userId == '' || this.data.userId == null) {
                 return
             }
@@ -271,7 +270,8 @@ Page({
                         title: '兑换成功',
                     })
                     this.setData({
-                        isPlusNumber: true
+                        isPlusNumber: true,
+                        disabled: true
                     })
                     this.getIsNumberHttp()
                     wx.startAccelerometer();
@@ -312,7 +312,6 @@ Page({
             if (Tool.isEmpty(req.responseObject.data)) {
 
             } else {
-                console.log(req.responseObject.data[0].telephone)
                 let arrNumber = req.responseObject.data;
                 let arrLength = arrNumber.length;
                 let arr = [];
@@ -359,17 +358,18 @@ Page({
     onShow: function () { // 进行摇一摇
       let that = this;
       this.isShowSake = true
+      let SignActivtyId = this.data.SignActivtyId
+      let isAcitivityEnd = this.data.isAcitivityEnd
+      let currentTime = new Date().getTime();
+      let getStartTime = this.data.activeStartTime
       if (this.data.isfalse) {
         Tool.showAlert('未授权')
-        return false
-      } else if (this.data.SignActivtyId) { // 活动未开启
+      } else if (getStartTime > currentTime) { // 活动未开启
         console.log('活动未开启时进入')
         Tool.showAlert(this.data.preHint)
-        return false
-      } else if (this.data.isAcitivityEnd){ // 活动已结束
+      } else if (isAcitivityEnd){ // 活动已结束
         console.log('活动已结束时进入')
         Tool.showAlert(this.data.sufHint)
-        return false
       } else {
             console.log('进入摇一摇')
             let num = 0
@@ -392,8 +392,8 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
+                    // console.log('speed:'+speed)
                     if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
-                    
                             that.setData({
                                 lastTime: nowTime,
                                 isAjax: false
@@ -494,7 +494,6 @@ Page({
                     }
                 }
 
-                console.log(num)
                 wx.onAccelerometerChange((e) => {
                     let pages = getCurrentPages()
                     let currentPage = pages[pages.length - 1]
@@ -504,10 +503,19 @@ Page({
                     }
                     shake(e)
                 })
-                this.getWinnerRequest() // 获取中奖名单
+                // this.getWinnerRequest() // 获取中奖名单
             }
+            wx.onAccelerometerChange((e) => {
+                let pages = getCurrentPages()
+                let currentPage = pages[pages.length - 1]
+                if (currentPage.onAccelerometerChange) {
+                  console.log('摇了一次')
+                  currentPage.onAccelerometerChange(e)
+                }
+                shake(e)
+            })
+          // that.getIsNumberHttp()
     },
-
     onHide: function () {
       this.isShowSake = false // 设置第一次进入
       console.log('影藏')
@@ -539,9 +547,8 @@ Page({
           isTrue: !this.data.isTrue,
           isFixed:!this.data.isFixed
         })
-        if (this.data.isTrue){
-          this.selectComponent("#sign").signListRequestHttp()
-        }
+        // this.selectComponent("#sign").signListRequestHttp()
+        this.selectComponent("#sign").signListRequestHttp()
         // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
@@ -571,15 +578,7 @@ Page({
         // }
     },
     getIsSign() { // 用户是否签到
-        if (!this.getIsLogin(false)){
-          this.setData({
-            isTrue: true,
-            isFixed: true,
-            isNotice: false
-          })
-          this.selectComponent("#sign").signListRequestHttp()
-          return
-        }
+      console.log(22222)
         let data = {
             activityId: Storage.getActivityId() || ''
         }
@@ -624,10 +623,10 @@ Page({
       //   this.data.audioCtx.pause()
       // }
     },
-    getIsLogin(isGoPage=true) { // 退出之后跳转登录
+    getIsLogin(isGoPage) { // 退出之后跳转登录
         let cookies = Storage.getUserCookie() || false
         if (!cookies) {
-            if (isGoPage) {
+            if (isGoPage === undefined) {
                 Tool.navigateTo('/pages/login/login')
             }
             return false
@@ -701,13 +700,5 @@ Page({
     },
     ouLaunch:function(){
       // wx.onAccelerometerChange()
-    },
-    onShareAppMessage: function (res) {
-      let imgUrl = ''
-      return {
-        title: "天天朵宝",
-        path: '/pages/start-page/start-page',
-        imgUrl: imgUrl
-      }
-    },
+    }
 })
