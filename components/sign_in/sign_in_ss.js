@@ -1,28 +1,17 @@
-
-//   /**
-//    *
-//    * @authors 杨京葛 (1141407871@qq.com)
-//    * @date    2018-05-21 19:26:19
-//    * @version $v1.01$
-//    */
-//
-//
-// }
 var yang_date = {
     //iyear年份
     //iMonth月份
     //that
     //iyear年份
-  bulidCal: function (iYear, iMonth, that, signday, weekdays, hadWinCount) {
-    console.log(weekdays)
+  bulidCal: function (iYear, iMonth, that, signday, weekdays, hadWinCount, maxSign) {
+    console.log(maxSign)
+    console.log(hadWinCount)
         let getToday = new Date();
         let todayDate = getToday.getDate();
         let todayMonths = getToday.getMonth();
         let todayMonth = (todayMonths + 1);
-        //todayMonth = todayMonth<10 ? "0" + todayMonth : todayMonth
         let todayYear = getToday.getFullYear();
         let todayss = getToday.getDate();
-        //todayss = todayss.length<10 ? "0" + todayss : todayss
         let nowTime = todayYear + "-" + todayMonth + "-" + todayss
         let showTime = iYear + "-" + iMonth + "-"
         console.log(nowTime)
@@ -46,38 +35,38 @@ var yang_date = {
         var d, w;
         for (d = iDayOfFirst; d < 7; d++) {
             if(signday.indexOf(iVarDate)>-1){
-                //console.log(111);
                 aMonth[0][d] = {
                     signday:"is",
                     normalday:iVarDate,
                     className: 'footer-c'
                 };
-              console.log(showTime + iVarDate, nowTime)
-              // if (showTime + iVarDate == nowTime) {
-              //   aMonth[0][d].className = 'haha2'
-              // }
               if (weekdays.length>0){
                   if (hadWinCount.indexOf(iVarDate) > -1) {
-                    aMonth[0][d].className = 'red'
+                    aMonth[0][d].className = 'continuity-sign'
                     let index = hadWinCount.indexOf(iVarDate)
-                    if (index == 0) {
-                      aMonth[0][d].day = 1
+                    aMonth[0][d].day = maxSign[index]
+                    let day = maxSign[index]
+                    if (day == 1) {
                       aMonth[0][d].num = 1
-                    } else if (index == 1) {
-                      aMonth[0][d].day = 7
+                      aMonth[0][d].title = '首次签到'
+                    } else if (day == 7) {
                       aMonth[0][d].num = 3
-                    } else if (index == 3) {
-                      aMonth[0][d].day = 15
+                      aMonth[0][d].title = '连续签到7天'
+                    } else if (day == 15) {
+                      aMonth[0][d].num = 5
+                      aMonth[0][d].title = '连续签到15天'
+                    } else if (day ==30) {
                       aMonth[0][d].num = 7
-                    } else if (index == 3) {
-                      aMonth[0][d].day = 30
+                      aMonth[0][d].title = '连续签到30天'
+                    } else if (day>30){
                       aMonth[0][d].num = 7
+                      aMonth[0][d].title = '连续签到30天以上'
                     }
-                    console.log(showTime + iVarDate, nowTime)
                     // if (showTime + iVarDate == nowTime) {
                     //   aMonth[0][d].className = 'haha2'
                     // }
                   }
+
 
                 }
             }else{
@@ -87,16 +76,21 @@ var yang_date = {
                     normalday:iVarDate,
                     className: ''
                 };
-              // console.log(hadWinCount[0], hadWinCount[hadWinCount.length - 1])
               if (weekdays.length > 0) {
-                console.log(iVarDate)
-                console.log(weekdays[0].date)
-                console.log(weekdays[weekdays.length - 1].date)
                 if (iVarDate >= weekdays[0].date && iVarDate <= weekdays[weekdays.length - 1].date) {
                   aMonth[0][d].className = 'no-footer'
                 }
-                if (iVarDate > weekdays[weekdays.length - 1].date && iVarDate<todayss){
-                  aMonth[0][d].className = 'no-footer'
+                if (iMonth == todayMonth) {
+                  // 当月漏签
+                  if (iVarDate > weekdays[weekdays.length - 1].date && iVarDate < todayss) {
+                    aMonth[0][d].className = 'no-footer'
+                  }
+                }
+                if (iMonth < todayMonth){
+                  //上月漏签
+                  if (iVarDate > weekdays[weekdays.length - 1].date) {
+                    aMonth[0][d].className = 'no-footer'
+                  }
                 }
                 if (showTime + iVarDate == nowTime){
                   aMonth[0][d].className = 'no-qian-dao'
@@ -111,32 +105,32 @@ var yang_date = {
             for (d = 0; d < 7; d++) {
                 if (iVarDate <= iDaysInMonth) {
                     if(signday.indexOf(iVarDate)>-1){
-                        //console.log(111);
                         aMonth[w][d] = {
                             signday:"is",
                             normalday:iVarDate,
                              className:'footer-c'
                         };
-                        console.log(showTime + iVarDate, nowTime)
-                        // if (showTime + iVarDate == nowTime) {
-                        //   aMonth[w][d].className = 'haha2'
-                        // }
                       if (weekdays.length > 0) {
                         if (hadWinCount.indexOf(iVarDate) > -1) {
-                          aMonth[w][d].className = 'red'
+                          aMonth[w][d].className = 'continuity-sign'
                           let index = hadWinCount.indexOf(iVarDate)
-                          if (index == 0) {
-                            aMonth[w][d].day = 1
+                          aMonth[w][d].day = maxSign[index]
+                          let day = maxSign[index]
+                          if (day == 1) {
                             aMonth[w][d].num = 1
-                          } else if (index == 1) {
-                            aMonth[w][d].day = 7
+                            aMonth[w][d].title = '首次签到'
+                          } else if (day == 7) {
                             aMonth[w][d].num = 3
-                          } else if (index == 3) {
-                            aMonth[w][d].day = 15
+                            aMonth[w][d].title = '连续签到7天'
+                          } else if (day == 15) {
+                            aMonth[w][d].num = 5
+                            aMonth[w][d].title = '连续签到15天'
+                          } else if (day==30) {
                             aMonth[w][d].num = 7
-                          } else if (index == 3) {
-                            aMonth[w][d].day = 30
+                            aMonth[w][d].title = '连续签到30天'
+                          } else if (day > 30) {
                             aMonth[w][d].num = 7
+                            aMonth[w][d].title = '连续签到30天以上'
                           }
                          
                         }
@@ -150,15 +144,24 @@ var yang_date = {
                             className:''
                         };
                       if (weekdays.length>0){
-                        console.log(iVarDate)
-                        console.log(weekdays[0].date)
-                        console.log(weekdays[weekdays.length - 1].date)
+                        // 漏签
                         if (iVarDate >= weekdays[0].date && iVarDate <= weekdays[weekdays.length - 1].date) {
                           aMonth[w][d].className = 'no-footer'
                         }
-                        if (iVarDate > weekdays[weekdays.length - 1].date && iVarDate < todayss) {
-                          aMonth[w][d].className = 'no-footer'
+                        if (iMonth == todayMonth){
+                          // 当月漏签
+                          if (iVarDate > weekdays[weekdays.length - 1].date && iVarDate < todayss) {
+                            aMonth[w][d].className = 'no-footer'
+                          }
                         }
+                        if (iMonth < todayMonth) {
+                          //上月漏签
+                          if (iVarDate > weekdays[weekdays.length - 1].date) {
+                            aMonth[w][d].className = 'no-footer'
+                          }
+                        }
+                        //今日未签到
+                        console.log(showTime + iVarDate, nowTime)
                         if (showTime + iVarDate == nowTime) {
                           aMonth[w][d].className = 'no-qian-dao'
                         }
@@ -166,7 +169,6 @@ var yang_date = {
                       
                     }
                     if(iVarDate==curMonthDays){
-                        console.log(aMonth);
                         that.setData({
                             signDays:aMonth,
                         });
@@ -178,7 +180,6 @@ var yang_date = {
             }
         }
         //处理每月其他天位置
-        console.log(aMonth);
         return aMonth;
     },
     //日历签到完成

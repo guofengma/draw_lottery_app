@@ -117,21 +117,18 @@ Page({
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
             // if (this.getIsLogin(false)) {
-            // let currentTime = new Date().getTime(); // 当前时间
-            let currentTime = this.data.activeEndTime
+            let currentTime = new Date().getTime(); // 当前时间
+            // let currentTime = this.data.activeEndTime
             let getStartTime = this.data.activeStartTime //活动开始时间
             if (getStartTime > currentTime) {
-                console.log('活动未开启')
                 this.setData({
-                    SignActivtyId: true,
+                    SignActivtyId: false
                 })
             } else {
-                console.log('这？')
                 this.setData({
-                    SignActivtyId: false // 活动开启
+                    SignActivtyId: true // 活动开启
                 })
             }
-            console.log(this.data.SignActivtyId)
             // }
             //this.getIsNumberHttp() // 获取抽奖次数
             this.getWinnerRequest() // 获取中奖名单
@@ -513,9 +510,14 @@ Page({
             isTrue: !this.data.isTrue,
             isFixed:!this.data.isFixed
         })
+<<<<<<< HEAD
         console.log(this.data.isFixed);
         
         // this.selectComponent("#sign").signListRequestHttp()
+=======
+      
+        this.selectComponent("#sign").signListRequestHttp()
+>>>>>>> 9a6afa76a604b8c0304db452b4234a911728bf1b
         // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
@@ -548,7 +550,7 @@ Page({
                     isTrue: true
                 })
                 if (this.data.isAuthorize) {
-                    // this.selectComponent("#sign").signListRequestHttp()
+                    this.selectComponent("#sign").signListRequestHttp()
                     // this.selectComponent("#sign").signReady()
                 }
             } else {

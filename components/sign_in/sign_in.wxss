@@ -375,6 +375,10 @@ button::after {
   /* background: yellow; */
   /* overflow: hidden; */
   z-index: 5;
+  background: transparent;
+  text-align: center;
+  padding: 0;
+  margin: 0;
 }
 .closeBtn image{
   width: 50rpx;
@@ -419,18 +423,20 @@ button::after {
 }
 .no-footer{
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/notfoo.png') no-repeat center center;
-  background-size: 80%;
+  background-size: 70%;
 }
 .footer-c{
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/foo.png') no-repeat center center;
-    background-size: 80%;
+  background-size: 70%;
 }
-.red{
-  color:red
+.continuity-sign{
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yuanq_03@2x.png') no-repeat center center;
+  background-size: 70%;
 }
 .dark{
   color: paleturquoise
 }
 .no-qian-dao{
-  color: blueviolet
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/icon1_03@2x.png') no-repeat center center;
+  background-size: 70%;
 }
