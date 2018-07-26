@@ -224,11 +224,11 @@ Page({
         }
     },
     didLogin() { // 获取 token
-        this.selectComponent("#topBar").getUserId()
-        this.getIsNumberHttp() // 获取抽奖次数
-        this.setData({
-            isAuthorize: Storage.didAuthorize() || '',
-        })
+      this.selectComponent("#topBar").getUserId()
+      this.getIsNumberHttp() // 获取抽奖次数
+      this.setData({
+          isAuthorize: Storage.didAuthorize() || '',
+      })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let code = this.data.code;
