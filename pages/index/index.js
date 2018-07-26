@@ -710,5 +710,13 @@ Page({
     },
     ouLaunch:function(){
       // wx.onAccelerometerChange()
-    }
+    },
+    onShareAppMessage: function (res) {
+      let imgUrl = ''
+      return {
+        title: "天天朵宝",
+        path: '/pages/start-page/start-page',
+        imgUrl: imgUrl
+      }
+    },
 })
