@@ -531,6 +531,11 @@ Page({
         // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
+    showNoticeClicked(){
+      this.setData({
+        isNotice: !this.data.isNotice
+      })
+    },
     showNotice: function (e) { // 显示公告
         this.setData({
             isNotice: !this.data.isNotice
