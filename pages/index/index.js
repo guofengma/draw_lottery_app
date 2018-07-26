@@ -99,7 +99,7 @@ Page({
     onReady: function () {
 
     },
-    getActivtyId() { // 获取活动Id
+    getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
           if (req.responseObject.data == null || req.responseObject.data == 'null'){
@@ -146,9 +146,11 @@ Page({
                 isAcitivityEnd: true // 活动已结束
               })
             }
-            // }
-            //this.getIsNumberHttp() // 获取抽奖次数
-            this.getWinnerRequest() // 获取中奖名单
+            if (callBack!==undefined){
+                this.getIsNumberHttp()
+              }
+              //this.getIsNumberHttp() // 获取抽奖次数
+              this.getWinnerRequest() // 获取中奖名单
             // this.selectComponent("#showNotice").noticeRequestHttp()
           }
         }
@@ -226,6 +228,14 @@ Page({
     didLogin() { // 获取 token
         this.selectComponent("#topBar").getUserId()
         this.getIsNumberHttp() // 获取抽奖次数
+        let callBack = () =>{
+            this.getIsNumberHttp()
+        }
+        if (this.data.activityId){
+            this.getIsNumberHttp()
+        } else {
+            this.getActivtyId(callBack)
+        }
         this.setData({
             isAuthorize: Storage.didAuthorize() || '',
         })
@@ -544,11 +554,12 @@ Page({
     },
     closeView(e) { // 显示天天签到
         this.setData({
-          isTrue: !this.data.isTrue,
-          isFixed:!this.data.isFixed
+            isTrue: !this.data.isTrue,
+            isFixed:!this.data.isFixed
         })
-        // this.selectComponent("#sign").signListRequestHttp()
+        if (this.data.isTrue){
         this.selectComponent("#sign").signListRequestHttp()
+        }
         // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
