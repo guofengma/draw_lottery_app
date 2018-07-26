@@ -61,6 +61,12 @@ Component({
         sign_start: function() { // 签到
             this.signRequestHttp() // 调取签到接口
             //签到成功后重新调用后台接口加载新的签到数据
+           setTimeout(()=>{
+            //  console.log('签到之后获取签到列表')
+             this.signListRequestHttp()
+             this.getIsNumberHttp()
+             this.signReady()
+           },1000)
         },
         sign_end: function() { // 到底了
             wx.showToast({
@@ -189,11 +195,12 @@ Component({
           } else {
             timeData = todayYear + "-" + todayMonth
           }
-          console.log(timeData)
+          // console.log(timeData)
           let data = {
             activityId: Storage.getActivityId() || '',
             yearsMonth: timeData
           };
+          console.log(data)
           let r = RequestFactory.signListRequest(data);
           r.finishBlock = (req) => {
             let stringJson = req.responseObject.data;
@@ -229,9 +236,7 @@ Component({
                 icon: 'success',
                 duration: 1500
               });
-              this.signListRequestHttp()
-              this.getIsNumberHttp()
-              this.signReady()
+              
             } else {
               return null
             }
@@ -241,7 +246,6 @@ Component({
         },
         signReady () { // ready加载日历获取签到天数
           setTimeout( ()=>{
-            console.log('ready')
             var getToday = new Date();
             var todayDate = getToday.getDate();
             var todayMonths = getToday.getMonth();
@@ -377,6 +381,7 @@ Component({
             }
             let currentTime = this.data.activeEndTime
             let getStartTime = this.data.activeStartTime //活动开始时间
+            // console.log(getStartTime > currentTime)
             if (getStartTime > currentTime) {
                 that.setData({
                   signtype: "3",
@@ -478,6 +483,68 @@ Component({
         },
         myCatchTouch() {
           retrun;
+        },
+        signI(){
+          var getToday = new Date();
+          var todayDate = getToday.getDate();
+          var todayMonths = getToday.getMonth();
+          var todayMonth = (todayMonths + 1);
+          var todayYear = getToday.getFullYear();
+          var todayss = getToday.getDate();
+          if (todayMonth < 10) {
+            var todayMonthss = "0" + todayMonth;
+          } else {
+            var todayMonthss = todayMonth;
+          }
+          console.log(todayss);
+          var godates = todayYear + "-" + todayMonthss + "-01";
+          var that = this;
+          var data = { seriesCount: 1, signDays: [] };
+          var $datas = data;
+          var signDate_arr = new Array();
+          var anns = $datas.signDays;
+          var count_signday = $datas.seriesCount;
+          if (count_signday > 9) {
+            var series_gos = "0";
+          } else if (count_signday < 0) {
+            var series_gos = 99;
+          } else {
+            var series_gos = 10 - parseInt(count_signday);
+          }
+          that.setData({
+            seriesCount: count_signday,
+            series_gos: series_gos,
+          });
+          for (var p in anns) { //遍历json对象的每个key/value对,p为key
+            var newdats = anns[p];
+            signDate_arr.push(newdats);
+          }
+          if (signDate_arr.indexOf(todayss) > -1) {
+            console.log("当前已签到");
+            that.setData({
+              signtype: "2",
+            });
+          } else {
+            console.log("当前未签到");
+            that.setData({
+              signtype: "1",
+            });
+          }
+          console.log(signDate_arr[0]);
+          signTime.dataTime.bulidCal(todayYear, todayMonth, that, signDate_arr);
+          //初始化加载日历
+
+          this.setData({
+            todayDate: todayDate,
+            todayMonth: todayMonth,
+            todayYear: todayYear,
+            prevYear: todayYear,
+            nextYear: todayYear,
+            prevMonth: todayMonth,
+            nextMonth: todayMonth,
+            showYear: todayYear,
+            showMonth: todayMonth,
+          });
         }
     },
     ready: function() {

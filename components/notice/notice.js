@@ -7,7 +7,7 @@ Component({
      */
     properties: {
       isNotice: Boolean,
-      datasisNull: Number
+      datasisNull: Number,
     },
 
     /**
@@ -54,14 +54,16 @@ Component({
               this.setData({
                 datasisNull: totals
               })
-              console.log(datas)
               if (totals == 0) {
-                  console.log('没有公告')
+                this.setData({
+                  // hasNotice:false
+                })
                   return
               } else {
                 
                 this.setData({
                   totals: totals,
+                  isNotice:true
                 })
                 if (datas.data[0].content == "undefined" || datas.data[0].content == null) {
                   return null
@@ -136,5 +138,6 @@ Component({
     ready() {
         // this.noticeRequestHttp() // 获取公告
         console.log('公告')
+        
     }
 })

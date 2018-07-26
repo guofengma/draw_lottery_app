@@ -8,6 +8,9 @@
   overflow: hidden;
   padding-bottom: 89rpx;
 }
+.fixed{
+  position: fixed
+}
 .home-tree{
   width: 690rpx;
   height: 660rpx;
