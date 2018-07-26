@@ -4,7 +4,10 @@ let { Tool, RequestFactory, Storage, Event } = global
 
 Component({
   properties: {
-    isTrue: Boolean,
+    isTrue: Boolean, // 是否显示日历
+    SignActivtyId: Boolean,// 活动是否开始
+    isAuthorize: Boolean,
+    visiable: Boolean,
   },
   data: {
     signDay: [{ "signDay": "9" }, { "signDay": "11" }, { "signDay": "12" }, { "signDay": "15" }],
@@ -20,18 +23,26 @@ Component({
     prevMonth: "",
     seriesCount: "99",
     series_gos: "15",
-    for_signs: "none",
     powerData: "0",
+    tips:false, // 是否显示联系签到的提示
+    tipsContent:{title:"",content:""}, // 联系签到的提示
   },
   methods: {
     dateClicked(e) {
       let className = e.currentTarget.dataset.class
       let num = e.currentTarget.dataset.num
-      let day = e.currentTarget.dataset.day
-      if (num) {
-        Tool.showAlert('签到' + day + "天获取" + num + "次获奖机会")
+      let title = e.currentTarget.dataset.day
+      if (num!==undefined) {
+        this.closeSingBox()
+        this.setData({
+          tipsContent: { title: title, content: num }
+        })
       }
-      console.log(className, num)
+    },
+    closeSingBox(){
+      this.setData({
+        tips: !this.data.tips
+      })
     },
     signListRequestHttp(month, preMonth) { // 请求签到列表
       console.log(preMonth)
@@ -78,8 +89,6 @@ Component({
             myDays: myDays,
             weekdays: data
           })
-          console.log(myDays)
-          console.log(this.data.myDays)
           this.test(this.data.myDays, this.data.weekdays, preMonth)
           // console.log(this.data.weekdays)
         }
@@ -96,6 +105,7 @@ Component({
       var todayYear = ''
       var todayss = ''
       var showMonth = ''
+      var showYear = ''
       var getToday = new Date();
       if (!preMonth) {
         todayYear = getToday.getFullYear()
@@ -104,6 +114,7 @@ Component({
         todayMonth = (todayMonths + 1);
         showMonth = todayMonth
         todayYear = getToday.getFullYear();
+        showYear = todayYear
         todayss = getToday.getDate();
         if (todayMonth < 10) {
           var todayMonthss = "0" + todayMonth;
@@ -115,14 +126,13 @@ Component({
         godates = preMonth
         let arr = godates.split('-')
         console.log(arr)
-        todayYear = arr[0]
+        todayYear = getToday.getFullYear();
+        showYear = arr[0]
         showMonth = arr[1]
         todayMonth = getToday.getMonth() + 1;
         todayss = getToday.getDate();
       }
 
-
-      console.log(todayss);
       // var godates = todayYear + "-" + todayMonthss + "-01";
       var that = this;
       var data = { seriesCount: 1, signDays: myDays };
@@ -166,13 +176,15 @@ Component({
       }
 
       let hadWinCount = []
+      let maxSign = []
       for (let i = 0; i < weekdays.length; i++) {
         if (weekdays[i].hadWinCount == 1) {
           hadWinCount.push(weekdays[i].date)
+          maxSign.push(weekdays[i].maxSign)
         }
       }
       console.log(signDate_arr[0]);
-      yangdate.yang_date.bulidCal(todayYear, todayMonth, that, signDate_arr, weekdays, hadWinCount);
+      yangdate.yang_date.bulidCal(showYear, showMonth, that, signDate_arr, weekdays, hadWinCount, maxSign);
       //初始化加载日历
 
       this.setData({
@@ -183,7 +195,7 @@ Component({
         nextYear: todayYear,
         prevMonth: todayMonth,
         nextMonth: todayMonth,
-        showYear: todayYear,
+        showYear: showYear,
         showMonth: showMonth,
       });
 
@@ -211,7 +223,7 @@ Component({
       wx.showToast({
         title: '今日已经签到',
         icon: 'loading',
-        duration: 1500
+        duration: 500
       });
     },
     sign_prev: function () {
@@ -229,7 +241,7 @@ Component({
         wx.showToast({
           title: '不能查看更多了',
           icon: 'loading',
-          duration: 1500
+          duration: 500
         });
         return;
       }
@@ -252,7 +264,7 @@ Component({
         wx.showToast({
           title: '未签到不能查看',
           icon: 'loading',
-          duration: 1500
+          duration: 500
         });
         return;
       }
@@ -263,10 +275,7 @@ Component({
         var showMonth = parseInt(this.data.showMonth) + 1;
         var showYear = this.data.showYear;
       }
-
-
       var that = this;
-
       if (showMonth < 10) {
         var showMonths = "0" + showMonth;
       } else {
@@ -274,12 +283,7 @@ Component({
       }
       var godates = showYear + "-" + showMonths;
       let preMonth = showYear + "-" + showMonths + "-01";
-      // var godates = showYear + "-" + showMonths + "-01";
-      // let preMonth = showYear + "-" + showMonths;
-      console.log(godates)
       this.signListRequestHttp(godates, preMonth)
-
-
     },
     signRequestHttp() { // 签到
       let data = {
@@ -314,8 +318,14 @@ Component({
       console.log(1)
       this.triggerEvent('closeView', false)
     },
+    getPhoneNumber(e){
+      this.triggerEvent('getPhoneNumber', e.detail)
+    },
+    agreeGetUser(e){
+      this.triggerEvent('agreeGetUser', e.detail)
+    }
   },
   ready: function () {
-    this.signListRequestHttp()
+    //this.signListRequestHttp()
   }
 })

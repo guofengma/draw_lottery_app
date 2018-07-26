@@ -51,7 +51,8 @@ Page({
         isShowNotice:false,
         isfalse:false,
         audioCtx: '',
-        shakeTrue: true,
+        lastTime:0,//上一次摇动时间
+        isAjax:true
     },
     onLoad: function () {
         this.setData({ // storage 中获取userId
@@ -69,6 +70,13 @@ Page({
         let r = global.RequestFactory.noticeRequest(data);
         r.finishBlock = (req) => {
           let datas = req.responseObject.data;
+          if(!datas){
+            this.setData({
+              isNotice: false,
+              hasNotice: false,
+            });
+            return
+          }
           let totals = datas.total;
           if (totals == 0) {
             this.setData({
@@ -108,27 +116,18 @@ Page({
                 shakeStartMusicSrc: req.responseObject.data.winMusic,
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
-            console.log(this.data.shakeStartMusicSrc)
-            console.log(this.data.shakeStopMusicSrc)
-            // if (this.getIsLogin(false)) {
             let currentTime = new Date().getTime(); // 当前时间
             let getStartTime = this.data.activeStartTime //活动开始时间
-            if (getStartTime > currentTime) {
-                console.log('活动未开启')
+            if (getStartTime > currentTime) { // 未开始
                 this.setData({
-                    SignActivtyId: true
+                    SignActivtyId: false
                 })
             } else {
-                console.log('这？')
                 this.setData({
-                    SignActivtyId: false // 活动开启
+                    SignActivtyId: true // 活动开启
                 })
             }
-            console.log(this.data.SignActivtyId)
-            // }
-            //this.getIsNumberHttp() // 获取抽奖次数
             this.getWinnerRequest() // 获取中奖名单
-            // this.selectComponent("#showNotice").noticeRequestHttp()
           }
         }
         Tool.showErrMsg(r)
@@ -165,20 +164,21 @@ Page({
         let currentTime = new Date().getTime()
         let getStartTime = this.data.activeStartTime //活动开始时间
         // console.log(getStartTime > currentTime)
-        if (getStartTime > currentTime) {
-            console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
-        } else {
+        if (this.data.SignActivtyId) {
+           
             console.log('这？')
             this.setData({
-                disabled: false,
-                isDisplay: false
+              disabled: false,
+              isDisplay: false
+            })
+        } else {
+          console.log('活动未开启')
+            this.setData({
+              disabled: true
+            })
+            wx.showModal({  // 活动未开启
+              title: '',
+              content: this.data.preHint,
             })
         }
     },
@@ -186,21 +186,23 @@ Page({
         let currentTime = new Date().getTime()
         let getStartTime = this.data.activeStartTime //活动开始时间
         console.log(getStartTime > currentTime)
-        if (getStartTime > currentTime) {
-            console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
-        } else {
-            this.setData({
-                disabled: false,
-                isDisplay: false
-            })
-        }
+      if (this.data.SignActivtyId) {
+
+        console.log('这？')
+        this.setData({
+          disabled: false,
+          isDisplay: false
+        })
+      } else {
+        console.log('活动未开启')
+        this.setData({
+          disabled: true
+        })
+        wx.showModal({  // 活动未开启
+          title: '',
+          content: this.data.preHint,
+        })
+      }
     },
     didLogin() { // 获取 token
         this.selectComponent("#topBar").getUserId()
@@ -282,7 +284,6 @@ Page({
             if (Tool.isEmpty(req.responseObject.data)) {
 
             } else {
-                console.log(req.responseObject.data[0].telephone)
                 let arrNumber = req.responseObject.data;
                 let arrLength = arrNumber.length;
                 let arr = [];
@@ -330,12 +331,15 @@ Page({
         let that = this;
         this.isShowSake = true
         console.log('显示')
-        if(this.data.isfalse){
-          console.log('未授权')
-            return false
-        } else {
-            let isStart = false
-            let lastTime = 0; //此变量用来记录上次摇动的时间
+        if (this.data.isfalse){
+            Tool.showAlert('未授权')
+          return false
+        } else if (this.data.SignActivtyId) {
+           Tool.showAlert(this.data.preHint)
+        }
+         else {
+            let num = 0
+            let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
             let x = 0,
               y = 0,
               z = 0,
@@ -356,12 +360,21 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-                    if (speed > shakeSpeed && isStart) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
+                    // console.log('speed:'+speed)
+                    if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
+                    
+                            that.setData({
+                              lastTime:nowTime,
+                              isAjax:false
+                            })
                             wx.stopAccelerometer()
-                            isStart = true 
+
                             wx.showLoading({
                               title: '摇奖中...'
                             })
+                            // setTimeout(()=>{
+
+                            // },1500)
                             let data = {
                                 activityId: Storage.getActivityId() || ''
                             };
@@ -371,6 +384,7 @@ Page({
                                 console.log(req.responseObject)
                                 console.log(req.responseObject.data.pType)
                               if (req.responseObject.code == 200) {
+                                console.log('中奖音乐：'+that.data.shakeStartMusicSrc)
                                 that.data.audioCtx = wx.createAudioContext('myAudioShake');
                                 that.data.audioCtx.setSrc(that.data.shakeStartMusicSrc);
                                 that.data.audioCtx.play();
@@ -409,13 +423,17 @@ Page({
                                   })
                                 }
                                 wx.hideLoading()
-                                wx.stopAccelerometer()
+                                wx.stopAccelerometer();
+                                that.setData({
+                                  isAjax:true
+                                })
                               }   
                             };
                             r.failBlock = (req) => {
                                 console.log('停止背景音乐')
                                 console.log('进入异步失败操作')
                                 console.log(req.responseObject)
+                              console.log('未中奖音乐：' + that.data.shakeStopMusicSrc)
                                 let start = () => {
                                     wx.startAccelerometer();
                                 }
@@ -433,6 +451,10 @@ Page({
                                           isDrawn:false
                                         })
                                     wx.hideLoading()
+                                    wx.stopAccelerometer();
+                                    that.setData({
+                                        isAjax: true
+                                    })
                                       // that.getIsNumberHttp()
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
@@ -445,7 +467,6 @@ Page({
                     lastZ = z; //赋值，为下一次计算做准备
                 }
             }
-            if(isStart){
               wx.onAccelerometerChange((e) => {
                 var pages = getCurrentPages()
                 var currentPage = pages[pages.length - 1]
@@ -454,9 +475,6 @@ Page({
                 }
                 shake(e)
               })
-            } else {
-               wx.stopAccelerometer()
-            }
             this.getWinnerRequest() // 获取中奖名单
         }  
     },
@@ -490,6 +508,7 @@ Page({
             isTrue: !this.data.isTrue,
             isFixed:!this.data.isFixed
         })
+        this.selectComponent("#sign").signListRequestHttp()
         wx.startAccelerometer()
     },
     showNotice: function (e) { // 显示公告
@@ -518,16 +537,19 @@ Page({
             if (userId == null || userId == 'null') {
                 console.log('未签到')
                 this.setData({
-                    isTrue: true
+                    isTrue: true,
+                    isFixd:true,
+                    isNotice:false
                 })
                 if (this.data.isAuthorize) {
-                    // this.selectComponent("#sign").signListRequestHttp()
+                    this.selectComponent("#sign").signListRequestHttp()
                     // this.selectComponent("#sign").signReady()
                 }
             } else {
                 console.log('已签到')
                 this.setData({
-                    isTrue: false
+                    isTrue: false,
+                    isFixed:false
                 })
 
             }
