@@ -287,7 +287,9 @@ Page({
                     isPlusNumber: false
                 })
             },1000)
-          wx.startAccelerometer();
+          if (this.data.isShakeBox && num != 0){
+              wx.startAccelerometer()
+          }
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -393,6 +395,7 @@ Page({
                                 console.log('进入异步成功')
                                 console.log(req.responseObject)
                                 console.log(req.responseObject.data.pType)
+                              let num = that.data.isNumber--
                               if (req.responseObject.code == 200) {
                                 console.log('中奖音乐：'+that.data.shakeStartMusicSrc)
                                 that.data.audioCtx = wx.createAudioContext('myAudioShake');
@@ -400,6 +403,7 @@ Page({
                                 that.data.audioCtx.play();
                                 if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                                   that.setData({
+                                    isNumber:num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     isMaterial: true,
@@ -411,6 +415,7 @@ Page({
                                   })
                                 } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
                                   that.setData({
+                                    isNumber: num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     iscardZJL: true,
@@ -422,6 +427,7 @@ Page({
                                   })
                                 } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
                                   that.setData({
+                                    isNumber: num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     ishongbao: true,
@@ -453,19 +459,20 @@ Page({
                                     that.data.audioCtx = wx.createAudioContext('myAudioShake');
                                     that.data.audioCtx.setSrc(that.data.shakeStopMusicSrc);
                                     that.data.audioCtx.play();
+                                        let num = that.data.isNumber --
                                         that.setData({
+                                          isNumber: num,
                                           isShowModelTitle: '很遗憾，未中奖',
                                           isShakeBox: true,
                                           isWzj: true,
                                           isReduceNumber: true,
                                           isDrawn:false
                                         })
-                                    wx.hideLoading()
-                                    wx.stopAccelerometer();
+                                      wx.hideLoading()
+                                      wx.stopAccelerometer();
                                       that.setData({
                                         isAjax: true
                                       })
-                                      that.getIsNumberHttp()
                                       that.getWinnerRequest() // 获取中奖名单
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
@@ -488,7 +495,7 @@ Page({
                 }
                 shake(e)
             })
-            
+          that.getIsNumberHttp()
         }  
     },
     onHide: function () {
