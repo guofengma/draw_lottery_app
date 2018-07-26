@@ -30,7 +30,6 @@ Page({
         iscardUrl: '',
         ishongbaoUrl: '',
         ishongbaoName: '',
-        src: '',
         isStop: true,
         animationData: {},
         winnerBlock: [],
