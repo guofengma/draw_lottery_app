@@ -32,10 +32,9 @@
   padding: 0 30rpx;
 }
 .time-line{
-  margin-top: 20rpx;
-  height: 88rpx;
-  line-height: 88rpx;
-  padding: 0 30rpx;
+  margin-bottom: 2rpx;
+  line-height: 40rpx;
+  padding: 10rpx 30rpx;
 }
 .time-line image{
   width: 60rpx;
@@ -43,6 +42,18 @@
   vertical-align: middle;
   margin-right: 20rpx;
 }
-.infos{
-  display: inline-block
+.area{
+  margin-top: 20rpx;
+}
+.detail{
+ float: right;
+ width: 70%;
+}
+.time{
+  width: 25%;
+  text-align: center;
+  float: left;
+}
+.clearfix{
+  clear: both;
 }

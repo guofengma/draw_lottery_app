@@ -381,7 +381,6 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-                    console.log('speed:'+speed)
                     if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
                     
                             that.setData({
