@@ -4,7 +4,7 @@ let { Tool, RequestFactory, Storage } = global
 
 Component({
   properties: {
-    
+    isTrue: Boolean,
   },
   data: {
     signDay: [{ "signDay": "9" }, { "signDay": "11" }, { "signDay": "12" }, { "signDay": "15" }],
