@@ -61,9 +61,7 @@ Page({
             userId: Storage.memberId() || '',
         });
         Tool.isIPhoneX(this);
-        // this.onStartMusic() // 播放音乐
         this.getActivtyId();
-        this.getIsSign()
         //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
         Event.on('getIsNumberHttp', this.getIsNumberHttp, this);
@@ -121,7 +119,7 @@ Page({
             })
             let currentTime = new Date().getTime(); // 当前时间
             let getStartTime = this.data.activeStartTime //活动开始时间
-            if (getStartTime > currentTime) { // 未开始
+            if (getStartTime > currentTime) {
                 this.setData({
                     SignActivtyId: false
                 })
@@ -145,7 +143,10 @@ Page({
                 isAcitivityEnd: true // 活动已结束
               })
             }
+            // }
+            //this.getIsNumberHttp() // 获取抽奖次数
             this.getWinnerRequest() // 获取中奖名单
+            // this.selectComponent("#showNotice").noticeRequestHttp()
           }
         }
         Tool.showErrMsg(r)
@@ -179,48 +180,45 @@ Page({
     },
     bindFocus() {
         // 活动未开启input 无法输入
-        let currentTime = new Date().getTime()
+        let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         // console.log(getStartTime > currentTime)
-        if (this.data.SignActivtyId) {
-           
-            console.log('这？')
+        if (getStartTime > currentTime) {
+            console.log('活动未开启')
             this.setData({
-              disabled: false,
-              isDisplay: false
-            })
-        } else {
-          console.log('活动未开启')
-            this.setData({
-              disabled: true
+                disabled: true
             })
             wx.showModal({  // 活动未开启
-              title: '',
-              content: this.data.preHint,
+                title: '',
+                content: this.data.preHint,
+            })
+        } else {
+            console.log('这？')
+            this.setData({
+                disabled: false,
+                isDisplay: false
             })
         }
     },
     bindBlur() {
-        let currentTime = new Date().getTime()
+        let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         console.log(getStartTime > currentTime)
-      if (this.data.SignActivtyId) {
-
-        console.log('这？')
-        this.setData({
-          disabled: false,
-          isDisplay: false
-        })
-      } else {
-        console.log('活动未开启')
-        this.setData({
-          disabled: true
-        })
-        wx.showModal({  // 活动未开启
-          title: '',
-          content: this.data.preHint,
-        })
-      }
+        if (getStartTime > currentTime) {
+            console.log('活动未开启')
+            this.setData({
+                disabled: true
+            })
+            wx.showModal({  // 活动未开启
+                title: '',
+                content: this.data.preHint,
+            })
+        } else {
+            this.setData({
+                disabled: false,
+                isDisplay: false
+            })
+        }
     },
     didLogin() { // 获取 token
         this.selectComponent("#topBar").getUserId()
@@ -235,7 +233,7 @@ Page({
             userId: Storage.memberId() || ''
         })
         // console.log(this.data.userId)
-        let currentTime = new Date().getTime()
+        let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         if (getStartTime > currentTime) {
             Tool.showAlert('活动未开启')
@@ -289,6 +287,7 @@ Page({
                     isPlusNumber: false
                 })
             },1000)
+          wx.startAccelerometer();
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -302,6 +301,7 @@ Page({
             if (Tool.isEmpty(req.responseObject.data)) {
 
             } else {
+                console.log(req.responseObject.data[0].telephone)
                 let arrNumber = req.responseObject.data;
                 let arrLength = arrNumber.length;
                 let arr = [];
@@ -348,26 +348,26 @@ Page({
     onShow: function () { // 进行摇一摇
         let that = this;
         this.isShowSake = true
-        console.log('显示')
-        if (this.data.isfalse){
-            Tool.showAlert('未授权')
-          return false
-        } else if (this.data.SignActivtyId) {
-           Tool.showAlert(this.data.preHint)
+        if(this.isShowSake){
+          this.getActivtyId()
+          wx.startAccelerometer()
         }
-         else {
+        console.log('显示')
+        if(this.data.isfalse){
+          console.log('未授权')
+            return false
+        } else {
             let num = 0
             let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
             let x = 0,
-              y = 0,
-              z = 0,
-              lastX = 0,
-              lastY = 0,
-              lastZ = 0; //此组变量分别记录对应x、y、z三轴的数值和上次的数值
+                y = 0,
+                z = 0,
+                lastX = 0,
+                lastY = 0,
+                lastZ = 0; //此组变量分别记录对应x、y、z三轴的数值和上次的数值
             let shakeSpeed = 110; //设置阈值
-            function shake(acceleration){
-              let num = 0
-              console.log( num++)
+            function shake(acceleration) {
+                num ++
                 let nowTime = new Date().getTime(); //记录当前时间
                 //如果这次摇的时间距离上次摇的时间有一定间隔 才执行
                 if (nowTime - lastTime > 100) {
@@ -378,7 +378,7 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-                    // console.log('speed:'+speed)
+                    console.log('speed:'+speed)
                     if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
                     
                             that.setData({
@@ -386,13 +386,9 @@ Page({
                               isAjax:false
                             })
                             wx.stopAccelerometer()
-
                             wx.showLoading({
                               title: '摇奖中...'
                             })
-                            // setTimeout(()=>{
-
-                            // },1500)
                             let data = {
                                 activityId: Storage.getActivityId() || ''
                             };
@@ -445,6 +441,7 @@ Page({
                                 that.setData({
                                   isAjax:true
                                 })
+                                that.getWinnerRequest() // 获取中奖名单
                               }   
                             };
                             r.failBlock = (req) => {
@@ -455,7 +452,6 @@ Page({
                                 let start = () => {
                                     wx.startAccelerometer();
                                 }
-                                wx.stopAccelerometer()
                                 if (req.responseObject.code === 600) {
                                     console.log(req.responseObject)
                                     that.data.audioCtx = wx.createAudioContext('myAudioShake');
@@ -470,10 +466,11 @@ Page({
                                         })
                                     wx.hideLoading()
                                     wx.stopAccelerometer();
-                                    that.setData({
+                                      that.setData({
                                         isAjax: true
-                                    })
-                                      // that.getIsNumberHttp()
+                                      })
+                                      that.getIsNumberHttp()
+                                      that.getWinnerRequest() // 获取中奖名单
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
                                 }
@@ -485,19 +482,22 @@ Page({
                     lastZ = z; //赋值，为下一次计算做准备
                 }
             }
-              wx.onAccelerometerChange((e) => {
-                var pages = getCurrentPages()
-                var currentPage = pages[pages.length - 1]
+            console.log(num)
+            wx.onAccelerometerChange((e) => {
+                let pages = getCurrentPages()
+                let currentPage = pages[pages.length - 1]
                 if (currentPage.onAccelerometerChange) {
+                  console.log('摇了一次')
                   currentPage.onAccelerometerChange(e)
                 }
                 shake(e)
-              })
-            this.getWinnerRequest() // 获取中奖名单
+            })
+            
         }  
     },
     onHide: function () {
       this.isShowSake = false // 设置第一次进入
+      console.log('影藏')
       wx.stopAccelerometer()
     },
     closeBindshakeBox: function () { // 摇一摇弹框
@@ -537,6 +537,9 @@ Page({
       this.setData({
         isNotice: !this.data.isNotice
       })
+      if (this.data.isNotice) {
+        this.selectComponent("#showNotice").noticeRequestHttp()
+      } 
     },
     showNotice: function (e) { // 显示公告
         this.setData({
@@ -549,6 +552,14 @@ Page({
         if (this.data.SignActivtyId){
           this.getIsSign()
         }
+
+        // let currentTime = this.data.activeEndTime
+        // let getStartTime = this.data.activeStartTime //活动开始时间
+        // if (getStartTime > currentTime) { // 没开始
+
+        // } else {
+        //     this.getIsSign()
+        // }
     },
     getIsSign() { // 用户是否签到
       console.log(22222)
@@ -577,7 +588,6 @@ Page({
                     isTrue: false,
                     isFixed:false
                 })
-
             }
         }
         Tool.showErrMsg(r)
@@ -673,12 +683,6 @@ Page({
         Event.off('getIsNumberHttp', this.getIsNumberHttp);
     },
     ouLaunch:function(){
-      wx.onAccelerometerChange((e) => {
-        var pages = getCurrentPages()
-        var currentPage = pages[pages.length - 1]
-        if (currentPage.onAccelerometerChange) {
-          currentPage.onAccelerometerChange(e)
-        }
-      })
+      // wx.onAccelerometerChange()
     }
 })
