@@ -531,8 +531,12 @@ Page({
         this.selectComponent("#sign").signListRequestHttp()
         wx.startAccelerometer()
     },
+    showNoticeClicked(){
+      this.setData({
+        isNotice: !this.data.isNotice
+      })
+    },
     showNotice: function (e) { // 显示公告
-        console.log(11111)
         this.setData({
             isNotice: !this.data.isNotice
         })

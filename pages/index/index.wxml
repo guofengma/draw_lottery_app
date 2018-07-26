@@ -23,7 +23,7 @@
   </view> -->
   <view class="home-tree"></view>
    <movable-view x="{{50}}" y="{{50}}" direction="all">
-      <view class="home-Notice" catchtap='showNotice' wx-if="{{hasNotice}}">
+      <view class="home-Notice" catchtap='showNoticeClicked' wx-if="{{hasNotice}}">
         <image src="../../img/Notice.png"></image>
       </view>
     </movable-view>
