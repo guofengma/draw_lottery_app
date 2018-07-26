@@ -117,7 +117,7 @@ Page({
             if (getStartTime > currentTime) {
                 console.log('活动未开启')
                 this.setData({
-                    SignActivtyId: true
+                    SignActivtyId: true,
                 })
             } else {
                 console.log('这？')
