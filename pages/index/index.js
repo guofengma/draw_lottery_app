@@ -287,7 +287,9 @@ Page({
                     isPlusNumber: false
                 })
             },1000)
-          wx.startAccelerometer();
+          if (this.data.isShakeBox && num != 0){
+              wx.startAccelerometer()
+          }
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -346,17 +348,14 @@ Page({
     },
     isShowSake: false,
     onShow: function () { // 进行摇一摇
-        let that = this;
-        this.isShowSake = true
-        if(this.isShowSake){
-          this.getActivtyId()
-          wx.startAccelerometer()
-        }
-        console.log('显示')
-        if(this.data.isfalse){
-          console.log('未授权')
-            return false
-        } else {
+      let that = this;
+      this.isShowSake = true
+      if (this.data.isfalse) {
+        Tool.showAlert('未授权')
+        return false
+      } else if (this.data.SignActivtyId) {
+        Tool.showAlert(this.data.preHint)
+      } else {
             let num = 0
             let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
             let x = 0,
@@ -367,7 +366,6 @@ Page({
                 lastZ = 0; //此组变量分别记录对应x、y、z三轴的数值和上次的数值
             let shakeSpeed = 110; //设置阈值
             function shake(acceleration) {
-                num ++
                 let nowTime = new Date().getTime(); //记录当前时间
                 //如果这次摇的时间距离上次摇的时间有一定间隔 才执行
                 if (nowTime - lastTime > 100) {
@@ -397,6 +395,7 @@ Page({
                                 console.log('进入异步成功')
                                 console.log(req.responseObject)
                                 console.log(req.responseObject.data.pType)
+                              let num = that.data.isNumber--
                               if (req.responseObject.code == 200) {
                                 console.log('中奖音乐：'+that.data.shakeStartMusicSrc)
                                 that.data.audioCtx = wx.createAudioContext('myAudioShake');
@@ -404,6 +403,7 @@ Page({
                                 that.data.audioCtx.play();
                                 if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                                   that.setData({
+                                    isNumber:num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     isMaterial: true,
@@ -415,6 +415,7 @@ Page({
                                   })
                                 } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
                                   that.setData({
+                                    isNumber: num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     iscardZJL: true,
@@ -426,6 +427,7 @@ Page({
                                   })
                                 } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
                                   that.setData({
+                                    isNumber: num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     ishongbao: true,
@@ -457,19 +459,20 @@ Page({
                                     that.data.audioCtx = wx.createAudioContext('myAudioShake');
                                     that.data.audioCtx.setSrc(that.data.shakeStopMusicSrc);
                                     that.data.audioCtx.play();
+                                        let num = that.data.isNumber --
                                         that.setData({
+                                          isNumber: num,
                                           isShowModelTitle: '很遗憾，未中奖',
                                           isShakeBox: true,
                                           isWzj: true,
                                           isReduceNumber: true,
                                           isDrawn:false
                                         })
-                                    wx.hideLoading()
-                                    wx.stopAccelerometer();
+                                      wx.hideLoading()
+                                      wx.stopAccelerometer();
                                       that.setData({
                                         isAjax: true
                                       })
-                                      that.getIsNumberHttp()
                                       that.getWinnerRequest() // 获取中奖名单
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
@@ -492,12 +495,11 @@ Page({
                 }
                 shake(e)
             })
-            
+          that.getIsNumberHttp()
         }  
     },
     onHide: function () {
       this.isShowSake = false // 设置第一次进入
-      console.log('影藏')
       wx.stopAccelerometer()
     },
     closeBindshakeBox: function () { // 摇一摇弹框
