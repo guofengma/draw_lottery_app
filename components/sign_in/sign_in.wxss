@@ -1,0 +1,436 @@
+button::after {
+    border: none;
+}
+
+.btn-qiandao {
+  width: 230rpx;
+  line-height: 80rpx;
+  color: #fff;
+  font-size: 26rpx;
+  text-align: center;
+  border: none;
+  outline: none;
+  background: #da2221;
+  position: relative;
+  top: 0rpx;
+  margin: 0 auto;
+  border-radius:50rpx; 
+  box-sizing: border-box;
+  box-shadow: 0rpx 0rpx 5rpx 0rpx #da2221;
+}
+.text-center{
+  margin: 20rpx;
+}
+.btn-qiandao1 {
+    border: none;
+    width: 200rpx;
+    line-height: 80rpx;
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+    border: none;
+    outline: none;
+    background: #e1e1e1;
+    /* margin-left: 275rpx; */
+    position: relative;
+    top: 0rpx;
+    margin: 0 auto;
+    border-radius:50rpx; 
+}
+.headers_wrapper {
+    width: 580rpx;
+    height: 200rpx;
+    /* background: linear-gradient(to right, #48fefe, #09dbdb); */
+    overflow: hidden;
+    zoom: 1;
+    /* padding: 25rpx 50rpx; */
+    margin:15rpx auto;
+    position: relative;
+    z-index: 5;
+}
+
+.for_headerleft {
+    /* float: left; */
+    width: 210rpx;
+    /* height: 150rpx; */
+    /* margin-top: 20rpx; */
+}
+
+.for_headerleft image {
+    width: 100%;
+    height: 100%;
+}
+
+.for_headerright text{
+    width: 100%;
+    display: block;
+    /* float: right; */
+    font-size: 26rpx;
+    /* margin-top: 22rpx; */
+    color: #000;
+}
+
+.for_headerright_list {
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 50rpx;
+}
+
+.for_headerright_list1 span {
+    font-weight: bold;
+    font-size: 30rpx;
+    padding: 0 5rpx;
+}
+
+.for_headerright_list2 {
+    line-height: 50rpx;
+    font-size: 24rpx;
+}
+
+.for_headerright_list2 span {
+    font-weight: bold;
+    padding: 5rpx;
+    font-size: 30rpx;
+}
+
+.for_headerright_list1 {
+    line-height: 50rpx;
+}
+
+.calen_header {
+    width: 620rpx;
+    margin: 0 auto;
+    margin-top: 29rpx;
+    /* line-height: 187rpx; */
+}
+.calendar{
+  border-radius: 35rpx 35rpx 35rpx 35rpx;
+  border: none;
+  width: 620rpx;
+  margin: 0 auto;
+  padding-bottom:16rpx;
+}
+.clearPadding{
+  border: none;
+  border-radius: 35rpx;
+}
+.calendar_thisday{
+  border: none;
+  border-radius: 35rpx;
+}
+.calenbox {
+    color: #fff;
+    width: 100%;
+    height: 186rpx;
+    text-align: center;
+    line-height: 187rpx;
+    font-size: 36rpx;
+    margin-top: 8rpx;
+    background-color:#da2221;
+    border-radius:34rpx 34rpx 0 0; 
+}
+.calendar_month_prev {
+    /* width: 60rpx;
+    height: 60rpx; */
+    margin-left: 67rpx;
+    float: left;
+    background: none;
+    border: none;
+}
+.btn-height{
+  width: 30rpx;
+  height: 40rpx;
+  margin-top: 80rpx;
+  vertical-align: center;
+  padding: 0;
+  position: relative !important;
+}
+.btn-img image {
+    width: 30rpx;
+    height: 40rpx;
+    display: block;
+}
+
+.calendar_month_next {
+    /* width: 60rpx;
+    height: 60rpx; */
+    margin-right: 67rpx;
+    float: right;
+    background: none;
+    border: none;
+}
+
+/* .calendar_month_next image {
+    width: 25rpx;
+    height: 50rpx;
+    transform: rotate(180deg);
+} */
+
+
+/*微信小程序签到wxss*/
+
+.calendar_wrapper {
+    width: 570rpx;
+    height: 560rpx;
+    margin: 10rpx auto;
+    font-size: 24rpx;
+    color: #2d2d2d;
+    overflow: hidden;
+    zoom: 1;
+}
+
+
+/*日历大小自定义*/
+
+.week_day {
+    width: 560rpx;
+    overflow: hidden;
+    margin: 0 10rpx;
+    zoom: 1;
+    height: 90rpx;
+    background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/lineBl.png') no-repeat bottom center;
+    background-size: 100%;
+}
+
+.weeklist {
+    width: 80rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    float: left;
+}
+
+
+/*星期定义*/
+
+.month_day {
+    width: 560rpx;
+    overflow: hidden;
+    margin: 0 10rpx;
+    zoom: 1;
+    height: 90rpx;
+}
+
+.day_list {
+    width: 80rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    float: left;
+    position: relative;
+    font-size: 26rpx;
+    font-weight: bold;
+}
+/* .day_list text{
+  font-size: 26rpx;
+  font-weight: bold;
+  line-height: 90rpx;
+} */
+
+/*日历输出定义*/
+
+.day_hover {
+    background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/foo.png') no-repeat center center;
+    background-size: 60%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80rpx;
+    height: 90rpx;
+    color: #bf201f;
+    text-align: center;
+    line-height: 90rpx;
+    font-size: 26rpx;
+}
+
+
+/*签到样式*/
+
+.maskbox {
+    background: #000;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: none;
+}
+
+.qdbox {
+    display: none;
+    padding: 100rpx 25rpx;
+    width: 500rpx;
+    background: #fff;
+    position: fixed;
+    z-index: 10;
+    top: 150rpx;
+    left: 100rpx;
+    height: 420rpx;
+    overflow: hidden;
+    zoom: 1;
+    display: none;
+}
+
+.qdbox .text-green {
+    color: #02d7d7;
+}
+
+.hover_powerimg image {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 30rpx 200rpx;
+    margin-bottom: 50rpx;
+}
+
+.hover_title_s {
+    width: 100%;
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 36rpx;
+}
+
+.hover_title {
+    text-align: center;
+    font-size: 24rpx;
+    line-height: 100rpx;
+}
+
+.hover_powers {
+    width: 100%;
+    text-align: center;
+}
+
+.viewcontent {
+    width: 690rpx;
+    height: 100%;
+    position: relative;
+    padding-bottom:350rpx;
+    /* margin-top: 350rpx;  */
+}
+.viewRadius{
+  border-radius: 35rpx 35rpx 35rpx 35rpx;
+  overflow: hidden;
+  width: 620rpx;
+  margin: 0 auto;
+  border: none;
+  z-index: 5;
+  position: relative
+}
+.containers{
+  background-color:#fcfbfa;
+  border: none;
+  border-radius: 35rpx;
+}
+.bacgroundRgba{
+  background-color:rgba(255,255,255, 0.8);
+  position: absolute;
+  top: 215rpx;
+  width: 690rpx;
+  /* height: 936rpx; */
+  z-index: 1;
+}
+.borderHover{
+  border: 1px solid hsl(0, 72%, 56%);
+  border-radius: 50%;
+  background: #fff !important;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index:9999;
+}
+.borderBreak{
+  border-radius: 50%;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/notfoo.png') no-repeat center center;
+  background-size: 60%;
+  width: 80rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index: 999999;
+}
+.backgroundHeader{
+  background-color: #bf201f;
+  position: absolute;
+  height: 215rpx;
+  width: 690rpx;
+}
+.headersTitle{
+  font-size: 30rpx;
+}
+.closeBtn{
+  position: absolute;
+  bottom:-144rpx;
+  left: 45%;
+  width: 50rpx;
+  height: 145rpx;
+  /* background: yellow; */
+  /* overflow: hidden; */
+  z-index: 5;
+}
+.closeBtn image{
+  width: 50rpx;
+  height: 145rpx;
+}
+.model-view-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100002;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+}
+.signShowBox{
+  width: 330rpx;
+  height: 310rpx;
+  position: absolute;
+  top: 15%;
+  left:27%;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/signShow.png') no-repeat center center;
+  background-size:100%;
+  z-index: 9999;
+}
+.signContent{
+  width: 260rpx;
+  height: 92rpx;
+  margin: 134rpx auto;
+  text-align: center;
+  font-size: 26rpx;
+}
+.signRedText{
+  color: #e60012;
+}
+.signBlankText{
+  margin-top: 35rpx;
+  color: #000;
+  font-weight: bold
+}
+.no-footer{
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/notfoo.png') no-repeat center center;
+  background-size: 80%;
+}
+.footer-c{
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/foo.png') no-repeat center center;
+    background-size: 80%;
+}
+.red{
+  color:red
+}
+.dark{
+  color: paleturquoise
+}
+.no-qian-dao{
+  color: blueviolet
+}

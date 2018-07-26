@@ -58,8 +58,8 @@ Page({
         });
         Tool.isIPhoneX(this);
         // this.onStartMusic() // 播放音乐
-        this.getActivtyId()
-        this.selectComponent("#sign").signReady()       
+        this.getActivtyId();
+        //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
         let data = {
           page: 1
@@ -493,8 +493,8 @@ Page({
             isFixed:!this.data.isFixed
         })
       
-        this.selectComponent("#sign").signListRequestHttp()
-        this.selectComponent("#sign").signReady()
+        // this.selectComponent("#sign").signListRequestHttp()
+        // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
     showNotice: function (e) { // 显示公告
@@ -526,8 +526,8 @@ Page({
                     isTrue: true
                 })
                 if (this.data.isAuthorize) {
-                    this.selectComponent("#sign").signListRequestHttp()
-                    this.selectComponent("#sign").signReady()
+                    // this.selectComponent("#sign").signListRequestHttp()
+                    // this.selectComponent("#sign").signReady()
                 }
             } else {
                 console.log('已签到')

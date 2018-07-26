@@ -272,9 +272,6 @@
           </view>
         </view>
      </view>  
-    <view class="closeBtn" bindtap='closeView'>  <!--关闭日历-->
-      <image src="../../img/close-x.png"></image>
-    </view>
     </view>
   </view>
 </view>

@@ -144,9 +144,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 18,
 					"name": "签到测试",
-					"pathName": "pages/test/sign_in"
+					"pathName": "components/sign_in/sign_in",
+					"query": ""
 				}
 			]
 		}

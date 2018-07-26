@@ -18,7 +18,8 @@
         "pages/my/my-order/my-order",
         "pages/logistics/logistics",
         "pages/activity-detail/activity-detail",
-        "pages/login/login"
+        "pages/login/login",
+        "components/sign_in/sign_in"
     ],
     "window": {
         "backgroundTextStyle": "light",

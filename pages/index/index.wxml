@@ -1,7 +1,8 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
-<sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' endTime="{{activeEndTime}}" startTime="{{activeStartTime}}" tipStart ="{{preHint}}" tipStop ="{{sufHint}}" bind:closeView='closeView' bind:getIsNumberHttp="getIsNumberHttp" bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
+<!-- <sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' endTime="{{activeEndTime}}" startTime="{{activeStartTime}}" tipStart ="{{preHint}}" tipStop ="{{sufHint}}" bind:closeView='closeView' bind:getIsNumberHttp="getIsNumberHttp" bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in> -->
+<sign-in></sign-in>
 <notice wx:if="{{isNotice}}"  bind:showNotice='showNotice' id='showNotice'></notice>
 <!-- <audio id="myAudio" style='display:none'></audio> -->
 <audio id="myAudioShake" style='display:none'></audio>

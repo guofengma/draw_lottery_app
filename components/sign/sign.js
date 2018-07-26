@@ -332,6 +332,7 @@ Component({
             //   //   signIsArr: arrResult
             //   // })
             // }
+            // // console.log(arrResult)
             var $datas = data;
             var signDate_arr = new Array();
             var anns = $datas.signDays;
