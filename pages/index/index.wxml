@@ -9,6 +9,7 @@
     isAuthorize = "{{isAuthorize}}"
     visiable="{{visiable}}"
     isAcitivityEnd ='{{isAcitivityEnd}}'
+    isAcitivityPause = '{{isAcitivityPause}}'
     bind:getPhoneNumber="getPhoneNumber" 
     bind:agreeGetUser="agreeGetUser" wx:if='{{isTrue}}'>
 </sign-in>

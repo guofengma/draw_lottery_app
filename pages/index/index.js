@@ -221,11 +221,11 @@ Page({
         }
     },
     didLogin() { // 获取 token
-        this.selectComponent("#topBar").getUserId()
-        this.getIsNumberHttp() // 获取抽奖次数
-        this.setData({
-            isAuthorize: Storage.didAuthorize() || '',
-        })
+      this.selectComponent("#topBar").getUserId()
+      this.getIsNumberHttp() // 获取抽奖次数
+      this.setData({
+          isAuthorize: Storage.didAuthorize() || '',
+      })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let code = this.data.code;
@@ -557,32 +557,29 @@ Page({
         // }
     },
     getIsSign() { // 用户是否签到
-      console.log(22222)
         let data = {
             activityId: Storage.getActivityId() || ''
         }
         let r = RequestFactory.signIsTrueRequest(data);
         r.finishBlock = (req) => {
-            console.log(req.responseObject.data.userId)
             let userId = req.responseObject.data.userId
-          console.log("userId"+userId)
-            if (userId == null || userId == 'null') {
-                this.setData({
-                    isTrue: true,
-                    isFixed:true,
-                    isNotice:false
-                })
-                this.selectComponent("#sign").signListRequestHttp()
+            if (userId>0){
+              console.log('已签到')
+              this.setData({
+                isTrue: false,
+                isFixed: false
+              })
+            } else {
+              this.setData({
+                isTrue: true,
+                isFixed: true,
+                isNotice: false
+              })
+              this.selectComponent("#sign").signListRequestHttp()
                 // if (this.data.isAuthorize) {
                 //     
                 //     // this.selectComponent("#sign").signReady()
                 // }
-            } else {
-                console.log('已签到')
-                this.setData({
-                    isTrue: false,
-                    isFixed:false
-                })
             }
         }
         Tool.showErrMsg(r)

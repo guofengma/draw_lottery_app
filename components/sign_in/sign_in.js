@@ -9,10 +9,9 @@ Component({
     isAuthorize: Boolean,
     visiable: Boolean,
     isAcitivityEnd: Boolean, // 活动是否结束
+    isAcitivityPause: Boolean, // 活动是否暂停
   },
   data: {
-    signDay: [{ "signDay": "9" }, { "signDay": "11" }, { "signDay": "12" }, { "signDay": "15" }],
-    signs: [1, 2, 3, 5, 6, 7],
     signtype: "1",
     signDays: [],
     todayDate: "1",
