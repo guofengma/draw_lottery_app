@@ -4,7 +4,7 @@ var yang_date = {
     //that
     //iyear年份
   bulidCal: function (iYear, iMonth, that, signday, weekdays, hadWinCount, maxSign) {
-      console.log(hadWinCount)
+    console.log(iYear, iMonth)
         let getToday = new Date();
         let todayDate = getToday.getDate();
         let todayMonths = getToday.getMonth();
