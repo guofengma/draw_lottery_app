@@ -67,7 +67,8 @@ Page({
         let { params } = this.data;
         params.expressStatus=status;
         this.setData({
-            params:params
+            params:params,
+            list:[]
         });
         this.querySecuritycodeUsedListByHadReceive(this.data.params)
 
