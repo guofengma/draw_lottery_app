@@ -425,8 +425,8 @@ button::after {
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/foo.png') no-repeat center center;
     background-size: 80%;
 }
-.red-red{
-  color: blue
+.red{
+  color:red
 }
 .dark{
   color: paleturquoise

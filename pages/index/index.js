@@ -58,7 +58,7 @@ Page({
         // this.onStartMusic() // 播放音乐
         this.ani(); // 旋转动画
         this.getActivtyId();
-        this.selectComponent("#sign").signReady();
+        //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
         // istotal()
         let data = {
@@ -500,8 +500,8 @@ Page({
             isFixed:!this.data.isFixed
         })
       
-        this.selectComponent("#sign").signListRequestHttp()
-        this.selectComponent("#sign").signReady()
+        // this.selectComponent("#sign").signListRequestHttp()
+        // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
     showNotice: function (e) { // 显示公告
@@ -533,8 +533,8 @@ Page({
                     isTrue: true
                 })
                 if (this.data.isAuthorize) {
-                    this.selectComponent("#sign").signListRequestHttp()
-                    this.selectComponent("#sign").signReady()
+                    // this.selectComponent("#sign").signListRequestHttp()
+                    // this.selectComponent("#sign").signReady()
                 }
             } else {
                 console.log('已签到')
