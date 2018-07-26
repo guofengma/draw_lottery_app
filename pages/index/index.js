@@ -61,7 +61,6 @@ Page({
             userId: Storage.memberId() || '',
         });
         Tool.isIPhoneX(this);
-        // this.onStartMusic() // 播放音乐
         this.getActivtyId();
         //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
@@ -118,9 +117,7 @@ Page({
                 shakeStartMusicSrc: req.responseObject.data.winMusic,
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
-            // if (this.getIsLogin(false)) {
             let currentTime = new Date().getTime(); // 当前时间
-            // let currentTime = this.data.activeEndTime
             let getStartTime = this.data.activeStartTime //活动开始时间
             if (getStartTime > currentTime) {
                 this.setData({
@@ -444,6 +441,7 @@ Page({
                                 that.setData({
                                   isAjax:true
                                 })
+                                that.getWinnerRequest() // 获取中奖名单
                               }   
                             };
                             r.failBlock = (req) => {
@@ -468,10 +466,11 @@ Page({
                                         })
                                     wx.hideLoading()
                                     wx.stopAccelerometer();
-                                  that.setData({
-                                    isAjax: true
-                                  })
-                                      // that.getIsNumberHttp()
+                                      that.setData({
+                                        isAjax: true
+                                      })
+                                      that.getIsNumberHttp()
+                                      that.getWinnerRequest() // 获取中奖名单
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
                                 }
@@ -493,7 +492,7 @@ Page({
                 }
                 shake(e)
             })
-            this.getWinnerRequest() // 获取中奖名单
+            
         }  
     },
     onHide: function () {
