@@ -8,6 +8,7 @@ Component({
     SignActivtyId: Boolean,// 活动是否开始
     isAuthorize: Boolean,
     visiable: Boolean,
+    isAcitivityEnd: Boolean, // 活动是否结束
   },
   data: {
     signDay: [{ "signDay": "9" }, { "signDay": "11" }, { "signDay": "12" }, { "signDay": "15" }],
@@ -45,7 +46,7 @@ Component({
       })
     },
     signListRequestHttp(month, preMonth) { // 请求签到列表
-      console.log(preMonth)
+      this.calendar()
       let timeData = '';
       if (!month) {
         let getToday = new Date();
@@ -69,7 +70,6 @@ Component({
       let r = RequestFactory.signListRequest(data);
       r.finishBlock = (req) => {
         let stringJson = req.responseObject.data;
-        console.log(stringJson)
         if (stringJson == [] || stringJson == '[]') {
           console.log('')
         } else {
@@ -89,7 +89,7 @@ Component({
             myDays: myDays,
             weekdays: data
           })
-          this.test(this.data.myDays, this.data.weekdays, preMonth)
+          this.calendar(this.data.myDays, this.data.weekdays, preMonth)
           // console.log(this.data.weekdays)
         }
 
@@ -97,7 +97,7 @@ Component({
       Tool.showErrMsg(r);
       r.addToQueue();
     },
-    test(myDays = [], weekdays = [], preMonth) {
+    calendar(myDays = [], weekdays = [], preMonth) {
       var godates = ''
       var getToday = ''
       var todayDate = ''

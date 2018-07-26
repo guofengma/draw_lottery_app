@@ -63,20 +63,25 @@
                 </view>
                 <!--控制月份日历输出-->
             </view>
-            <view class="text-center"  wx:if="{{signtype=='1' && SignActivtyId}}">
+            <view class="text-center"  wx:if="{{signtype=='1' && SignActivtyId && !isAcitivityEnd}}">
               <!-- 活动已经开始 未签到 -->
               
               <button class='btn-qiandao'wx:if='{{!isAuthorize&&!visiable}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">签到</button>
               <button wx:elif='{{!isAuthorize&&visiable}}' open-type="getUserInfo" class='btn-qiandao' bindgetuserinfo="agreeGetUser" lang="zh_CN">签到</button>
               <button wx:else class="btn-qiandao"  bindtap="sign_start" >签到</button>
             </view>
-            <view class="text-center"  wx:if="{{signtype=='2' && SignActivtyId}}">
+            <view class="text-center"  wx:if="{{signtype=='2' && SignActivtyId &&!isAcitivityEnd}}">
               <!-- 活动已经开始 已签到 -->
               <button class="btn-qiandao1" bindtap="sign_end" >已签到</button>
             </view>
-            <view class="text-center"  wx:if="{{!SignActivtyId}}">
-              <!-- 活动未开始 -->
+            <view class="text-center"  wx:if="{{!SignActivtyId && !isAcitivityEnd}}">
+              <!-- 活动未开始 未结束-->
               <button class="btn-qiandao1" >未开始</button>
+            </view>
+
+             <view class="text-center"  wx:if="{{SignActivtyId && isAcitivityEnd}}">
+              <!-- 活动已开始 但结束 -->
+              <button class="btn-qiandao1" >已结束</button>
             </view>
         </view>
     </view>
