@@ -18,7 +18,7 @@ Page({
     },
     getDelivery() {
         let params = {
-            usedId: 153
+            usedId: this.data.id
         };
         let r = RequestFactory.getDelivery(params);
         // let {lists} = this.data
