@@ -57,6 +57,7 @@ Page({
     onLoad: function () {
         this.setData({ // storage 中获取userId
             userId: Storage.memberId() || '',
+            isAuthorize: Storage.didAuthorize() || '',
         });
         Tool.isIPhoneX(this);
         this.getActivtyId();
@@ -669,5 +670,20 @@ Page({
         })
         Storage.setWxUserInfo(userInfo)
         this.requetLogin()
+    },
+    onUnload: function () {
+        Event.off('didLogin', this.didLogin);
+        Event.off('getIsNumberHttp', this.getIsNumberHttp);
+    },
+    ouLaunch:function(){
+      // wx.onAccelerometerChange()
+    },
+    onShareAppMessage: function (res) {
+      let imgUrl = ''
+      return {
+        title: "天天朵宝",
+        path: '/pages/start-page/start-page',
+        imgUrl: imgUrl
+      }
     },
 })

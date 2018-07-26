@@ -63,6 +63,6 @@
 .no-result{
   width: 268rpx;
   margin: 10rpx auto;
-  margin-top: 80rpx;
+  margin-top: 200rpx;
   text-align: center;
 }
