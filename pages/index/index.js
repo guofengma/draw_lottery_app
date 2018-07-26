@@ -129,8 +129,8 @@ Page({
                 isAcitivityPause = true 
               }
               this.setData({
-                isAcitivityPause: isAcitivityPause, // 活动开启
-                SignActivtyId: true
+                isAcitivityPause: isAcitivityPause,  
+                SignActivtyId: true// 活动开启
               })
             }
             console.log(req.responseObject.data.endTime, currentTime)
@@ -183,41 +183,41 @@ Page({
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         // console.log(getStartTime > currentTime)
-        if (getStartTime > currentTime) {
+        if (this.data.SignActivtyId) {
             console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
-        } else {
+          this.setData({
+            disabled: false,
+            isDisplay: false
+          })
+        } else if (!this.data.isAcitivityEnd){ // 活动已结束
             console.log('这？')
-            this.setData({
-                disabled: false,
-                isDisplay: false
-            })
+          Tool.showAlert(this.data.sufHint)
+        } else {
+          this.setData({
+            disabled: true
+          })
+          Tool.showAlert(this.data.preHint)
         }
+     
     },
     bindBlur() {
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         console.log(getStartTime > currentTime)
-        if (getStartTime > currentTime) {
-            console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
+        if (this.data.SignActivtyId) {
+          this.setData({
+            disabled: false,
+            isDisplay: false
+          })
+        } else if (this.data.isAcitivityEnd) { // 活动已结束
+          console.log('结束')
+          Tool.showAlert(this.data.sufHint)
         } else {
-            this.setData({
-                disabled: false,
-                isDisplay: false
-            })
+          console.log('活动未开启')
+          this.setData({
+            disabled: true
+          })
+          Tool.showAlert(this.data.preHint)
         }
     },
     didLogin() { // 获取 token
@@ -232,12 +232,19 @@ Page({
         this.setData({
             userId: Storage.memberId() || ''
         })
+      console.log(!this.data.SignActivtyId)
         // console.log(this.data.userId)
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
-        if (getStartTime > currentTime) {
-            Tool.showAlert('活动未开启')
-        } else {
+        if (!this.data.SignActivtyId) {
+            Tool.showAlert(this.data.preHint)
+        } else if (this.data.isAcitivityEnd){
+            Tool.showAlert(this.data.sufHint)
+        } else if (this.data.isAcitivityPause){
+            this.setData({
+              disabled: true
+            })
+        }else {
             if (this.data.userId == '' || this.data.userId == null) {
                 return
             }
@@ -260,7 +267,8 @@ Page({
                         title: '兑换成功',
                     })
                     this.setData({
-                        isPlusNumber: true
+                        isPlusNumber: true,
+                        disabled: true
                     })
                     this.getIsNumberHttp()
                     wx.startAccelerometer();
@@ -305,7 +313,6 @@ Page({
             if (Tool.isEmpty(req.responseObject.data)) {
 
             } else {
-                console.log(req.responseObject.data[0].telephone)
                 let arrNumber = req.responseObject.data;
                 let arrLength = arrNumber.length;
                 let arr = [];
@@ -352,17 +359,18 @@ Page({
     onShow: function () { // 进行摇一摇
       let that = this;
       this.isShowSake = true
+      let SignActivtyId = this.data.SignActivtyId
+      let isAcitivityEnd = this.data.isAcitivityEnd
+      let currentTime = new Date().getTime();
+      let getStartTime = this.data.activeStartTime
       if (this.data.isfalse) {
         Tool.showAlert('未授权')
-        return false
-      } else if (this.data.SignActivtyId) { // 活动未开启
+      } else if (getStartTime > currentTime) { // 活动未开启
         console.log('活动未开启时进入')
         Tool.showAlert(this.data.preHint)
-        return false
-      } else if (this.data.isAcitivityEnd){ // 活动已结束
+      } else if (isAcitivityEnd){ // 活动已结束
         console.log('活动已结束时进入')
         Tool.showAlert(this.data.sufHint)
-        return false
       } else {
             console.log('进入摇一摇')
             let num = 0
@@ -385,12 +393,8 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-<<<<<<< HEAD
                     // console.log('speed:'+speed)
-=======
->>>>>>> 8663b2e693ae7edacfed578ce4ffacc04bf33856
                     if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
-                    
                             that.setData({
                               lastTime:nowTime,
                               isAjax:false
@@ -507,7 +511,7 @@ Page({
                 }
                 shake(e)
             })
-          that.getIsNumberHttp()
+          // that.getIsNumberHttp()
         }  
     },
     onHide: function () {
