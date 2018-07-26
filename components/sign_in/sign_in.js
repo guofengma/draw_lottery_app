@@ -45,8 +45,11 @@ Component({
       })
     },
     signListRequestHttp(month, preMonth) { // 请求签到列表
-      this.calendar()
+      let activityId = Storage.getActivityId() || ''
       let cookies = Storage.getUserCookie() || false
+      if (!cookies || !activityId){
+        this.calendar()
+      }
       if (!cookies) return
       let timeData = '';
       if (!month) {
@@ -128,8 +131,8 @@ Component({
         let arr = godates.split('-')
         console.log(arr)
         todayYear = getToday.getFullYear();
-        showYear = arr[0]
-        showMonth = arr[1]
+        showYear = parseInt(arr[0]) 
+        showMonth = arr[1][0] == '0' ? parseInt(arr[1][1]) : parseInt(arr[1])
         todayMonth = getToday.getMonth() + 1;
         todayss = getToday.getDate();
       }
@@ -316,7 +319,6 @@ Component({
       r.addToQueue();
     },
     closeView: function () { // 关闭日历
-      console.log(1)
       this.triggerEvent('closeView', false)
     },
     getPhoneNumber(e){
@@ -324,6 +326,7 @@ Component({
     },
     agreeGetUser(e){
       this.triggerEvent('agreeGetUser', e.detail)
+      this.triggerEvent('closeView', false)
     }
   },
   ready: function () {

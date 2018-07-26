@@ -98,7 +98,7 @@ Page({
     onReady: function () {
 
     },
-    getActivtyId() { // 获取活动Id
+    getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
           if (req.responseObject.data == null || req.responseObject.data == 'null'){
@@ -133,7 +133,6 @@ Page({
                 SignActivtyId: true
               })
             }
-            console.log(req.responseObject.data.endTime, currentTime)
             if (req.responseObject.data.endTime > currentTime){
               this.setData({
                 isAcitivityEnd: false  // 活动未结束
@@ -144,6 +143,9 @@ Page({
               })
             }
             // }
+            if (callBack!==undefined){
+              this.getIsNumberHttp()
+            }
             //this.getIsNumberHttp() // 获取抽奖次数
             this.getWinnerRequest() // 获取中奖名单
             // this.selectComponent("#showNotice").noticeRequestHttp()
@@ -201,9 +203,7 @@ Page({
         }
     },
     bindBlur() {
-        get
         let getStartTime = this.data.activeStartTime //活动开始时间
-        console.log(getStartTime > currentTime)
         if (getStartTime > currentTime) {
             console.log('活动未开启')
             this.setData({
@@ -223,6 +223,14 @@ Page({
     didLogin() { // 获取 token
       this.selectComponent("#topBar").getUserId()
       this.getIsNumberHttp() // 获取抽奖次数
+      let callBack = () =>{
+        this.getIsNumberHttp()
+      }
+      if (this.data.activityId){
+        this.getIsNumberHttp()
+      } else {
+        this.getActivtyId(callBack)
+      }
       this.setData({
           isAuthorize: Storage.didAuthorize() || '',
       })
@@ -385,10 +393,6 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-<<<<<<< HEAD
-                    // console.log('speed:'+speed)
-=======
->>>>>>> 8663b2e693ae7edacfed578ce4ffacc04bf33856
                     if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
                     
                             that.setData({
@@ -576,7 +580,7 @@ Page({
         // }
     },
     getIsSign() { // 用户是否签到
-        if (this.getIsLogin(false)){
+        if (!this.getIsLogin(false)){
           this.setData({
             isTrue: true,
             isFixed: true,
@@ -704,5 +708,13 @@ Page({
     },
     ouLaunch:function(){
       // wx.onAccelerometerChange()
-    }
+    },
+    onShareAppMessage: function (res) {
+      let imgUrl = ''
+      return {
+        title: "天天朵宝",
+        path: '/pages/start-page/start-page',
+        imgUrl: imgUrl
+      }
+    },
 })
