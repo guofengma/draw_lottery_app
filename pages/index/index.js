@@ -53,6 +53,8 @@ Page({
         audioCtx: '',
         isAcitivityEnd:false, //活动是否结束
         isAcitivityPause:false, //活动是否暂停
+        lastTime:0,//上一次摇动时间
+        isAjax:true
     },
     onLoad: function () {
         this.setData({ // storage 中获取userId
@@ -70,6 +72,13 @@ Page({
         let r = global.RequestFactory.noticeRequest(data);
         r.finishBlock = (req) => {
           let datas = req.responseObject.data;
+          if(!datas){
+            this.setData({
+              isNotice: false,
+              hasNotice: false,
+            });
+            return
+          }
           let totals = datas.total;
           if (totals == 0) {
             this.setData({
@@ -79,7 +88,6 @@ Page({
           } else {
             this.setData({
               isNotice: true,
-              isFixed:true,
               hasNotice: true
             });
             this.selectComponent("#showNotice").noticeRequestHttp()
@@ -110,8 +118,6 @@ Page({
                 shakeStartMusicSrc: req.responseObject.data.winMusic,
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
-            console.log(this.data.shakeStartMusicSrc)
-            console.log(this.data.shakeStopMusicSrc)
             // if (this.getIsLogin(false)) {
             let currentTime = new Date().getTime(); // 当前时间
             // let currentTime = this.data.activeEndTime
@@ -355,7 +361,7 @@ Page({
             return false
         } else {
             let num = 0
-            let lastTime = 0; //此变量用来记录上次摇动的时间
+            let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
             let x = 0,
                 y = 0,
                 z = 0,
@@ -375,7 +381,13 @@ Page({
                     z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
                     //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
                     let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-                    if (speed > shakeSpeed) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
+                    console.log('speed:'+speed)
+                    if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
+                    
+                            that.setData({
+                              lastTime:nowTime,
+                              isAjax:false
+                            })
                             wx.stopAccelerometer()
                             wx.showLoading({
                               title: '摇奖中...'
@@ -389,6 +401,7 @@ Page({
                                 console.log(req.responseObject)
                                 console.log(req.responseObject.data.pType)
                               if (req.responseObject.code == 200) {
+                                console.log('中奖音乐：'+that.data.shakeStartMusicSrc)
                                 that.data.audioCtx = wx.createAudioContext('myAudioShake');
                                 that.data.audioCtx.setSrc(that.data.shakeStartMusicSrc);
                                 that.data.audioCtx.play();
@@ -427,13 +440,17 @@ Page({
                                   })
                                 }
                                 wx.hideLoading()
-                                wx.stopAccelerometer()
+                                wx.stopAccelerometer();
+                                that.setData({
+                                  isAjax:true
+                                })
                               }   
                             };
                             r.failBlock = (req) => {
                                 console.log('停止背景音乐')
                                 console.log('进入异步失败操作')
                                 console.log(req.responseObject)
+                              console.log('未中奖音乐：' + that.data.shakeStopMusicSrc)
                                 let start = () => {
                                     wx.startAccelerometer();
                                 }
@@ -450,7 +467,10 @@ Page({
                                           isDrawn:false
                                         })
                                     wx.hideLoading()
-                                    wx.stopAccelerometer()
+                                    wx.stopAccelerometer();
+                                  that.setData({
+                                    isAjax: true
+                                  })
                                       // that.getIsNumberHttp()
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
@@ -507,8 +527,8 @@ Page({
           isTrue: !this.data.isTrue,
           isFixed:!this.data.isFixed
         })
+        console.log(this.data.isFixed);
         this.selectComponent("#sign").signListRequestHttp()
-        // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
     showNotice: function (e) { // 显示公告
