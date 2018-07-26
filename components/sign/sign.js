@@ -258,11 +258,6 @@ Component({
             var signDay = this.data.weekdays
             // console.log(signDay)
             var data = { seriesCount: 1, signDays: [] };
-<<<<<<< HEAD
-            
-            // console.log(yearDate)
-            // let signJsonNew = ''
-=======
             let yearDate = [];
             let result = [];
             for (let p in signDay) { // 获取签到列表的每一天
@@ -295,7 +290,6 @@ Component({
             }
             console.log(yearDate)
             let signJsonNew = ''
->>>>>>> 74789443f9e887bb2c7ae64f997cd457d3861de2
             if (signDay.length == 0) {
               return false 
             } else if(signDay.length == 2){
@@ -304,50 +298,33 @@ Component({
               } else {
                 signJsonNew = this.f(signDay[0].signTime, signDay[signDay.length - 1].signTime) // 获取2个日期直接天
               }
-            
-            for (var i = 0; i < signJsonNew.length; i++) {
-              var obj = signJsonNew[i];
-              var isExist = false;
-              for (var j = 0; j < yearDate.length; j++) {
-                var aj = yearDate[j];
-                if (obj == aj) {
-                  isExist = true;
-                  break;
+              
+              for (var i = 0; i < signJsonNew.length; i++) {
+                var obj = signJsonNew[i];
+                var isExist = false;
+                for (var j = 0; j < yearDate.length; j++) {
+                  var aj = yearDate[j];
+                  if (obj == aj) {
+                    isExist = true;
+                    break;
+                  }
+                }
+                if (!isExist) {
+                  result.push(obj);
                 }
               }
-              if (!isExist) {
-                result.push(obj);
+              let resultWeekDays = 0
+              let arrResult = []
+              for (let i in result) {
+                if (todayss > 10) {
+                  resultWeekDays = parseInt(result[i].substr(8, 2))
+                } else {
+                  resultWeekDays = parseInt(result[i].substr(9, 1))
+                }
+                arrResult.push(resultWeekDays)
               }
             }
-            let resultWeekDays = 0
-            let arrResult = []
-            for (let i in result) {
-              if (todayss > 10) {
-                resultWeekDays = parseInt(result[i].substr(8, 2))
-              } else {
-                resultWeekDays = parseInt(result[i].substr(9, 1))
-              }
-              arrResult.push(resultWeekDays)
-            }
-            }
-            var getToday = new Date();
-            var todayDate = getToday.getDate();
-            var todayMonths = getToday.getMonth();
-            var todayMonth = (todayMonths + 1);
-            var todayYear = getToday.getFullYear();
-            var todayss = getToday.getDate();
-            if (todayMonth < 10) {
-              var todayMonthss = "0" + todayMonth;
-            } else {
-              var todayMonthss = todayMonth;
-            }
-            var godates = todayYear + "-" + todayMonthss + "-01";
-            var that = this;
-            var signDay = this.data.weekdays
-            // console.log(signDay)
-            var data = { seriesCount: 1, signDays: [] };
-            let yearDate = [];
-            let result = [];
+           
             for (let p in signDay) { // 获取签到列表的每一天
               let signJson = signDay[p].signTime
               let weekDays = 0;
