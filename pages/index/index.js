@@ -287,8 +287,10 @@ Page({
                     isPlusNumber: false
                 })
             },1000)
-          if (this.data.isShakeBox && num != 0){
-              wx.startAccelerometer()
+          if (this.data.isShakeBox && num == 0){
+              
+          } else {
+            wx.startAccelerometer()
           }
         };
         Tool.showErrMsg(r);
