@@ -58,6 +58,7 @@ Page({
     onLoad: function () {
         this.setData({ // storage 中获取userId
             userId: Storage.memberId() || '',
+            isAuthorize: Storage.didAuthorize() || '',
         });
         Tool.isIPhoneX(this);
         // this.onStartMusic() // 播放音乐
