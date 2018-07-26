@@ -4,8 +4,7 @@ var yang_date = {
     //that
     //iyear年份
   bulidCal: function (iYear, iMonth, that, signday, weekdays, hadWinCount, maxSign) {
-    console.log(maxSign)
-    console.log(hadWinCount)
+      console.log(hadWinCount)
         let getToday = new Date();
         let todayDate = getToday.getDate();
         let todayMonths = getToday.getMonth();
@@ -17,6 +16,7 @@ var yang_date = {
         console.log(nowTime)
         var that =that;
         var aMonth = new Array();
+    console.log(iMonth, todayMonth)
         aMonth[0] = new Array(7);
         aMonth[1] = new Array(7);
         aMonth[2] = new Array(7);
@@ -76,7 +76,11 @@ var yang_date = {
                     normalday:iVarDate,
                     className: ''
                 };
+              if (showTime + iVarDate == nowTime) {
+                aMonth[0][d].className = 'no-qian-dao'
+              }
               if (weekdays.length > 0) {
+                console.log(showTime + iVarDate, nowTime)
                 if (iVarDate >= weekdays[0].date && iVarDate <= weekdays[weekdays.length - 1].date) {
                   aMonth[0][d].className = 'no-footer'
                 }
@@ -143,6 +147,9 @@ var yang_date = {
                             normalday:iVarDate,
                             className:''
                         };
+                      if (showTime + iVarDate == nowTime) {
+                        aMonth[w][d].className = 'no-qian-dao'
+                      }
                       if (weekdays.length>0){
                         // 漏签
                         if (iVarDate >= weekdays[0].date && iVarDate <= weekdays[weekdays.length - 1].date) {

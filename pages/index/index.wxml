@@ -8,6 +8,7 @@
     SignActivtyId='{{SignActivtyId}}' 
     isAuthorize = "{{isAuthorize}}"
     visiable="{{visiable}}"
+    isAcitivityEnd ='{{isAcitivityEnd}}'
     bind:getPhoneNumber="getPhoneNumber" 
     bind:agreeGetUser="agreeGetUser">
 </sign-in>

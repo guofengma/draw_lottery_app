@@ -439,4 +439,5 @@ button::after {
 .no-qian-dao{
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/icon1_03@2x.png') no-repeat center center;
   background-size: 70%;
+  color: transparent;
 }

@@ -51,6 +51,8 @@ Page({
         isShowNotice:false,
         isfalse:false,
         audioCtx: '',
+        isAcitivityEnd:false, //活动是否结束
+        isAcitivityPause:false, //活动是否暂停
         lastTime:0,//上一次摇动时间
         isAjax:true
     },
@@ -61,6 +63,7 @@ Page({
         Tool.isIPhoneX(this);
         // this.onStartMusic() // 播放音乐
         this.getActivtyId();
+        this.getIsSign()
         //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
         Event.on('getIsNumberHttp', this.getIsNumberHttp, this);
@@ -123,9 +126,24 @@ Page({
                     SignActivtyId: false
                 })
             } else {
-                this.setData({
-                    SignActivtyId: true // 活动开启
-                })
+              let isAcitivityPause = false 
+              if (req.responseObject.data.actStauts ==3) {
+                isAcitivityPause = true
+              }
+              this.setData({
+                isAcitivityPause: isAcitivityPause, // 活动开启
+                SignActivtyId: true
+              })
+            }
+            console.log(req.responseObject.data.endTime, currentTime)
+            if (req.responseObject.data.endTime > currentTime){
+              this.setData({
+                isAcitivityEnd: false  // 活动为结束
+              })
+            } else{
+              this.setData({
+                isAcitivityEnd: true // 活动已结束
+              })
             }
             this.getWinnerRequest() // 获取中奖名单
           }
@@ -505,28 +523,28 @@ Page({
     },
     closeView(e) { // 显示天天签到
         this.setData({
-            isTrue: !this.data.isTrue,
-            isFixed:!this.data.isFixed
+          isTrue: !this.data.isTrue,
+          isFixed:!this.data.isFixed
         })
+        console.log(this.data.isFixed);
         this.selectComponent("#sign").signListRequestHttp()
         wx.startAccelerometer()
     },
     showNotice: function (e) { // 显示公告
+        console.log(11111)
         this.setData({
             isNotice: !this.data.isNotice
         })
         if (this.data.isNotice) {
             this.selectComponent("#showNotice").noticeRequestHttp()
-        }
-        let currentTime = new Date().getTime()
-        let getStartTime = this.data.activeStartTime //活动开始时间
-        if (getStartTime > currentTime) { // 没开始
-
-        } else {
-            this.getIsSign()
+        } 
+        // 如果活动开始了 
+        if (this.data.SignActivtyId){
+          this.getIsSign()
         }
     },
     getIsSign() { // 用户是否签到
+      console.log(22222)
         let data = {
             activityId: Storage.getActivityId() || ''
         }
@@ -535,16 +553,16 @@ Page({
             console.log(req.responseObject.data.userId)
             let userId = req.responseObject.data.userId
             if (userId == null || userId == 'null') {
-                console.log('未签到')
                 this.setData({
                     isTrue: true,
                     isFixd:true,
                     isNotice:false
                 })
-                if (this.data.isAuthorize) {
-                    this.selectComponent("#sign").signListRequestHttp()
-                    // this.selectComponent("#sign").signReady()
-                }
+                this.selectComponent("#sign").signListRequestHttp()
+                // if (this.data.isAuthorize) {
+                //     
+                //     // this.selectComponent("#sign").signReady()
+                // }
             } else {
                 console.log('已签到')
                 this.setData({
@@ -634,7 +652,7 @@ Page({
 
             }
         })
-    },
+    },   
     getLogin(userInfo) { // 登录
         this.setData({
             userInfo: userInfo
