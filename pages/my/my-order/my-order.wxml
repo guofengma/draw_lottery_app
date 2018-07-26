@@ -5,24 +5,25 @@
       <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">已发货</view>
       <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">待发货</view>
   </scroll-view>
-  <scroll-view scroll-y="true" class="scoll-h" >
-    <block>
+  <scroll-view scroll-y="true" class="scoll-h"  wx:if='{{list.length>0}}' bindscrolltolower='onScroll'>
+    <block wx:for="{{list}}" wx:key="unique">
         <view class='container whiteBg'>
           <view class='state flexR-sb font-26'>
             <view>朵女郎</view>
-            <view class='red'>已发货</view>
+            <view class='red' wx:if="{{item.express_status==1||item.express_status==2}}">待发货</view>
+            <view class='red' wx:else>已发货</view>
           </view>
           <view class='font-22 red ordernum'>
-            <text>订单编号：1532132132132132</text>
-            <text class='time'>2017-12-31 14:15:16</text>
+            <text>订单编号：{{item.order_num}}</text>
+            <text class='time'>{{item.receive_time}}</text>
           </view>
           <view class='content font-26 flexR-sb grayBg'>
-            <image src='/img/default-user.png'></image>
+            <image src='{{item.img_url}}'></image>
             <view class='infos'>
-              <view class='red ellipsis'>中奖码：2017121212121313</view>
-              <view class='ellipsis'>护手霜</view>
+              <view class='red ellipsis'>中奖码：{{item.securitycode}}</view>
+              <view class='ellipsis'>{{item.award_name}}</view>
               <view class='flexR-sb'>
-                <text class='gray'>分类：圣诞节收到货</text>
+                <text class='gray'>颜色分类：{{item.description}}</text>
                 <text>x 1</text>
               </view>
             </view>
@@ -36,4 +37,8 @@
         </view>
     </block>
   </scroll-view>
+  <view class='no-result' wx:else>
+    <image src='/img/no-result-bg.png' mode='widthFix'></image>
+    <view class='font-26 gray'>暂无订单~</view>
+  </view>
 </view>

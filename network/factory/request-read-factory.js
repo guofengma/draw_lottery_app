@@ -252,5 +252,11 @@ export default class RequestFactory {
     return this.request(url, params, '添加反馈', true);
   }
 
+    /****************** 我的反馈 *******************************/
+
+    static querySecuritycodeUsedListByHadReceive(params) {
+        let url = Operation.sharedInstance().querySecuritycodeUsedListByHadReceive;
+        return this.request(url, params, '订单物流列表', true);
+    }
 }
 
