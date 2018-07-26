@@ -61,6 +61,7 @@ Page({
         this.getActivtyId();
         //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
+        Event.on('getIsNumberHttp', this.getIsNumberHttp, this);
         let data = {
           page: 1
         };
@@ -626,6 +627,7 @@ Page({
     },
     onUnload: function () {
         Event.off('didLogin', this.didLogin);
+        Event.off('getIsNumberHttp', this.getIsNumberHttp);
     },
     ouLaunch:function(){
       // wx.onAccelerometerChange()

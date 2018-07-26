@@ -1,6 +1,6 @@
 let yangdate = require("sign_in_ss.js");
 
-let { Tool, RequestFactory, Storage } = global
+let { Tool, RequestFactory, Storage, Event } = global
 
 Component({
   properties: {
@@ -301,7 +301,7 @@ Component({
             duration: 1500
           });
           this.signListRequestHttp()
-          // this.getIsNumberHttp()
+          Event.emit('getIsNumberHttp') // 更新抽奖次数
           // this.signReady()
         } else {
           return null
@@ -309,6 +309,10 @@ Component({
       };
       Tool.showErrMsg(r);
       r.addToQueue();
+    },
+    closeView: function () { // 关闭日历
+      console.log(1)
+      this.triggerEvent('closeView', false)
     },
   },
   ready: function () {
