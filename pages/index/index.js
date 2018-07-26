@@ -61,6 +61,7 @@ Page({
             userId: Storage.memberId() || '',
         });
         Tool.isIPhoneX(this);
+        // this.onStartMusic() // 播放音乐
         this.getActivtyId();
         //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
@@ -117,7 +118,9 @@ Page({
                 shakeStartMusicSrc: req.responseObject.data.winMusic,
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
+            // if (this.getIsLogin(false)) {
             let currentTime = new Date().getTime(); // 当前时间
+            // let currentTime = this.data.activeEndTime
             let getStartTime = this.data.activeStartTime //活动开始时间
             if (getStartTime > currentTime) {
                 this.setData({
@@ -221,11 +224,11 @@ Page({
         }
     },
     didLogin() { // 获取 token
-      this.selectComponent("#topBar").getUserId()
-      this.getIsNumberHttp() // 获取抽奖次数
-      this.setData({
-          isAuthorize: Storage.didAuthorize() || '',
-      })
+        this.selectComponent("#topBar").getUserId()
+        this.getIsNumberHttp() // 获取抽奖次数
+        this.setData({
+            isAuthorize: Storage.didAuthorize() || '',
+        })
     },
     SecurityCodeRequestHttp() { // 防伪码验证
         let code = this.data.code;
@@ -287,11 +290,7 @@ Page({
                     isPlusNumber: false
                 })
             },1000)
-          if (this.data.isShakeBox && num == 0){
-              
-          } else {
-            wx.startAccelerometer()
-          }
+          wx.startAccelerometer();
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -350,14 +349,17 @@ Page({
     },
     isShowSake: false,
     onShow: function () { // 进行摇一摇
-      let that = this;
-      this.isShowSake = true
-      if (this.data.isfalse) {
-        Tool.showAlert('未授权')
-        return false
-      } else if (this.data.SignActivtyId) {
-        Tool.showAlert(this.data.preHint)
-      } else {
+        let that = this;
+        this.isShowSake = true
+        if(this.isShowSake){
+          this.getActivtyId()
+          wx.startAccelerometer()
+        }
+        console.log('显示')
+        if(this.data.isfalse){
+          console.log('未授权')
+            return false
+        } else {
             let num = 0
             let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
             let x = 0,
@@ -368,6 +370,7 @@ Page({
                 lastZ = 0; //此组变量分别记录对应x、y、z三轴的数值和上次的数值
             let shakeSpeed = 110; //设置阈值
             function shake(acceleration) {
+                num ++
                 let nowTime = new Date().getTime(); //记录当前时间
                 //如果这次摇的时间距离上次摇的时间有一定间隔 才执行
                 if (nowTime - lastTime > 100) {
@@ -396,7 +399,6 @@ Page({
                                 console.log('进入异步成功')
                                 console.log(req.responseObject)
                                 console.log(req.responseObject.data.pType)
-                              let num = that.data.isNumber--
                               if (req.responseObject.code == 200) {
                                 console.log('中奖音乐：'+that.data.shakeStartMusicSrc)
                                 that.data.audioCtx = wx.createAudioContext('myAudioShake');
@@ -404,7 +406,6 @@ Page({
                                 that.data.audioCtx.play();
                                 if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                                   that.setData({
-                                    isNumber:num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     isMaterial: true,
@@ -416,7 +417,6 @@ Page({
                                   })
                                 } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
                                   that.setData({
-                                    isNumber: num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     iscardZJL: true,
@@ -428,7 +428,6 @@ Page({
                                   })
                                 } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
                                   that.setData({
-                                    isNumber: num,
                                     isShowModelTitle: '恭喜你，中奖啦',
                                     isShakeBox: true,
                                     ishongbao: true,
@@ -444,7 +443,6 @@ Page({
                                 that.setData({
                                   isAjax:true
                                 })
-                                that.getWinnerRequest() // 获取中奖名单
                               }   
                             };
                             r.failBlock = (req) => {
@@ -460,21 +458,19 @@ Page({
                                     that.data.audioCtx = wx.createAudioContext('myAudioShake');
                                     that.data.audioCtx.setSrc(that.data.shakeStopMusicSrc);
                                     that.data.audioCtx.play();
-                                        let num = that.data.isNumber --
                                         that.setData({
-                                          isNumber: num,
                                           isShowModelTitle: '很遗憾，未中奖',
                                           isShakeBox: true,
                                           isWzj: true,
                                           isReduceNumber: true,
                                           isDrawn:false
                                         })
-                                      wx.hideLoading()
-                                      wx.stopAccelerometer();
-                                      that.setData({
-                                        isAjax: true
-                                      })
-                                      that.getWinnerRequest() // 获取中奖名单
+                                    wx.hideLoading()
+                                    wx.stopAccelerometer();
+                                  that.setData({
+                                    isAjax: true
+                                  })
+                                      // that.getIsNumberHttp()
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
                                 }
@@ -496,11 +492,12 @@ Page({
                 }
                 shake(e)
             })
-          that.getIsNumberHttp()
+            this.getWinnerRequest() // 获取中奖名单
         }  
     },
     onHide: function () {
       this.isShowSake = false // 设置第一次进入
+      console.log('影藏')
       wx.stopAccelerometer()
     },
     closeBindshakeBox: function () { // 摇一摇弹框
@@ -529,10 +526,8 @@ Page({
           isTrue: !this.data.isTrue,
           isFixed:!this.data.isFixed
         })
-        // 
-        if (this.data.isTrue){
-          this.selectComponent("#sign").signListRequestHttp()
-        }
+        // this.selectComponent("#sign").signListRequestHttp()
+        this.selectComponent("#sign").signListRequestHttp()
         // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
@@ -540,9 +535,6 @@ Page({
       this.setData({
         isNotice: !this.data.isNotice
       })
-      if (this.data.isNotice) {
-        this.selectComponent("#showNotice").noticeRequestHttp()
-      } 
     },
     showNotice: function (e) { // 显示公告
         this.setData({
@@ -565,29 +557,32 @@ Page({
         // }
     },
     getIsSign() { // 用户是否签到
+      console.log(22222)
         let data = {
             activityId: Storage.getActivityId() || ''
         }
         let r = RequestFactory.signIsTrueRequest(data);
         r.finishBlock = (req) => {
+            console.log(req.responseObject.data.userId)
             let userId = req.responseObject.data.userId
-            if (userId>0){
-              console.log('已签到')
-              this.setData({
-                isTrue: false,
-                isFixed: false
-              })
-            } else {
-              this.setData({
-                isTrue: true,
-                isFixed: true,
-                isNotice: false
-              })
-              this.selectComponent("#sign").signListRequestHttp()
+          console.log("userId"+userId)
+            if (userId == null || userId == 'null') {
+                this.setData({
+                    isTrue: true,
+                    isFixed:true,
+                    isNotice:false
+                })
+                this.selectComponent("#sign").signListRequestHttp()
                 // if (this.data.isAuthorize) {
                 //     
                 //     // this.selectComponent("#sign").signReady()
                 // }
+            } else {
+                console.log('已签到')
+                this.setData({
+                    isTrue: false,
+                    isFixed:false
+                })
             }
         }
         Tool.showErrMsg(r)

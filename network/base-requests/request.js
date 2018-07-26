@@ -11,7 +11,7 @@ export default class Request {
     getBaseUrl(bParam) {
         // 开发 
         // this.baseUrl = 'http://172.16.10.7:'
-        // this.baseUrl = 'http://172.16.10.21:'
+        this.baseUrl = 'http://172.16.10.21:'
         // this.baseUrl = 'http://172.16.10.4:'
         // this.baseUrl = 'http://172.16.10.12:'
         // this.baseUrl = 'http://172.16.10.29:'
