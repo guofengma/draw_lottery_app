@@ -144,7 +144,7 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 18,
 					"name": "签到测试",
 					"pathName": "pages/test/sign_in",
 					"query": ""
@@ -152,7 +152,8 @@
 				{
 					"id": -1,
 					"name": "订单物流列表",
-					"pathName": "pages/my/my-order/my-order"
+					"pathName": "components/sign_in/sign_in",
+					"query": ""
 				}
 			]
 		}

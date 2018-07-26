@@ -47,13 +47,14 @@ var dataTime = {
                         //console.log(111);
                         aMonth[w][d] = {
                             signday: "is",
-                            classname: '',
+                            classname: '1',
                             normalday: iVarDate,
                         };
                     } else {
                         //console.log(22);
                         aMonth[w][d] = {
                             signday: "nois",
+                            classname:'2',
                             normalday: iVarDate,
                         };
                     }
