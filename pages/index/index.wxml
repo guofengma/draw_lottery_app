@@ -2,18 +2,18 @@
 
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
 <sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' endTime="{{activeEndTime}}" startTime="{{activeStartTime}}" tipStart ="{{preHint}}" tipStop ="{{sufHint}}" bind:closeView='closeView' bind:getIsNumberHttp="getIsNumberHttp" bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in>
-<notice wx:if="{{isNotice}}" datasisNull="{{datasisNull}}" bind:showNotice='showNotice' bind:istotal="istotal" id='showNotice'></notice>
+<notice wx:if="{{isNotice}}"  bind:showNotice='showNotice' id='showNotice'></notice>
 <!-- <audio id="myAudio" style='display:none'></audio> -->
 <audio id="myAudioShake" style='display:none'></audio>
 <movable-area>
-<view class="home-page">
+<view class="home-page {{isNotice||isFixed?'fixed':''}}">
   <!-- <view class="myAudio">
     <image wx:if="{{isStop}}"  src="../../img/action.png" class="an-c an-r an-t animated rotate" bindtap='onStopbgMusic'></image>
     <image wx:else src="../../img/stop.png" bindtap='onActionbgMusic'></image>
   </view> -->
   <view class="home-tree"></view>
    <movable-view x="{{50}}" y="{{50}}" direction="all">
-      <view class="home-Notice" catchtap='showNotice'>
+      <view class="home-Notice" catchtap='showNotice' wx-if="{{hasNotice}}">
         <image src="../../img/Notice.png"></image>
       </view>
     </movable-view>
@@ -45,9 +45,9 @@
                     </view>
                 </swiper-item>
                 </block>
-            </swiper> 
+            </swiper>
           </view>
-    </view>    
+    </view>
   </view>
 
   <view class="home-tabar flexR {{isIPhoneX.className}}">
