@@ -61,6 +61,7 @@ Page({
             userId: Storage.memberId() || '',
         });
         Tool.isIPhoneX(this);
+        // this.onStartMusic() // 播放音乐
         this.getActivtyId();
         //this.selectComponent("#sign").signReady();
         Event.on('didLogin', this.didLogin, this);
@@ -117,7 +118,9 @@ Page({
                 shakeStartMusicSrc: req.responseObject.data.winMusic,
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
+            // if (this.getIsLogin(false)) {
             let currentTime = new Date().getTime(); // 当前时间
+            // let currentTime = this.data.activeEndTime
             let getStartTime = this.data.activeStartTime //活动开始时间
             if (getStartTime > currentTime) { // 活动未开启
                 this.setData({
@@ -295,11 +298,7 @@ Page({
                     isPlusNumber: false
                 })
             },1000)
-          if (this.data.isShakeBox && num == 0){
-              
-          } else {
-            wx.startAccelerometer()
-          }
+          wx.startAccelerometer();
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -396,12 +395,12 @@ Page({
                     if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
                     
                             that.setData({
-                              lastTime:nowTime,
-                              isAjax:false
+                                lastTime: nowTime,
+                                isAjax: false
                             })
                             wx.stopAccelerometer()
                             wx.showLoading({
-                              title: '摇奖中...'
+                                title: '摇奖中...'
                             })
                             let data = {
                                 activityId: Storage.getActivityId() || ''
@@ -411,62 +410,57 @@ Page({
                                 console.log('进入异步成功')
                                 console.log(req.responseObject)
                                 console.log(req.responseObject.data.pType)
-                              let num = that.data.isNumber--
-                              if (req.responseObject.code == 200) {
-                                console.log('中奖音乐：'+that.data.shakeStartMusicSrc)
-                                that.data.audioCtx = wx.createAudioContext('myAudioShake');
-                                that.data.audioCtx.setSrc(that.data.shakeStartMusicSrc);
-                                that.data.audioCtx.play();
-                                if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
-                                  that.setData({
-                                    isNumber:num,
-                                    isShowModelTitle: '恭喜你，中奖啦',
-                                    isShakeBox: true,
-                                    isMaterial: true,
-                                    iscardZJL: false,
-                                    ishongbao: false,
-                                    isReduceNumber: true,
-                                    isMaterialUrl: req.responseObject.data.imgUrl,
-                                    isMaterialName: req.responseObject.data.awardName
-                                  })
-                                } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
-                                  that.setData({
-                                    isNumber: num,
-                                    isShowModelTitle: '恭喜你，中奖啦',
-                                    isShakeBox: true,
-                                    iscardZJL: true,
-                                    ishongbao: false,
-                                    isMaterial: false,
-                                    isReduceNumber: true,
-                                    iscardUrl: req.responseObject.data.imgUrl,
-                                    iscardName: req.responseObject.data.awardName
-                                  })
-                                } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
-                                  that.setData({
-                                    isNumber: num,
-                                    isShowModelTitle: '恭喜你，中奖啦',
-                                    isShakeBox: true,
-                                    ishongbao: true,
-                                    isMaterial: false,
-                                    iscardZJL: false,
-                                    isReduceNumber: true,
-                                    ishongbaoUrl: req.responseObject.data.imgUrl,
-                                    ishongbaoName: req.responseObject.data.awardName
-                                  })
+                                if (req.responseObject.code == 200) {
+                                    console.log('中奖音乐：' + that.data.shakeStartMusicSrc)
+                                    that.data.audioCtx = wx.createAudioContext('myAudioShake');
+                                    that.data.audioCtx.setSrc(that.data.shakeStartMusicSrc);
+                                    that.data.audioCtx.play();
+                                    if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
+                                        that.setData({
+                                            isShowModelTitle: '恭喜你，中奖啦',
+                                            isShakeBox: true,
+                                            isMaterial: true,
+                                            iscardZJL: false,
+                                            ishongbao: false,
+                                            isReduceNumber: true,
+                                            isMaterialUrl: req.responseObject.data.imgUrl,
+                                            isMaterialName: req.responseObject.data.awardName
+                                        })
+                                    } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
+                                        that.setData({
+                                            isShowModelTitle: '恭喜你，中奖啦',
+                                            isShakeBox: true,
+                                            iscardZJL: true,
+                                            ishongbao: false,
+                                            isMaterial: false,
+                                            isReduceNumber: true,
+                                            iscardUrl: req.responseObject.data.imgUrl,
+                                            iscardName: req.responseObject.data.awardName
+                                        })
+                                    } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
+                                        that.setData({
+                                            isShowModelTitle: '恭喜你，中奖啦',
+                                            isShakeBox: true,
+                                            ishongbao: true,
+                                            isMaterial: false,
+                                            iscardZJL: false,
+                                            isReduceNumber: true,
+                                            ishongbaoUrl: req.responseObject.data.imgUrl,
+                                            ishongbaoName: req.responseObject.data.awardName
+                                        })
+                                    }
+                                    wx.hideLoading()
+                                    wx.stopAccelerometer();
+                                    that.setData({
+                                        isAjax: true
+                                    })
                                 }
-                                wx.hideLoading()
-                                wx.stopAccelerometer();
-                                that.setData({
-                                  isAjax:true
-                                })
-                                that.getWinnerRequest() // 获取中奖名单
-                              }   
                             };
                             r.failBlock = (req) => {
                                 console.log('停止背景音乐')
                                 console.log('进入异步失败操作')
                                 console.log(req.responseObject)
-                              console.log('未中奖音乐：' + that.data.shakeStopMusicSrc)
+                                console.log('未中奖音乐：' + that.data.shakeStopMusicSrc)
                                 let start = () => {
                                     wx.startAccelerometer();
                                 }
@@ -475,47 +469,48 @@ Page({
                                     that.data.audioCtx = wx.createAudioContext('myAudioShake');
                                     that.data.audioCtx.setSrc(that.data.shakeStopMusicSrc);
                                     that.data.audioCtx.play();
-                                        let num = that.data.isNumber --
-                                        that.setData({
-                                          isNumber: num,
-                                          isShowModelTitle: '很遗憾，未中奖',
-                                          isShakeBox: true,
-                                          isWzj: true,
-                                          isReduceNumber: true,
-                                          isDrawn:false
-                                        })
-                                      wx.hideLoading()
-                                      wx.stopAccelerometer();
-                                      that.setData({
+                                    that.setData({
+                                        isShowModelTitle: '很遗憾，未中奖',
+                                        isShakeBox: true,
+                                        isWzj: true,
+                                        isReduceNumber: true,
+                                        isDrawn: false
+                                    })
+                                    wx.hideLoading()
+                                    wx.stopAccelerometer();
+                                    that.setData({
                                         isAjax: true
-                                      })
-                                      that.getWinnerRequest() // 获取中奖名单
+                                    })
+                                    // that.getIsNumberHttp()
                                 } else {
                                     Tool.showAlert(req.responseObject.msg, start)
                                 }
                             };
                             r.addToQueue();
+                        }
+                        lastX = x; //赋值，为下一次计算做准备
+                        lastY = y; //赋值，为下一次计算做准备
+                        lastZ = z; //赋值，为下一次计算做准备
                     }
-                    lastX = x; //赋值，为下一次计算做准备
-                    lastY = y; //赋值，为下一次计算做准备
-                    lastZ = z; //赋值，为下一次计算做准备
                 }
+
+                console.log(num)
+                wx.onAccelerometerChange((e) => {
+                    let pages = getCurrentPages()
+                    let currentPage = pages[pages.length - 1]
+                    if (currentPage.onAccelerometerChange) {
+                        console.log('摇了一次')
+                        currentPage.onAccelerometerChange(e)
+                    }
+                    shake(e)
+                })
+                this.getWinnerRequest() // 获取中奖名单
             }
-            console.log(num)
-            wx.onAccelerometerChange((e) => {
-                let pages = getCurrentPages()
-                let currentPage = pages[pages.length - 1]
-                if (currentPage.onAccelerometerChange) {
-                  console.log('摇了一次')
-                  currentPage.onAccelerometerChange(e)
-                }
-                shake(e)
-            })
-          that.getIsNumberHttp()
-        }  
     },
+
     onHide: function () {
       this.isShowSake = false // 设置第一次进入
+      console.log('影藏')
       wx.stopAccelerometer()
     },
     closeBindshakeBox: function () { // 摇一摇弹框
@@ -544,7 +539,6 @@ Page({
           isTrue: !this.data.isTrue,
           isFixed:!this.data.isFixed
         })
-        // 
         if (this.data.isTrue){
           this.selectComponent("#sign").signListRequestHttp()
         }
@@ -555,9 +549,6 @@ Page({
       this.setData({
         isNotice: !this.data.isNotice
       })
-      if (this.data.isNotice) {
-        this.selectComponent("#showNotice").noticeRequestHttp()
-      } 
     },
     showNotice: function (e) { // 显示公告
         this.setData({
@@ -594,24 +585,26 @@ Page({
         }
         let r = RequestFactory.signIsTrueRequest(data);
         r.finishBlock = (req) => {
+            console.log(req.responseObject.data.userId)
             let userId = req.responseObject.data.userId
-            if (userId>0){
-              console.log('已签到')
-              this.setData({
-                isTrue: false,
-                isFixed: false
-              })
-            } else {
-              this.setData({
-                isTrue: true,
-                isFixed: true,
-                isNotice: false
-              })
-              this.selectComponent("#sign").signListRequestHttp()
+          console.log("userId"+userId)
+            if (userId == null || userId == 'null') {
+                this.setData({
+                    isTrue: true,
+                    isFixed:true,
+                    isNotice:false
+                })
+                this.selectComponent("#sign").signListRequestHttp()
                 // if (this.data.isAuthorize) {
                 //     
                 //     // this.selectComponent("#sign").signReady()
                 // }
+            } else {
+                console.log('已签到')
+                this.setData({
+                    isTrue: false,
+                    isFixed:false
+                })
             }
         }
         Tool.showErrMsg(r)

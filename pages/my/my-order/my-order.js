@@ -2,6 +2,7 @@ let {Tool, RequestFactory,Storage} = global
 Page({
     data: {
         list: [],
+        currentTab:0,
         totalPage: '', // 页面总页数
         currentPage: 1, // 当前的页数
         pageSize: 10, // 每次加载请求的条数 默认10

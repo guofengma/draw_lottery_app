@@ -18,22 +18,24 @@ Page({
     },
     getDelivery() {
         let params = {
-            usedId: 153
+            usedId: this.data.id
         };
         let r = RequestFactory.getDelivery(params);
         // let {lists} = this.data
         r.finishBlock = (req) => {
             let datas = req.responseObject.data;
             if (datas) {
-                let list = datas.Traces;
-                let tempList = [];
+              if (datas.showapi_res_body && datas.showapi_res_body.data){
+              
                 this.setData({
                   img: datas.img,
-                  deliveryName: datas.deliveryName,
-                  LogisticCode: datas.LogisticCode,
+                  expTextName: datas.expTextName,
+                  mailNo: datas.showapi_res_body.mailNo,
                   phone: datas.phone
                 })
-                if(list.length){
+                let list = datas.showapi_res_body.data;
+                let tempList = [];
+                if (list.length) {
                   list.forEach((item) => {
                     tempList.unshift(item)
                   });
@@ -41,6 +43,8 @@ Page({
                     list: tempList
                   })
                 }
+              }
+               
             }
         };
         Tool.showErrMsg(r);
