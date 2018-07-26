@@ -25,7 +25,7 @@ Page({
     },
     querySecuritycodeUsedListByHadReceive(params) {
         let r = RequestFactory.querySecuritycodeUsedListByHadReceive(params);
-        let { lists } = this.data;
+        let {list} = this.data;
         r.finishBlock = (req) => {
             let datas = req.responseObject.data;
             if (datas.resultCount > 0) {
@@ -33,7 +33,7 @@ Page({
                     item.receive_time = Tool.formatTime(item.receive_time)
                 });
                 this.setData({
-                    lists: lists.concat(datas.data),
+                    list: list.concat(datas.data),
                     totalPage: datas.total
                 })
             }

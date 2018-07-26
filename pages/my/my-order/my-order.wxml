@@ -5,7 +5,7 @@
       <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">已发货</view>
       <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">待发货</view>
   </scroll-view>
-  <scroll-view scroll-y="true" class="scoll-h"  wx:if='{{lists.length>0}}' bindscrolltolower='onScroll'>
+  <scroll-view scroll-y="true" class="scoll-h"  wx:if='{{list.length>0}}' bindscrolltolower='onScroll'>
     <block wx:for="{{list}}" wx:key="unique">
         <view class='container whiteBg'>
           <view class='state flexR-sb font-26'>
@@ -23,7 +23,7 @@
               <view class='red ellipsis'>中奖码：{{item.securitycode}}</view>
               <view class='ellipsis'>{{item.award_name}}</view>
               <view class='flexR-sb'>
-                <text class='gray'>分类：{{item.description}}</text>
+                <text class='gray'>颜色分类：{{item.description}}</text>
                 <text>x 1</text>
               </view>
             </view>
