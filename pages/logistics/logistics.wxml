@@ -1,26 +1,37 @@
 <top-bar/>
 
 <view class='top-content flexR-sb whiteBg'>
-  <view class='img-view'>
-    <image src='/img/default-user.png'></image>
-  </view>
-  <view class='logistics'>
-    <view class='red'>运输中</view>
-    <view class='gray'>EMS:151515151551</view>
-    <view class='flexR-sb' >
-       <view>官方电话： <text class='blue'>11183</text> </view>
-       <view class='sub-btn flexR' catchtap='makePhoneCall'>物流服务</view>
+<view class='img-view'>
+    <image src='{{img}}'></image>
+</view>
+<view class='logistics'>
+    <!--<view class='red'>运输中</view>-->
+    <view class='gray'>{{deliveryName}}:{{LogisticCode}}</view>
+    <view class='flexR-sb'>
+        <view>官方电话：
+            <text class='blue'>{{phone}}</text>
+        </view>
+        <view class='sub-btn flexR' catchtap='makePhoneCall'>物流服务</view>
     </view>
-  </view>
+</view>
 </view>
 
-<view class='log-name whiteBg gray font-26'>
-   本数据有 <text class='blue'>百世汇通</text> 提供
-</view>
+<!--<view class='log-name whiteBg gray font-26'>-->
+<!--本数据有 <text class='blue'>{{name}}</text> 提供-->
+<!--</view>-->
 
-<view class='time-line whiteBg'>
-   <image src='/img/default-user.png' mode='widthFix'></image>
-   <view class='infos font-26'>
-     <view>是多少的货架上</view>
-   </view>
+<view wx:if="{{list.length>0}}" class="area">
+<block wx:for="{{list}}" wx:key="unique" wx:for-index='index'>
+    <view class="time-line whiteBg">
+        <!--<image src='/img/default-user.png' mode='widthFix' wx:if="{{index==0}}"></image>-->
+        <view class="infos font-26">
+            <view class="time">{{item.AcceptTime}}</view>
+            <view class="detail">{{item.AcceptStation}}</view>
+            <view class="clearfix"></view>
+        </view>
+    </view>
+</block>
+</view>
+<view class='time-line whiteBg' wx:else>
+<view class="infos font-26">暂无物流信息~</view>
 </view>
