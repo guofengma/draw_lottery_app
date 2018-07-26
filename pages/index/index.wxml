@@ -10,7 +10,7 @@
     visiable="{{visiable}}"
     isAcitivityEnd ='{{isAcitivityEnd}}'
     bind:getPhoneNumber="getPhoneNumber" 
-    bind:agreeGetUser="agreeGetUser">
+    bind:agreeGetUser="agreeGetUser" wx:if='{{isTrue}}'>
 </sign-in>
 <notice wx:if="{{isNotice}}"  bind:showNotice='showNotice' id='showNotice'></notice>
 <!-- <audio id="myAudio" style='display:none'></audio> -->

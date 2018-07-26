@@ -527,8 +527,9 @@ Page({
           isTrue: !this.data.isTrue,
           isFixed:!this.data.isFixed
         })
-        console.log(this.data.isFixed);
+        // this.selectComponent("#sign").signListRequestHttp()
         this.selectComponent("#sign").signListRequestHttp()
+        // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
     showNoticeClicked(){
@@ -565,9 +566,12 @@ Page({
         r.finishBlock = (req) => {
             console.log(req.responseObject.data.userId)
             let userId = req.responseObject.data.userId
+          console.log("userId"+userId)
             if (userId == null || userId == 'null') {
                 this.setData({
-                    isTrue: true
+                    isTrue: true,
+                    isFixed:true,
+                    isNotice:false
                 })
                 this.selectComponent("#sign").signListRequestHttp()
                 // if (this.data.isAuthorize) {
@@ -577,7 +581,8 @@ Page({
             } else {
                 console.log('已签到')
                 this.setData({
-                    isTrue: false
+                    isTrue: false,
+                    isFixed:false
                 })
             }
         }
