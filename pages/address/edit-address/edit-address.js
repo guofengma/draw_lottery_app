@@ -45,6 +45,7 @@ Page({
         this.setData({
           addressList: list
         })
+        Event.emit('updateAdressList')
       };
       Tool.showErrMsg(r)
       r.addToQueue();

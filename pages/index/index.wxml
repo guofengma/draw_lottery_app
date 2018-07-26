@@ -2,7 +2,15 @@
 
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
 <!-- <sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' endTime="{{activeEndTime}}" startTime="{{activeStartTime}}" tipStart ="{{preHint}}" tipStop ="{{sufHint}}" bind:closeView='closeView' bind:getIsNumberHttp="getIsNumberHttp" bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in> -->
-<sign-in isTrue='{{isTrue}}' bind:closeView='closeView' ></sign-in>
+<sign-in id='sign' 
+    isTrue='{{isTrue}}' 
+    bind:closeView='closeView' 
+    SignActivtyId='{{SignActivtyId}}' 
+    isAuthorize = "{{isAuthorize}}"
+    visiable="{{visiable}}"
+    bind:getPhoneNumber="getPhoneNumber" 
+    bind:agreeGetUser="agreeGetUser">
+</sign-in>
 <notice wx:if="{{isNotice}}"  bind:showNotice='showNotice' id='showNotice'></notice>
 <!-- <audio id="myAudio" style='display:none'></audio> -->
 <audio id="myAudioShake" style='display:none'></audio>

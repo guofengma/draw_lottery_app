@@ -109,6 +109,7 @@ Page({
       let r = RequestFactory.deleteUserAddress({ id: this.data.address.id });
       r.finishBlock = (req) => {
         this.successCallBack("删除成功")
+        Event.emit('updateAdressList')
       };
       Tool.showErrMsg(r)
       r.addToQueue();

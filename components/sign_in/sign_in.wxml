@@ -7,18 +7,18 @@
     <view class="clearPadding">
         <view class="calendar">
              <view class="calen_header">
-                        <button class='calendar_month_prev btn-img btn-height' bindtap="sign_prev">
-                            <image src="../../img/signleft.png"></image>
-                        </button>
-                        <button class='calendar_month_next btn-img btn-height' bindtap="sign_next">
-                            <image src="../../img/signright.png" ></image>
-                        </button>
-                    </view>
-                    <view class="calenbox">
-                        <view class="calendar_thisday">
-                            <text>{{showYear}}</text>年<text>{{showMonth}}</text>月
-                        </view>
-                    </view> 
+                <button class='calendar_month_prev btn-img btn-height' bindtap="sign_prev">
+                    <image src="../../img/signleft.png"></image>
+                </button>
+                <button class='calendar_month_next btn-img btn-height' bindtap="sign_next">
+                    <image src="../../img/signright.png" ></image>
+                </button>
+              </view>
+              <view class="calenbox">
+                  <view class="calendar_thisday">
+                      <text>{{showYear}}</text>年<text>{{showMonth}}</text>月
+                  </view>
+              </view> 
             <view class="calendar_wrapper">
                 <view class="week_day">
                     <view class="weeklist">日</view>
@@ -31,59 +31,58 @@
                 </view>
                 <view>
                     <view class="month_day">
-                        <view class="day_list {{item.className}}"  wx:for="{{signDays[0]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.day}}">{{item == null ? '' : item.normalday}}
+                        <view class="day_list {{item.className}}"  wx:for="{{signDays[0]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.title}}">{{item == null ? '' : item.normalday}}
                             <!-- <view class="day_hover" wx:if="{{item.signday=='is'}}"></view> -->
                         </view>
                     </view>
                     <view class="month_day">
-                        <view class="day_list {{item.className}}"  wx:for="{{signDays[1]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.day}}">{{item == null ? '' : item.normalday}}<view class="day_hover" wx:if="{{signs.indexof(item)>-1}}"></view>
+                        <view class="day_list {{item.className}}"  wx:for="{{signDays[1]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.title}}">{{item == null ? '' : item.normalday}}<view class="day_hover" wx:if="{{signs.indexof(item)>-1}}"></view>
                          <!-- <view class="day_hover" wx:if="{{item.signday=='is'}}"></view> -->
                         </view>
                     </view>
                     <view class="month_day">
-                        <view class="day_list {{item.className}}"  wx:for="{{signDays[2]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.day}}">{{item == null ? '' : item.normalday}}
+                        <view class="day_list {{item.className}}"  wx:for="{{signDays[2]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.title}}">{{item == null ? '' : item.normalday}}
                             <!-- <view class="day_hover" wx:if="{{item.signday=='is'}}"></view> -->
                         </view>
                     </view>
                     <view class="month_day">
-                        <view class="day_list {{item.className}}"  wx:for="{{signDays[3]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.day}}">{{item == null ? '' : item.normalday}}
+                        <view class="day_list {{item.className}}"  wx:for="{{signDays[3]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.title}}">{{item == null ? '' : item.normalday}}
                             <!-- <view class="day_hover" wx:if="{{item.signday=='is'}}"></view> -->
                         </view>
                     </view>
                     <view class="month_day">
-                        <view class="day_list {{item.className}}"  wx:for="{{signDays[4]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.day}}">{{item == null ? '' : item.normalday}}
+                        <view class="day_list {{item.className}}"  wx:for="{{signDays[4]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.title}}">{{item == null ? '' : item.normalday}}
                             <!-- <view class="day_hover" wx:if="{{item.signday=='is'}}"></view> -->
                         </view>
                     </view>
                     <view class="month_day">
-                        <view class="day_list {{item.className}}"  wx:for="{{signDays[5]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.day}}">{{item == null ? '' : item.normalday}}
+                        <view class="day_list {{item.className}}"  wx:for="{{signDays[5]}}"  wx:key="un" wx:for-index="index"  wx:for-item="item" catchtap='dateClicked' data-num='{{item.num}}' data-class='{{item.className}}' data-day="{{item.title}}">{{item == null ? '' : item.normalday}}
                             <!-- <view class="day_hover" wx:if="{{item.signday=='is'}}"></view> -->
                         </view>
                     </view>
                 </view>
                 <!--控制月份日历输出-->
             </view>
-            <view class="text-center"  wx:if="{{signtype=='1'}}">
-                <button class="btn-qiandao"  bindtap="sign_start" >签到</button>
+            <view class="text-center"  wx:if="{{signtype=='1' && SignActivtyId}}">
+              <!-- 活动已经开始 未签到 -->
+              
+              <button class='btn-qiandao'wx:if='{{!isAuthorize&&!visiable}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">签到</button>
+              <button wx:elif='{{!isAuthorize&&visiable}}' open-type="getUserInfo" class='btn-qiandao' bindgetuserinfo="agreeGetUser" lang="zh_CN">签到</button>
+              <button wx:else class="btn-qiandao"  bindtap="sign_start" >签到</button>
             </view>
-            <view class="text-center"  wx:if="{{signtype=='2'}}">
-                <button class="btn-qiandao1" bindtap="sign_end" >已签到</button>
+            <view class="text-center"  wx:if="{{signtype=='2' && SignActivtyId}}">
+              <!-- 活动已经开始 已签到 -->
+              <button class="btn-qiandao1" bindtap="sign_end" >已签到</button>
+            </view>
+            <view class="text-center"  wx:if="{{!SignActivtyId}}">
+              <!-- 活动未开始 -->
+              <button class="btn-qiandao1" >未开始</button>
             </view>
         </view>
     </view>
 </view>
 </view>
 
-
-
-
-<!-- <view class="maskbox" style="display: {{for_signs}}" bindtap="close_qdbox"></view>
-<view class="qdbox" style="display: {{for_signs}}" bindtap="close_qdbox">
-      <view class="hover_title_s"><strong>签到奖励</strong></view>
-      <view class="hover_title">每天登陆<br />签到可领取水晶</view>
-      <view class="hover_powerimg"></view>
-      <view class="hover_powers">{{powerData}}</view>
-  </view> -->
   <view class="headers_wrapper">
       <view class="for_headerleft">
       <text class="headersTitle">签到规则</text>
@@ -99,24 +98,31 @@
 
 
 
-                    <view class="model-view-bg" wx:if="{{tip}}">
-                        <view class="signShowBox"><!--连续签到弹框-->
-                            <view class="signContent">
-                                <text class="signRedText" >{{signTitle}}</text>
-                                <view class="signBlankText">
-                                    赠送 <text class="signRedText">{{signNumber}}次</text>免费抽奖机会
-                                </view>
-                            </view>
-                            <view class="closeBtn" bindtap='closeSingBox'>
-                                <image src="../../img/close-x.png"></image>
-                            </view>
-                        </view>
-                    </view>
-                <view class="closeBtn" bindtap='closeView'>  <!--关闭日历-->
-                    <image src="../../img/close-x.png"></image>
-                </view>    
-         </view>           
-     </view>
+    <view class="model-view-bg" wx:if="{{tips}}">
+      <view class="signShowBox"><!--连续签到弹框-->
+          <view class="signContent">
+              <text class="signRedText" >{{tipsContent.title}}</text>
+              <view class="signBlankText">
+                  赠送 <text class="signRedText">{{tipsContent.content}}次</text>免费抽奖机会
+              </view>
+          </view>
+          <view class="closeBtn" bindtap='closeSingBox'>
+            <image src="../../img/close-x.png"></image>
+          </view>
+      </view>
+    </view>
+      <!-- 关闭日历 -->
+      <button wx:if='{{!isAuthorize&&!visiable}}' class='closeBtn'  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+        <image src="../../img/close-x.png"></image>
+      </button>
+      <button wx:elif='{{!isAuthorize&&visiable}}' open-type="getUserInfo" class='closeBtn' bindgetuserinfo="agreeGetUser" lang="zh_CN">
+        <image src="../../img/close-x.png"></image>
+      </button>
+      <view wx:else class="closeBtn" bindtap='closeView'>  
+        <image src="../../img/close-x.png"></image>
+      </view>    
+    </view>           
+  </view>
 </view>
 
 
