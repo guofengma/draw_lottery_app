@@ -305,7 +305,7 @@ Page({
     },
     getWinnerRequest() { // 获取公告中奖名单
         let data = {
-            activityId: Storage.getActivityId() || ''
+            activityId: Storage.getActivityId() || '' 
         };
         let r = RequestFactory.winnerRequest(data);
         r.finishBlock = (req) => {
