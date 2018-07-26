@@ -155,8 +155,10 @@ export default class Operation {
         this.getCityList = '/admin/areaApi/getCityList'
 
         // 获取区
-        this.getAreaList = '/admin/areaApi/getAreaList'
+        this.getAreaList = '/admin/areaApi/getAreaList';
 
+        /**********  订单物流列表 *******************/
+        this.querySecuritycodeUsedListByHadReceive = '/user/securitycodeUsed/querySecuritycodeUsedListByHadReceive';
     }
 
     static sharedInstance() {

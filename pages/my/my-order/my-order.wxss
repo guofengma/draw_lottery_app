@@ -56,3 +56,13 @@
   color: #666666;
   font-size: 22rpx;
 }
+.no-result image{
+  width: 268rpx;
+  margin-bottom: 10rpx;
+}
+.no-result{
+  width: 268rpx;
+  margin: 10rpx auto;
+  margin-top: 80rpx;
+  text-align: center;
+}
