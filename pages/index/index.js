@@ -137,8 +137,8 @@ Page({
           isDisplay: false
         })
       } else if (this.data.isAcitivityEnd) { // 活动已结束
-        console.log('结束')
-        Tool.showAlert(this.data.sufHint)
+        console.log('结束')     
+        Tool.showAlert(this.data.preHint)
       } else if (this.data.isAcitivityPause) {
         console.log('暂停')
         Tool.showAlert('活动已暂停')
@@ -150,7 +150,7 @@ Page({
         this.setData({
           disabled: true
         })
-        Tool.showAlert(this.data.preHint)
+        Tool.showAlert(this.data.sufHint)
       }
 
     },
@@ -164,19 +164,19 @@ Page({
         })
       } else if (this.data.isAcitivityEnd) { // 活动已结束
         console.log('结束')
-        Tool.showAlert(this.data.preHint)
+        Tool.showAlert(this.data.sufHint)
       } else if (this.data.isAcitivityPause) {
         Tool.showAlert('活动已暂停')
         this.setData({
           disabled: false,
-        //   isDisplay: true
+          isDisplay: true
         })
       } else {
         console.log('开启')
         this.setData({
           disabled: true
         })
-        Tool.showAlert(this.data.sufHint)
+        Tool.showAlert(this.data.preHint) 
       }
     },
     SecurityCodeRequestHttp() { // 防伪码验证
@@ -281,7 +281,7 @@ Page({
               return
             }
             if (that.data.isAcitivityPause) {
-              Tool.showAlert('活动暂停')
+              Tool.showAlert('活动已暂停')
               wx.stopAccelerometer();
               return
             }

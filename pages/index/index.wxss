@@ -153,7 +153,7 @@
   top: 180rpx;
   left: 45rpx;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeDraw.png') no-repeat center center;
-  background-size: 100%;
+  background-size: 100% 100%;
   z-index: 100003;
   overflow: hidden;
 }
