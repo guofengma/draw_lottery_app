@@ -65,6 +65,7 @@ Page({
       this.getActivtyId();
       this.getNoticeNumRequst() // 获取公告
       Event.on('didLogin', this.didLogin, this);
+      Tool.isEmpty(null)
     },
     getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();

@@ -340,7 +340,9 @@ Component({
     },
     agreeGetUser(e){
       this.triggerEvent('agreeGetUser', e.detail)
-      this.triggerEvent('closeView', false)
+      if(e.target.dataset.index!=1){
+        this.triggerEvent('closeView', false)
+      }
     }
   },
   ready: function () {
