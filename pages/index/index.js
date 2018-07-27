@@ -318,6 +318,10 @@ Page({
               that.data.audioCtx.setSrc(that.data.shakeStartMusicSrc);
               that.data.audioCtx.play();
               let num = that.data.isNumber--
+              let isName = ''
+              let Dname = req.responseObject.data.dictionaryName == null ? '' : req.responseObject.data.dictionaryName
+              isName = '"' + Dname + '"' + req.responseObject.data.awardName
+              console.log(isName)
               if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                 that.setData({
                   isNumber: num,
@@ -330,7 +334,7 @@ Page({
                   isReduceNumber: true,
                   isNumberReduce:'isNumberReduce',
                   isMaterialUrl: req.responseObject.data.imgUrl,
-                  isMaterialName: req.responseObject.data.awardName
+                  isMaterialName: isName
                 })
               } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
                 that.setData({
@@ -344,7 +348,7 @@ Page({
                   isReduceNumber: true,
                   isNumberReduce: 'isNumberReduce',
                   iscardUrl: req.responseObject.data.imgUrl,
-                  iscardName: req.responseObject.data.awardName
+                  iscardName: isName
                 })
               } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
                 that.setData({
