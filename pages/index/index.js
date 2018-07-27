@@ -37,8 +37,8 @@ Page({
         activeEndTime: '',
         SignActivtyId: false,
         disabled: false,
-        isPlusNumber: false,
-        isReduceNumber: false,
+        isPlusNumber: false, // 是否加+1 
+        isReduceNumber: false, // 是否减1
         isDrawn: true,
         preHint: '', // 开始提示
         sufHint: '', // 结束提示
