@@ -182,4 +182,12 @@ export default class Storage {
     static getRedPackageNum(day) {
       return this.getterFor('RedPackageNum')
     }
+    //  存储次数
+    static setIsNumber(num) {
+      return this.setterFor('IsNumber', num)
+    }
+    static getIsNumber(day) {
+      return this.getterFor('IsNumber')
+    }
+
 }

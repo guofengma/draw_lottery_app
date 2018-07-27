@@ -51,6 +51,7 @@ Component({
         this.calendar()
       }
       if (!cookies) return
+      console.log("哈啊啊啊啊啊啊啊啊啊啊啊啊啊")
       let timeData = '';
       if (!month) {
         let getToday = new Date();
@@ -98,7 +99,21 @@ Component({
         }
 
       };
-      Tool.showErrMsg(r);
+      r.failBlock = (req) => {
+        this.calendar()
+        let callBack = () => {
+
+        }
+        if (req.responseObject.code == 210) {
+          callBack = () => {
+            let page = '/pages/login/login'
+            Tool.navigateTo(page + '?isBack=' + true)
+          }
+        }
+        if (req.responseObject.msg) {
+          Tool.showAlert(req.responseObject.msg, callBack)
+        };
+      }
       r.addToQueue();
     },
     calendar(myDays = [], weekdays = [], preMonth) {
