@@ -138,11 +138,9 @@ Page({
           disabled: false,
           isDisplay: false
         })
-      } else if (this.data.isAcitivityEnd) { // 活动已结束
-        console.log('结束')     
+      } else if (this.data.isAcitivityEnd) { // 活动已结束   
         Tool.showAlert(this.data.preHint)
       } else if (this.data.isAcitivityPause) {
-        console.log('暂停')
         Tool.showAlert('活动已暂停')
         this.setData({
           disabled: false,
@@ -198,7 +196,7 @@ Page({
           isDisplay: true
         })
         Tool.showAlert('活动已暂停')
-      } else {
+      }else {
           if (this.data.userId == '' || this.data.userId == null) {
               return
           }
@@ -394,9 +392,7 @@ Page({
                 wx.hideLoading()
                 wx.stopAccelerometer();
                 that.setData({
-                  isAjax: true,
-                  isReduceNumber: false,
-                  isNumberReduce: '',
+                  isAjax: true
                 })
               } else {
                 Tool.showAlert(req.responseObject.msg, start)
@@ -417,9 +413,6 @@ Page({
         }
         shake(e)
       })
-      that.setData({
-        isReduceNumber: false
-      })
     },
     closeBindshakeBox() { // 摇一摇弹框
       let that = this
@@ -428,9 +421,11 @@ Page({
       })
       that.data.audioCtx.pause()
       this.getIsNumberHttp();
-      that.setData({
-        isReduceNumber: false
-      })
+      setTimeout(()=>{
+        that.setData({
+          isReduceNumber: false
+        })
+      },1000)
     },
     closeView(e) { // 显示天天签到
         this.setData({

@@ -1,8 +1,7 @@
 <view>
     <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
     <view class='fixed-top'>
-        <!-- <image src='https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yw_images/activityDetail.jpg' mode='widthFix'></image> -->
-        <image src="{{current==0?'/img/action.png':'/img/nv.png'}}"></image>
+      <image src="{{current==0? imgUrl1:imgUrl2}}"></image>
     </view>
     <view class="tabar flexR {{isIPhoneX.className}}">
         <view class="tabar-btn {{current==0?'active':''}}" catchtap='changeInf' data-index='0'>活动规则</view>

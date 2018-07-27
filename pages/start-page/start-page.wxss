@@ -4,7 +4,7 @@ image{
 .timer{
   position: absolute;
   right: 64rpx;
-  top: 64rpx;
+  top: 50rpx;
   width: 120rpx;
 	height: 44rpx;
 	background-color: rgba(0, 0, 0, 0.3);
@@ -12,4 +12,9 @@ image{
 	border:  1rpx solid rgba(255, 255, 255, 0.3);
   color: #fff;
   font-size: 22rpx;
+}
+.fixed-top{
+  height: 100%;
+  background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/start-page-bg.png') no-repeat left top;
+  background-size: 100% 100%;
 }

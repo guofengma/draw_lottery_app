@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    current:'0'
+    current:'0',
+    imgUrl1:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yw_images/activityDetail.jpg',
+    imgUrl2: 'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yw_images/activityDetail2.jpg',
   },
 
   /**
