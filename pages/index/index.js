@@ -37,6 +37,8 @@ Page({
         disabled: false,
         isPlusNumber: false, // 是否加+1 
         isReduceNumber: false, // 是否减1
+        isNumberPlus: '', // 加1动画
+        isNumberReduce: '',// 减1动画
         isDrawn: true,
         preHint: '', // 开始提示
         sufHint: '', // 结束提示
@@ -213,6 +215,7 @@ Page({
               // Tool.showAlert('兑换成功')
               this.setData({
                 isPlusNumber: true,
+                isNumberPlus: 'isNumberPlus',
                 disabled: true
               })
               this.getIsNumberHttp()
@@ -235,7 +238,8 @@ Page({
           })
           setTimeout(() => {
             that.setData({
-              isPlusNumber: false
+              isPlusNumber: false,
+              isNumberPlus: '',
             })
           },1000)
           this.toAccelerometer()
@@ -323,6 +327,7 @@ Page({
                   isWzj: false,
                   ishongbao: false,
                   isReduceNumber: true,
+                  isNumberReduce:'isNumberReduce',
                   isMaterialUrl: req.responseObject.data.imgUrl,
                   isMaterialName: req.responseObject.data.awardName
                 })
@@ -336,6 +341,7 @@ Page({
                   isWzj: false,
                   isMaterial: false,
                   isReduceNumber: true,
+                  isNumberReduce: 'isNumberReduce',
                   iscardUrl: req.responseObject.data.imgUrl,
                   iscardName: req.responseObject.data.awardName
                 })
@@ -349,6 +355,7 @@ Page({
                   iscardZJL: false,
                   isWzj: false,
                   isReduceNumber: true,
+                  isNumberReduce: 'isNumberReduce',
                   ishongbaoUrl: req.responseObject.data.imgUrl,
                   ishongbaoName: req.responseObject.data.awardName
                 })
@@ -379,6 +386,7 @@ Page({
                   ishongbao: false,
                   isMaterial: false,
                   isReduceNumber: true,
+                  isNumberReduce: 'isNumberReduce',
                   isDrawn: false
                 })
                 wx.hideLoading()
