@@ -780,6 +780,5 @@ export default class Tool {
       })
       return { isIPhoneX,showBottom, className}
     }
-
 }
 
