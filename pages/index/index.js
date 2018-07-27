@@ -352,10 +352,10 @@ Page({
                   ishongbaoUrl: req.responseObject.data.imgUrl,
                   ishongbaoName: req.responseObject.data.awardName
                 })
-                that.getWinnerRequest()  // 中奖一次以后更新中奖名单
               }
               wx.hideLoading()
               wx.stopAccelerometer();
+              that.getWinnerRequest()  // 中奖一次以后更新中奖名单
               that.setData({
                 isAjax: true
               })
