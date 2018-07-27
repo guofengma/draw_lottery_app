@@ -23,8 +23,8 @@
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "抽奖系统",
-        "navigationBarTextStyle": "black"
+        "navigationBarBackgroundColor": "#000",
+        "navigationBarTitleText": "天天朵宝",
+        "navigationBarTextStyle": "#fff"
     }
 }
