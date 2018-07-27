@@ -38,8 +38,8 @@
       <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">
-        <view class="isNumberPlus" wx:if="{{isPlusNumber}}">+1</view>
-        <view class="isNumberReduce" wx:if="{{isReduceNumber}}">-1</view>
+        <view class="{{isNumberPlus}}" wx:if="{{isPlusNumber}}">+1</view>
+        <view class="{{isNumberReduce}}" wx:if="{{isReduceNumber}}">-1</view>
       <!-- <view class="numberPlus"> -->
         <text class="">
           您有{{isNumber}}次摇奖机会
