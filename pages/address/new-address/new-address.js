@@ -13,6 +13,7 @@ Page({
     region:[],// 省市区的数组
     isChoose:false, // 是否选择为默认地址
     door:1, // 1常规 2 朵地址
+    hidden:false // 解决层级问题
   },
   onLoad: function (options) {
     Tool.isIPhoneX(this)
@@ -46,7 +47,8 @@ Page({
     }
     this.setData({ 
       content: content,
-      region: region
+      region: region,
+      hidden: e.detail.hidden
     })
     if (e.detail.btnType == 2) {
       // this.updateDealerRegion(e)

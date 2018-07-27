@@ -9,7 +9,8 @@
   <city-picker bind:pickerClicked="pickerClicked" id='picker' region='{{region}}'>
       <template is="cell-line" data="{{label:'所在区域',placeholder:'请选择',content}}"/>
   </city-picker> 
-  <textarea placeholder="请输入详细地址" placeholder-style="color:#999;" class='font-26' name='address' value='{{address.address}}'/>
+  <textarea wx:if="{{!hidden}}" placeholder="请输入详细地址" placeholder-style="color:#999;" class='font-26 textarea' name='address' value='{{address.address}}'/>
+  <view class='textarea' wx:else></view>
 
   <view class='font-26 whiteBg group-line'>
     <view class='flexR-sb' wx:if="{{addressType==1&&door==1}}">
