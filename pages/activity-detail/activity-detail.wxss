@@ -1,3 +1,24 @@
+@import "/components/iPhoneX-line/iPhoneX-line";
 image{
   width: 100%
+}
+.tabar{
+  height: 88rpx;
+}
+.tabar-btn{
+  width: 50%;
+  height: 88rpx;
+  background: #dddddd;
+  display: inline-block;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 0 1rpx 0 1rpx;
+  border-radius: 0;
+}
+.tabar-btn:first-child{
+  border-right:6rpx solid #fff;
+}
+.tabar-btn.active{
+  background-color: #e9d96a;
 }

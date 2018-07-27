@@ -682,7 +682,6 @@ export default class Tool {
 
     static showErrMsg(r) {
       r.failBlock = (req) => {
-        console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
         let callBack = ()=>{
 

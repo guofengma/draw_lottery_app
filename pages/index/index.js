@@ -136,11 +136,9 @@ Page({
           disabled: false,
           isDisplay: false
         })
-      } else if (this.data.isAcitivityEnd) { // 活动已结束
-        console.log('结束')     
+      } else if (this.data.isAcitivityEnd) { // 活动已结束   
         Tool.showAlert(this.data.preHint)
       } else if (this.data.isAcitivityPause) {
-        console.log('暂停')
         Tool.showAlert('活动已暂停')
         this.setData({
           disabled: false,
