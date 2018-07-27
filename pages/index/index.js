@@ -30,7 +30,6 @@ Page({
         iscardUrl: '',
         ishongbaoUrl: '',
         ishongbaoName: '',
-        src: '',
         isStop: true,
         animationData: {},
         winnerBlock: [],
@@ -99,7 +98,7 @@ Page({
     onReady: function () {
 
     },
-    getActivtyId() { // 获取活动Id
+    getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
         r.finishBlock = (req) => {
           if (req.responseObject.data == null || req.responseObject.data == 'null'){
@@ -127,13 +126,13 @@ Page({
                     SignActivtyId: false
                 })
             } else {
-              let isAcitivityPause = false
+              let isAcitivityPause = false 
               if (req.responseObject.data.actStauts ==3) { // 活动暂停
-                isAcitivityPause = true
+                isAcitivityPause = true 
               }
               this.setData({
-                isAcitivityPause: isAcitivityPause, // 活动开启
-                SignActivtyId: true
+                isAcitivityPause: isAcitivityPause,  
+                SignActivtyId: true// 活动开启
               })
             }
             console.log(req.responseObject.data.endTime, currentTime)
@@ -146,9 +145,11 @@ Page({
                 isAcitivityEnd: true // 活动已结束
               })
             }
-            // }
-            //this.getIsNumberHttp() // 获取抽奖次数
-            this.getWinnerRequest() // 获取中奖名单
+            if (callBack!==undefined){
+                this.getIsNumberHttp()
+              }
+              //this.getIsNumberHttp() // 获取抽奖次数
+              this.getWinnerRequest() // 获取中奖名单
             // this.selectComponent("#showNotice").noticeRequestHttp()
           }
         }
@@ -186,46 +187,54 @@ Page({
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         // console.log(getStartTime > currentTime)
-        if (getStartTime > currentTime) {
+        if (this.data.SignActivtyId) {
             console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
-        } else {
+          this.setData({
+            disabled: false,
+            isDisplay: false
+          })
+        } else if (!this.data.isAcitivityEnd){ // 活动已结束
             console.log('这？')
-            this.setData({
-                disabled: false,
-                isDisplay: false
-            })
+          Tool.showAlert(this.data.sufHint)
+        } else {
+          this.setData({
+            disabled: true
+          })
+          Tool.showAlert(this.data.preHint)
         }
+     
     },
     bindBlur() {
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         console.log(getStartTime > currentTime)
-        if (getStartTime > currentTime) {
-            console.log('活动未开启')
-            this.setData({
-                disabled: true
-            })
-            wx.showModal({  // 活动未开启
-                title: '',
-                content: this.data.preHint,
-            })
+        if (this.data.SignActivtyId) {
+          this.setData({
+            disabled: false,
+            isDisplay: false
+          })
+        } else if (this.data.isAcitivityEnd) { // 活动已结束
+          console.log('结束')
+          Tool.showAlert(this.data.sufHint)
         } else {
-            this.setData({
-                disabled: false,
-                isDisplay: false
-            })
+          console.log('活动未开启')
+          this.setData({
+            disabled: true
+          })
+          Tool.showAlert(this.data.preHint)
         }
     },
     didLogin() { // 获取 token
         this.selectComponent("#topBar").getUserId()
         this.getIsNumberHttp() // 获取抽奖次数
+        let callBack = () =>{
+            this.getIsNumberHttp()
+        }
+        if (this.data.activityId){
+            this.getIsNumberHttp()
+        } else {
+            this.getActivtyId(callBack)
+        }
         this.setData({
             isAuthorize: Storage.didAuthorize() || '',
         })
@@ -235,12 +244,19 @@ Page({
         this.setData({
             userId: Storage.memberId() || ''
         })
+      console.log(!this.data.SignActivtyId)
         // console.log(this.data.userId)
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
-        if (getStartTime > currentTime) {
-            Tool.showAlert('活动未开启')
-        } else {
+        if (!this.data.SignActivtyId) {
+            Tool.showAlert(this.data.preHint)
+        } else if (this.data.isAcitivityEnd){
+            Tool.showAlert(this.data.sufHint)
+        } else if (this.data.isAcitivityPause){
+            this.setData({
+              disabled: true
+            })
+        }else {
             if (this.data.userId == '' || this.data.userId == null) {
                 return
             }
@@ -263,7 +279,8 @@ Page({
                         title: '兑换成功',
                     })
                     this.setData({
-                        isPlusNumber: true
+                        isPlusNumber: true,
+                        disabled: true
                     })
                     this.getIsNumberHttp()
                     wx.startAccelerometer();
@@ -297,14 +314,13 @@ Page({
     },
     getWinnerRequest() { // 获取公告中奖名单
         let data = {
-            activityId: Storage.getActivityId() || ''
+            activityId: Storage.getActivityId() || '' 
         };
         let r = RequestFactory.winnerRequest(data);
         r.finishBlock = (req) => {
             if (Tool.isEmpty(req.responseObject.data)) {
 
             } else {
-                console.log(req.responseObject.data[0].telephone)
                 let arrNumber = req.responseObject.data;
                 let arrLength = arrNumber.length;
                 let arr = [];
@@ -349,56 +365,44 @@ Page({
     },
     isShowSake: false,
     onShow: function () { // 进行摇一摇
-        let that = this;
-        this.isShowSake = true
-        if(this.isShowSake){
-          this.getActivtyId()
-          wx.startAccelerometer()
-        }
-        console.log('显示')
-        if(this.data.isfalse){
-          console.log('未授权')
-            return false
-        } else {
-            let that = this;
-            this.isShowSake = true
-            if (this.data.isfalse) {
-                Tool.showAlert('未授权')
-                return false
-            } else if (this.data.SignActivtyId) { // 活动未开启
-                console.log('活动未开启时进入')
-                Tool.showAlert(this.data.preHint)
-                return false
-            } else if (this.data.isAcitivityEnd) { // 活动已结束
-                console.log('活动已结束时进入')
-                Tool.showAlert(this.data.sufHint)
-                return false
-            } else {
-                console.log('进入摇一摇')
-                let num = 0
-                let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
-                let x = 0,
-                    y = 0,
-                    z = 0,
-                    lastX = 0,
-                    lastY = 0,
-                    lastZ = 0; //此组变量分别记录对应x、y、z三轴的数值和上次的数值
-                let shakeSpeed = 110; //设置阈值
-                function shake(acceleration) {
-                    num++
-                    let nowTime = new Date().getTime(); //记录当前时间
-                    //如果这次摇的时间距离上次摇的时间有一定间隔 才执行
-                    if (nowTime - lastTime > 100) {
-                        let diffTime = nowTime - lastTime; //记录时间段
-                        lastTime = nowTime; //记录本次摇动时间，为下次计算摇动时间做准备
-                        x = acceleration.x; //获取x轴数值，x轴为垂直于北轴，向东为正
-                        y = acceleration.y; //获取y轴数值，y轴向正北为正
-                        z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
-                        //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
-                        let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
-                        // console.log('speed:'+speed)
-                        if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
-
+      let that = this;
+      this.isShowSake = true
+      let SignActivtyId = this.data.SignActivtyId
+      let isAcitivityEnd = this.data.isAcitivityEnd
+      let currentTime = new Date().getTime();
+      let getStartTime = this.data.activeStartTime
+      if (this.data.isfalse) {
+        Tool.showAlert('未授权')
+      } else if (getStartTime > currentTime) { // 活动未开启
+        console.log('活动未开启时进入')
+        Tool.showAlert(this.data.preHint)
+      } else if (isAcitivityEnd){ // 活动已结束
+        console.log('活动已结束时进入')
+        Tool.showAlert(this.data.sufHint)
+      } else {
+            console.log('进入摇一摇')
+            let num = 0
+            let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
+            let x = 0,
+                y = 0,
+                z = 0,
+                lastX = 0,
+                lastY = 0,
+                lastZ = 0; //此组变量分别记录对应x、y、z三轴的数值和上次的数值
+            let shakeSpeed = 110; //设置阈值
+            function shake(acceleration) {
+                let nowTime = new Date().getTime(); //记录当前时间
+                //如果这次摇的时间距离上次摇的时间有一定间隔 才执行
+                if (nowTime - lastTime > 100) {
+                    let diffTime = nowTime - lastTime; //记录时间段
+                    lastTime = nowTime; //记录本次摇动时间，为下次计算摇动时间做准备
+                    x = acceleration.x; //获取x轴数值，x轴为垂直于北轴，向东为正
+                    y = acceleration.y; //获取y轴数值，y轴向正北为正
+                    z = acceleration.z; //获取z轴数值，z轴垂直于地面，向上为正
+                    //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
+                    let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
+                    // console.log('speed:'+speed)
+                    if (speed > shakeSpeed && that.data.isAjax) { //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
                             that.setData({
                                 lastTime: nowTime,
                                 isAjax: false
@@ -499,7 +503,6 @@ Page({
                     }
                 }
 
-                console.log(num)
                 wx.onAccelerometerChange((e) => {
                     let pages = getCurrentPages()
                     let currentPage = pages[pages.length - 1]
@@ -509,11 +512,19 @@ Page({
                     }
                     shake(e)
                 })
-                this.getWinnerRequest() // 获取中奖名单
+                // this.getWinnerRequest() // 获取中奖名单
             }
-        }
+            wx.onAccelerometerChange((e) => {
+                let pages = getCurrentPages()
+                let currentPage = pages[pages.length - 1]
+                if (currentPage.onAccelerometerChange) {
+                  console.log('摇了一次')
+                  currentPage.onAccelerometerChange(e)
+                }
+                shake(e)
+            })
+          // that.getIsNumberHttp()
     },
-
     onHide: function () {
       this.isShowSake = false // 设置第一次进入
       console.log('影藏')
@@ -542,11 +553,12 @@ Page({
     },
     closeView(e) { // 显示天天签到
         this.setData({
-          isTrue: !this.data.isTrue,
-          isFixed:!this.data.isFixed
+            isTrue: !this.data.isTrue,
+            isFixed:!this.data.isFixed
         })
-        // this.selectComponent("#sign").signListRequestHttp()
+        if (this.data.isTrue){
         this.selectComponent("#sign").signListRequestHttp()
+        }
         // this.selectComponent("#sign").signReady()
         wx.startAccelerometer()
     },
@@ -561,8 +573,8 @@ Page({
         })
         if (this.data.isNotice) {
             this.selectComponent("#showNotice").noticeRequestHttp()
-        }
-        // 如果活动开始了
+        } 
+        // 如果活动开始了 
         if (this.data.SignActivtyId){
           this.getIsSign()
         }
@@ -593,7 +605,7 @@ Page({
                 })
                 this.selectComponent("#sign").signListRequestHttp()
                 // if (this.data.isAuthorize) {
-                //
+                //     
                 //     // this.selectComponent("#sign").signReady()
                 // }
             } else {
@@ -684,7 +696,7 @@ Page({
 
             }
         })
-    },
+    },   
     getLogin(userInfo) { // 登录
         this.setData({
             userInfo: userInfo
