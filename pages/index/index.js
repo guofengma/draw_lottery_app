@@ -140,62 +140,79 @@ Page({
         })
     },
     bindFocus() {
+      console.log(this.data.SignActivtyId)
         // 活动未开启input 无法输入
-        let currentTime = this.data.activeEndTime
+        let currentTime = new Date().getTime()
         let getStartTime = this.data.activeStartTime //活动开始时间
-        if (this.data.SignActivtyId) {
+      if (this.data.SignActivtyId) {
             console.log('活动开启')
           this.setData({
             disabled: false,
             isDisplay: false
           })
-        } else if (!this.data.isAcitivityEnd){ // 活动已结束
+        } else if (this.data.isAcitivityEnd){ // 活动已结束
             console.log('结束')
           Tool.showAlert(this.data.sufHint)
+        } else if (this.data.isAcitivityPause){
+          Tool.showAlert('活动已暂停')
+          this.setData({
+            disabled: false,
+            isDisplay: true
+          })
         } else {
-          console.log('为开启')
+          console.log('未开启')
           this.setData({
             disabled: true
           })
-          Tool.showAlert(this.data.preHint)
+          Tool.showAlert(this.data.sufHint)
         }
      
     },
     bindBlur() {
-        let currentTime = this.data.activeEndTime
-        let getStartTime = this.data.activeStartTime //活动开始时间
-        console.log(getStartTime > currentTime)
-        if (this.data.SignActivtyId) {
-          this.setData({
-            disabled: false,
-            isDisplay: false
-          })
-        } else if (!this.data.isAcitivityEnd) { // 活动已结束
-          console.log('结束')
-          Tool.showAlert(this.data.sufHint)
-        } else {
-          console.log('开启')
-          this.setData({
-            disabled: true
-          })
-          Tool.showAlert(this.data.preHint)
-        }
+      console.log(this.data.SignActivtyId)
+      let currentTime = new Date().getTime()
+      let getStartTime = this.data.activeStartTime //活动开始时间
+      console.log(getStartTime > currentTime)
+      if (this.data.SignActivtyId) {
+        this.setData({
+          disabled: false,
+          isDisplay: false
+        })
+      } else if (this.data.isAcitivityEnd) { // 活动已结束
+        console.log('结束')
+        Tool.showAlert(this.data.preHint)
+      } else if (this.data.isAcitivityPause) {
+        Tool.showAlert('活动已暂停')
+        this.setData({
+          disabled: false,
+          isDisplay: true
+        })
+      }else {
+        console.log('开启')
+        this.setData({
+          disabled: true
+        })
+        Tool.showAlert(this.data.sufHint)
+      }
     },
     SecurityCodeRequestHttp() { // 防伪码验证
       let code = this.data.code;
       this.setData({
           userId: Storage.memberId() || ''
       })
-      let currentTime = this.data.activeEndTime
+      let currentTime = new Date().getTime()
       let getStartTime = this.data.activeStartTime //活动开始时间
-      if (!this.data.SignActivtyId) {
+      console.log(this.data.SignActivtyId)
+      if (!this.data.SignActivtyId) { // 未开启
         Tool.showAlert(this.data.preHint)
       } else if (this.data.isAcitivityEnd){
         Tool.showAlert(this.data.sufHint)
       } else if (this.data.isAcitivityPause){
         this.setData({
-          disabled: true
+          disabled: false,
+          isDisplay: true
         })
+        Tool.showAlert('活动已暂停')
       }else {
           if (this.data.userId == '' || this.data.userId == null) {
               return
@@ -362,7 +379,8 @@ Page({
               wx.hideLoading()
               wx.stopAccelerometer();
               that.setData({
-                isAjax: true
+                isAjax: true,
+                isReduceNumber:false
               })
             };
             r.failBlock = (req) => {
