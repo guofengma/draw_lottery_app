@@ -173,7 +173,7 @@ Page({
         Tool.showAlert('活动已暂停')
         this.setData({
           disabled: false,
-          isDisplay: true
+        //   isDisplay: true
         })
       }else {
         console.log('开启')
