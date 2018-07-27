@@ -280,10 +280,10 @@ movable-area {
   right: 120rpx;
   text-align: center;
   color: #ffec00;
-  animation:plusScale 2s linear  2;
-  -moz-animation:plusScale 2s linear  2; /* Firefox */
-  -webkit-animation:plusScale 2s linear  2; /* Safari and Chrome */
-  -o-animation:plusScale 2s linear  2; /* Opera */
+  animation:plusScale 1.2s linear  1;
+  -moz-animation:plusScale 1.2s linear  1; /* Firefox */
+  -webkit-animation:plusScale 1.2s linear  1; /* Safari and Chrome */
+  -o-animation:plusScale 1.2s linear  1; /* Opera */
 }
 .isNumberReduce{
   position: absolute;
@@ -291,10 +291,10 @@ movable-area {
   right: 120rpx;
   text-align: center;
   color: #ffec00;
-  animation:plusScale 2s linear 1;
-  -moz-animation:plusScale 2s linear 1; /* Firefox */
-  -webkit-animation:plusScale 2s linear 1; /* Safari and Chrome */
-  -o-animation:plusScale 2s linear 1; /* Opera */
+  animation:plusScale 1.2s linear  1;
+  -moz-animation:plusScale 1.2s linear  1; /* Firefox */
+  -webkit-animation:plusScale 1.2s linear  1; /* Safari and Chrome */
+  -o-animation:plusScale 1.2s linear  1; /* Opera */
 }
 .cishu{
   animation:anim1 2s linear infinite;
@@ -321,10 +321,13 @@ movable-area {
 }
 @keyframes plusScale{
   0%{
-    transform:  scale(5)
+    transform:  scale(5);
+    opacity: 1;
+
   }
   100%{
-    transform:  scale(0)
+    transform:  scale(0);
+    opacity: 0;
   }
 }
 @keyframes reduceScale{
