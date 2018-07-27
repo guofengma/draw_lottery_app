@@ -253,7 +253,22 @@ Page({
           //计算 公式的意思是 单位时间内运动的路程，即为我们想要的速度
           let speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
           if (speed > shakeSpeed && that.data.isAjax) { 
-            //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇      
+            //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇
+            if (!that.data.SignActivtyId) { // 活动未开启
+              Tool.showAlert(that.data.preHint)
+              wx.stopAccelerometer();
+              return
+            } 
+            if (that.data.isAcitivityEnd) { // 活动已结束
+              Tool.showAlert(that.data.sufHint)
+              wx.stopAccelerometer();
+              return
+            }
+            if (that.data.isAcitivityPause) {
+              Tool.showAlert('活动暂停')
+              wx.stopAccelerometer();
+              return
+            }
             if (that.data.isNumber <= 0) {
               //Tool.showAlert('没有摇奖次数了')
               that.showMyNumClicked()
@@ -266,19 +281,7 @@ Page({
               Tool.showAlert('请先登录')
               wx.stopAccelerometer();
               return
-            } else if (!that.data.SignActivtyId) { // 活动未开启
-              Tool.showAlert(that.data.preHint)
-              wx.stopAccelerometer();
-              return
-            } else if (isAcitivityEnd) { // 活动已结束
-              Tool.showAlert(that.data.sufHint)
-              wx.stopAccelerometer();
-              return
-            } else if (that.data.isAcitivityPause) {
-              Tool.showAlert('活动暂停')
-              wx.stopAccelerometer();
-              return
-            }
+            } 
             that.setData({
               lastTime: nowTime,
               isAjax: false
