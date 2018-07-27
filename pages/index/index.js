@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 let {Tool, RequestFactory, Storage, Event} = global
+let app = getApp()
 Page({
     data: {
         userInfo: {},
@@ -52,7 +53,8 @@ Page({
         isAcitivityEnd:false, //活动是否结束
         isAcitivityPause:false, //活动是否暂停
         lastTime:0,//上一次摇动时间
-        isAjax:true
+        isAjax:true,
+        isonShow: false,
     },
     onLoad: function () {
         this.setData({ // storage 中获取userId
@@ -166,7 +168,7 @@ Page({
         let currentTime = this.data.activeEndTime
         let getStartTime = this.data.activeStartTime //活动开始时间
         if (this.data.SignActivtyId) {
-            console.log('活动未开启')
+            console.log('活动开启')
           this.setData({
             disabled: false,
             isDisplay: false
@@ -175,7 +177,7 @@ Page({
             console.log('结束')
           Tool.showAlert(this.data.sufHint)
         } else {
-          console.log('开启')
+          console.log('为开启')
           this.setData({
             disabled: true
           })
@@ -281,7 +283,6 @@ Page({
             this.setData({
                 isNumber: num,
             })
-            wx.setStorageSync('IsNumber', num)
             setTimeout(() => {
               that.setData({
                 isPlusNumber: false
@@ -344,8 +345,10 @@ Page({
     isShowSake: false,
     onShow: function () { // 进行摇一摇
       let that = this;
-      let num = wx.getStorage('IsNumber');
-      console.log(num)
+      let data = {
+        activityId: Storage.getActivityId() || ''
+      };
+      let num
       this.isShowSake = true
       let SignActivtyId = this.data.SignActivtyId
       let isAcitivityEnd = this.data.isAcitivityEnd
@@ -360,7 +363,9 @@ Page({
       } else  if (this.data.isAcitivityPause){
         Tool.showAlert('活动暂停') 
       } else if(num == 0){
-        Tool.showAlert('没有摇奖次数了') 
+        // if(this.data.isonShow){
+          Tool.showAlert('没有摇奖次数') 
+        // }
       }else {
             console.log('进入摇一摇')
             let num = 0
@@ -508,6 +513,9 @@ Page({
                     shake(e)
                 })
             }
+            // this.setData({
+            //   isonShow:true
+            // })
     },
     onHide: function () {
       this.isShowSake = false // 设置第一次进入

@@ -100,7 +100,7 @@ export default class Request {
         let that = this;
         this.url();
         this.body();
-        this.hasCookie()
+        this.hasCookie();
         this.requestStatus = RequestStatus.requesting;
         wx.request({
             data: this._body,
@@ -173,7 +173,7 @@ export default class Request {
                 }
             }
         });
-
+        
         console.debug('------------------------------> 请求发起：' + that.name);
 
         console.debug('url: ' + this._url);
@@ -205,7 +205,6 @@ export default class Request {
 
     // 是否带上cookie 请求 
     hasCookie() {
-
         if (this.bodyParam.hasCookie) {
             delete this.bodyParam.hasCookie
             this.cookie = global.Storage.getUserCookie() || ' '

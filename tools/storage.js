@@ -186,7 +186,7 @@ export default class Storage {
     static setIsNumber(num) {
       return this.setterFor('IsNumber', num)
     }
-    static getIsNumber(day) {
+    static getIsNumber() {
       return this.getterFor('IsNumber')
     }
 
