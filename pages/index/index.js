@@ -159,23 +159,6 @@ Page({
      
     },
     bindBlur() {
-        let currentTime = this.data.activeEndTime
-        let getStartTime = this.data.activeStartTime //活动开始时间
-        if (this.data.SignActivtyId) {
-          this.setData({
-            disabled: false,
-            isDisplay: true
-          })
-        } else {
-          console.log('未开启')
-          this.setData({
-            disabled: true
-          })
-          Tool.showAlert(this.data.sufHint)
-        }
-     
-    },
-    bindBlur() {
       let currentTime = new Date().getTime()
       let getStartTime = this.data.activeStartTime //活动开始时间
       if (this.data.SignActivtyId) {
@@ -292,7 +275,7 @@ Page({
           if (speed > shakeSpeed && that.data.isAjax) { 
             //如果计算出来的速度超过了阈值，那么就算作用户成功摇一摇      
             if (that.data.isNumber <= 0) {
-              // Tool.showAlert('没有摇奖次数了')
+              //Tool.showAlert('没有摇奖次数了')
               that.showMyNumClicked()
               wx.stopAccelerometer();
               return
@@ -469,6 +452,9 @@ Page({
     },
     getIsSign() { // 用户是否签到
       let userId = Storage.getUserAccountInfo()? Storage.getUserAccountInfo().id :''
+      if (Storage.getUserAccountInfo()){
+        userId = Storage.getUserAccountInfo().id ? Storage.getUserAccountInfo().id : ''
+      }
       let data = {
         activityId: Storage.getActivityId() || '',
         userId: userId,
@@ -672,6 +658,7 @@ Page({
       this.setData({
         showMyNum:!this.data.showMyNum
       })
+      wx.stopAccelerometer();
     },
     onShow: function () { // 进行摇一摇
       this.toAccelerometer(false)
