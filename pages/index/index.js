@@ -23,10 +23,10 @@ Page({
         iscardZJL: false,
         ishongbao: false,
         isMaterial: false,
-        isShowModelTitle: '恭喜您，中奖了',
+        isShowModelTitle: '未中奖',
         isMaterialUrl: '',
         isMaterialName: '',
-        iscardName: '女',
+        iscardName: '朵',
         iscardUrl: '',
         ishongbaoUrl: '',
         ishongbaoName: '',
@@ -200,7 +200,7 @@ Page({
           isDisplay: true
         })
         Tool.showAlert('活动已暂停')
-      }else {
+      } else {
           if (this.data.userId == '' || this.data.userId == null) {
               return
           }
@@ -391,7 +391,8 @@ Page({
                 wx.hideLoading()
                 wx.stopAccelerometer();
                 that.setData({
-                  isAjax: true
+                  isAjax: true,
+                  isReduceNumber: false,
                 })
               } else {
                 Tool.showAlert(req.responseObject.msg, start)
@@ -412,6 +413,9 @@ Page({
         }
         shake(e)
       })
+      that.setData({
+        isReduceNumber: false
+      })
     },
     closeBindshakeBox() { // 摇一摇弹框
       let that = this
@@ -420,11 +424,9 @@ Page({
       })
       that.data.audioCtx.pause()
       this.getIsNumberHttp();
-      setTimeout(()=>{
-        that.setData({
-          isReduceNumber: false
-        })
-      },1000)
+      that.setData({
+        isReduceNumber: false
+      })
     },
     closeView(e) { // 显示天天签到
         this.setData({

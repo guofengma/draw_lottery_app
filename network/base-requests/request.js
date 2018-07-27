@@ -97,98 +97,6 @@ export default class Request {
 
     //发起请求
     start() {
-<<<<<<< HEAD
-        let that = this;
-        this.url();
-        this.body();
-        this.hasCookie();
-        this.requestStatus = RequestStatus.requesting;
-        wx.request({
-            data: this._body,
-            url: this._url,
-            dataType: 'json',
-            method: this.requestMethod,
-            header: {
-                'content-type': 'application/x-www-form-urlencoded',
-                'Cookie': this.cookie
-            },
-            success: function(res) {
-                if (that.managerLoadingPrompt) {
-                    global.Tool.hideLoading();
-                }
-                that.header = res.header
-                console.log('<============================== 请求结束：' + that.name);
-                console.debug('result:');
-                console.debug('==============================\n\n\n');
-
-                //成功
-                that.responseObject = res.data;
-                //成功
-                if (res.data.code == '200') {
-                    let Datas = that.responseObject.data;
-                    let firstData = {};
-                    firstData = Datas
-                        //预处理，可以重新组织请求结果
-                    that.preprocessCallback(that, firstData)
-                    that.finishBlock(that, firstData)
-                }
-
-                //失败，有异常
-                else {
-                    //弹窗，提示服务器错误
-                    that.failBlock(that);
-                    // global.Tool.showAlert(res.data.msg);
-                }
-            },
-            fail: function() {
-                that.tryCount++;
-
-                console.debug('<============================== 请求结束：' + that.name + '第' + that.tryCount + '次请求');
-                console.debug('==============================\n\n\n');
-                //请求失败重试
-                if (that.tryCount < that.maxTryCount) {
-                    if (that.isManagedByQueue) {
-                        that.addToQueue();
-                    } else {
-                        that.start();
-                    }
-                }
-
-                //达到重试上限，提示错误
-                else {
-                    //弹窗，提示服务器错误
-                    that.failBlock(that);
-                    global.Tool.showAlert('请求失败，请稍后重试')
-                }
-            },
-            complete: function() {
-                that.requestStatus = RequestStatus.finish;
-                that.completeBlock(that);
-
-                if (that.isManagedByQueue) {
-                    RequestQueue.removeRequest(that);
-                }
-
-                if (that.manageLoadingPrompt) {
-                    global.Tool.hideLoading();
-                }
-            }
-        });
-        
-        console.debug('------------------------------> 请求发起：' + that.name);
-
-        console.debug('url: ' + this._url);
-        console.debug('body:');
-        console.debug(JSON.stringify(this._body));
-        console.debug(this._body);
-        console.debug('------------------------------\n\n\n');
-
-        if (this.manageLoadingPrompt) {
-            global.Tool.showLoading();
-        }
-
-        return this;
-=======
       let that = this;
       this.url();
       this.body();
@@ -279,7 +187,6 @@ export default class Request {
       }
 
       return this;
->>>>>>> 70afd2788b9c25f35da6cd10de0087351a0ab261
     }
 
     //拼接url
@@ -298,18 +205,10 @@ export default class Request {
 
     // 是否带上cookie 请求 
     hasCookie() {
-<<<<<<< HEAD
-        if (this.bodyParam.hasCookie) {
-            delete this.bodyParam.hasCookie
-            this.cookie = global.Storage.getUserCookie() || ' '
-            return this.cookie
-        }
-=======
       if (this.bodyParam.hasCookie) {
           delete this.bodyParam.hasCookie
           this.cookie = global.Storage.getUserCookie() || ' '
           return this.cookie
       }
->>>>>>> 70afd2788b9c25f35da6cd10de0087351a0ab261
     }
 }

@@ -153,11 +153,12 @@
   top: 180rpx;
   left: 45rpx;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeDraw.png') no-repeat center center;
-  background-size: 100%;
+  background-size: 100% 100%;
   z-index: 100003;
   overflow: hidden;
 }
 .shakeHeaderTitle{
+  margin-top: 10rpx;
   height: 106rpx;
   color: #fff;
   text-align: center;
@@ -195,8 +196,8 @@
   float: right;
 }
 .shakeText{
-  line-height: 30rpx;
-  font-size: 30rpx;
+  line-height: 38rpx;
+  font-size: 38rpx;
   color: #666666;
   text-align: center;
 }
