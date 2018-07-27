@@ -144,6 +144,7 @@ Page({
         this.tipsImg()
       }
       this.queryActivityWordCard()
+      this.getCardNumber()
       this.modelClicked()
     };
     Tool.showErrMsg(r)
