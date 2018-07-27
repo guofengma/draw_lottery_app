@@ -51,7 +51,6 @@ Component({
         this.calendar()
       }
       if (!cookies) return
-      console.log("哈啊啊啊啊啊啊啊啊啊啊啊啊啊")
       let timeData = '';
       if (!month) {
         let getToday = new Date();
