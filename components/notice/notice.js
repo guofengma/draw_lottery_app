@@ -131,13 +131,13 @@ Component({
             })
             this.noticeRequestHttp()
             
-            console.log(this.data.page)
+            // console.log(this.data.page)
           }
         }
     },
     ready() {
         // this.noticeRequestHttp() // 获取公告
-        console.log('公告')
+        // console.log('公告')
         
     }
 })

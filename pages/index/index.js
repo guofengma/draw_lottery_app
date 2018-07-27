@@ -38,8 +38,8 @@ Page({
         activeEndTime: '',
         SignActivtyId: false,
         disabled: false,
-        isPlusNumber: false,
-        isReduceNumber: false,
+        isPlusNumber: false, // 是否加+1 
+        isReduceNumber: false, // 是否减1
         isDrawn: true,
         preHint: '', // 开始提示
         sufHint: '', // 结束提示
@@ -282,7 +282,9 @@ Page({
               wx.stopAccelerometer();
               return
             } 
-            if (that.data.isfalse) {
+            // 一次cookie 都没有表示从未注册登录过
+            let isLogin = Storage.getUserCookie() || false
+            if (!isLogin) {
               Tool.showAlert('请先登录')
               wx.stopAccelerometer();
               return
@@ -428,9 +430,9 @@ Page({
             isFixed:!this.data.isFixed
         })
         if (this.data.isTrue){
-        this.selectComponent("#sign").signListRequestHttp()
+          this.selectComponent("#sign").signListRequestHttp()
         }
-        wx.startAccelerometer()
+        // wx.startAccelerometer()
     },
     showNoticeClicked(){
       this.setData({

@@ -450,8 +450,8 @@ export default class Tool {
     }
 
     static redirectTo(url, success, fail, complete) {
-        console.log('\n\n******************************************************************************************');
-        console.log('redirectTo:' + url);
+        // console.log('\n\n******************************************************************************************');
+        // console.log('redirectTo:' + url);
         wx.redirectTo({
             url: url,
             success: success,
@@ -462,8 +462,8 @@ export default class Tool {
     }
 
     static switchTab(url, success, fail, complete) {
-        console.log('\n\n******************************************************************************************');
-        console.log('switchTab:' + url);
+        // console.log('\n\n******************************************************************************************');
+        // console.log('switchTab:' + url);
         wx.switchTab({
             url: url,
             success: success,
@@ -473,8 +473,8 @@ export default class Tool {
     }
    
     static navigateTo(url, success, fail, complete) {
-        console.log('\n\n******************************************************************************************');
-        console.log('navigateTo:' + url);
+        // console.log('\n\n******************************************************************************************');
+        // console.log('navigateTo:' + url);
         wx.navigateTo({
             url: url,
             success: success,
@@ -693,7 +693,6 @@ export default class Tool {
             this.navigateTo(page+'?isBack='+true)
           }
         }
-        console.log(req.responseObject.msg)
         if (req.responseObject.msg){
           this.showAlert(req.responseObject.msg, callBack)
         }
@@ -773,7 +772,7 @@ export default class Tool {
 
     static isIPhoneX(that) {
       let isIPhoneX = global.Storage.sysInfo().isIphoneX
-      console.log(global.Storage.sysInfo())
+      // console.log(global.Storage.sysInfo())
       let className = isIPhoneX ? 'fixed-bottom-iPhoneX' :'fixed-bottom'
       let showBottom = isIPhoneX
       that.setData({

@@ -66,7 +66,7 @@ Component({
       } else {
         timeData = month
       }
-      console.log(timeData)
+      // console.log(timeData)
       let data = {
         activityId: Storage.getActivityId() || '',
         yearsMonth: timeData
@@ -143,7 +143,7 @@ Component({
       } else {
         godates = preMonth
         let arr = godates.split('-')
-        console.log(arr)
+        // console.log(arr)
         todayYear = getToday.getFullYear();
         showYear = parseInt(arr[0]) 
         showMonth = arr[1][0] == '0' ? parseInt(arr[1][1]) : parseInt(arr[1])
@@ -174,15 +174,15 @@ Component({
         var newdats = anns[p];
         signDate_arr.push(newdats);
       }
-      console.log(signDate_arr)
+      // console.log(signDate_arr)
       if (showMonth == todayMonth) {
         if (signDate_arr.indexOf(todayss) > -1) {
-          console.log("当前已签到");
+          // console.log("当前已签到");
           that.setData({
             signtype: "2",
           });
         } else {
-          console.log("当前未签到");
+          // console.log("当前未签到");
           that.setData({
             signtype: "1",
           });
@@ -201,7 +201,7 @@ Component({
           maxSign.push(weekdays[i].maxSign)
         }
       }
-      console.log(signDate_arr[0]);
+      // console.log(signDate_arr[0]);
       yangdate.yang_date.bulidCal(showYear, showMonth, that, signDate_arr, weekdays, hadWinCount, maxSign);
       //初始化加载日历
 
@@ -217,7 +217,7 @@ Component({
         showMonth: showMonth,
       });
 
-      console.log(this.data.signDays)
+      // console.log(this.data.signDays)
     },
     sign_start: function () {
       this.signRequestHttp()
@@ -245,7 +245,7 @@ Component({
       });
     },
     sign_prev: function () {
-      console.log("上一月");
+      // console.log("上一月");
       var showMonth = this.data.showMonth;
       var todayMonth = this.data.todayMonth;
       if (showMonth == "1") {
@@ -271,11 +271,11 @@ Component({
       }
       var godates = showYear + "-" + showMonths;
       let preMonth = showYear + "-" + showMonths + "-01";
-      console.log(godates)
+      // console.log(godates)
       this.signListRequestHttp(godates, preMonth)
     },
     sign_next: function () {
-      console.log("下一月");
+      // console.log("下一月");
       var showMonth = this.data.showMonth;
       var todayMonth = this.data.todayMonth;
       if (todayMonth == showMonth) {
@@ -315,7 +315,7 @@ Component({
       let todayss = getToday.getDate();
       let r = RequestFactory.signRequest(data);
       r.finishBlock = (req) => {
-        console.log(req.responseObject.code)
+        // console.log(req.responseObject.code)
         if (req.responseObject.code === 200) {
           wx.showToast({
             title: '签到成功',

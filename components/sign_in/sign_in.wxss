@@ -28,7 +28,6 @@ button::after {
     color: #fff;
     font-size: 30rpx;
     text-align: center;
-    border: none;
     outline: none;
     background: #e1e1e1;
     /* margin-left: 275rpx; */
@@ -160,13 +159,6 @@ button::after {
     border: none;
 }
 
-/* .calendar_month_next image {
-    width: 25rpx;
-    height: 50rpx;
-    transform: rotate(180deg);
-} */
-
-
 /*微信小程序签到wxss*/
 
 .calendar_wrapper {
@@ -221,11 +213,6 @@ button::after {
     font-size: 26rpx;
     font-weight: bold;
 }
-/* .day_list text{
-  font-size: 26rpx;
-  font-weight: bold;
-  line-height: 90rpx;
-} */
 
 /*日历输出定义*/
 
@@ -270,7 +257,6 @@ button::after {
     height: 420rpx;
     overflow: hidden;
     zoom: 1;
-    display: none;
 }
 
 .qdbox .text-green {
@@ -372,8 +358,6 @@ button::after {
   left: 45%;
   width: 50rpx;
   height: 145rpx;
-  /* background: yellow; */
-  /* overflow: hidden; */
   z-index: 5;
   background: transparent;
   text-align: center;
@@ -432,9 +416,6 @@ button::after {
 .continuity-sign{
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yuanq_03@2x.png') no-repeat center center;
   background-size: 70%;
-}
-.dark{
-  color: paleturquoise
 }
 .no-qian-dao{
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/icon1_03@2x.png') no-repeat center center;
