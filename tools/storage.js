@@ -182,5 +182,14 @@ export default class Storage {
     static getIsShowNotice() {
       return this.getterFor('isShowNotice')
     }
+    
+    // 红包数量是否大于0 
 
+    static setRedPackageNum(info) {
+      return this.setterFor('RedPackageNum', info)
+    }
+
+    static getRedPackageNum(day) {
+      return this.getterFor('RedPackageNum')
+    }
 }

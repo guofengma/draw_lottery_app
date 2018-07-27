@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event } = global
+let { Tool, RequestFactory, Event, Storage } = global
 Page({
   data: {
     currentTab:0,
@@ -12,10 +12,12 @@ Page({
     let params = {
       pageSize: this.data.pageSize,
       page: this.data.currentPage,
-      status:''
+      status:'',
+      activityId: Storage.getActivityId() || '',
     }
     this.setData({
-      params: params
+      params: params,
+      activityId: Storage.getActivityId() || '',
     })
     this.queryByCreateUserList()
     Event.on('updateFeedback', this.queryByCreateUserList,this)
@@ -28,7 +30,8 @@ Page({
       let params = {
         pageSize: this.data.pageSize,
         page: 1,
-        status: cur
+        status: cur,
+        activityId: this.data.activityId
       }
       this.setData({
         currentTab: cur,
