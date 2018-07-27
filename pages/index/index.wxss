@@ -155,6 +155,7 @@
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeDraw.png') no-repeat center center;
   background-size: 100%;
   z-index: 100003;
+  overflow: hidden;
 }
 .shakeHeaderTitle{
   height: 106rpx;
@@ -166,13 +167,13 @@
 .shakeContent{
   width: 466rpx;
   height: 580rpx;
-  margin: 0 auto;
+  margin: 40rpx auto auto auto;
   text-align: center;
 }
 .shakeContent image{
   width: 330rpx;
   height: 330rpx;
-  margin: 55rpx auto;
+  margin: 80rpx auto;
 }
 .shakeBtnBox{
   width: 521rpx;
@@ -199,16 +200,14 @@
   color: #666666;
   text-align: center;
 }
-.shakeWzj{
+/* .shakeWzj{
   height: 467rpx;
   margin: 40rpx auto;
-}
-.cardZJL image{
-  width: 140rpx;
-  height: 140rpx;
-  margin-top: 57rpx;
-  margin-bottom: 30rpx;
-}
+} */
+/* .cardZJL image{
+  width: 330rpx;
+  height: 330rpx;
+} */
 .hongbao{
   width: 191rpx;
   height: 272rpx;

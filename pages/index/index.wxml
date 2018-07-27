@@ -10,6 +10,7 @@
     visiable="{{visiable}}"
     isAcitivityEnd ='{{isAcitivityEnd}}'
     isAcitivityPause = '{{isAcitivityPause}}'
+    bind:getIsNumberHttp = 'getIsNumberHttp'
     bind:getPhoneNumber="getPhoneNumber" 
     bind:agreeGetUser="agreeGetUser" wx:if='{{isTrue}}'>
 </sign-in>
@@ -130,3 +131,12 @@
 </block> -->
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+
+<!-- 没有中奖次数的弹框 -->
+
+<view class="model-view-bg model-view-bg-c" wx:if='{{showMyNum}}' catchtap='showMyNumClicked'>
+  <view class="my-award-filter flexC">
+      <view class='content-c flexC'>没有摇奖次数了</view>
+      <view class='sureBtn flexC'>确定</view>
+  </view>
+</view>

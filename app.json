@@ -25,6 +25,6 @@
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#000",
         "navigationBarTitleText": "天天朵宝",
-        "navigationBarTextStyle": "blank"
+        "navigationBarTextStyle": "#fff"
     }
 }
