@@ -1,6 +1,6 @@
 let yangdate = require("sign_in_ss.js");
 
-let { Tool, RequestFactory, Storage, Event } = global
+let { Tool, RequestFactory, Storage } = global
 
 Component({
   properties: {
@@ -323,7 +323,7 @@ Component({
             duration: 1500
           });
           this.signListRequestHttp()
-          Event.emit('getIsNumberHttp') // 更新抽奖次数
+          this.triggerEvent('getIsNumberHttp') // 更新抽奖次数
           // this.signReady()
         } else {
           return null

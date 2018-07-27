@@ -173,21 +173,14 @@ export default class Storage {
       return this.getterFor('userLocation');
     }
 
-    // 红包数量是否大于0 
+    // 是否显示过公告了 
 
-    static setRedPackageNum(info) {
-      return this.setterFor('RedPackageNum', info)
+    static setIsShowNotice(info) {
+      return this.setterFor('isShowNotice', info)
     }
 
-    static getRedPackageNum(day) {
-      return this.getterFor('RedPackageNum')
-    }
-    //  存储次数
-    static setIsNumber(num) {
-      return this.setterFor('IsNumber', num)
-    }
-    static getIsNumber(day) {
-      return this.getterFor('IsNumber')
+    static getIsShowNotice() {
+      return this.getterFor('isShowNotice')
     }
 
 }

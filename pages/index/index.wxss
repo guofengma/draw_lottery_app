@@ -2,7 +2,7 @@
 .home-page{
   position: relative;
   width: 750rpx;
-  /* height: 2000rpx; */
+  height: 1880rpx;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homePage.png') no-repeat center center;
   background-size:100%; 
   overflow: hidden;
@@ -14,7 +14,7 @@
 .home-tree{
   width: 690rpx;
   height: 660rpx;
-  margin: 640rpx auto auto auto;
+  margin: 450rpx auto auto auto;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeTree.png') no-repeat center center;
   background-size:100%;
 }
@@ -30,6 +30,8 @@
   width: 536rpx;
   height: 678rpx;
   margin: 0 auto;
+  position: relative;
+  top: -126rpx;
 }
 .inputBox{
   width: 463rpx;
@@ -145,45 +147,46 @@
   border-right:6rpx solid #fff; 
 }
 .shakeBox{
-  width: 566rpx;
-  height: 532rpx;
+  width: 660rpx;
+  height: 852rpx;
   position: absolute;
-  top: 280rpx;
-  left: 92rpx;
+  top: 180rpx;
+  left: 45rpx;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeDraw.png') no-repeat center center;
   background-size: 100%;
   z-index: 100003;
 }
 .shakeHeaderTitle{
-  height: 104rpx;
+  height: 106rpx;
   color: #fff;
   text-align: center;
-  line-height: 104rpx;
+  line-height: 106rpx;
   font-size: 36rpx;
 }
 .shakeContent{
-  width: 314rpx;
-  height: 331rpx;
+  width: 466rpx;
+  height: 580rpx;
   margin: 0 auto;
   text-align: center;
 }
 .shakeContent image{
-  width: 194rpx;
-  height: 254rpx;
+  width: 330rpx;
+  height: 330rpx;
+  margin: 55rpx auto;
 }
 .shakeBtnBox{
-  width: 434rpx;
-  height: 80rpx;
+  width: 521rpx;
+  height: 88rpx;
   margin: 0 auto;
 }
 .shakeBtn{
   float: left;
-  width:200rpx ;
+  width:252rpx ;
   background: #ffca00;
   font-size: 24rpx;
   color: #fff;
   text-align: center;
-  line-height: 80rpx;
+  line-height: 88rpx;
   border: none;
   border-radius: 15rpx;
 }
@@ -191,10 +194,14 @@
   float: right;
 }
 .shakeText{
-  line-height: 24rpx;
-  font-size: 24rpx;
+  line-height: 30rpx;
+  font-size: 30rpx;
   color: #666666;
   text-align: center;
+}
+.shakeWzj{
+  height: 467rpx;
+  margin: 40rpx auto;
 }
 .cardZJL image{
   width: 140rpx;
@@ -284,10 +291,10 @@ movable-area {
   right: 120rpx;
   text-align: center;
   color: #ffec00;
-  animation:plusScale 2s linear 2;
-  -moz-animation:plusScale 2s linear 2; /* Firefox */
-  -webkit-animation:plusScale 2s linear 2; /* Safari and Chrome */
-  -o-animation:plusScale 2s linear 2; /* Opera */
+  animation:plusScale 2s linear 1;
+  -moz-animation:plusScale 2s linear 1; /* Firefox */
+  -webkit-animation:plusScale 2s linear 1; /* Safari and Chrome */
+  -o-animation:plusScale 2s linear 1; /* Opera */
 }
 .cishu{
   animation:anim1 2s linear infinite;
@@ -339,4 +346,26 @@ movable-area {
   25% {top: 30px;opacity: 0}
   50% {top: 30px;opacity: 1}
   100%{top: -30px;opacity: 1}
+}
+.model-view-bg-c{
+  background-color: transparent;
+  z-index: 99;
+}
+.my-award-filter{
+  width:400rpx;
+  background: #fff;
+  font-size: 30rpx;
+  height:200rpx;
+  justify-content: space-between;
+  border-radius: 10rpx;
+  overflow: hidden;
+  border:1rpx solid #ddd;
+}
+.content-c{
+  height: 120rpx;
+}
+.sureBtn{
+  height: 80rpx;
+  background: #ddd;
+  width: 100%;
 }
