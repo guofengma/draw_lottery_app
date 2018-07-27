@@ -49,6 +49,7 @@ Component({
             let r = RequestFactory.noticeRequest(data);
             r.finishBlock = (req) => {
               let datas = req.responseObject.data;
+              console.log(datas)
               let starts = datas.start;
               let totals = datas.total;
               this.setData({
