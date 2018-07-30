@@ -478,7 +478,8 @@ Page({
       // 用户第一次登录弹出公告
       Storage.setIsShowNotice(true)
       this.setData({
-        isNotice: !this.data.isNotice
+        isNotice: !this.data.isNotice,
+        isFixed:!this.data.isFixed
       })
       if (this.data.isNotice) {
         this.selectComponent("#showNotice").noticeRequestHttp()
@@ -516,7 +517,7 @@ Page({
           }
           this.setData({
             isTrue: isTrue,
-            isFixed: true,
+            // isFixed: false,
             isNotice: false
           })
           if (isTrue){
@@ -590,7 +591,7 @@ Page({
           isNotice= Storage.getIsShowNotice()===true? false:true
           this.setData({
             isNotice: isNotice,
-            hasNotice: !hasNotice,
+            hasNotice: !hasNotice
           });
           if (isNotice){
             this.selectComponent("#showNotice").noticeRequestHttp()
