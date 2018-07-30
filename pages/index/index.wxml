@@ -38,8 +38,8 @@
       <view class="securit-btn" bindtap='SecurityCodeRequestHttp'>提交</view>
     </view>
     <view class="draw-number">
-        <view class="{{isNumberPlus}}" wx:if="{{isPlusNumber}}">+1</view>
-        <view class="{{isNumberReduce}}" wx:if="{{isReduceNumber}}">-1</view>
+        <view animation="{{animationData}}" class="isNumberPlus" wx:if="{{isPlusNumber}}">+1</view>
+        <view animation="{{animationData}}" class="isNumberReduce" wx:if="{{isReduceNumber}}">-1</view>
       <!-- <view class="numberPlus"> -->
         <text class="">
           您有{{isNumber}}次摇奖机会
@@ -92,19 +92,19 @@
         <view class="shakeContent">
            <view class="shakeWzj" wx:if="{{isWzj}}">
             <image src="../../img/wzj.png"></image>
-            <view class="shakeText">别灰心、么么哒、再接再厉！</view>
+            <view class="shakeText font-30">别灰心、么么哒、再接再厉！</view>
            </view>
            <view class="cardZJL" wx:if="{{iscardZJL}}"> <!--字卡-->
               <image src="{{iscardUrl}}"></image>
-              <view class="shakeText" style="font-weight:blod;">{{iscardName}}</view>
+              <view class="shakeText ellipsis" >{{iscardName}}</view>
            </view>
            <view class="hongbao" wx:if="{{ishongbao}}"> <!--红包-->
               <image src="{{ishongbaoUrl}}"></image>
-              <view class="shakeText" style="font-weight:blod;">{{ishongbaoName}}</view>
+              <view class="shakeText ellipsis" >{{ishongbaoName}}</view>
            </view>
            <view class="Material" wx:if="{{isMaterial}}"> <!--实物-->
               <image src="{{isMaterialUrl}}"></image>
-              <view class="shakeText" style="font-weight:blod;">{{isMaterialName}}</view>
+              <view class="shakeText ellipsis">{{isMaterialName}}</view>
            </view>
         </view>
         <view class="shakeBtnBox" wx:if="{{isDrawn}}">

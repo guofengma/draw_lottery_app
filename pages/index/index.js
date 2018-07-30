@@ -55,6 +55,7 @@ Page({
         lastTime:0,//上一次摇动时间
         isAjax:true,
         showMyNum:false, //没有中奖次数提示框
+        scaleani:{}
     },
     onLoad: function () {
       this.setData({ // storage 中获取userId
@@ -88,7 +89,9 @@ Page({
             let getStartTime = this.data.activeStartTime //活动开始时间
             if (getStartTime > currentTime) { // 活动未开启
                 this.setData({
-                    SignActivtyId: false
+                    SignActivtyId: false,
+                    isDisplay: true,
+                    disabled: false
                 })
             } else {
               let isAcitivityPause = false 
@@ -97,16 +100,22 @@ Page({
               }
               this.setData({
                 isAcitivityPause: isAcitivityPause,  
-                SignActivtyId: true// 活动开启
+                SignActivtyId: true, // 活动开启
+                isDisplay: false,
+                disabled: true
               })
             }
             if (req.responseObject.data.endTime > currentTime){
               this.setData({
-                isAcitivityEnd: false  // 活动未结束
+                isAcitivityEnd: false,  // 活动未结束
+                isDisplay: false,
+                disabled: true
               })
             } else{
               this.setData({
-                isAcitivityEnd: true // 活动已结束
+                isAcitivityEnd: true, // 活动已结束
+                isDisplay:true,
+                disabled:false
               })
             }
             if (callBack !== undefined || Storage.memberId()){
@@ -123,6 +132,23 @@ Page({
     },
     catchTouchMove: function (res) { // swipei 滑动
         return false
+    },
+    ani (){
+      let animation = wx.createAnimation({
+        duration: 1000,
+        timingFunction: 'ease',
+      })
+      this.animation = animation
+      animation.scale(4).step()
+      this.setData({
+        animationData: animation.export()
+      })
+      setTimeout(function () {
+        animation.scale(0).step()
+        this.setData({
+          animationData: animation.export()
+        })
+      }.bind(this), 1000)
     },
     bindinputCode(e) { // 获取输入防伪码
       this.setData({
@@ -215,9 +241,9 @@ Page({
               // Tool.showAlert('兑换成功')
               this.setData({
                 isPlusNumber: true,
-                isNumberPlus: 'isNumberPlus',
                 disabled: true
               })
+              this.ani()
               this.getIsNumberHttp()
             };
             Tool.showErrMsg(r);
@@ -316,6 +342,10 @@ Page({
               that.data.audioCtx = wx.createAudioContext('myAudioShake');
               that.data.audioCtx.setSrc(that.data.shakeStartMusicSrc);
               that.data.audioCtx.play();
+              let isName = ''
+              let Dname = req.responseObject.data.dictionaryName == null ? '' : req.responseObject.data.dictionaryName
+              isName = '"' + Dname +'"'+req.responseObject.data.awardName
+              console.log(isName)
               let num = that.data.isNumber--
               if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                 that.setData({
@@ -329,8 +359,9 @@ Page({
                   isReduceNumber: true,
                   isNumberReduce:'isNumberReduce',
                   isMaterialUrl: req.responseObject.data.imgUrl,
-                  isMaterialName: req.responseObject.data.awardName
+                  isMaterialName: isName
                 })
+                that.ani()
               } else if (req.responseObject.data.pType == 2 || req.responseObject.data.pType == '2') { // 字卡
                 that.setData({
                   isNumber: num,
@@ -343,8 +374,9 @@ Page({
                   isReduceNumber: true,
                   isNumberReduce: 'isNumberReduce',
                   iscardUrl: req.responseObject.data.imgUrl,
-                  iscardName: req.responseObject.data.awardName
+                  iscardName: isName
                 })
+                that.ani()
               } else if (req.responseObject.data.pType == 3 || req.responseObject.data.pType == '3') { // 红包
                 that.setData({
                   isNumber: num,
@@ -357,8 +389,9 @@ Page({
                   isReduceNumber: true,
                   isNumberReduce: 'isNumberReduce',
                   ishongbaoUrl: req.responseObject.data.imgUrl,
-                  ishongbaoName: req.responseObject.data.awardName
+                  ishongbaoName: isName
                 })
+                that.ani()
               }
               wx.hideLoading()
               wx.stopAccelerometer();
@@ -389,6 +422,7 @@ Page({
                   isNumberReduce: 'isNumberReduce',
                   isDrawn: false
                 })
+                that.ani()
                 wx.hideLoading()
                 wx.stopAccelerometer();
                 that.setData({
@@ -421,6 +455,8 @@ Page({
       })
       that.data.audioCtx.pause()
       this.getIsNumberHttp();
+      
+      
       setTimeout(()=>{
         that.setData({
           isReduceNumber: false

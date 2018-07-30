@@ -150,7 +150,7 @@
   width: 660rpx;
   height: 852rpx;
   position: absolute;
-  top: 180rpx;
+  top: 220rpx;
   left: 45rpx;
   background: url('https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/homeDraw.png') no-repeat center center;
   background-size: 100% 100%;
@@ -196,10 +196,11 @@
   float: right;
 }
 .shakeText{
-  line-height: 38rpx;
-  font-size: 38rpx;
+  line-height: 30rpx;
+  font-size: 30rpx;
   color: #666666;
   text-align: center;
+  font-weight: bold;
 }
 /* .shakeWzj{
   height: 467rpx;
@@ -274,16 +275,19 @@ movable-area {
   margin: 0 auto;
   display: inline-block !important; */
 }
+.fontisp{
+  opacity: 0;
+}
+.fontisr{
+  opacity: 0;
+}
 .isNumberPlus{
   position: absolute;
   top: 0rpx;
   right: 120rpx;
   text-align: center;
   color: #ffec00;
-  animation:plusScale 1.2s linear  1;
-  -moz-animation:plusScale 1.2s linear  1; /* Firefox */
-  -webkit-animation:plusScale 1.2s linear  1; /* Safari and Chrome */
-  -o-animation:plusScale 1.2s linear  1; /* Opera */
+  
 }
 .isNumberReduce{
   position: absolute;
@@ -291,10 +295,7 @@ movable-area {
   right: 120rpx;
   text-align: center;
   color: #ffec00;
-  animation:plusScale 1.2s linear  1;
-  -moz-animation:plusScale 1.2s linear  1; /* Firefox */
-  -webkit-animation:plusScale 1.2s linear  1; /* Safari and Chrome */
-  -o-animation:plusScale 1.2s linear  1; /* Opera */
+
 }
 .cishu{
   animation:anim1 2s linear infinite;
@@ -323,7 +324,17 @@ movable-area {
   0%{
     transform:  scale(5);
     opacity: 1;
-
+  }
+  100%{
+    transform:  scale(0);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes plusScale{
+  0%{
+    transform:  scale(5);
+    opacity: 1;
+    
   }
   100%{
     transform:  scale(0);
