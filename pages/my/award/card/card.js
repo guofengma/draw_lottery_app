@@ -4,7 +4,7 @@ Page({
     datas:[
       {
         name:null,
-        'icon1': "/img/duo.png", 
+        'icon1': "/img/duo-red.png", 
         "icon2":'/img/duo-active.png',
         "showImg1":'duo-dark.png',
         "showImg2": 'card-right.png',
