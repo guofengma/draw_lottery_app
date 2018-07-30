@@ -2,7 +2,7 @@
  @import "/components/cell-line/cell-line"; 
  @import "/components/iPhoneX-line/iPhoneX-line";
 
- textarea{
+ .textarea{
    height:180rpx;
    background: #fff;
    padding: 20rpx 30rpx;

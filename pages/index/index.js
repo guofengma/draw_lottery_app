@@ -66,6 +66,7 @@ Page({
       this.getActivtyId();
       this.getNoticeNumRequst() // 获取公告
       Event.on('didLogin', this.didLogin, this);
+      Tool.isEmpty(null)
     },
     getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
@@ -347,6 +348,10 @@ Page({
               isName = '"' + Dname +'"'+req.responseObject.data.awardName
               console.log(isName)
               let num = that.data.isNumber--
+              let isName = ''
+              let Dname = req.responseObject.data.dictionaryName == null ? '' : req.responseObject.data.dictionaryName
+              isName = '"' + Dname + '"' + req.responseObject.data.awardName
+              console.log(isName)
               if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                 that.setData({
                   isNumber: num,

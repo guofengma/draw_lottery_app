@@ -73,6 +73,10 @@ Page({
         this.setData({
           addressList: req.responseObject.data
         })
+      } else {
+        this.setData({
+          addressList: []
+        })
       }
     };
     Tool.showErrMsg(r)
