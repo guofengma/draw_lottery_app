@@ -343,10 +343,6 @@ Page({
               that.data.audioCtx = wx.createAudioContext('myAudioShake');
               that.data.audioCtx.setSrc(that.data.shakeStartMusicSrc);
               that.data.audioCtx.play();
-              let isName = ''
-              let Dname = req.responseObject.data.dictionaryName == null ? '' : req.responseObject.data.dictionaryName
-              isName = '"' + Dname +'"'+req.responseObject.data.awardName
-              console.log(isName)
               let num = that.data.isNumber--
               let isName = ''
               let Dname = req.responseObject.data.dictionaryName == null ? '' : req.responseObject.data.dictionaryName
