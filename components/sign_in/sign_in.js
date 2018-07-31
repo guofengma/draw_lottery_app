@@ -78,9 +78,6 @@ Component({
           console.log('')
         } else {
           let data = req.responseObject.data
-          // this.setData({
-          //   weekdays: req.responseObject.data || []
-          // })
           let myDays = []
           data.forEach((item) => {
             let day = item.signTime
@@ -99,19 +96,7 @@ Component({
 
       };
       r.failBlock = (req) => {
-        this.calendar()
-        let callBack = () => {
-
-        }
-        if (req.responseObject.code == 210) {
-          callBack = () => {
-            let page = '/pages/login/login'
-            Tool.navigateTo(page + '?isBack=' + true)
-          }
-        }
-        if (req.responseObject.msg) {
-          Tool.showAlert(req.responseObject.msg, callBack)
-        };
+        this.callBack(req)
       }
       r.addToQueue();
     },
@@ -329,7 +314,9 @@ Component({
           return null
         }
       };
-      Tool.showErrMsg(r);
+      r.failBlock = (req) => {
+        this.callBack(req)
+      }
       r.addToQueue();
     },
     closeView: function () { // 关闭日历
@@ -341,8 +328,24 @@ Component({
     agreeGetUser(e){
       this.triggerEvent('agreeGetUser', e.detail)
       if(e.target.dataset.index!=1){
-        this.triggerEvent('closeView', false)
+        this.closeView()
       }
+    },
+    callBack(req){
+      this.calendar()
+      let callBack = () => {
+
+      }
+      if (req.responseObject.code == 210) {
+        callBack = () => {
+          let page = '/pages/login/login'
+          this.closeView()
+          Tool.navigateTo(page + '?isBack=' + true)
+        }
+      }
+      if (req.responseObject.msg) {
+        Tool.showAlert(req.responseObject.msg, callBack)
+      };
     }
   },
   ready: function () {

@@ -87,12 +87,12 @@ Page({
                 shakeStopMusicSrc: req.responseObject.data.loseMusic,
             })
             let currentTime = new Date().getTime(); // 当前时间
-            let getStartTime = this.data.activeStartTime //活动开始时间
+            let getStartTime = req.responseObject.data.startTime //活动开始时间
             if (getStartTime > currentTime) { // 活动未开启
                 this.setData({
-                    SignActivtyId: false,
-                    isDisplay: true,
-                    disabled: false
+                  SignActivtyId: false,
+                  isDisplay: true,
+                  disabled: false
                 })
             } else {
               let isAcitivityPause = false 
