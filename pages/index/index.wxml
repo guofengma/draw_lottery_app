@@ -1,7 +1,7 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
 <top-bar id='topBar' canStart='{{true}}'></top-bar>
-<!-- <sign-in isTrue='{{isTrue}}' SignActivtyId='{{SignActivtyId}}' endTime="{{activeEndTime}}" startTime="{{activeStartTime}}" tipStart ="{{preHint}}" tipStop ="{{sufHint}}" bind:closeView='closeView' bind:getIsNumberHttp="getIsNumberHttp" bind:getPhoneNumber="getPhoneNumber" bind:agreeGetUser="agreeGetUser" id="sign"></sign-in> -->
+
 <sign-in id='sign' 
     isTrue='{{isTrue}}' 
     bind:closeView='closeView' 
@@ -120,15 +120,6 @@
 </view>
 </movable-area>
 
-<!-- <block wx:if="{{visiable}}">
-  <view class="model-view-bg-c">
-    <view class="my-award-filter">
-        <view class="title-c"><view>提示</view></view>
-        <view class='content-c'>您同意了授权</view>
-        <button open-type="getUserInfo" class="agree" bindgetuserinfo="agreeGetUser" lang="zh_CN">确定</button>
-    </view>
-  </view>
-</block> -->
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 

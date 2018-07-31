@@ -1,30 +1,30 @@
 {
-    "pages": [
-        "pages/start-page/start-page",
-        "pages/index/index",
-        "pages/address/new-address/new-address",
-        "pages/address/address-list/address-list",
-        "pages/address/edit-address/edit-address",
-        "pages/my/my",
-        "pages/my/feedback/my-feedback/my-feedback",
-        "pages/my/feedback/new-feedback/new-feedback",
-        "pages/my/feedback/submit-feedback/submit-feedback",
-        "pages/my/feedback/feedback-detail/feedback-detail",
-        "pages/my/award/award-goods/award-goods",
-        "pages/my/award/red-envelopes/red-envelopes",
-        "pages/my/award/card/card",
-        "pages/order-confirm/order-confirm",
-        "pages/order-confirm/submit-order/submit-order",
-        "pages/my/my-order/my-order",
-        "pages/logistics/logistics",
-        "pages/activity-detail/activity-detail",
-        "pages/login/login",
-        "components/sign_in/sign_in"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#000",
-        "navigationBarTitleText": "天天朵宝",
-        "navigationBarTextStyle": "#fff"
-    }
+  "pages": [
+    "pages/start-page/start-page",
+    "pages/index/index",
+    "pages/address/new-address/new-address",
+    "pages/address/address-list/address-list",
+    "pages/address/edit-address/edit-address",
+    "pages/my/my",
+    "pages/my/feedback/my-feedback/my-feedback",
+    "pages/my/feedback/new-feedback/new-feedback",
+    "pages/my/feedback/submit-feedback/submit-feedback",
+    "pages/my/feedback/feedback-detail/feedback-detail",
+    "pages/my/award/award-goods/award-goods",
+    "pages/my/award/red-envelopes/red-envelopes",
+    "pages/my/award/card/card",
+    "pages/order-confirm/order-confirm",
+    "pages/order-confirm/submit-order/submit-order",
+    "pages/my/my-order/my-order",
+    "pages/logistics/logistics",
+    "pages/activity-detail/activity-detail",
+    "pages/login/login",
+    "components/sign_in/sign_in"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "天天朵宝",
+    "navigationBarTextStyle": "#fff"
+  }
 }

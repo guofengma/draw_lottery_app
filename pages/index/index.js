@@ -190,16 +190,13 @@ Page({
           isDisplay: false
         })
       } else if (this.data.isAcitivityEnd) { // 活动已结束
-        console.log('结束')
         Tool.showAlert(this.data.sufHint)
       } else if (this.data.isAcitivityPause) {
-        Tool.showAlert('活动已暂停')
         this.setData({
           disabled: false,
           isDisplay: true
         })
       } else {
-        console.log('开启')
         this.setData({
           disabled: true
         })
@@ -269,17 +266,13 @@ Page({
               isNumberPlus: '',
             })
           },1000)
-          this.toAccelerometer()
+          wx.startAccelerometer()
         };
         Tool.showErrMsg(r);
         r.addToQueue();
     },
-    isShowSake: false,
-    toAccelerometer(isShowAlert=true){ // 监听摇一摇
+    toAccelerometer(isShowAlert=false){ // 监听摇一摇
       let that = this;
-      this.isShowSake = true
-      let SignActivtyId = this.data.SignActivtyId
-      let isAcitivityEnd = this.data.isAcitivityEnd
       let lastTime = this.data.lastTime; //此变量用来记录上次摇动的时间
       let x = 0, y = 0, z = 0,
           lastX = 0,
@@ -347,7 +340,6 @@ Page({
               let isName = ''
               let Dname = req.responseObject.data.dictionaryName == null ? '' : req.responseObject.data.dictionaryName
               isName = '"' + Dname + '"' + req.responseObject.data.awardName
-              console.log(isName)
               if (req.responseObject.data.pType == 1 || req.responseObject.data.pType == '1') { // 实物
                 that.setData({
                   isNumber: num,
@@ -440,14 +432,16 @@ Page({
           lastZ = z; //赋值，为下一次计算做准备
         }
       }
-      wx.onAccelerometerChange((e) => {
-        let pages = getCurrentPages()
-        let currentPage = pages[pages.length - 1]
-        if (currentPage.onAccelerometerChange) {
-          currentPage.onAccelerometerChange(e)
-        }
-        shake(e)
-      })
+      if (isShowAlert){
+        wx.onAccelerometerChange((e) => {
+          let pages = getCurrentPages()
+          let currentPage = pages[pages.length - 1]
+          if (currentPage.onAccelerometerChange) {
+            currentPage.onAccelerometerChange(e)
+          }
+          shake(e)
+        })
+      }
     },
     closeBindshakeBox() { // 摇一摇弹框
       let that = this
@@ -456,8 +450,6 @@ Page({
       })
       that.data.audioCtx.pause()
       this.getIsNumberHttp();
-      
-      
       setTimeout(()=>{
         that.setData({
           isReduceNumber: false
@@ -465,14 +457,13 @@ Page({
       },1000)
     },
     closeView(e) { // 显示天天签到
-        this.setData({
-            isTrue: !this.data.isTrue,
-            isFixed:!this.data.isFixed
-        })
-        if (this.data.isTrue){
-          this.selectComponent("#sign").signListRequestHttp()
-        }
-        // wx.startAccelerometer()
+      this.setData({
+          isTrue: !this.data.isTrue,
+          isFixed:!this.data.isFixed
+      })
+      if (this.data.isTrue){
+        this.selectComponent("#sign").signListRequestHttp()
+      }
     },
     showNoticeClicked(){ // 点击公告按钮
       // 用户第一次登录弹出公告
@@ -703,10 +694,9 @@ Page({
       wx.stopAccelerometer();
     },
     onShow: function () { // 进行摇一摇
-      this.toAccelerometer(false)
+      this.toAccelerometer(true)
     },
     onHide: function () {
-      this.isShowSake = false // 设置第一次进入
       wx.stopAccelerometer()
     },
     onUnload: function () {
