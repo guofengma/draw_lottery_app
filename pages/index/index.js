@@ -184,18 +184,18 @@ Page({
           isDisplay: false
         })
       } else if (this.data.isAcitivityEnd) { // 活动已结束   
-        Tool.showAlert(this.data.preHint)
+        Tool.showAlert(this.data.sufHint)
       } else if (this.data.isAcitivityPause) {
         Tool.showAlert('活动已暂停')
         this.setData({
           disabled: false,
           isDisplay: true
         })
-      } else {
+      } else if (!this.data.SignActivtyId){
         this.setData({
           disabled: true
         })
-        Tool.showAlert(this.data.sufHint)
+        Tool.showAlert(this.data.preHint)
       }
 
     },
@@ -214,7 +214,7 @@ Page({
           disabled: false,
           isDisplay: true
         })
-      } else {
+      } else if (!this.data.SignActivtyId) {
         this.setData({
           disabled: true
         })
