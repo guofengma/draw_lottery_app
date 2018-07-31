@@ -1,6 +1,10 @@
 image{
   width: 100%
 }
+.fixed-top{
+  height: 100%;
+  overflow: auto;
+}
 .timer{
   position: absolute;
   right: 64rpx;

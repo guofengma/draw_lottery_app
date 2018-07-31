@@ -192,4 +192,24 @@ export default class Storage {
     static getRedPackageNum(day) {
       return this.getterFor('RedPackageNum')
     }
+
+    // 今日弹出日历签到
+
+    static setTodaySign(info) {
+      return this.setterFor('todaySigin', info)
+    }
+
+    static getTodaySign(day) {
+      return this.getterFor('todaySigin')
+    }
+
+    // 今日弹出日历签到
+
+    static setActivityDetail(info) {
+      return this.setterFor('activityDetail', info)
+    }
+
+    static getActivityDetail(day) {
+      return this.getterFor('activityDetail')
+    }
 }

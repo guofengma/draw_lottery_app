@@ -18,7 +18,8 @@
 <!-- <audio id="myAudio" style='display:none'></audio> -->
 <audio id="myAudioShake" style='display:none'></audio>
 <movable-area>
-<view class="home-page {{isNotice||isFixed?'fixed':''}}">
+<!-- {{isNotice||isFixed?'fixed':''}}-->
+<view class="home-page"  >
   <!-- <view class="myAudio">
     <image wx:if="{{isStop}}"  src="../../img/action.png" class="an-c an-r an-t animated rotate" bindtap='onStopbgMusic'></image>
     <image wx:else src="../../img/stop.png" bindtap='onActionbgMusic'></image>
@@ -52,10 +53,11 @@
             <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="6000">
                 <block wx:for="{{winnerBlock}}" wx:for-index="index" wx:key="n" wx:for-item="item">
                   <swiper-item catchtouchmove='catchTouchMove'>
-                    <view class="text" wx:for="{{item}}" wx:for-index="index" wx:key="n" wx:for-item="item">
-                      {{item.prizeName}} <view class="text-width"></view>  {{item.tphone}}
+                    <view class="text font-24 flexR-sb" wx:for="{{item}}" wx:for-index="index" wx:key="n" wx:for-item="item">
+                      <view class='textLeft ellipsis'>{{item.prizeName}}</view>
+                      <view>{{item.tphone}}</view>
                     </view>
-                </swiper-item>
+                  </swiper-item>
                 </block>
             </swiper>
           </view>

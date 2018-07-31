@@ -1,75 +1,36 @@
-// pages/activity-detail/activity-detail.js
 //获取应用实例
-let { Tool } = global
+import WxParse from '../../libs/wxParse/wxParse.js';
+
+let { Tool, Storage } = global
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    current:'0',
-    imgUrl1:'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yw_images/activityDetail.jpg',
-    imgUrl2: 'https://dnlcjxt.oss-cn-hangzhou.aliyuncs.com/xcx/yw_images/activityDetail2.jpg',
+    current:0,
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     Tool.isIPhoneX(this); // 判断是否是iPhone X
+    this.setData({
+      info: Storage.getActivityDetail() || ''
+    })
+    this.initHtml()
   },
   changeInf(e){
     let index=e.currentTarget.dataset.index;
     this.setData({
-        current:index
+      current:index
     })
+    this.initHtml()
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  initHtml(){
+    if (!this.data.info) return
+    let html = ''
+    if (this.data.current == 0) {
+      html = this.data.info.introduce
+    } else {
+      html = this.data.info.awardContent
+    }
+    if (html === null) {
+      html = ''
+    }
+    WxParse.wxParse('article', 'html', html, this, 5);
   }
 })

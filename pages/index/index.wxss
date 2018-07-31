@@ -383,3 +383,6 @@ movable-area {
   background: #ddd;
   width: 100%;
 }
+.textLeft{
+  width: 240rpx;
+}

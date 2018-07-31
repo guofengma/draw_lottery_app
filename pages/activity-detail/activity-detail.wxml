@@ -1,14 +1,18 @@
-<view>
-    <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
-    <view class='fixed-top'>
-      <image src="{{current==0? imgUrl1:imgUrl2}}"></image>
-    </view>
-    <view class="tabar flexR {{isIPhoneX.className}}">
-        <view class="tabar-btn {{current==0?'active':''}}" catchtap='changeInf' data-index='0'>活动规则</view>
-        <view class="tabar-btn {{current==1?'active':''}}" catchtap='changeInf' data-index='1'>奖品展示</view>
-    </view> 
-    <!--适配iPhone X  -->
-    <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line"/>
+<import src="../../libs/wxParse/wxParse.wxml" />
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='detail'>    
+  <view class='fixed-top'>
+    <scroll-view scroll-y class='scroll {{isIPhoneX.isIPhoneX? "scroll-bottom":""}}'>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </scroll-view>
+  </view>
+  <view class="tabar flexR {{isIPhoneX.className}}">
+      <view class="tabar-btn {{current==0?'active':''}}" catchtap='changeInf' data-index='0'>活动规则</view>
+      <view class="tabar-btn {{current==1?'active':''}}" catchtap='changeInf' data-index='1'>奖品展示</view>
+  </view> 
+  <!--适配iPhone X  -->
+  <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line"/>
 </view>
 
 

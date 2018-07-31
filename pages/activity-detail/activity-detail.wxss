@@ -2,6 +2,18 @@
 image{
   width: 100%
 }
+.fixed-top,.detail{
+  height: 100%;
+  box-sizing: border-box;
+}
+.scroll{
+  height: 100%;
+  padding-bottom: 88rpx;
+  box-sizing: border-box;
+}
+.scroll-bottom{
+  padding-bottom: 122rpx;
+}
 .tabar{
   height: 88rpx;
 }

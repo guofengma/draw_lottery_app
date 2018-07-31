@@ -66,7 +66,16 @@ Page({
       this.getActivtyId();
       this.getNoticeNumRequst() // 获取公告
       Event.on('didLogin', this.didLogin, this);
-      Tool.isEmpty(null)
+    },
+    initDateSgin(){ // 首次弹出公告以后 每日第一次进入弹出日历
+      let notice = Storage.getIsShowNotice() || false
+      let isSginDate = Storage.getTodaySign() || false
+      let day = new Date().toLocaleDateString()
+      let { SignActivtyId, isAcitivityPause, isAcitivityEnd } = this.data
+      // 活动开始了 未暂停 未结束 已经首次显示过公告 当前日期与缓存日期不一致 弹出日历
+      if (SignActivtyId && !isAcitivityPause && !isAcitivityEnd && notice && !(isSginDate == day)){
+        this.closeView()
+      }
     },
     getActivtyId(callBack) { // 获取活动Id
         let r = global.RequestFactory.getActivityId();
@@ -76,6 +85,11 @@ Page({
           }else {
             Storage.setActivityId(req.responseObject.data.id)
             Storage.setActivityCode(req.responseObject.data.code)
+            let activityDetail = {
+              awardContent: req.responseObject.data.awardContent,
+              introduce: req.responseObject.data.introduce
+            }
+            Storage.setActivityDetail(activityDetail)
             this.setData({
                 activityId: req.responseObject.data.id,
                 activeStartTime: req.responseObject.data.startTime,
@@ -123,8 +137,12 @@ Page({
                 this.selectComponent("#topBar").getUserId()
                 this.getIsNumberHttp()
             }
+            if (callBack !== undefined){
+              this.initDateSgin() //是弹出日期
+            }
               //this.getIsNumberHttp() // 获取抽奖次数
               this.getWinnerRequest() // 获取中奖名单
+              
             // this.selectComponent("#showNotice").noticeRequestHttp()
           }
         }
@@ -222,7 +240,8 @@ Page({
         Tool.showAlert('活动已暂停')
       }else {
           if (this.data.userId == '' || this.data.userId == null) {
-              return
+            this.getIsLogin() // 
+            return
           }
           if (this.data.code === '' || this.data.code === null) {
             wx.showModal({
@@ -464,6 +483,7 @@ Page({
       if (this.data.isTrue){
         this.selectComponent("#sign").signListRequestHttp()
       }
+      Storage.setTodaySign(new Date().toLocaleDateString())
     },
     showNoticeClicked(){ // 点击公告按钮
       // 用户第一次登录弹出公告
@@ -538,11 +558,11 @@ Page({
               num = t;
               arr[t] = new Array();
             }
+            let telIphone = ''
             if (res.telephone == null) {
             } else {
               let str = res.telephone
               let strL = str.length
-              let telIphone = ''
               if (Tool.isEmpty(str)) {
                 console.log('不完整')
               } else {
@@ -552,13 +572,13 @@ Page({
                   telIphone = str.substr(0, 3) + "****" + str.substr(7)
                 }
               }
-              arr[t].push({
-                index: index + 1,
-                tphone: telIphone,
-                prizeName: res.prizeName
-              });
+              
             }
-
+            arr[t].push({
+              index: index + 1,
+              tphone: telIphone,
+              prizeName: res.prizeName
+            });
           })
           this.setData({
             winnerBlock: arr
@@ -607,11 +627,10 @@ Page({
     },
     didLogin() { // 获取 token
       this.selectComponent("#topBar").getUserId()
-      let callBack = () => {
-        this.getIsNumberHttp()
-      }
+      let callBack = () => {}
       if (this.data.activityId) {
         this.getIsNumberHttp()
+        this.initDateSgin()
       } else {
         this.getActivtyId(callBack)
       }
@@ -630,14 +649,15 @@ Page({
       return true
     },
     getPhoneNumber(e) { // 获取手机
-      if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-          console.log('用户拒绝了你的请求')
-      } else {
+      console.log(e)
+      if (e.detail.errMsg == 'getPhoneNumber:ok') {
         this.setData({
-            encryptedData: e.detail.encryptedData,
-            iv: e.detail.iv,
-            visiable: !this.data.visiable,
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv,
+          visiable: !this.data.visiable,
         })
+      } else {
+        console.log('用户拒绝了你的请求')
       }
     },
     agreeGetUser(e) { // 获取授权
