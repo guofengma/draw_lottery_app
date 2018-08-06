@@ -5,7 +5,19 @@
     <image src='{{img}}'></image>
 </view>
 <view class='logistics'>
-    <!--<view class='red'>运输中</view>-->
+    <view class='red'>
+        <span wx:if="{{status==0}}">查询异常</span>
+        <span wx:if="{{status==1}}">暂无记录</span>
+        <span wx:if="{{status==2}}">在途中</span>
+        <span wx:if="{{status==3}}">派送中</span>
+        <span wx:if="{{status==4}}">已签收</span>
+        <span wx:if="{{status==5}}">用户拒签</span>
+        <span wx:if="{{status==6}}">疑难件</span>
+        <span wx:if="{{status==7}}">无效单</span>
+        <span wx:if="{{status==8}}">超时单</span>
+        <span wx:if="{{status==9}}">签收失败</span>
+        <span wx:if="{{status==10}}">退回</span>
+    </view>
     <view class='gray'>{{expTextName}}:{{mailNo}}</view>
     <view class='flexR-sb'>
         <view>官方电话：

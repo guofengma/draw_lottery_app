@@ -3,8 +3,9 @@ let {Tool, RequestFactory} = global
 Page({
     data: {
         phone: '',
-        deliveryName: '',
-        LogisticCode: '',
+        expTextName: '',
+        mailNo: '',
+        status: '',
         img: '',
         id: '',
         name: '',
@@ -29,15 +30,16 @@ Page({
               
                 this.setData({
                   img: datas.img,
-                  expTextName: datas.expTextName,
+                  expTextName: datas.showapi_res_body.expTextName,
                   mailNo: datas.showapi_res_body.mailNo,
+                  status: datas.showapi_res_body.status,
                   phone: datas.phone
                 })
                 let list = datas.showapi_res_body.data;
                 let tempList = [];
                 if (list.length) {
                   list.forEach((item) => {
-                    tempList.unshift(item)
+                    tempList.push(item)
                   });
                   this.setData({
                     list: tempList
