@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.2.0",
 	"appid": "wxb149b67e84af7551",
-	"projectname": "draw_lottery",
+	"projectname": "draw_lottery_min",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
